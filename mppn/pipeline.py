@@ -183,7 +183,7 @@ def _store_path(results_dir=Path('./tmp')):
     'Creates a new folder to store results'
     now = datetime.now()
     current_time = now.strftime("%Y-%m-%d_%H:%M:%S")
-    results_dir=results_dir/current_time
+#     results_dir=results_dir/current_time
     results_dir.mkdir()
     return results_dir
 
