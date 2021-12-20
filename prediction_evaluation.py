@@ -25,14 +25,14 @@ logs=[
 ]
 
 ppms=[
-#     PPM_Evermann,
+    PPM_Evermann,
 #     PPM_Tax_Spezialized,
 #     PPM_Tax_Shared,
 #     PPM_Tax_Mixed,
 #     PPM_Camargo_Spezialized,
 #     PPM_Camargo_concat,
 #     PPM_Camargo_fullconcat,
-    PPM_MiDA,
+#     PPM_MiDA,
     PPM_MPPN
 ]
 
