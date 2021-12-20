@@ -11,26 +11,27 @@ from mppn.mppn import *
 
 # Cell
 logs=[
-    EventLogs.Helpdesk,
-    EventLogs.Mobis,
-    EventLogs.BPIC_12,
-    EventLogs.BPIC_12_A,
-    EventLogs.BPIC_12_O,
+#     EventLogs.Helpdesk,
+#     EventLogs.Mobis,
+#     EventLogs.BPIC_12,
+#     EventLogs.BPIC_12_A,
+#     EventLogs.BPIC_12_O,
+    EventLogs.BPIC_12_W,
     EventLogs.BPIC_12_Wcomplete,
-    EventLogs.BPIC_13_CP,
-    EventLogs.BPIC_17_OFFER,
-    EventLogs.BPIC_20_RFP
+#     EventLogs.BPIC_13_CP,
+#     EventLogs.BPIC_17_OFFER,
+#     EventLogs.BPIC_20_RFP
 
 ]
 
 ppms=[
-    PPM_Evermann,
-    PPM_Tax_Spezialized,
-    PPM_Tax_Shared,
-    PPM_Tax_Mixed,
-    PPM_Camargo_Spezialized,
-    PPM_Camargo_concat,
-    PPM_Camargo_fullconcat,
+#     PPM_Evermann,
+#     PPM_Tax_Spezialized,
+#     PPM_Tax_Shared,
+#     PPM_Tax_Mixed,
+#     PPM_Camargo_Spezialized,
+#     PPM_Camargo_concat,
+#     PPM_Camargo_fullconcat,
     PPM_MiDA,
     PPM_MPPN
 ]
