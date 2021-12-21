@@ -9,7 +9,7 @@ from mppn.pipeline import *
 from mppn.baselines import *
 from mppn.mppn import *
 
-logs=[BPIC_12_Wcomplete, BPIC_12_Wc_const, BPIC_12_Wc_mode_event, BPIC_12_Wc_mode_case]
+logs=[EventLogs.BPIC_12_Wcomplete, EventLogs.BPIC_12_Wc_const, EventLogs.BPIC_12_Wc_mode_event, EventLogs.BPIC_12_Wc_mode_case]
 ppms=[PPM_MPPN]
 
 # Cell

@@ -530,7 +530,10 @@ def create_attr_dict(attr_list):
 attr_list=[
     ['BPIC12','activity, resource','AMOUNT_REQ','timestamp'],
     ['BPIC12_W','activity, resource','AMOUNT_REQ','timestamp'],
-    ['BPIC12_Wc','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_Wc','activity, resource','AMOUNT_REQ','timestamp'],    
+    ['BPIC12_Wc_const','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_Wc_mode_event','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_Wc_mode_case','activity, resource','AMOUNT_REQ','timestamp'],
     ['BPIC12_O','activity, resource','AMOUNT_REQ','timestamp'],
     ['BPIC12_A','activity, resource','AMOUNT_REQ','timestamp'],
     ['Mobis','activity, resource, type','cost','timestamp'],
