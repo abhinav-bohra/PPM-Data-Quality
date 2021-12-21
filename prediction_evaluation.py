@@ -13,11 +13,11 @@ from mppn.mppn import *
 logs=[
 #     EventLogs.Helpdesk,
 #     EventLogs.Mobis,
-#     EventLogs.BPIC_12,
+    EventLogs.BPIC_12,
 #     EventLogs.BPIC_12_A,
 #     EventLogs.BPIC_12_O,
-    EventLogs.BPIC_12_W,
-    EventLogs.BPIC_12_Wcomplete,
+    # EventLogs.BPIC_12_W,
+    EventLogs.BPIC_12_Wcomplete
 #     EventLogs.BPIC_13_CP,
 #     EventLogs.BPIC_17_OFFER,
 #     EventLogs.BPIC_20_RFP
@@ -25,7 +25,7 @@ logs=[
 ]
 
 ppms=[
-    PPM_Evermann,
+    # PPM_Evermann,
 #     PPM_Tax_Spezialized,
 #     PPM_Tax_Shared,
 #     PPM_Tax_Mixed,

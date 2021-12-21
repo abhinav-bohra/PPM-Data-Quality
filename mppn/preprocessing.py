@@ -9,16 +9,16 @@ from .imports import *
 
 # Cell
 class EventLogs:
-    Helpdesk=Path('./event_logs/Helpdesk.csv')
-    BPIC_12=Path('./event_logs/BPIC12.csv')
+    # Helpdesk=Path('./event_logs/Helpdesk.csv')
+    # BPIC_12=Path('./event_logs/BPIC12.csv')
     BPIC_12_W=Path('./event_logs/BPIC12_W.csv')
     BPIC_12_Wcomplete=Path('./event_logs/BPIC12_Wc.csv')
-    BPIC_12_A=Path('./event_logs/BPIC12_A.csv')
-    BPIC_12_O=Path('./event_logs/BPIC12_O.csv')
-    BPIC_13_CP=Path('./event_logs/BPIC13_CP.csv')
-    BPIC_17_OFFER=Path('./event_logs/BPIC17_O.csv')
-    BPIC_20_RFP=Path('./event_logs/BPIC20_RFP.csv')
-    Mobis=Path('./event_logs/Mobis.csv')
+    # BPIC_12_A=Path('./event_logs/BPIC12_A.csv')
+    # BPIC_12_O=Path('./event_logs/BPIC12_O.csv')
+    # BPIC_13_CP=Path('./event_logs/BPIC13_CP.csv')
+    # BPIC_17_OFFER=Path('./event_logs/BPIC17_O.csv')
+    # BPIC_20_RFP=Path('./event_logs/BPIC20_RFP.csv')
+    # Mobis=Path('./event_logs/Mobis.csv')
 
 def import_log(ds): return pd.read_csv(ds,index_col=0)
 

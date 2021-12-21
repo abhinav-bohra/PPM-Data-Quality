@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: mppn
+Version: 0.0.1
+Summary: A description of your project
+Home-page: https://gitlab.com/user/mppn/tree/master/
+Author: Author
+Author-email: auther@inst.com
+License: Apache Software License 2.0
+Keywords: some keywords
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+# IBM-Data-Quality
+
