@@ -9,8 +9,8 @@ from mppn.pipeline import *
 from mppn.baselines import *
 from mppn.mppn import *
 
-logs=[EventLogs.BPIC_12_Wc_const, EventLogs.BPIC_12_Wc_mode_event, EventLogs.BPIC_12_Wc_mode_case, EventLogs.BPIC_12_Wcomplete]
-ppms=[PPM_MPPN]
+logs=[EventLogs.BPIC_15_5, EventLogs.Helpdesk]
+ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
 # Cell
 import fire
