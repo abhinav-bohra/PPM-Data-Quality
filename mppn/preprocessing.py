@@ -32,7 +32,7 @@ class EventLogs:
     Helpdesk=Path('./event_logs/Helpdesk.csv')
     Helpdesk_under_activity=Path('./event_logs/Helpdesk_under_activity.csv') 
     Helpdesk_under_resource=Path('./event_logs/Helpdesk_under_resource.csv') 
-    Helpdesk_under_both=Path('./event_logs/BHelpdesk_under_both.csv')
+    Helpdesk_under_both=Path('./event_logs/Helpdesk_under_both.csv')
     Mobis=Path('./event_logs/Mobis.csv')
 
 def import_log(ds): return pd.read_csv(ds,index_col=0)
