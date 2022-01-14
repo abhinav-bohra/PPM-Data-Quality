@@ -9,9 +9,6 @@ from mppn.pipeline import *
 from mppn.baselines import *
 from mppn.mppn import *
 
-# logs=[EventLogs.BPIC_15_5, EventLogs.Helpdesk]
-# logs=[EventLogs.BPIC_15_5_under_activity,EventLogs.BPIC_15_5_under_resource,EventLogs.BPIC_15_5_under_both,\
-# EventLogs.Helpdesk_under_activity,EventLogs.Helpdesk_under_resource,EventLogs.Helpdesk_under_both]
 logs=[EventLogs.BPIC_15_5_under_both,EventLogs.Helpdesk_under_both]
 ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 

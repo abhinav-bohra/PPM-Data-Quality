@@ -9,7 +9,6 @@ from .imports import *
 
 # Cell
 class EventLogs:
-    Helpdesk=Path('./event_logs/Helpdesk.csv')
     BPIC_12=Path('./event_logs/BPIC12.csv')
     BPIC_12_A=Path('./event_logs/BPIC12_A.csv')
     BPIC_12_O=Path('./event_logs/BPIC12_O.csv')
