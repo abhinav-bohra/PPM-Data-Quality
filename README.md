@@ -14,4 +14,4 @@ python setup.py install
 pip install -r requirements.txt
 ```
 
-The repository is build with the MPPN Repository -> https://github.com/joLahann/mppn
+The repository is primarily built upon the MPPN Repository -> https://github.com/joLahann/mppn
