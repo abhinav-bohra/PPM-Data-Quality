@@ -77,12 +77,25 @@ setup.py
 02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_resource_prediction.pth
 02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_step_prediction.pth
 02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MiDA/outcome_prediction.pth
+dist/mppn-0.0.1-py3.7.egg
 event_logs/BPIC12.csv
 event_logs/BPIC12_A.csv
 event_logs/BPIC12_O.csv
 event_logs/BPIC12_W.csv
+event_logs/BPIC12_W_const.csv
+event_logs/BPIC12_W_mode_case.csv
+event_logs/BPIC12_W_mode_event.csv
 event_logs/BPIC12_Wc.csv
+event_logs/BPIC12_Wc_const.csv
+event_logs/BPIC12_Wc_mode_case.csv
+event_logs/BPIC12_Wc_mode_event.csv
+event_logs/BPIC12_const.csv
+event_logs/BPIC12_mode_case.csv
+event_logs/BPIC12_mode_event.csv
 event_logs/BPIC13_CP.csv
+event_logs/BPIC13_CP_const.csv
+event_logs/BPIC13_CP_mode_case.csv
+event_logs/BPIC13_CP_mode_event.csv
 event_logs/BPIC15_1.csv
 event_logs/BPIC15_2.csv
 event_logs/BPIC15_3.csv
@@ -92,6 +105,9 @@ event_logs/BPIC17_O.csv
 event_logs/BPIC20_RFP.csv
 event_logs/Helpdesk.csv
 event_logs/Mobis.csv
+event_logs/Mobis_const.csv
+event_logs/Mobis_mode_case.csv
+event_logs/Mobis_mode_event.csv
 mppn/_nbdev.py
 mppn/baselines.py
 mppn/imports.py

@@ -190,7 +190,7 @@ def _store_path(save_dir,results_dir=Path('./')):
 
 # Cell
 @delegates(PPModel)
-def runner(dataset_urls,ppm_classes,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
+def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
            **kwargs):
     store_path= _store_path(save_dir) if store else None
     '''
