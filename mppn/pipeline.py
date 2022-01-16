@@ -52,7 +52,7 @@ def training_loop(learn,epoch,print_output,lr_find):
     else: learn.fit(epoch,0.01)
 
 # Cell
-def train_validate(dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_output=True,model_dir=".",lr_find=True,
+def train_validate(dls,m,metrics=[accuracy,f1],loss=F.cross_entropy,epoch=20,print_output=True,model_dir=".",lr_find=True,
                    output_index=1,patience=3,min_delta=0.005,show_plot=True,store_path='tmp',model_name='.model'):
     '''
     Trains a model on the training set with early stopping based on the validation loss.
@@ -123,7 +123,7 @@ class PPModel():
 
         return nsp, nrp, lrp, op, dtnep, dtep, asp, rsp
 
-    def _train_validate(self,dls,m,metrics=accuracy,loss=F.cross_entropy,output_index=1):
+    def _train_validate(self,dls,m,metrics=[accuracy,f1],loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
         if self.store:
             ins_stack=inspect.stack()

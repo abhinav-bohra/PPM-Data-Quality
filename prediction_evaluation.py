@@ -17,7 +17,7 @@ parser.add_argument('--save_folder', default="MV",type=str, help='Folder for sav
 args = parser.parse_args()
 exp = args.exp
 save_folder = args.save_folder 
-save_dir = f"results/{save_folder}"
+save_dir = f"{save_folder}"
 ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
 if exp == "MV":
@@ -30,6 +30,10 @@ if exp == "MV":
 elif exp == "CI":
   logs=[EventLogs.BPIC_15_5,EventLogs.Helpdesk]
   save_dir = f"02_Class-Imbalance/{save_folder}"
+elif exp == "test":
+  logs=[EventLogs.BPIC_15_5]
+  save_dir = f"{save_folder}"
+  ppms=[PPM_MiDA]
 else:
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_A, EventLogs.BPIC_12_O, EventLogs.BPIC_12_W, \
   EventLogs.BPIC_12_Wcomplete, EventLogs.BPIC_13_CP, EventLogs.BPIC_15_1, EventLogs.BPIC_15_2, \

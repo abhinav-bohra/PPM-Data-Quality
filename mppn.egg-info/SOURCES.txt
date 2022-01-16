@@ -13,6 +13,7 @@ requirements.txt
 settings.ini
 setup.py
 01_Missing-Values/fill_missing_values.py
+01_Missing-Values/results/run0_BPIC12_const_splits.pickle
 02_Class-Imbalance/eda.py
 02_Class-Imbalance/imbalance_degree.py
 02_Class-Imbalance/results/No Technique/run0_BPIC15_5_splits.pickle
