@@ -6,7 +6,7 @@ __all__ = ['EventLogs', 'import_log', 'drop_long_traces', 'RandomTraceSplitter',
 
 # Cell
 from .imports import *
-
+['BPIC12.csv','BPIC12_W.csv','BPIC12_Wc.csv','BPIC13_CP.csv','Mobis.csv']
 # Cell
 class EventLogs:
     BPIC_12=Path('./event_logs/BPIC12.csv')
@@ -14,25 +14,33 @@ class EventLogs:
     BPIC_12_O=Path('./event_logs/BPIC12_O.csv')
     BPIC_12_W=Path('./event_logs/BPIC12_W.csv')
     BPIC_12_Wcomplete=Path('./event_logs/BPIC12_Wc.csv')
-    BPIC_12_Wc_const=Path('./event_logs/BPIC12_Wc_const.csv')
-    BPIC_12_Wc_mode_event=Path('./event_logs/BPIC12_Wc_mode_event.csv')
-    BPIC_12_Wc_mode_case=Path('./event_logs/BPIC12_Wc_mode_case.csv')
     BPIC_13_CP=Path('./event_logs/BPIC13_CP.csv')
     BPIC_15_1=Path('./event_logs/BPIC15_1.csv')
     BPIC_15_2=Path('./event_logs/BPIC15_2.csv')
     BPIC_15_3=Path('./event_logs/BPIC15_3.csv')
     BPIC_15_4=Path('./event_logs/BPIC15_4.csv')
     BPIC_15_5=Path('./event_logs/BPIC15_5.csv') 
-    BPIC_15_5_under_activity=Path('./event_logs/BPIC15_5_under_activity.csv') 
-    BPIC_15_5_under_resource=Path('./event_logs/BPIC15_5_under_resource.csv') 
-    BPIC_15_5_under_both=Path('./event_logs/BPIC15_5_under_both.csv')    
     BPIC_17_OFFER=Path('./event_logs/BPIC17_O.csv')
     BPIC_20_RFP=Path('./event_logs/BPIC20_RFP.csv')
     Helpdesk=Path('./event_logs/Helpdesk.csv')
-    Helpdesk_under_activity=Path('./event_logs/Helpdesk_under_activity.csv') 
-    Helpdesk_under_resource=Path('./event_logs/Helpdesk_under_resource.csv') 
-    Helpdesk_under_both=Path('./event_logs/Helpdesk_under_both.csv')
     Mobis=Path('./event_logs/Mobis.csv')
+    #New Datasets
+    BPIC_12_const=Path('./event_logs/BPIC12_const.csv')
+    BPIC_12_mode_event=Path('./event_logs/BPIC12_mode_event.csv')
+    BPIC_12_mode_case=Path('./event_logs/BPIC12_mode_case.csv')
+    BPIC_12_W_const=Path('./event_logs/BPIC12_W_const.csv')
+    BPIC_12_W_mode_event=Path('./event_logs/BPIC12_W_mode_event.csv')
+    BPIC_12_W_mode_case=Path('./event_logs/BPIC12_W_mode_case.csv')
+    BPIC_12_Wc_const=Path('./event_logs/BPIC12_Wc_const.csv')
+    BPIC_12_Wc_mode_event=Path('./event_logs/BPIC12_Wc_mode_event.csv')
+    BPIC_12_Wc_mode_case=Path('./event_logs/BPIC12_Wc_mode_case.csv')
+    BPIC_13_CP_const=Path('./event_logs/BPIC13_CP_const.csv')
+    BPIC_13_CP_mode_event=Path('./event_logs/BPIC13_CP_mode_event.csv')
+    BPIC_13_CP_mode_case=Path('./event_logs/BPIC13_CP_mode_case.csv')
+    Mobis_const=Path('./event_logs/Mobis_const.csv')
+    Mobis_mode_event=Path('./event_logs/Mobis_mode_event.csv')
+    Mobis_mode_case=Path('./event_logs/Mobis_mode_case.csv')
+    
 
 def import_log(ds): return pd.read_csv(ds,index_col=0)
 

@@ -179,11 +179,12 @@ class Performance_Statistic():
         return self.df
 
 # Cell
-def _store_path(results_dir=Path('./tmp')):
+def _store_path(save_dir,results_dir=Path('./')):
     'Creates a new folder to store results'
-    now = datetime.now()
-    current_time = now.strftime("%Y-%m-%d_%H:%M:%S")
-#     results_dir=results_dir/current_time
+    #now = datetime.now()
+    #current_time = now.strftime("%Y-%m-%d_%H:%M:%S")
+    #results_dir=results_dir/current_time
+    results_dir = results_dir/save_dir
     results_dir.mkdir()
     return results_dir
 
@@ -191,7 +192,7 @@ def _store_path(results_dir=Path('./tmp')):
 @delegates(PPModel)
 def runner(dataset_urls,ppm_classes,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
            **kwargs):
-    store_path= _store_path() if store else None
+    store_path= _store_path(save_dir) if store else None
     '''
     Runs a number of process prediction models PPModel on a number of datasets for multiple runs.
     Stores results in ./tmp folder.

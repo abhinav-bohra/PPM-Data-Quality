@@ -7,6 +7,8 @@ __all__ = ['maeDurDaysNormalize', 'maeDurDaysMinMax', 'AvgMetric', 'get_metrics'
            'PPM_MiDA', 'create_attr_dict', 'attr_list', 'attr_dict']
 
 # Cell
+import warnings
+warnings.filterwarnings("ignore")
 from .imports import *
 from .preprocessing import *
 from .pipeline import *
@@ -533,29 +535,32 @@ attr_list=[
     ['BPIC12_O','activity, resource','AMOUNT_REQ','timestamp'],
     ['BPIC12_W','activity, resource','AMOUNT_REQ','timestamp'],
     ['BPIC12_Wc','activity, resource','AMOUNT_REQ','timestamp'],    
-    ['BPIC12_Wc_const','activity, resource','AMOUNT_REQ','timestamp'],
-    ['BPIC12_Wc_mode_event','activity, resource','AMOUNT_REQ','timestamp'],
-    ['BPIC12_Wc_mode_case','activity, resource','AMOUNT_REQ','timestamp'],
     ['BPIC15_1','activity, resource',None,'timestamp'],
     ['BPIC15_2','activity, resource',None,'timestamp'],
     ['BPIC15_3','activity, resource',None,'timestamp'],
     ['BPIC15_4','activity, resource',None,'timestamp'],
     ['BPIC15_5','activity, resource',None,'timestamp'],
     ['BPIC15_5','activity, resource',None,'timestamp'],
-    ['BPIC15_5_under_activity','activity, resource',None,'timestamp'],
-    ['BPIC15_5_under_resource','activity, resource',None,'timestamp'],
-    ['BPIC15_5_under_both','activity, resource',None,'timestamp'],
     ['Mobis','activity, resource, type','cost','timestamp'],
-    ['BPIC13_CP','activity, resource, resource country, organization country, organization involved, impact, product, org:role',
-     None,'timestamp'],
+    ['BPIC13_CP','activity, resource, resource country, organization country, organization involved, impact, product, org:role', None,'timestamp'],
     ['Helpdesk','activity, resource',None,'timestamp'],
-    ['Helpdesk_under_activity','activity, resource',None,'timestamp'],
-    ['Helpdesk_under_resource','activity, resource',None,'timestamp'],
-    ['Helpdesk_under_both','activity, resource',None,'timestamp'],
-    ['BPIC17_O','activity, Action, NumberOfTerms, resource',
-     'FirstWithdrawalAmount, MonthlyCost, OfferedAmount, CreditScore', 'timestamp'],
-    ['BPIC20_RFP','org:role, activity, resource, Project, Task, OrganizationalEntity',
-     'RequestedAmount','timestamp']
+    ['BPIC17_O','activity, Action, NumberOfTerms, resource','FirstWithdrawalAmount, MonthlyCost, OfferedAmount, CreditScore', 'timestamp'],
+    ['BPIC20_RFP','org:role, activity, resource, Project, Task, OrganizationalEntity','RequestedAmount','timestamp'],
+    ['BPIC12_const','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_mode_event','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_mode_case','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_W_const','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_W_mode_event','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_W_mode_case','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_Wc_const','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_Wc_mode_event','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC12_Wc_mode_case','activity, resource','AMOUNT_REQ','timestamp'],
+    ['BPIC13_CP_const','activity, resource, resource country, organization country, organization involved, impact, product, org:role', None,'timestamp'],
+    ['BPIC13_CP_mode_event','activity, resource, resource country, organization country, organization involved, impact, product, org:role', None,'timestamp'],
+    ['BPIC13_CP_mode_case','activity, resource, resource country, organization country, organization involved, impact, product, org:role', None,'timestamp'],
+    ['Mobis_const','activity, resource, type','cost','timestamp'],
+    ['Mobis_mode_event','activity, resource, type','cost','timestamp'],
+    ['Mobis_mode_case','activity, resource, type','cost','timestamp']   
 ]
 
 
