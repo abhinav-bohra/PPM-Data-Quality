@@ -1,0 +1,38 @@
+Metadata-Version: 2.1
+Name: mppn
+Version: 0.0.1
+Summary: A description of your project
+Home-page: https://gitlab.com/user/mppn/tree/master/
+Author: Author
+Author-email: auther@inst.com
+License: Apache Software License 2.0
+Keywords: some keywords
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+# IBM-Data-Quality
+
+> This repository contains the source code of the paper Assessing Quality of Event Logs for Business Process Predictions.
+
+
+## Installation
+
+The recommended way to install the scripts is:
+```
+cd IBM-Data-Quality
+conda create --name idq python=3.7.
+conda activate idq
+python setup.py install
+pip install -r requirements.txt
+```
+
+The repository is primarily built upon the MPPN Repository -> https://github.com/joLahann/mppn
+
+
