@@ -63,6 +63,13 @@ def get_metrics(o,date_col='timestamp_Relative_elapsed'):
         accuracy_func.__name__= f"acc_{o.ycat_names[i]}"
         accuracy_func=AvgMetric(accuracy_func)
         accuracies.append(accuracy_func)
+
+    for i in range(number_cats):
+    	f1_func = partial(fbeta, thresh=0.2, beta = 1)
+        f1_func.__name__= f"f1_{o.ycat_names[i]}"
+        f1_func=AvgMetric(f1_func)
+        accuracies.append(f1_func)
+    
     mae_days=None
     if len(o.ycont_names)>0:
         if 'minmax' in o.ycont_names[0]: # Here we expect only one timestamp

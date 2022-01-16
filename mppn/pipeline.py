@@ -199,9 +199,11 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
     '''
     i=0
     results=[]
+    #Loop over num_runs
     for r in tqdm(range(runs),desc='Runs'):
         performance_statistic = Performance_Statistic()
         db=tqdm(range(len(dataset_urls)),leave=False)
+        #Loop over datasets
         for i in db:
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
@@ -212,6 +214,7 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
                 with open(store_path/f'run{r}_{ds_name}_splits.pickle', "wb") as output_file:
                     pickle.dump(splits, output_file)
             mb=tqdm(range(len(ppm_classes)),leave=False)
+            #Loop over models
             for j in mb:
                 mb.set_description(ppm_classes[j].__name__.replace('PPM_',""))
                 ppm_class=ppm_classes[j]

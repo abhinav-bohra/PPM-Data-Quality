@@ -13,10 +13,12 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--exp', default="MV",type=str, help='MV - Missing Values, CI - Class Imbalance')    
 parser.add_argument('--save_folder', default="MV",type=str, help='Folder for saving results')    
+
 args = parser.parse_args()
 exp = args.exp
 save_folder = args.save_folder 
 save_dir = f"results/{save_folder}"
+ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
 if exp == "MV":
   logs = [EventLogs.BPIC_12_const, EventLogs.BPIC_12_mode_event, EventLogs.BPIC_12_mode_case, \
@@ -34,7 +36,6 @@ else:
   EventLogs.BPIC_15_3, EventLogs.BPIC_15_4, EventLogs.BPIC_15_5, EventLogs. BPIC_17_OFFER, \
   EventLogs.BPIC_20_RFP, EventLogs.Helpdesk, EventLogs.Mobis]
 
-ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
 # Cell
 import fire
