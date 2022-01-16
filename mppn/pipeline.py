@@ -52,7 +52,7 @@ def training_loop(learn,epoch,print_output,lr_find):
     else: learn.fit(epoch,0.01)
 
 # Cell
-def train_validate(dls,m,metrics=[accuracy,f1],loss=F.cross_entropy,epoch=20,print_output=True,model_dir=".",lr_find=True,
+def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=20,print_output=True,model_dir=".",lr_find=True,
                    output_index=1,patience=3,min_delta=0.005,show_plot=True,store_path='tmp',model_name='.model'):
     '''
     Trains a model on the training set with early stopping based on the validation loss.
@@ -98,16 +98,16 @@ class PPModel():
         self.setup()
 
         print('next_step_prediction')
-        nsp=self.next_step_prediction()
+        nsp =self.next_step_prediction()
 
         print('next_resource_prediction')
-        nrp=self.next_resource_prediction()
+        nrp, nrp_f1 =self.next_resource_prediction()
 
         print('last_resource_prediction')
-        lrp=self.last_resource_prediction()
+        lrp, lrp_f1 =self.last_resource_prediction()
 
         print('outcome_prediction')
-        op=self.outcome_prediction()
+        op, op_f1 =self.outcome_prediction()
 
         print('duration_to_next_event_prediction')
         dtnep=self.duration_to_next_event_prediction()
@@ -120,10 +120,11 @@ class PPModel():
 
         print('resource_suffix_prediction')
         rsp=self.resource_suffix_prediction()
-
+        print(nsp, nrp, lrp, op, dtnep, dtep, asp, rsp)
+        # print(nsp_f1, nrp_f1, lrp_f1, op_f1)
         return nsp, nrp, lrp, op, dtnep, dtep, asp, rsp
 
-    def _train_validate(self,dls,m,metrics=[accuracy,f1],loss=F.cross_entropy,output_index=1):
+    def _train_validate(self,dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
         if self.store:
             ins_stack=inspect.stack()
@@ -221,6 +222,8 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
                 model_path=store_path/'models'/f"run{r}" if store else None
                 model=ppm_class(log,ds_name,splits,store=model_path,sample=sample,**kwargs)
                 model_performance = model.evaluate()
+                print("len(model_performance):",len(model_performance))
+                print(model_performance)
                 model_performance = [ds_name, model.get_name(),*model_performance]
                 performance_statistic.update(model_performance)
                 [ds_name, model.get_name(),*model_performance]

@@ -1,0 +1,10 @@
+2022-01-16 19:57:10,416 Harmless debug Message
+2022-01-16 19:57:10,888 ----
+2022-01-16 19:57:10,888 [<mppn.baselines.AvgMetric object at 0x7fb023b9bbd0>, <mppn.baselines.AvgMetric object at 0x7fb023b9bc50>, <mppn.baselines.AvgMetric object at 0x7fb023b9bcd0>, <mppn.baselines.AvgMetric object at 0x7fb023b9bd50>]
+2022-01-16 19:57:10,888 <function get_metrics.<locals>.<lambda> at 0x7fb023ba0950>
+2022-01-16 19:57:56,185 [0.7973214387893677, 0.43244048953056335, 0.7973214387893677]
+2022-01-16 19:57:56,185 [<mppn.baselines.AvgMetric object at 0x7fb0228ae590>, <mppn.baselines.AvgMetric object at 0x7fb02318a190>, <mppn.baselines.AvgMetric object at 0x7fb02314ce50>, <mppn.baselines.AvgMetric object at 0x7fb023b9b850>]
+2022-01-16 19:57:56,186 <function get_metrics.<locals>.<lambda> at 0x7fb023c145f0>
+2022-01-16 19:58:28,487 ----
+2022-01-16 19:58:28,614 [<mppn.baselines.AvgMetric object at 0x7fb0228560d0>, <mppn.baselines.AvgMetric object at 0x7fb022856190>, <mppn.baselines.AvgMetric object at 0x7fb0228564d0>, <mppn.baselines.AvgMetric object at 0x7fb022856750>]
+2022-01-16 19:58:28,614 <function get_metrics.<locals>.<lambda> at 0x7fb0228a1710>
