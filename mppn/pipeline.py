@@ -137,8 +137,7 @@ class PPModel():
         print('resource_suffix_prediction')
         rsp=self.resource_suffix_prediction()
         
-        return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, lrp_acc,lrp_pre,lrp_rec,lrp_f1, \
-               op_acc,op_pre,op_rec,op_f1, dtnep, dtep, asp, rsp
+        return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, lrp_acc,lrp_pre,lrp_rec,lrp_f1, op_acc,op_pre,op_rec,op_f1, dtnep, dtep, asp, rsp
 
     def _train_validate(self,dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
@@ -190,7 +189,7 @@ class Performance_Statistic():
     def __init__(self):
         self.df = pd.DataFrame(
         columns=['Dataset', 'Model', 'Next Step Acc','Next Step Pre','Next Step Rec','Next Step F1',\
-         'Next Resource Acc','Next Resource Pre','Next Resource Rec','Next Resource F1' \
+         'Next Resource Acc','Next Resource Pre','Next Resource Rec','Next Resource F1', \
          'Last Resource Acc','Last Resource Pre','Last Resource Rec','Last Resource F1', \
          'Outcome Acc','Outcome Pre','Outcome Rec','Outcome F1', \
          'Next relative Timestamp', 'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
@@ -228,6 +227,7 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
+            log = log[:500]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             if store:
