@@ -1,0 +1,2 @@
+,Dataset,Model,Next Step Acc,Next Step Pre,Next Resource Acc,Next Resource Pre,Last Resource Acc,Last Resource Pre,Outcome Acc,Outcome Pre,Next relative Timestamp,Duration to Outcome,Activity Suffix,Resource Suffix
+0,Helpdesk,Camargo_concat,0.7869047522544861,0.7869047522544861,0.43244048953056335,0.43244048953056335,0.8107143044471741,0.8107143044471741,0.9940476417541504,0.9940476417541504,7.689795970916748,6.602866172790527,,

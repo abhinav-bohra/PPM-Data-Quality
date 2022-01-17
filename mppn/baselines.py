@@ -80,7 +80,7 @@ def get_metrics(o,date_col='timestamp_Relative_elapsed'):
 
     precisions=[]
     for i in range(number_cats):
-        precision_func=partial(Precision)
+        precision_func=partial(_accuracy_idx,i=i)
         precision_func.__name__= f"pre_{o.ycat_names[i]}"
         precision_func=AvgMetric(precision_func)
         precisions.append(precision_func)

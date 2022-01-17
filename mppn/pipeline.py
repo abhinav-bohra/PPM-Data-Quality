@@ -137,7 +137,7 @@ class PPModel():
         print('resource_suffix_prediction')
         rsp=self.resource_suffix_prediction()
         
-        return nsp_acc, nsp_pre, nrp_acc, nrp_pre, lrp_acc, lrp_pre, op_acc, op_pre dtnep, dtep, asp, rsp
+        return nsp_acc, nsp_pre, nrp_acc, nrp_pre, lrp_acc, lrp_pre, op_acc, op_pre, dtnep, dtep, asp, rsp
 
     def _train_validate(self,dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
