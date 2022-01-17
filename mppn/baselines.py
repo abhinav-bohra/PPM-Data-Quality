@@ -24,7 +24,7 @@ logger = logging.getLogger()
 # Setting the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
 # Test messages
-logger.debug("Harmless debug Message")
+logger.debug("--Logging--")
 
 # Cell
 def maeDurDaysNormalize(p,yb,mean=0,std=0,unit=60*60*24):
@@ -76,11 +76,6 @@ def get_metrics(o,date_col='timestamp_Relative_elapsed'):
         accuracy_func.__name__= f"acc_{o.ycat_names[i]}"
         accuracy_func=AvgMetric(accuracy_func)
         accuracies.append(accuracy_func)
-    for i in range(number_cats):
-        accuracy_func=partial(_accuracy_idx,i=i)
-        accuracy_func.__name__= f"acc_{o.ycat_names[i]}"
-        accuracy_func=AvgMetric(accuracy_func)
-        accuracies.append(accuracy_func)
 
     # for i in range(number_cats):
     #     F1Score_func=F1Score()
@@ -99,8 +94,7 @@ def get_metrics(o,date_col='timestamp_Relative_elapsed'):
                       o.procs.normalize.stds[date_col])
             mae_days=lambda p,y: maeDurDaysNormalize(listify(p)[-1],listify(y)[-1],mean=mean,std=std)
         mae_days.__name__='mae_days'
-    logger.debug(L(accuracies))
-    logger.debug(mae_days)
+    
     return L(accuracies)+mae_days
 
 # Cell
@@ -261,14 +255,9 @@ class PPM_Camargo_Spezialized(PPModel):
         print('Next event prediction training')
         dls=o.get_dls(bs=self.bs)
         m=self.model(o)
-        logger.debug("----")
-        logger.debug(self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
-                                                   output_index=[1,2,3]))
         self.nsp,self.nrp,self.dtnp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
                                                    output_index=[1,2,3])
 
-
-        logger.debug("----")
         # Last event prediction training
         print('Last event prediction training')
         dls=o.get_dls(outcome=True,bs=self.bs)

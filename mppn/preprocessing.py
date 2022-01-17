@@ -6,7 +6,6 @@ __all__ = ['EventLogs', 'import_log', 'drop_long_traces', 'RandomTraceSplitter',
 
 # Cell
 from .imports import *
-['BPIC12.csv','BPIC12_W.csv','BPIC12_Wc.csv','BPIC13_CP.csv','Mobis.csv']
 # Cell
 class EventLogs:
     BPIC_12=Path('./event_logs/BPIC12.csv')

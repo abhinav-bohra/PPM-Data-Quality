@@ -8,6 +8,7 @@
 06_nb_all_benchmark.ipynb
 README.md
 _Latex_export.ipynb
+debug.log
 prediction_evaluation.py
 requirements.txt
 settings.ini
@@ -137,3 +138,5 @@ mppn/results/run_6_results.csv
 mppn/results/run_7_results.csv
 mppn/results/run_8_results.csv
 mppn/results/run_9_results.csv
+tests/run0_Helpdesk_splits.pickle
+tests/models/run0/Helpdesk/Camargo_concat/setup.pth
