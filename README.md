@@ -6,6 +6,7 @@
 ## Installation
 
 Clone the repo and run the following commands
+
 ```
 cd IBM-Data-Quality
 conda create --name idq python=3.7.
@@ -27,7 +28,7 @@ python prediction_evaluation.py --exp MV --save_folder results
 
 --save_folder : Name of folder to save model checkpoints and results.<br><br>
 
-For each model, checkpoints are saved as .pth files in 01-Missing-Values/results/models/
+For each model, checkpoints are saved as .pth files in 01_Missing-Values/results/models/
 
 (It saves the model's best during training)
 
