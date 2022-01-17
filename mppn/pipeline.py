@@ -7,6 +7,16 @@ __all__ = ['RNNwEmbedding', 'HideOutput', 'training_loop', 'train_validate', 'PP
 from .imports import *
 from .preprocessing import *
 import pickle
+import logging
+ 
+# Create and configure logger
+logging.basicConfig(filename="pipeline.log",format='%(asctime)s %(message)s',filemode='w')
+# Creating an object
+logger = logging.getLogger() 
+# Setting the threshold of logger to DEBUG
+logger.setLevel(logging.DEBUG)
+# Test messages
+logger.debug("--Logging--")
 
 # Cell
 class RNNwEmbedding(torch.nn.Module) :
@@ -58,6 +68,12 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
     Trains a model on the training set with early stopping based on the validation loss.
     Afterwards, applies it to the test set.
     '''
+    logger.debug("--Train Validate--")
+    logger.debug(f" DLS is {dls}")
+    logger.debug(f" Model is {m}")
+    logger.debug(f" Metrics is {metrics}")
+
+    logger.debug("-----------------")
     cbs = [CudaCallback,
       EarlyStoppingCallback(monitor='valid_loss',min_delta=min_delta, patience=patience),
       SaveModelCallback(fname=model_name)
@@ -98,16 +114,16 @@ class PPModel():
         self.setup()
 
         print('next_step_prediction')
-        nsp=self.next_step_prediction()
+        nsp_acc,nsp_pre=self.next_step_prediction()
 
         print('next_resource_prediction')
-        nrp=self.next_resource_prediction()
+        nrp_acc,nrp_pre=self.next_resource_prediction()
 
         print('last_resource_prediction')
-        lrp=self.last_resource_prediction()
+        lrp_acc,lrp_pre=self.last_resource_prediction()
 
         print('outcome_prediction')
-        op=self.outcome_prediction()
+        op_acc,op_pre=self.outcome_prediction()
 
         print('duration_to_next_event_prediction')
         dtnep=self.duration_to_next_event_prediction()
@@ -121,7 +137,7 @@ class PPModel():
         print('resource_suffix_prediction')
         rsp=self.resource_suffix_prediction()
         
-        return nsp, nrp, lrp, op, dtnep, dtep, asp, rsp
+        return nsp_acc, nsp_pre, nrp_acc, nrp_pre, lrp_acc, lrp_pre, op_acc, op_pre dtnep, dtep, asp, rsp
 
     def _train_validate(self,dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
@@ -172,8 +188,9 @@ class Performance_Statistic():
     'Creates a results dataframe, that shows the performance of all models on all datasets on all tasks.'
     def __init__(self):
         self.df = pd.DataFrame(
-        columns=['Dataset', 'Model', 'Next Step', 'Next Resource', 'Last Resource', 'Outcome',
-                'Next relative Timestamp', 'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
+        columns=['Dataset', 'Model', 'Next Step Acc','Next Step Pre', 'Next Resource Acc','Next Resource Pre', \
+         'Last Resource Acc','Last Resource Pre', 'Outcome Acc','Outcome Pre', \
+         'Next relative Timestamp', 'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
     def update(self,model_performance): self.df.loc[len(self.df)] = model_performance
     def to_df(self):
         return self.df
@@ -221,6 +238,7 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
                 model_path=store_path/'models'/f"run{r}" if store else None
                 model=ppm_class(log,ds_name,splits,store=model_path,sample=sample,**kwargs)
                 model_performance = model.evaluate()
+                logger.debug(model_performance)
                 model_performance = [ds_name, model.get_name(),*model_performance]
                 performance_statistic.update(model_performance)
                 [ds_name, model.get_name(),*model_performance]
