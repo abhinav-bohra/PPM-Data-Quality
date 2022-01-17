@@ -423,23 +423,23 @@ class PPM_Tax_Spezialized(PPModel):
         print('Next event prediction training')
         dls=o.get_dls(bs=self.bs)
         m=self.model(o)
-        self.nsp,self.dtnp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
-                                                   output_index=[1,2])
+        self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1, self.dtnp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
+                                                   output_index=[1,2,3,4,5])
 
 
         # Last event prediction training
         print('Last event prediction training')
         dls=o.get_dls(outcome=True,bs=self.bs)
         m=self.model(o)
-        self.op,self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
-                                                 output_index=[1,2])
+        self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
+                                                 output_index=[1,2,3,4,5])
 
 
 
-    def next_step_prediction(self): return self.nsp
+    def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
 
 
-    def outcome_prediction(self): return self.op
+    def outcome_prediction(self): return self.op_acc, self.op_pre, self.op_rec, self.op_f1
     def duration_to_next_event_prediction(self): return self.dtnp
     def duration_to_end_prediction(self): return self.dtlp
     def activity_suffix_prediction(self): pass
