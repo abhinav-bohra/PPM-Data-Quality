@@ -245,6 +245,8 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
                 model_performance = [ds_name, model.get_name(),*model_performance]
                 performance_statistic.update(model_performance)
                 [ds_name, model.get_name(),*model_performance]
+                df = performance_statistic.to_df()
+                if store: df.to_csv(store_path/f"run_{r}_results.csv")
 
         df = performance_statistic.to_df()
         results.append(df)

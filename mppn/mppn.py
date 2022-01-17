@@ -10,6 +10,16 @@ from .preprocessing import *
 from .pipeline import *
 from .baselines import *
 
+import logging
+ 
+# Create and configure logger
+logging.basicConfig(filename="mppn.log",format='%(asctime)s %(message)s',filemode='w')
+# Creating an object
+logger = logging.getLogger() 
+# Setting the threshold of logger to DEBUG
+logger.setLevel(logging.DEBUG)
+# Test messages
+logger.debug("--MPPN Logging--")
 # Cell
 
 class BaseMPPN(nn.Module):
@@ -386,7 +396,13 @@ class PPM_MPPN(PPModel):
 
     def setup(self):
         def act_acc(p,y): return accuracy(p[0],y[0])
-        def act_res(p,y): return accuracy(p[1],y[1])
+        def act_pre(p,y): return accuracy(p[0],y[0])
+        def act_rec(p,y): return accuracy(p[0],y[0])
+        def act_f1(p,y): return accuracy(p[0],y[0])
+        def res_acc(p,y): return accuracy(p[1],y[1])
+        def res_pre(p,y): return accuracy(p[1],y[1])
+        def res_rec(p,y): return accuracy(p[1],y[1])
+        def res_f1(p,y): return accuracy(p[1],y[1])
         cat_names,cont_names,date_names=self._attr_from_dict(self.ds_name)
         self.o=PPObj(self.log,[Categorify,Datetify,FillMissing,MinMax],
                      cat_names=cat_names,date_names=date_names,cont_names=cont_names,
@@ -403,7 +419,7 @@ class PPM_MPPN(PPModel):
         dls=self.o.get_dls(after_batch=gaf_transform,bs=self.bs)
         loss=partial(multi_loss_sum,self.o)
         time_metric=lambda p,y: maeDurDaysNormalize(listify(p)[-1],listify(y)[-1],mean=self.mean,std=self.std)
-        self._train_validate(dls,self.pretrain,loss=loss,metrics=[act_acc,act_res,time_metric])
+        self._train_validate(dls,self.pretrain,loss=loss,metrics=[act_acc,act_pre, act_rec, act_f1, res_acc, res_pre, res_rec, res_f1,time_metric])
 
 
 
@@ -415,6 +431,7 @@ class PPM_MPPN(PPModel):
         dls=self.o.get_dls(after_batch=gaf_transform,bs=self.bs,outcome=outcome)
         loss=partial(multi_loss_sum,self.o)
         metrics=get_metrics(self.o)
+        logger.debug(metrics)
         return self._train_validate(dls,m,loss=loss,metrics=metrics)
 
     def next_resource_prediction(self):return self.next_step_prediction(outcome=False,col='resource')

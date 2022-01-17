@@ -1,33 +1,64 @@
-2022-01-17 19:25:29,678 --Logging--
-2022-01-17 19:25:29,730 --Logging--
-2022-01-17 19:25:30,190 --Train Validate--
-2022-01-17 19:25:30,190  DLS is <fastai.data.core.DataLoaders object at 0x7f3ebd694c50>
-2022-01-17 19:25:30,190  Model is Camargo_concat(
+2022-01-17 19:53:30,744 --Logging--
+2022-01-17 19:53:30,790 --Logging--
+2022-01-17 19:53:30,798 --MPPN Logging--
+2022-01-17 19:53:31,248 --Train Validate--
+2022-01-17 19:53:31,249  DLS is <fastai.data.core.DataLoaders object at 0x7f6b5b59d5d0>
+2022-01-17 19:53:31,249  Model is Camargo_concat(
+  (emb_act): Embedding(22, 5)
+  (emb_res): Embedding(9, 4)
+  (lstm_concat): LSTM(9, 25, batch_first=True)
+  (lstm_act): LSTM(25, 25, batch_first=True)
+  (lstm_res): LSTM(25, 25, batch_first=True)
+  (lstm_tim): LSTM(1, 25, num_layers=2, batch_first=True)
+  (linear_act): Linear(in_features=25, out_features=22, bias=True)
+  (linear_res): Linear(in_features=25, out_features=9, bias=True)
+  (linear_tim): Linear(in_features=25, out_features=1, bias=True)
+)
+2022-01-17 19:53:31,249  Metrics is [<mppn.baselines.AvgMetric object at 0x7f6b5b564d10>, <mppn.baselines.AvgMetric object at 0x7f6b5b564d90>, <mppn.baselines.AvgMetric object at 0x7f6b5b564e10>, <mppn.baselines.AvgMetric object at 0x7f6b5b564e90>, <mppn.baselines.AvgMetric object at 0x7f6b5b564f10>, <mppn.baselines.AvgMetric object at 0x7f6b5b564f90>, <mppn.baselines.AvgMetric object at 0x7f6b5b564fd0>, <mppn.baselines.AvgMetric object at 0x7f6b5b573050>, <function get_metrics.<locals>.<lambda> at 0x7f6b5b56fa70>]
+2022-01-17 19:53:31,249 -----------------
+2022-01-17 19:54:01,947 --Train Validate--
+2022-01-17 19:54:01,947  DLS is <fastai.data.core.DataLoaders object at 0x7f6b5a21d1d0>
+2022-01-17 19:54:01,947  Model is Camargo_concat(
+  (emb_act): Embedding(22, 5)
+  (emb_res): Embedding(9, 4)
+  (lstm_concat): LSTM(9, 25, batch_first=True)
+  (lstm_act): LSTM(25, 25, batch_first=True)
+  (lstm_res): LSTM(25, 25, batch_first=True)
+  (lstm_tim): LSTM(1, 25, num_layers=2, batch_first=True)
+  (linear_act): Linear(in_features=25, out_features=22, bias=True)
+  (linear_res): Linear(in_features=25, out_features=9, bias=True)
+  (linear_tim): Linear(in_features=25, out_features=1, bias=True)
+)
+2022-01-17 19:54:01,947  Metrics is [<mppn.baselines.AvgMetric object at 0x7f6b5b508150>, <mppn.baselines.AvgMetric object at 0x7f6b5a2199d0>, <mppn.baselines.AvgMetric object at 0x7f6b5a219ed0>, <mppn.baselines.AvgMetric object at 0x7f6b5a21aa50>, <mppn.baselines.AvgMetric object at 0x7f6b5a21a5d0>, <mppn.baselines.AvgMetric object at 0x7f6b5a218c50>, <mppn.baselines.AvgMetric object at 0x7f6b5a218cd0>, <mppn.baselines.AvgMetric object at 0x7f6b5a22c050>, <function get_metrics.<locals>.<lambda> at 0x7f6b5a22e9e0>]
+2022-01-17 19:54:01,947 -----------------
+2022-01-17 19:54:30,988 (0.27906978130340576, 0.27906978130340576, 0.27906978130340576, 0.27906978130340576, 0.4883720874786377, 0.4883720874786377, 0.4883720874786377, 0.4883720874786377, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 2.3252034187316895, 86.05461883544922, None, None)
+2022-01-17 19:54:31,081 --Train Validate--
+2022-01-17 19:54:31,081  DLS is <fastai.data.core.DataLoaders object at 0x7f6b19ffeb50>
+2022-01-17 19:54:31,081  Model is Camargo_concat(
   (emb_act): Embedding(9, 4)
-  (emb_res): Embedding(19, 5)
+  (emb_res): Embedding(18, 5)
   (lstm_concat): LSTM(9, 25, batch_first=True)
   (lstm_act): LSTM(25, 25, batch_first=True)
   (lstm_res): LSTM(25, 25, batch_first=True)
   (lstm_tim): LSTM(1, 25, num_layers=2, batch_first=True)
   (linear_act): Linear(in_features=25, out_features=9, bias=True)
-  (linear_res): Linear(in_features=25, out_features=19, bias=True)
+  (linear_res): Linear(in_features=25, out_features=18, bias=True)
   (linear_tim): Linear(in_features=25, out_features=1, bias=True)
 )
-2022-01-17 19:25:30,190  Metrics is [<mppn.baselines.AvgMetric object at 0x7f3ebd6546d0>, <mppn.baselines.AvgMetric object at 0x7f3ebd654750>, <mppn.baselines.AvgMetric object at 0x7f3ebd6547d0>, <mppn.baselines.AvgMetric object at 0x7f3ebd654850>, <mppn.baselines.AvgMetric object at 0x7f3ebd6548d0>, <mppn.baselines.AvgMetric object at 0x7f3ebd654950>, <mppn.baselines.AvgMetric object at 0x7f3ebd654990>, <mppn.baselines.AvgMetric object at 0x7f3ebd6549d0>, <function get_metrics.<locals>.<lambda> at 0x7f3ebd664950>]
-2022-01-17 19:25:30,190 -----------------
-2022-01-17 19:26:05,707 --Train Validate--
-2022-01-17 19:26:05,707  DLS is <fastai.data.core.DataLoaders object at 0x7f3ebc3175d0>
-2022-01-17 19:26:05,707  Model is Camargo_concat(
+2022-01-17 19:54:31,081  Metrics is [<mppn.baselines.AvgMetric object at 0x7f6b19f84f50>, <mppn.baselines.AvgMetric object at 0x7f6b19f84fd0>, <mppn.baselines.AvgMetric object at 0x7f6b19f8c090>, <mppn.baselines.AvgMetric object at 0x7f6b19f8c110>, <mppn.baselines.AvgMetric object at 0x7f6b19f8c190>, <mppn.baselines.AvgMetric object at 0x7f6b19f8c210>, <mppn.baselines.AvgMetric object at 0x7f6b19f8c250>, <mppn.baselines.AvgMetric object at 0x7f6b19f8c290>, <function get_metrics.<locals>.<lambda> at 0x7f6b19f87170>]
+2022-01-17 19:54:31,081 -----------------
+2022-01-17 19:55:06,544 --Train Validate--
+2022-01-17 19:55:06,544  DLS is <fastai.data.core.DataLoaders object at 0x7f6b5a218190>
+2022-01-17 19:55:06,544  Model is Camargo_concat(
   (emb_act): Embedding(9, 4)
-  (emb_res): Embedding(19, 5)
+  (emb_res): Embedding(18, 5)
   (lstm_concat): LSTM(9, 25, batch_first=True)
   (lstm_act): LSTM(25, 25, batch_first=True)
   (lstm_res): LSTM(25, 25, batch_first=True)
   (lstm_tim): LSTM(1, 25, num_layers=2, batch_first=True)
   (linear_act): Linear(in_features=25, out_features=9, bias=True)
-  (linear_res): Linear(in_features=25, out_features=19, bias=True)
+  (linear_res): Linear(in_features=25, out_features=18, bias=True)
   (linear_tim): Linear(in_features=25, out_features=1, bias=True)
 )
-2022-01-17 19:26:05,707  Metrics is [<mppn.baselines.AvgMetric object at 0x7f3ebcbad710>, <mppn.baselines.AvgMetric object at 0x7f3ebc31b050>, <mppn.baselines.AvgMetric object at 0x7f3ebc31b650>, <mppn.baselines.AvgMetric object at 0x7f3ebc31ba50>, <mppn.baselines.AvgMetric object at 0x7f3ebc31b790>, <mppn.baselines.AvgMetric object at 0x7f3ebc31b210>, <mppn.baselines.AvgMetric object at 0x7f3ebc31b690>, <mppn.baselines.AvgMetric object at 0x7f3ebc31b910>, <function get_metrics.<locals>.<lambda> at 0x7f3ebc3298c0>]
-2022-01-17 19:26:05,707 -----------------
-2022-01-17 19:26:35,958 (0.6756756901741028, 0.6756756901741028, 0.6756756901741028, 0.6756756901741028, 0.12162162363529205, 0.12162162363529205, 0.12162162363529205, 0.12162162363529205, 0.7162162065505981, 0.7162162065505981, 0.7162162065505981, 0.7162162065505981, 0.9324324131011963, 0.9324324131011963, 0.9324324131011963, 0.9324324131011963, 10.789642333984375, 8.521332740783691, None, None)
+2022-01-17 19:55:06,544  Metrics is [<mppn.baselines.AvgMetric object at 0x7f6b19f9bdd0>, <mppn.baselines.AvgMetric object at 0x7f6b19f9b2d0>, <mppn.baselines.AvgMetric object at 0x7f6b19f9b450>, <mppn.baselines.AvgMetric object at 0x7f6b19f9b050>, <mppn.baselines.AvgMetric object at 0x7f6b19f9b990>, <mppn.baselines.AvgMetric object at 0x7f6b19f9b7d0>, <mppn.baselines.AvgMetric object at 0x7f6b19f9b810>, <mppn.baselines.AvgMetric object at 0x7f6b19f9b890>, <function get_metrics.<locals>.<lambda> at 0x7f6b19fadf80>]
+2022-01-17 19:55:06,544 -----------------
