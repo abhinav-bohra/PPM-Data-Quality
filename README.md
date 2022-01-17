@@ -27,6 +27,6 @@ python prediction_evaluation.py --exp MV --save_folder results
 
 --save_folder : Name of folder to save model checkpoints and results.<br><br>
 
-Model Checkpoints are saved as .pth files in 01-Missing-Values/resutls/models/ for every model.
+For each model, checkpoints are saved as .pth files in 01-Missing-Values/resutls/models/
 
 The repository is primarily built upon the MPPN Repository -> https://github.com/joLahann/mppn
