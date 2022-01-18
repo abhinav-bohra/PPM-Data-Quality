@@ -14,7 +14,7 @@ import logging
  
 logging.basicConfig(filename="mppn.log",format='',filemode='w')
 logger = logging.getLogger() 
-logger.setLevel(logging.DEBUG
+logger.setLevel(logging.DEBUG)
 logger.debug("--MPPN Logging--")
 
 class BaseMPPN(nn.Module):

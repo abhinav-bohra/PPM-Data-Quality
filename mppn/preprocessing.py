@@ -389,7 +389,6 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
     ds=[]
     for s in ppo.subsets(): #train dev and test sets
         wds,idx=windows(s.xs,s.event_ids)
-
         if not outcome: y=s.ys.iloc[idx]
         else: y=s.ys.groupby(s.items.index).transform('last').iloc[idx]
         ycats=tensor(y[s.ycat_names].values).long() #['activity', 'resource'] torch.Size([342, 2])
@@ -398,26 +397,31 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         xcats=tensor(wds[:,:len(s.cat_names)]).long() # torch.Size([312, 1, 64])
         xs=tuple([i.squeeze() for i in [xcats,xconts] if i.shape[1]>0])
         ys=tuple([ycats[:,i] for i in range(ycats.shape[1])])+tuple([yconts[:,i] for i in range(yconts.shape[1])])
+        ds.append(PPDset((*xs,ys)))
         logger.debug("\n---S---")
-        logger.debug(s.iloc[4])
+        logger.debug(s.iloc[0])
         
-        logger.debug("\n---Y---")
-        logger.debug(s.ycat_names)
-        logger.debug(ycats.size())
-        logger.debug(s.ycont_names)
-        logger.debug(yconts.size())
         logger.debug("\n---X---")
         logger.debug(s.cat_names)
         logger.debug(xcats.size())
         logger.debug(s.cat_names)
         logger.debug(xconts.size())
+
+        logger.debug("\n---Y---")
+        logger.debug(s.ycat_names)
+        logger.debug(ycats.size())
+        logger.debug(s.ycont_names)
+        logger.debug(yconts.size())
         
         logger.debug("\n---XS & YS ---")
         logger.debug(f"xs is {len(xs)} X {xs[0].size()} {xs[1].size()} {type(xs)}")
         logger.debug(f"ys is {len(ys)} X {ys[0].size()} {ys[1].size()} {ys[2].size()} {type(ys)}")
-        logger.debug(f"xs is {xs[0][0]}")
-        logger.debug(f"ys is {ys[0][0]}")
-        ds.append(PPDset((*xs,ys)))
+        
+        logger.debug("\n---Datapoints---")
+        logger.debug(f"xs[0] is {xs[0][0]}")
+        logger.debug(f"ys[0] is {ys[0][0]}")
+        logger.debug(f"ys[1] is {ys[1][0]}")
+        logger.debug(f"ys[2] is {ys[2][0]}")
 
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)
 PPObj.get_dls= get_dls

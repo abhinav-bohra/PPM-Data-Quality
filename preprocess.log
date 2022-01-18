@@ -1,78 +1,110 @@
---Pre-processing Logging--
---Logging--
---Logging--
+--Preprocessing Logging--
+--Pipeline Logging--
+--Baselines Logging--
 --MPPN Logging--
 
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case104          0         1        17                   -0.811359
-Case104          1         7         9                   -0.809098
-Case104          2         6         9                   -0.809030
-Case104          3         2        14                    1.276882
-
----Y---
-['activity', 'resource']
-torch.Size([286, 2])
-['timestamp_Relative_elapsed']
-torch.Size([286, 1])
+Case1            0         1         1                   -0.761067
+Case1            1         7         1                   -0.761038
+Case1            2         7         6                   -0.588547
+Case1            3         6         1                    0.149353
+Case1            4         2         7                    1.014224
 
 ---X---
 ['activity', 'resource']
-torch.Size([286, 2, 64])
+torch.Size([143, 2, 64])
 ['activity', 'resource']
-torch.Size([286, 1, 64])
+torch.Size([143, 1, 64])
+
+---Y---
+['activity', 'resource']
+torch.Size([143, 2])
+['timestamp_Relative_elapsed']
+torch.Size([143, 1])
 
 ---XS & YS ---
-xs is 2 X torch.Size([286, 2, 64]) torch.Size([286, 64]) <class 'tuple'>
-ys is 3 X torch.Size([286]) torch.Size([286]) torch.Size([286]) <class 'tuple'>
+xs is 2 X torch.Size([143, 2, 64]) torch.Size([143, 64]) <class 'tuple'>
+ys is 3 X torch.Size([143]) torch.Size([143]) torch.Size([143]) <class 'tuple'>
+
+---Datapoints---
+xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]])
+ys[0] is 7
+ys[1] is 6
+ys[2] is -0.7061101198196411
 
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case34           0         1         6                   -0.811359
-Case34           1         7         6                   -0.028926
-Case34           2         8         6                   -0.028883
-Case34           3         8        18                    0.033944
-Case34           4         6        18                    0.534434
-Case34           5         2        12                    1.380904
-
----Y---
-['activity', 'resource']
-torch.Size([31, 2])
-['timestamp_Relative_elapsed']
-torch.Size([31, 1])
+Case13           0         1         8                   -0.761067
+Case13           1         7         8                    0.155356
+Case13           2         6         8                    0.272697
+Case13           3         2         7                    1.132791
 
 ---X---
 ['activity', 'resource']
-torch.Size([31, 2, 64])
+torch.Size([14, 2, 64])
 ['activity', 'resource']
-torch.Size([31, 1, 64])
+torch.Size([14, 1, 64])
+
+---Y---
+['activity', 'resource']
+torch.Size([14, 2])
+['timestamp_Relative_elapsed']
+torch.Size([14, 1])
 
 ---XS & YS ---
-xs is 2 X torch.Size([31, 2, 64]) torch.Size([31, 64]) <class 'tuple'>
-ys is 3 X torch.Size([31]) torch.Size([31]) torch.Size([31]) <class 'tuple'>
+xs is 2 X torch.Size([14, 2, 64]) torch.Size([14, 64]) <class 'tuple'>
+ys is 3 X torch.Size([14]) torch.Size([14]) torch.Size([14]) <class 'tuple'>
+
+---Datapoints---
+xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8]])
+ys[0] is 7
+ys[1] is 8
+ys[2] is 0.1553560346364975
 
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case11           0         1        13                   -0.811359
-Case11           1         7        13                   -0.811324
-Case11           2         6        13                   -0.767819
-Case11           3         2        14                    0.938227
-
----Y---
-['activity', 'resource']
-torch.Size([74, 2])
-['timestamp_Relative_elapsed']
-torch.Size([74, 1])
+Case14           0         1         4                   -0.761067
+Case14           1         7         4                   -0.761058
+Case14           2         6         4                   -0.760849
+Case14           3         2         9                    1.016567
 
 ---X---
 ['activity', 'resource']
-torch.Size([74, 2, 64])
+torch.Size([38, 2, 64])
 ['activity', 'resource']
-torch.Size([74, 1, 64])
+torch.Size([38, 1, 64])
+
+---Y---
+['activity', 'resource']
+torch.Size([38, 2])
+['timestamp_Relative_elapsed']
+torch.Size([38, 1])
 
 ---XS & YS ---
-xs is 2 X torch.Size([74, 2, 64]) torch.Size([74, 64]) <class 'tuple'>
-ys is 3 X torch.Size([74]) torch.Size([74]) torch.Size([74]) <class 'tuple'>
+xs is 2 X torch.Size([38, 2, 64]) torch.Size([38, 64]) <class 'tuple'>
+ys is 3 X torch.Size([38]) torch.Size([38]) torch.Size([38]) <class 'tuple'>
+
+---Datapoints---
+xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8]])
+ys[0] is 7
+ys[1] is 8
+ys[2] is -0.7610473036766052
