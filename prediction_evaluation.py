@@ -60,7 +60,7 @@ if not isnotebook():
     from tqdm import tqdm as tqdm_console
     
     def command_line(log_idx=range(len(logs)),ppm_idx=range(len(ppms)),sample=False,store=True, runs=1,
-                                   bs=64,print_output=False,patience=3, min_delta=0.005, epoch=20):
+                                   bs=64,print_output=True,patience=3, min_delta=0.005, epoch=20):
         log_sel=L(logs)[log_idx]
         ppm_sel=L(ppms)[ppm_idx]
         

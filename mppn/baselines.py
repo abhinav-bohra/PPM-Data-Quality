@@ -12,12 +12,12 @@ warnings.filterwarnings("ignore")
 from .imports import *
 from .preprocessing import *
 from .pipeline import *
-
+import sklearn
 from fastai import *
 from fastai.text import *
 import logging
  
-logging.basicConfig(filename="debug.log",format='',filemode='w')
+logging.basicConfig(filename="baselines.log",format='',filemode='w')
 logger = logging.getLogger() 
 logger.setLevel(logging.DEBUG)
 logger.debug("--Baselines Logging--")
@@ -45,6 +45,15 @@ def maeDurDaysMinMax(p,yb,minn=0,maxx=0,unit=60*60*24):
 
 # Cell
 def _accuracy_idx(a,b,i): return accuracy(listify(a)[i],listify(b)[i])
+def _precision_idx(a,b,i): 
+  logger.debug(f"i is {i} {type(i)}")
+  logger.debug(f"a is {a} {type(a)}")
+  logger.debug(f"b is {b} {type(b)}")
+  print(f"i is {i} {type(i)}")
+  print(f"a is {a} {type(a)}")
+  print(f"b is {b} {type(b)}")
+  return 1
+  # return sklearn.metrics.precision_score(listify(a)[i],listify(b)[i])
 
 # Cell
 class AvgMetric(Metric):
@@ -70,29 +79,29 @@ def get_metrics(o,date_col='timestamp_Relative_elapsed'):
     for i in range(number_cats):
         accuracy_func=partial(_accuracy_idx,i=i)
         accuracy_func.__name__= f"acc_{o.ycat_names[i]}"
-        accuracy_func=AvgMetric(accuracy_func)
-        accuracies.append(accuracy_func)
+        avg_accuracy_func=AvgMetric(accuracy_func)
+        accuracies.append(avg_accuracy_func)
     
     precisions=[]
     for i in range(number_cats):
-        precision_func=partial(_accuracy_idx,i=i)
+        precision_func=partial(_precision_idx,i=i)
         precision_func.__name__= f"pre_{o.ycat_names[i]}"
-        precision_func=AvgMetric(precision_func)
-        precisions.append(precision_func)
+        avg_precision_func=AvgMetric(precision_func)
+        precisions.append(avg_precision_func)
 
     recalls=[]
     for i in range(number_cats):
         recall_func=partial(_accuracy_idx,i=i)
         recall_func.__name__= f"rec_{o.ycat_names[i]}"
-        recall_func=AvgMetric(recall_func)
-        recalls.append(recall_func)
+        avg_recall_func=AvgMetric(recall_func)
+        recalls.append(avg_recall_func)
 
     f1_scores=[]
     for i in range(number_cats):
         f1_score_func=partial(_accuracy_idx,i=i)
         f1_score_func.__name__= f"f1_score_{o.ycat_names[i]}"
-        f1_score_func=AvgMetric(f1_score_func)
-        f1_scores.append(f1_score_func)
+        avg_f1_score_func=AvgMetric(f1_score_func)
+        f1_scores.append(avg_f1_score_func)
  
     mae_days=None
     if len(o.ycont_names)>0:
