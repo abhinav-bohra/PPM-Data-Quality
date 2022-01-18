@@ -46,14 +46,10 @@ def maeDurDaysMinMax(p,yb,minn=0,maxx=0,unit=60*60*24):
 # Cell
 def _accuracy_idx(a,b,i): return accuracy(listify(a)[i],listify(b)[i])
 def _precision_idx(a,b,i): 
-  logger.debug(f"i is {i} {type(i)}")
-  logger.debug(f"a is {a} {type(a)}")
-  logger.debug(f"b is {b} {type(b)}")
-  print(f"i is {i} {type(i)}")
-  print(f"a is {a} {type(a)}")
-  print(f"b is {b} {type(b)}")
-  return 1
-  # return sklearn.metrics.precision_score(listify(a)[i],listify(b)[i])
+  pred = listify(a)[i]
+  targ = listify(b)[i]
+  pred,targ = flatten_check(pred.argmax(dim=-1), targ)
+  return sklearn.metrics.precision_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy())
 
 # Cell
 class AvgMetric(Metric):
