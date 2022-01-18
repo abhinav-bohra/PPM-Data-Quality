@@ -12,15 +12,10 @@ from .baselines import *
 
 import logging
  
-# Create and configure logger
-logging.basicConfig(filename="mppn.log",format='%(asctime)s %(message)s',filemode='w')
-# Creating an object
+logging.basicConfig(filename="mppn.log",format='',filemode='w')
 logger = logging.getLogger() 
-# Setting the threshold of logger to DEBUG
-logger.setLevel(logging.DEBUG)
-# Test messages
+logger.setLevel(logging.DEBUG
 logger.debug("--MPPN Logging--")
-# Cell
 
 class BaseMPPN(nn.Module):
 

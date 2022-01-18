@@ -6,57 +6,60 @@
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case104          0         1        17                   -0.810289
-Case104          1         7         9                   -0.808028
-Case104          2         6         9                   -0.807960
-Case104          3         2        14                    1.278506
+Case104          0         1        17                   -0.811359
+Case104          1         7         9                   -0.809098
+Case104          2         6         9                   -0.809030
+Case104          3         2        14                    1.276882
 
 ---Y---
 ['activity', 'resource']
-torch.Size([287, 2])
+torch.Size([286, 2])
 ['timestamp_Relative_elapsed']
-torch.Size([287, 1])
+torch.Size([286, 1])
 
 ---X---
 ['activity', 'resource']
-torch.Size([287, 2, 64])
+torch.Size([286, 2, 64])
 ['activity', 'resource']
-torch.Size([287, 1, 64])
+torch.Size([286, 1, 64])
 
 ---XS & YS ---
-xs is 2 X torch.Size([287, 2, 64]) torch.Size([287, 64]) <class 'tuple'>
-ys is 3 X torch.Size([287]) torch.Size([287]) torch.Size([287]) <class 'tuple'>
+xs is 2 X torch.Size([286, 2, 64]) torch.Size([286, 64]) <class 'tuple'>
+ys is 3 X torch.Size([286]) torch.Size([286]) torch.Size([286]) <class 'tuple'>
 
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case35           0         1         1                   -0.810289
-Case35           1         6         1                   -0.806717
-Case35           2         2        14                    2.125100
+Case34           0         1         6                   -0.811359
+Case34           1         7         6                   -0.028926
+Case34           2         8         6                   -0.028883
+Case34           3         8        18                    0.033944
+Case34           4         6        18                    0.534434
+Case34           5         2        12                    1.380904
 
 ---Y---
 ['activity', 'resource']
-torch.Size([30, 2])
+torch.Size([31, 2])
 ['timestamp_Relative_elapsed']
-torch.Size([30, 1])
+torch.Size([31, 1])
 
 ---X---
 ['activity', 'resource']
-torch.Size([30, 2, 64])
+torch.Size([31, 2, 64])
 ['activity', 'resource']
-torch.Size([30, 1, 64])
+torch.Size([31, 1, 64])
 
 ---XS & YS ---
-xs is 2 X torch.Size([30, 2, 64]) torch.Size([30, 64]) <class 'tuple'>
-ys is 3 X torch.Size([30]) torch.Size([30]) torch.Size([30]) <class 'tuple'>
+xs is 2 X torch.Size([31, 2, 64]) torch.Size([31, 64]) <class 'tuple'>
+ys is 3 X torch.Size([31]) torch.Size([31]) torch.Size([31]) <class 'tuple'>
 
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case11           0         1        13                   -0.810289
-Case11           1         7        13                   -0.810254
-Case11           2         6        13                   -0.766738
-Case11           3         2        14                    0.939761
+Case11           0         1        13                   -0.811359
+Case11           1         7        13                   -0.811324
+Case11           2         6        13                   -0.767819
+Case11           3         2        14                    0.938227
 
 ---Y---
 ['activity', 'resource']

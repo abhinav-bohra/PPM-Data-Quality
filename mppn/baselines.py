@@ -17,14 +17,10 @@ from fastai import *
 from fastai.text import *
 import logging
  
-# Create and configure logger
-logging.basicConfig(filename="debug.log",format='%(asctime)s %(message)s',filemode='w')
-# Creating an object
+logging.basicConfig(filename="debug.log",format='',filemode='w')
 logger = logging.getLogger() 
-# Setting the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
-# Test messages
-logger.debug("--Logging--")
+logger.debug("--Baselines Logging--")
 
 # Cell
 def maeDurDaysNormalize(p,yb,mean=0,std=0,unit=60*60*24):

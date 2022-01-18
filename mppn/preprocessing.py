@@ -11,14 +11,10 @@ from .imports import *
 from imblearn.under_sampling import NearMiss 
 
 import logging
-# Create and configure logger
 logging.basicConfig(filename="preprocess.log",format='',filemode='w')
-# Creating an object
 logger = logging.getLogger() 
-# Setting the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
-# Test messages
-logger.debug("--Pre-processing Logging--")
+logger.debug("--Preprocessing Logging--")
 
 # Cell
 class EventLogs:
@@ -381,7 +377,7 @@ class PPDset(torch.utils.data.Dataset):
 
 def Balance(technique,X,y):
   if technique == "NearMiss":
-    logger.debug("Applying NearMiss")
+    logger.debug("---Applying NearMiss---")
     nm = NearMiss()
     X_res, y_res = nm.fit_resample(X, y)
     return X_res, y_res
@@ -415,14 +411,12 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         logger.debug(xcats.size())
         logger.debug(s.cat_names)
         logger.debug(xconts.size())
-        # logger.debug(f" s is {len(s)}")
-        # logger.debug(f"xs is {len(xs)} X {xs[0].size()} {xs[1].size()} {type(xs)}")
-        # logger.debug(f"ys is {len(ys)} X {ys[0].size()} {ys[1].size()} {ys[2].size()} {type(ys)}")
-        # xs, ys = Balance("NearMiss",xs,ys)
-        # logger.debug(f" s is {len(s)}")
+        
         logger.debug("\n---XS & YS ---")
         logger.debug(f"xs is {len(xs)} X {xs[0].size()} {xs[1].size()} {type(xs)}")
         logger.debug(f"ys is {len(ys)} X {ys[0].size()} {ys[1].size()} {ys[2].size()} {type(ys)}")
+        logger.debug(f"xs is {xs[0][0]}")
+        logger.debug(f"ys is {ys[0][0]}")
         ds.append(PPDset((*xs,ys)))
 
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)

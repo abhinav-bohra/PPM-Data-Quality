@@ -8,15 +8,11 @@ from .imports import *
 from .preprocessing import *
 import pickle
 import logging
- 
-# Create and configure logger
-logging.basicConfig(filename="pipeline.log",format='%(asctime)s %(message)s',filemode='w')
-# Creating an object
+
+logging.basicConfig(filename="pipeline.log",format='',filemode='w')
 logger = logging.getLogger() 
-# Setting the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
-# Test messages
-logger.debug("--Logging--")
+logger.debug("--Pipeline Logging--")
 
 # Cell
 class RNNwEmbedding(torch.nn.Module) :
@@ -221,7 +217,7 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
-            log = log[:500]
+            log = log[:250]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             if store:
@@ -235,7 +231,7 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
                 model_path=store_path/'models'/f"run{r}" if store else None
                 model=ppm_class(log,ds_name,splits,store=model_path,sample=sample,**kwargs)
                 model_performance = model.evaluate()
-                logger.debug(model_performance)
+                logger.debug(f"model_performance: {model_performance}")
                 model_performance = [ds_name, model.get_name(),*model_performance]
                 performance_statistic.update(model_performance)
                 [ds_name, model.get_name(),*model_performance]
