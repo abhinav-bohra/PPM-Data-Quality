@@ -4,8 +4,22 @@ __all__ = ['EventLogs', 'import_log', 'drop_long_traces', 'RandomTraceSplitter',
            'Categorify', 'FillStrategy', 'FillMissing', 'Normalize', 'Base_Date_Encodings', 'encode_date',
            'decode_date', 'Datetify', 'MinMax', 'OneHot', 'subsequences_fast', 'PPDset', 'get_dls']
 
+import pandas as pd
+pd.set_option('display.max_columns', None)
 # Cell
 from .imports import *
+from imblearn.under_sampling import NearMiss 
+
+import logging
+# Create and configure logger
+logging.basicConfig(filename="preprocess.log",format='',filemode='w')
+# Creating an object
+logger = logging.getLogger() 
+# Setting the threshold of logger to DEBUG
+logger.setLevel(logging.DEBUG)
+# Test messages
+logger.debug("--Pre-processing Logging--")
+
 # Cell
 class EventLogs:
     BPIC_12=Path('./event_logs/BPIC12.csv')
@@ -365,21 +379,51 @@ class PPDset(torch.utils.data.Dataset):
         if len(ys)==1: ys=ys[0]
         return (*xs,ys)
 
+def Balance(technique,X,y):
+  if technique == "NearMiss":
+    logger.debug("Applying NearMiss")
+    nm = NearMiss()
+    X_res, y_res = nm.fit_resample(X, y)
+    return X_res, y_res
+  return X,y
+
 # Cell
 @delegates(TfmdDL)
 def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id',bs=64,**kwargs):
     ds=[]
-    for s in ppo.subsets():
+    for s in ppo.subsets(): #train dev and test sets
         wds,idx=windows(s.xs,s.event_ids)
 
         if not outcome: y=s.ys.iloc[idx]
         else: y=s.ys.groupby(s.items.index).transform('last').iloc[idx]
-        ycats=tensor(y[s.ycat_names].values).long()
-        yconts=tensor(y[s.ycont_names].values).float()
-        xconts=tensor(wds[:,len(s.cat_names):]).float()
-        xcats=tensor(wds[:,:len(s.cat_names)]).long()
+        ycats=tensor(y[s.ycat_names].values).long() #['activity', 'resource'] torch.Size([342, 2])
+        yconts=tensor(y[s.ycont_names].values).float() #['timestamp_Relative_elapsed'] torch.Size([342, 1])
+        xconts=tensor(wds[:,len(s.cat_names):]).float() # torch.Size([312, 2, 64])
+        xcats=tensor(wds[:,:len(s.cat_names)]).long() # torch.Size([312, 1, 64])
         xs=tuple([i.squeeze() for i in [xcats,xconts] if i.shape[1]>0])
         ys=tuple([ycats[:,i] for i in range(ycats.shape[1])])+tuple([yconts[:,i] for i in range(yconts.shape[1])])
+        logger.debug("\n---S---")
+        logger.debug(s.iloc[4])
+        
+        logger.debug("\n---Y---")
+        logger.debug(s.ycat_names)
+        logger.debug(ycats.size())
+        logger.debug(s.ycont_names)
+        logger.debug(yconts.size())
+        logger.debug("\n---X---")
+        logger.debug(s.cat_names)
+        logger.debug(xcats.size())
+        logger.debug(s.cat_names)
+        logger.debug(xconts.size())
+        # logger.debug(f" s is {len(s)}")
+        # logger.debug(f"xs is {len(xs)} X {xs[0].size()} {xs[1].size()} {type(xs)}")
+        # logger.debug(f"ys is {len(ys)} X {ys[0].size()} {ys[1].size()} {ys[2].size()} {type(ys)}")
+        # xs, ys = Balance("NearMiss",xs,ys)
+        # logger.debug(f" s is {len(s)}")
+        logger.debug("\n---XS & YS ---")
+        logger.debug(f"xs is {len(xs)} X {xs[0].size()} {xs[1].size()} {type(xs)}")
+        logger.debug(f"ys is {len(ys)} X {ys[0].size()} {ys[1].size()} {ys[2].size()} {type(ys)}")
         ds.append(PPDset((*xs,ys)))
+
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)
 PPObj.get_dls= get_dls

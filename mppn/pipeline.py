@@ -68,12 +68,6 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
     Trains a model on the training set with early stopping based on the validation loss.
     Afterwards, applies it to the test set.
     '''
-    logger.debug("--Train Validate--")
-    logger.debug(f" DLS is {dls}")
-    logger.debug(f" Model is {m}")
-    logger.debug(f" Metrics is {metrics}")
-
-    logger.debug("-----------------")
     cbs = [CudaCallback,
       EarlyStoppingCallback(monitor='valid_loss',min_delta=min_delta, patience=patience),
       SaveModelCallback(fname=model_name)

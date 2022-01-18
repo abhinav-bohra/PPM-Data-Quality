@@ -1,0 +1,75 @@
+--Pre-processing Logging--
+--Logging--
+--Logging--
+--MPPN Logging--
+
+---S---
+          event_id  activity  resource  timestamp_Relative_elapsed
+trace_id                                                          
+Case104          0         1        17                   -0.810289
+Case104          1         7         9                   -0.808028
+Case104          2         6         9                   -0.807960
+Case104          3         2        14                    1.278506
+
+---Y---
+['activity', 'resource']
+torch.Size([287, 2])
+['timestamp_Relative_elapsed']
+torch.Size([287, 1])
+
+---X---
+['activity', 'resource']
+torch.Size([287, 2, 64])
+['activity', 'resource']
+torch.Size([287, 1, 64])
+
+---XS & YS ---
+xs is 2 X torch.Size([287, 2, 64]) torch.Size([287, 64]) <class 'tuple'>
+ys is 3 X torch.Size([287]) torch.Size([287]) torch.Size([287]) <class 'tuple'>
+
+---S---
+          event_id  activity  resource  timestamp_Relative_elapsed
+trace_id                                                          
+Case35           0         1         1                   -0.810289
+Case35           1         6         1                   -0.806717
+Case35           2         2        14                    2.125100
+
+---Y---
+['activity', 'resource']
+torch.Size([30, 2])
+['timestamp_Relative_elapsed']
+torch.Size([30, 1])
+
+---X---
+['activity', 'resource']
+torch.Size([30, 2, 64])
+['activity', 'resource']
+torch.Size([30, 1, 64])
+
+---XS & YS ---
+xs is 2 X torch.Size([30, 2, 64]) torch.Size([30, 64]) <class 'tuple'>
+ys is 3 X torch.Size([30]) torch.Size([30]) torch.Size([30]) <class 'tuple'>
+
+---S---
+          event_id  activity  resource  timestamp_Relative_elapsed
+trace_id                                                          
+Case11           0         1        13                   -0.810289
+Case11           1         7        13                   -0.810254
+Case11           2         6        13                   -0.766738
+Case11           3         2        14                    0.939761
+
+---Y---
+['activity', 'resource']
+torch.Size([74, 2])
+['timestamp_Relative_elapsed']
+torch.Size([74, 1])
+
+---X---
+['activity', 'resource']
+torch.Size([74, 2, 64])
+['activity', 'resource']
+torch.Size([74, 1, 64])
+
+---XS & YS ---
+xs is 2 X torch.Size([74, 2, 64]) torch.Size([74, 64]) <class 'tuple'>
+ys is 3 X torch.Size([74]) torch.Size([74]) torch.Size([74]) <class 'tuple'>
