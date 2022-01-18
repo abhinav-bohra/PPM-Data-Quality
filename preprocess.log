@@ -6,27 +6,27 @@
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case1            0         1         1                   -0.787581
-Case1            1         7         1                   -0.787552
-Case1            2         7         6                   -0.620937
-Case1            3         6         1                    0.091826
-Case1            4         2         7                    0.927234
+Case1            0         1         1                   -0.768801
+Case1            1         7         1                   -0.768773
+Case1            2         7         6                   -0.602694
+Case1            3         6         1                    0.107775
+Case1            4         2         7                    0.940495
 
 ---X---
 ['activity', 'resource']
-torch.Size([143, 2, 64])
+torch.Size([139, 2, 64])
 ['activity', 'resource']
-torch.Size([143, 1, 64])
+torch.Size([139, 1, 64])
 
 ---Y---
 ['activity', 'resource']
-torch.Size([143, 2])
+torch.Size([139, 2])
 ['timestamp_Relative_elapsed']
-torch.Size([143, 1])
+torch.Size([139, 1])
 
 ---XS & YS ---
-xs is 2 X torch.Size([143, 2, 64]) torch.Size([143, 64]) <class 'tuple'>
-ys is 3 X torch.Size([143]) torch.Size([143]) torch.Size([143]) <class 'tuple'>
+xs is 2 X torch.Size([139, 2, 64]) torch.Size([139, 64]) <class 'tuple'>
+ys is 3 X torch.Size([139]) torch.Size([139]) torch.Size([139]) <class 'tuple'>
 
 ---Datapoints---
 xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -34,53 +34,53 @@ xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]])
-ys[0] is 7
-ys[1] is 13
-ys[2] is -0.783070981502533
-
----S---
-          event_id  activity  resource  timestamp_Relative_elapsed
-trace_id                                                          
-Case11           0         1         8                   -0.787581
-Case11           1         7         8                   -0.787547
-Case11           2         6         8                   -0.744848
-Case11           3         2         9                    0.929599
-
----X---
-['activity', 'resource']
-torch.Size([14, 2, 64])
-['activity', 'resource']
-torch.Size([14, 1, 64])
-
----Y---
-['activity', 'resource']
-torch.Size([14, 2])
-['timestamp_Relative_elapsed']
-torch.Size([14, 1])
-
----XS & YS ---
-xs is 2 X torch.Size([14, 2, 64]) torch.Size([14, 64]) <class 'tuple'>
-ys is 3 X torch.Size([14]) torch.Size([14]) torch.Size([14]) <class 'tuple'>
-
----Datapoints---
-xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]])
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4]])
 ys[0] is 7
 ys[1] is 6
-ys[2] is -0.78717041015625
+ys[2] is -0.7601063847541809
 
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case14           0         1         4                   -0.787581
-Case14           1         7         4                   -0.787572
-Case14           2         6         4                   -0.787370
-Case14           3         2         9                    0.929498
+Case2            0         1         8                   -0.768801
+Case2            1         7         8                   -0.768791
+Case2            2         6         8                   -0.657610
+Case2            3         2         9                    1.770923
+
+---X---
+['activity', 'resource']
+torch.Size([18, 2, 64])
+['activity', 'resource']
+torch.Size([18, 1, 64])
+
+---Y---
+['activity', 'resource']
+torch.Size([18, 2])
+['timestamp_Relative_elapsed']
+torch.Size([18, 1])
+
+---XS & YS ---
+xs is 2 X torch.Size([18, 2, 64]) torch.Size([18, 64]) <class 'tuple'>
+ys is 3 X torch.Size([18]) torch.Size([18]) torch.Size([18]) <class 'tuple'>
+
+---Datapoints---
+xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8]])
+ys[0] is 7
+ys[1] is 8
+ys[2] is -0.7687913775444031
+
+---S---
+          event_id  activity  resource  timestamp_Relative_elapsed
+trace_id                                                          
+Case14           0         1         4                   -0.768801
+Case14           1         7         4                   -0.768792
+Case14           2         6         4                   -0.768591
+Case14           3         2         9                    0.942751
 
 ---X---
 ['activity', 'resource']
@@ -107,32 +107,32 @@ xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8]])
 ys[0] is 7
 ys[1] is 8
-ys[2] is -0.7875614762306213
+ys[2] is -0.7687817811965942
 
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case1            0         1         1                   -0.787581
-Case1            1         7         1                   -0.787552
-Case1            2         7         6                   -0.620937
-Case1            3         6         1                    0.091826
-Case1            4         2         7                    0.927234
+Case1            0         1         1                   -0.768801
+Case1            1         7         1                   -0.768773
+Case1            2         7         6                   -0.602694
+Case1            3         6         1                    0.107775
+Case1            4         2         7                    0.940495
 
 ---X---
 ['activity', 'resource']
-torch.Size([143, 2, 64])
+torch.Size([139, 2, 64])
 ['activity', 'resource']
-torch.Size([143, 1, 64])
+torch.Size([139, 1, 64])
 
 ---Y---
 ['activity', 'resource']
-torch.Size([143, 2])
+torch.Size([139, 2])
 ['timestamp_Relative_elapsed']
-torch.Size([143, 1])
+torch.Size([139, 1])
 
 ---XS & YS ---
-xs is 2 X torch.Size([143, 2, 64]) torch.Size([143, 64]) <class 'tuple'>
-ys is 3 X torch.Size([143]) torch.Size([143]) torch.Size([143]) <class 'tuple'>
+xs is 2 X torch.Size([139, 2, 64]) torch.Size([139, 64]) <class 'tuple'>
+ys is 3 X torch.Size([139]) torch.Size([139]) torch.Size([139]) <class 'tuple'>
 
 ---Datapoints---
 xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -140,34 +140,34 @@ xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]])
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4]])
 ys[0] is 2
 ys[1] is 9
-ys[2] is 0.9295068979263306
+ys[2] is 1.8812748193740845
 
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case11           0         1         8                   -0.787581
-Case11           1         7         8                   -0.787547
-Case11           2         6         8                   -0.744848
-Case11           3         2         9                    0.929599
+Case2            0         1         8                   -0.768801
+Case2            1         7         8                   -0.768791
+Case2            2         6         8                   -0.657610
+Case2            3         2         9                    1.770923
 
 ---X---
 ['activity', 'resource']
-torch.Size([14, 2, 64])
+torch.Size([18, 2, 64])
 ['activity', 'resource']
-torch.Size([14, 1, 64])
+torch.Size([18, 1, 64])
 
 ---Y---
 ['activity', 'resource']
-torch.Size([14, 2])
+torch.Size([18, 2])
 ['timestamp_Relative_elapsed']
-torch.Size([14, 1])
+torch.Size([18, 1])
 
 ---XS & YS ---
-xs is 2 X torch.Size([14, 2, 64]) torch.Size([14, 64]) <class 'tuple'>
-ys is 3 X torch.Size([14]) torch.Size([14]) torch.Size([14]) <class 'tuple'>
+xs is 2 X torch.Size([18, 2, 64]) torch.Size([18, 64]) <class 'tuple'>
+ys is 3 X torch.Size([18]) torch.Size([18]) torch.Size([18]) <class 'tuple'>
 
 ---Datapoints---
 xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -175,18 +175,18 @@ xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]])
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8]])
 ys[0] is 2
 ys[1] is 9
-ys[2] is 0.984804093837738
+ys[2] is 1.7709232568740845
 
 ---S---
           event_id  activity  resource  timestamp_Relative_elapsed
 trace_id                                                          
-Case14           0         1         4                   -0.787581
-Case14           1         7         4                   -0.787572
-Case14           2         6         4                   -0.787370
-Case14           3         2         9                    0.929498
+Case14           0         1         4                   -0.768801
+Case14           1         7         4                   -0.768792
+Case14           2         6         4                   -0.768591
+Case14           3         2         9                    0.942751
 
 ---X---
 ['activity', 'resource']
@@ -213,5 +213,5 @@ xs[0] is tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8]])
 ys[0] is 2
 ys[1] is 9
-ys[2] is 1.0010236501693726
-model_performance: (0.7894737124443054, 1.0, 0.7894737124443054, 0.7894737124443054, 0.3947368562221527, 1.0, 0.3947368562221527, 0.3947368562221527, 0.5, 1.0, 0.5, 0.5, 1.0, 1.0, 1.0, 1.0, 15.704974174499512, 6.303531646728516, None, None)
+ys[2] is 1.014046311378479
+model_performance: (0.5526315569877625, 0.38181818181818183, 0.5526315569877625, 0.5526315569877625, 0.2368421107530594, 0.1, 0.2368421107530594, 0.2368421107530594, 0.5, 0.5, 0.5, 0.5, 1.0, 1.0, 1.0, 1.0, 13.758954048156738, 9.259443283081055, None, None)

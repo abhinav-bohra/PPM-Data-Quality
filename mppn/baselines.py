@@ -45,11 +45,24 @@ def maeDurDaysMinMax(p,yb,minn=0,maxx=0,unit=60*60*24):
 
 # Cell
 def _accuracy_idx(a,b,i): return accuracy(listify(a)[i],listify(b)[i])
+
 def _precision_idx(a,b,i): 
   pred = listify(a)[i]
   targ = listify(b)[i]
   pred,targ = flatten_check(pred.argmax(dim=-1), targ)
-  return sklearn.metrics.precision_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy())
+  return sklearn.metrics.precision_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+
+def _recall_idx(a,b,i): 
+  pred = listify(a)[i]
+  targ = listify(b)[i]
+  pred,targ = flatten_check(pred.argmax(dim=-1), targ)
+  return sklearn.metrics.recall_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+
+def _f1_score_idx(a,b,i): 
+  pred = listify(a)[i]
+  targ = listify(b)[i]
+  pred,targ = flatten_check(pred.argmax(dim=-1), targ)
+  return sklearn.metrics.f1_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
 
 # Cell
 class AvgMetric(Metric):
@@ -87,14 +100,14 @@ def get_metrics(o,date_col='timestamp_Relative_elapsed'):
 
     recalls=[]
     for i in range(number_cats):
-        recall_func=partial(_accuracy_idx,i=i)
+        recall_func=partial(_recall_idx,i=i)
         recall_func.__name__= f"rec_{o.ycat_names[i]}"
         avg_recall_func=AvgMetric(recall_func)
         recalls.append(avg_recall_func)
 
     f1_scores=[]
     for i in range(number_cats):
-        f1_score_func=partial(_accuracy_idx,i=i)
+        f1_score_func=partial(_f1_score_idx,i=i)
         f1_score_func.__name__= f"f1_score_{o.ycat_names[i]}"
         avg_f1_score_func=AvgMetric(f1_score_func)
         f1_scores.append(avg_f1_score_func)
