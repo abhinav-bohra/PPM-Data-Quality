@@ -33,7 +33,7 @@ elif exp == "CI":
 elif exp == "test":
   logs=[EventLogs.Helpdesk]
   save_dir = f"{save_folder}"
-  ppms=[PPM_Camargo_concat]
+  ppms=[PPM_MPPN]
 else:
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_A, EventLogs.BPIC_12_O, EventLogs.BPIC_12_W, \
   EventLogs.BPIC_12_Wcomplete, EventLogs.BPIC_13_CP, EventLogs.BPIC_15_1, EventLogs.BPIC_15_2, \
