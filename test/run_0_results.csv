@@ -1,2 +1,0 @@
-,Dataset,Model,Next Step Acc,Next Step Pre,Next Step Rec,Next Step F1,Next Resource Acc,Next Resource Pre,Next Resource Rec,Next Resource F1,Last Resource Acc,Last Resource Pre,Last Resource Rec,Last Resource F1,Outcome Acc,Outcome Pre,Outcome Rec,Outcome F1,Next relative Timestamp,Duration to Outcome,Activity Suffix,Resource Suffix
-0,Helpdesk,MPPN,0.8684210777282715,0.6,0.5263736263736264,0.5593333333333332,0.3947368562221527,0.23111111111111116,0.20787878787878786,0.17558823529411766,0.5,0.5,0.25,0.3333333333333333,1.0,1.0,1.0,1.0,9.852725982666016,6.552001476287842,,
