@@ -26,6 +26,7 @@ ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
 #Experiment MOdes
 if exp == "MV":
+  #All datasets with missing values
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_const, EventLogs.BPIC_12_mode_event, EventLogs.BPIC_12_mode_case, \
   EventLogs.BPIC_12_W, EventLogs.BPIC_12_W_const, EventLogs.BPIC_12_W_mode_event, EventLogs.BPIC_12_W_mode_case, \
   EventLogs.BPIC_12_Wcomplete, EventLogs.BPIC_12_Wc_const, EventLogs.BPIC_12_Wc_mode_event, EventLogs.BPIC_12_Wc_mode_case,\
@@ -33,12 +34,13 @@ if exp == "MV":
   EventLogs.Mobis, EventLogs.Mobis_const, EventLogs.Mobis_mode_event, EventLogs.Mobis_mode_case]
   save_dir = f"01_Missing-Values/{save_folder}"
 elif exp == "CI":
+  #One with high imbalance & one with low
   logs=[EventLogs.BPIC_15_5,EventLogs.Helpdesk]
   save_dir = f"02_Class-Imbalance/{save_folder}"
 elif exp == "test":
   logs=[EventLogs.Helpdesk]
   save_dir = f"{save_folder}"
-  ppms=[PPM_Tax_Mixed]
+  ppms=[PPM_Camargo_concat]
 else:
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_A, EventLogs.BPIC_12_O, EventLogs.BPIC_12_W, \
   EventLogs.BPIC_12_Wcomplete, EventLogs.BPIC_13_CP, EventLogs.BPIC_15_1, EventLogs.BPIC_15_2, \

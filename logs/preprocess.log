@@ -2,5 +2,3 @@
 --Pipeline Logging--
 --Baselines Logging--
 --MPPN Logging--
-[<mppn.baselines.AvgMetric object at 0x7fc8c7578090>, <mppn.baselines.AvgMetric object at 0x7fc8c7578d10>, <mppn.baselines.AvgMetric object at 0x7fc8c7578b90>, <mppn.baselines.AvgMetric object at 0x7fc8c7578850>, <function get_metrics.<locals>.<lambda> at 0x7fc8c355cd40>]
-model_performance: (0.7223214507102966, 0.4608420040939351, 0.4093509956159773, 0.4297107981867309, None, None, None, None, None, None, None, None, 0.9940476417541504, 0.9523809523809523, 0.9494047619047619, 0.9508397691868075, 6.445693016052246, 7.145281791687012, None, None)

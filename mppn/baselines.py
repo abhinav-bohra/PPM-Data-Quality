@@ -2,7 +2,7 @@
 
 __all__ = ['maeDurDaysNormalize', 'maeDurDaysMinMax', 'AvgMetric', 'get_metrics', 'multi_loss_sum',
            'Camargo_specialized', 'Camargo_concat', 'Camargo_fullconcat', 'PPM_Camargo_Spezialized',
-           'PPM_Camargo_concat', 'PPM_Camargo_fullconcat', 'Evermann', 'PPM_Evermann', 'Tax_et_al_spezialized',
+           'PPM_Camargo_concat', 'PPM_Camargo_fullconcat', 'PPM_RNNwEmbedding', 'Evermann', 'PPM_Evermann', 'Tax_et_al_spezialized',
            'Tax_et_al_shared', 'Tax_et_al_mixed', 'PPM_Tax_Spezialized', 'PPM_Tax_Shared', 'PPM_Tax_Mixed', 'MiDA',
            'PPM_MiDA', 'create_attr_dict', 'attr_list', 'attr_dict']
 
@@ -316,7 +316,23 @@ class PPM_Camargo_fullconcat(PPM_Camargo_Spezialized):
     model = Camargo_fullconcat
 
 # Cell
+class PPM_RNNwEmbedding(PPModel):
+    'Sampe PPM based on RNNwEmbedding'
+    model=RNNwEmbedding
 
+    def next_step_prediction(self,outcome=False,col='activity'):
+        o=PPObj(self.log,procs=Categorify(),cat_names=col,y_names=col,splits=self.splits)
+        dls=o.get_dls(outcome=outcome,bs=self.bs,windows=self.windows)
+        m=self.model(o)
+        metrics=get_metrics(o)
+        output_index = list(range(1, len(metrics)+1))
+        return self._train_validate(dls,m,metrics=metrics,output_index=output_index)
+
+    def next_resource_prediction(self): return self.next_step_prediction(col='resource')
+    def last_resource_prediction(self): return self.next_step_prediction(col='resource',outcome=True)
+    def outcome_prediction(self): return self.next_step_prediction(outcome=True)
+
+# Cell
 class Evermann(torch.nn.Module) :
     def __init__(self, o) :
         super().__init__()
@@ -447,7 +463,6 @@ class PPM_Tax_Spezialized(PPModel):
         print('Last event prediction training')
         dls=o.get_dls(outcome=True,bs=self.bs)
         m=self.model(o)
-        logger.debug(get_metrics(o))
         self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
                                                  output_index=[1,2,3,4,5])
 
