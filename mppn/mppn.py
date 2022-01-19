@@ -380,34 +380,22 @@ import numpy as np
 
 # Cell
 def precision(a,b): 
-  pred = (a.cpu().detach()).numpy()
-  targ = (b.cpu().detach()).numpy()
-  print(f"PRED: {pred}")
-  print(f"TARG: {targ}")
-  pred,targ = flatten_check(pred.argmax(), targ)
-  print(f"PRED: {pred}")
-  print(f"TARG: {targ}")
-  return sklearn.metrics.precision_score(pred, targ,average='macro')
+  pred = (a.cpu().detach())
+  targ = (b.cpu().detach())
+  pred,targ = flatten_check(pred.argmax(axis=-1), targ)
+  return sklearn.metrics.precision_score(pred.numpy(), targ.numpy(),average='macro')
 
 def recall(a,b): 
-  pred = (a.cpu().detach()).numpy()
-  targ = (b.cpu().detach()).numpy()
-  print(f"PRED: {pred}")
-  print(f"TARG: {targ}")
-  pred,targ = flatten_check(pred.argmax(), targ)
-  print(f"PRED: {pred}")
-  print(f"TARG: {targ}")
-  return sklearn.metrics.recall_score(pred, targ,average='macro')
+  pred = (a.cpu().detach())
+  targ = (b.cpu().detach())
+  pred,targ = flatten_check(pred.argmax(axis=-1), targ)
+  return sklearn.metrics.recall_score(pred.numpy(), targ.numpy(),average='macro')
 
 def f1(a,b): 
-  pred = (a.cpu().detach()).numpy()
-  targ = (b.cpu().detach()).numpy()
-  print(f"PRED: {pred}")
-  print(f"TARG: {targ}")
-  pred,targ = flatten_check(pred.argmax(), targ)
-  print(f"PRED: {pred}")
-  print(f"TARG: {targ}")
-  return sklearn.metrics.f1_score(pred, targ,average='macro')
+  pred = (a.cpu().detach())
+  targ = (b.cpu().detach())
+  pred,targ = flatten_check(pred.argmax(axis=-1), targ)
+  return sklearn.metrics.f1_score(pred.numpy(), targ.numpy(),average='macro')
 
 class PPM_MPPN(PPModel):
 
