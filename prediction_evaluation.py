@@ -10,16 +10,21 @@ from mppn.baselines import *
 from mppn.mppn import *
 import argparse
 
+#Command Line Arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--exp', default="MV",type=str, help='MV - Missing Values, CI - Class Imbalance')    
-parser.add_argument('--save_folder', default="MV",type=str, help='Folder for saving results')    
+parser.add_argument('--save_folder', default="MV",type=str, help='Folder for saving results')        
+parser.add_argument('--gpu', default="0",type=str, help='GPU Device number')    
 
+#Args
 args = parser.parse_args()
 exp = args.exp
 save_folder = args.save_folder 
+gpu_id = args.gpu
 save_dir = f"{save_folder}"
 ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
+#Experiment MOdes
 if exp == "MV":
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_const, EventLogs.BPIC_12_mode_event, EventLogs.BPIC_12_mode_case, \
   EventLogs.BPIC_12_W, EventLogs.BPIC_12_W_const, EventLogs.BPIC_12_W_mode_event, EventLogs.BPIC_12_W_mode_case, \
@@ -33,14 +38,16 @@ elif exp == "CI":
 elif exp == "test":
   logs=[EventLogs.Helpdesk]
   save_dir = f"{save_folder}"
-  ppms=[PPM_MPPN]
+  ppms=[PPM_Tax_Mixed]
 else:
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_A, EventLogs.BPIC_12_O, EventLogs.BPIC_12_W, \
   EventLogs.BPIC_12_Wcomplete, EventLogs.BPIC_13_CP, EventLogs.BPIC_15_1, EventLogs.BPIC_15_2, \
   EventLogs.BPIC_15_3, EventLogs.BPIC_15_4, EventLogs.BPIC_15_5, EventLogs. BPIC_17_OFFER, \
   EventLogs.BPIC_20_RFP, EventLogs.Helpdesk, EventLogs.Mobis]
 
-
+#Setting cuda device
+device = f'cuda:{gpu_id}' if torch.cuda.is_available() else 'cpu'
+print(device)
 # Cell
 import fire
 

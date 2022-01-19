@@ -447,6 +447,7 @@ class PPM_Tax_Spezialized(PPModel):
         print('Last event prediction training')
         dls=o.get_dls(outcome=True,bs=self.bs)
         m=self.model(o)
+        logger.debug(get_metrics(o))
         self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
                                                  output_index=[1,2,3,4,5])
 
@@ -546,7 +547,8 @@ class PPM_MiDA(PPModel):
         m=self.model(self.o,seq_len)
         loss=partial(multi_loss_sum,self.o)
         metrics=get_metrics(self.o)
-        return self._train_validate(dls,m,loss=loss,metrics=metrics)
+        output_index = list(range(1, len(metrics)+1))
+        return self._train_validate(dls,m,loss=loss,metrics=metrics,output_index=output_index)
 
 
 
