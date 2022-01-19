@@ -454,8 +454,8 @@ class PPM_Tax_Spezialized(PPModel):
 
 
     def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
-
-
+    def next_resource_prediction(self): return None,None,None,None
+    def last_resource_prediction(self): return None,None,None,None
     def outcome_prediction(self): return self.op_acc, self.op_pre, self.op_rec, self.op_f1
     def duration_to_next_event_prediction(self): return self.dtnp
     def duration_to_end_prediction(self): return self.dtlp
