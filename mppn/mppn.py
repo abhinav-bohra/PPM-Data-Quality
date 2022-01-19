@@ -376,25 +376,38 @@ def mppn_get_output_attributes(o):
 # Cell
 import copy
 import sklearn
+import numpy as np
 
 # Cell
 def precision(a,b): 
-  pred = listify(a)
-  targ = listify(b)
-  pred,targ = flatten_check(pred.argmax(dim=-1), targ)
-  return sklearn.metrics.precision_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+  pred = (a.cpu().detach()).numpy()
+  targ = (b.cpu().detach()).numpy()
+  print(f"PRED: {pred}")
+  print(f"TARG: {targ}")
+  pred,targ = flatten_check(pred.argmax(), targ)
+  print(f"PRED: {pred}")
+  print(f"TARG: {targ}")
+  return sklearn.metrics.precision_score(pred, targ,average='macro')
 
 def recall(a,b): 
-  pred = listify(a)
-  targ = listify(b)
-  pred,targ = flatten_check(pred.argmax(dim=-1), targ)
-  return sklearn.metrics.recall_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+  pred = (a.cpu().detach()).numpy()
+  targ = (b.cpu().detach()).numpy()
+  print(f"PRED: {pred}")
+  print(f"TARG: {targ}")
+  pred,targ = flatten_check(pred.argmax(), targ)
+  print(f"PRED: {pred}")
+  print(f"TARG: {targ}")
+  return sklearn.metrics.recall_score(pred, targ,average='macro')
 
 def f1(a,b): 
-  pred = listify(a)
-  targ = listify(b)
-  pred,targ = flatten_check(pred.argmax(dim=-1), targ)
-  return sklearn.metrics.f1_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+  pred = (a.cpu().detach()).numpy()
+  targ = (b.cpu().detach()).numpy()
+  print(f"PRED: {pred}")
+  print(f"TARG: {targ}")
+  pred,targ = flatten_check(pred.argmax(), targ)
+  print(f"PRED: {pred}")
+  print(f"TARG: {targ}")
+  return sklearn.metrics.f1_score(pred, targ,average='macro')
 
 class PPM_MPPN(PPModel):
 

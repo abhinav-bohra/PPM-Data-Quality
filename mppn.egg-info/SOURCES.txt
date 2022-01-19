@@ -145,5 +145,4 @@ mppn/results/run_7_results.csv
 mppn/results/run_8_results.csv
 mppn/results/run_9_results.csv
 test/run0_Helpdesk_splits.pickle
-test/run_0_results.csv
-test/models/run0/Helpdesk/Camargo_concat/setup.pth
+test/models/run0/Helpdesk/MPPN/_tmp.pth
