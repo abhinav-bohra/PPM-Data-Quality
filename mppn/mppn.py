@@ -10,7 +10,13 @@ from .preprocessing import *
 from .pipeline import *
 from .baselines import *
 
-# Cell
+import logging
+ 
+logging.basicConfig(filename="logs/mppn.log",format='',filemode='w')
+logger = logging.getLogger() 
+logger.setLevel(logging.DEBUG)
+logging.getLogger('numba').setLevel(logging.WARNING)
+logger.debug("--MPPN Logging--")
 
 class BaseMPPN(nn.Module):
 
@@ -370,8 +376,27 @@ def mppn_get_output_attributes(o):
 
 # Cell
 import copy
+import sklearn
+import numpy as np
 
 # Cell
+def precision(a,b): 
+  pred = (a.cpu().detach())
+  targ = (b.cpu().detach())
+  pred,targ = flatten_check(pred.argmax(axis=-1), targ)
+  return sklearn.metrics.precision_score(pred.numpy(), targ.numpy(),average='macro')
+
+def recall(a,b): 
+  pred = (a.cpu().detach())
+  targ = (b.cpu().detach())
+  pred,targ = flatten_check(pred.argmax(axis=-1), targ)
+  return sklearn.metrics.recall_score(pred.numpy(), targ.numpy(),average='macro')
+
+def f1(a,b): 
+  pred = (a.cpu().detach())
+  targ = (b.cpu().detach())
+  pred,targ = flatten_check(pred.argmax(axis=-1), targ)
+  return sklearn.metrics.f1_score(pred.numpy(), targ.numpy(),average='macro')
 
 class PPM_MPPN(PPModel):
 
@@ -386,7 +411,13 @@ class PPM_MPPN(PPModel):
 
     def setup(self):
         def act_acc(p,y): return accuracy(p[0],y[0])
-        def act_res(p,y): return accuracy(p[1],y[1])
+        def act_pre(p,y): return precision(p[0],y[0])
+        def act_rec(p,y): return recall(p[0],y[0])
+        def act_f1(p,y): return f1(p[0],y[0])
+        def res_acc(p,y): return accuracy(p[1],y[1])
+        def res_pre(p,y): return precision(p[1],y[1])
+        def res_rec(p,y): return recall(p[1],y[1])
+        def res_f1(p,y): return f1(p[1],y[1])
         cat_names,cont_names,date_names=self._attr_from_dict(self.ds_name)
         self.o=PPObj(self.log,[Categorify,Datetify,FillMissing,MinMax],
                      cat_names=cat_names,date_names=date_names,cont_names=cont_names,
@@ -403,7 +434,7 @@ class PPM_MPPN(PPModel):
         dls=self.o.get_dls(after_batch=gaf_transform,bs=self.bs)
         loss=partial(multi_loss_sum,self.o)
         time_metric=lambda p,y: maeDurDaysNormalize(listify(p)[-1],listify(y)[-1],mean=self.mean,std=self.std)
-        self._train_validate(dls,self.pretrain,loss=loss,metrics=[act_acc,act_res,time_metric])
+        self._train_validate(dls,self.pretrain,loss=loss,metrics=[act_acc,act_pre, act_rec, act_f1, res_acc, res_pre, res_rec, res_f1,time_metric])
 
 
 
@@ -415,7 +446,7 @@ class PPM_MPPN(PPModel):
         dls=self.o.get_dls(after_batch=gaf_transform,bs=self.bs,outcome=outcome)
         loss=partial(multi_loss_sum,self.o)
         metrics=get_metrics(self.o)
-        return self._train_validate(dls,m,loss=loss,metrics=metrics)
+        return self._train_validate(dls,m,loss=loss,metrics=metrics,output_index=[1,2,3,4])
 
     def next_resource_prediction(self):return self.next_step_prediction(outcome=False,col='resource')
 

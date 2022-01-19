@@ -8,77 +8,83 @@
 06_nb_all_benchmark.ipynb
 README.md
 _Latex_export.ipynb
-debug.log
+pipeline.log
 prediction_evaluation.py
+preprocess.log
 requirements.txt
 settings.ini
 setup.py
 01_Missing-Values/fill_missing_values.py
-01_Missing-Values/results/run0_BPIC12_const_splits.pickle
 02_Class-Imbalance/eda.py
 02_Class-Imbalance/imbalance_degree.py
-02_Class-Imbalance/results/No Technique/run0_BPIC15_5_splits.pickle
-02_Class-Imbalance/results/No Technique/run0_Helpdesk_splits.pickle
-02_Class-Imbalance/results/No Technique/run_0_results.csv
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/Camargo_concat/setup.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MPPN/duration_to_end_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MPPN/duration_to_next_event_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MPPN/last_resource_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MPPN/next_resource_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MPPN/next_step_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MPPN/outcome_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MPPN/setup.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MiDA/duration_to_end_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MiDA/duration_to_next_event_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MiDA/last_resource_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MiDA/next_resource_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MiDA/next_step_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/BPIC15_5/MiDA/outcome_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/Camargo_concat/setup.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MPPN/duration_to_end_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MPPN/duration_to_next_event_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MPPN/last_resource_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MPPN/next_resource_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MPPN/next_step_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MPPN/outcome_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MPPN/setup.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MiDA/duration_to_end_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MiDA/duration_to_next_event_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MiDA/last_resource_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MiDA/next_resource_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MiDA/next_step_prediction.pth
-02_Class-Imbalance/results/No Technique/models/run0/Helpdesk/MiDA/outcome_prediction.pth
-02_Class-Imbalance/results/Under Sampling/run0_BPIC15_5_under_both_splits.pickle
-02_Class-Imbalance/results/Under Sampling/run0_Helpdesk_under_both_splits.pickle
-02_Class-Imbalance/results/Under Sampling/run_0_results.csv
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/Camargo_concat/setup.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/duration_to_end_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/duration_to_next_event_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/last_resource_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/next_resource_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/next_step_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/outcome_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/setup.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/duration_to_end_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/duration_to_next_event_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/last_resource_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/next_resource_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/next_step_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/outcome_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/Camargo_concat/setup.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MPPN/duration_to_end_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MPPN/duration_to_next_event_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MPPN/last_resource_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MPPN/next_resource_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MPPN/next_step_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MPPN/outcome_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MPPN/setup.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MiDA/duration_to_end_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MiDA/duration_to_next_event_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MiDA/last_resource_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_resource_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_step_prediction.pth
-02_Class-Imbalance/results/Under Sampling/models/run0/Helpdesk_under_both/MiDA/outcome_prediction.pth
+02_Class-Imbalance/results_old/No Technique/run0_BPIC15_5_splits.pickle
+02_Class-Imbalance/results_old/No Technique/run0_Helpdesk_splits.pickle
+02_Class-Imbalance/results_old/No Technique/run_0_results.csv
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/Camargo_concat/setup.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MPPN/duration_to_end_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MPPN/duration_to_next_event_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MPPN/last_resource_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MPPN/next_resource_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MPPN/next_step_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MPPN/outcome_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MPPN/setup.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MiDA/duration_to_end_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MiDA/duration_to_next_event_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MiDA/last_resource_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MiDA/next_resource_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MiDA/next_step_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/BPIC15_5/MiDA/outcome_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/Camargo_concat/setup.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MPPN/duration_to_end_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MPPN/duration_to_next_event_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MPPN/last_resource_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MPPN/next_resource_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MPPN/next_step_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MPPN/outcome_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MPPN/setup.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MiDA/duration_to_end_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MiDA/duration_to_next_event_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MiDA/last_resource_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MiDA/next_resource_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MiDA/next_step_prediction.pth
+02_Class-Imbalance/results_old/No Technique/models/run0/Helpdesk/MiDA/outcome_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/run0_BPIC15_5_under_both_splits.pickle
+02_Class-Imbalance/results_old/Under Sampling/run0_Helpdesk_under_both_splits.pickle
+02_Class-Imbalance/results_old/Under Sampling/run_0_results.csv
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/Camargo_concat/setup.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/duration_to_end_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/duration_to_next_event_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/last_resource_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/next_resource_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/next_step_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/outcome_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MPPN/setup.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/duration_to_end_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/duration_to_next_event_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/last_resource_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/next_resource_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/next_step_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/BPIC15_5_under_both/MiDA/outcome_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/Camargo_concat/setup.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MPPN/duration_to_end_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MPPN/duration_to_next_event_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MPPN/last_resource_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MPPN/next_resource_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MPPN/next_step_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MPPN/outcome_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MPPN/setup.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/duration_to_end_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/duration_to_next_event_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/last_resource_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_resource_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_step_prediction.pth
+02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/outcome_prediction.pth
+02_Class-Imbalance/test/run0_BPIC15_5_splits.pickle
+02_Class-Imbalance/test/run0_Helpdesk_splits.pickle
+02_Class-Imbalance/test/run_0_results.csv
+02_Class-Imbalance/test/models/run0/BPIC15_5/Camargo_concat/setup.pth
+02_Class-Imbalance/test/models/run0/Helpdesk/Camargo_concat/_tmp.pth
+02_Class-Imbalance/test/models/run0/Helpdesk/Camargo_concat/setup.pth
 dist/mppn-0.0.1-py3.7.egg
 event_logs/BPIC12.csv
 event_logs/BPIC12_A.csv
@@ -138,5 +144,6 @@ mppn/results/run_6_results.csv
 mppn/results/run_7_results.csv
 mppn/results/run_8_results.csv
 mppn/results/run_9_results.csv
-tests/run0_Helpdesk_splits.pickle
-tests/models/run0/Helpdesk/Camargo_concat/setup.pth
+test/run0_Helpdesk_splits.pickle
+test/models/run0/Helpdesk/MPPN/_tmp.pth
+test/models/run0/Helpdesk/MPPN/setup.pth

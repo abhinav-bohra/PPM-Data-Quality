@@ -7,6 +7,14 @@ __all__ = ['RNNwEmbedding', 'HideOutput', 'training_loop', 'train_validate', 'PP
 from .imports import *
 from .preprocessing import *
 import pickle
+import logging
+
+#Logging
+logging.basicConfig(filename="logs/pipeline.log",format='',filemode='w')
+logger = logging.getLogger() 
+logger.setLevel(logging.DEBUG)
+logging.getLogger('numba').setLevel(logging.WARNING)
+logger.debug("--Pipeline Logging--")
 
 # Cell
 class RNNwEmbedding(torch.nn.Module) :
@@ -98,16 +106,16 @@ class PPModel():
         self.setup()
 
         print('next_step_prediction')
-        nsp=self.next_step_prediction()
+        nsp_acc,nsp_pre,nsp_rec,nsp_f1=self.next_step_prediction()
 
         print('next_resource_prediction')
-        nrp=self.next_resource_prediction()
+        nrp_acc,nrp_pre,nrp_rec,nrp_f1=self.next_resource_prediction()
 
         print('last_resource_prediction')
-        lrp=self.last_resource_prediction()
+        lrp_acc,lrp_pre,lrp_rec,lrp_f1=self.last_resource_prediction()
 
         print('outcome_prediction')
-        op=self.outcome_prediction()
+        op_acc,op_pre,op_rec,op_f1=self.outcome_prediction()
 
         print('duration_to_next_event_prediction')
         dtnep=self.duration_to_next_event_prediction()
@@ -121,7 +129,7 @@ class PPModel():
         print('resource_suffix_prediction')
         rsp=self.resource_suffix_prediction()
         
-        return nsp, nrp, lrp, op, dtnep, dtep, asp, rsp
+        return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, lrp_acc,lrp_pre,lrp_rec,lrp_f1, op_acc,op_pre,op_rec,op_f1, dtnep, dtep, asp, rsp
 
     def _train_validate(self,dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
@@ -172,8 +180,11 @@ class Performance_Statistic():
     'Creates a results dataframe, that shows the performance of all models on all datasets on all tasks.'
     def __init__(self):
         self.df = pd.DataFrame(
-        columns=['Dataset', 'Model', 'Next Step', 'Next Resource', 'Last Resource', 'Outcome',
-                'Next relative Timestamp', 'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
+        columns=['Dataset', 'Model', 'Next Step Acc','Next Step Pre','Next Step Rec','Next Step F1',\
+         'Next Resource Acc','Next Resource Pre','Next Resource Rec','Next Resource F1', \
+         'Last Resource Acc','Last Resource Pre','Last Resource Rec','Last Resource F1', \
+         'Outcome Acc','Outcome Pre','Outcome Rec','Outcome F1', \
+         'Next relative Timestamp', 'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
     def update(self,model_performance): self.df.loc[len(self.df)] = model_performance
     def to_df(self):
         return self.df
@@ -221,6 +232,7 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
                 model_path=store_path/'models'/f"run{r}" if store else None
                 model=ppm_class(log,ds_name,splits,store=model_path,sample=sample,**kwargs)
                 model_performance = model.evaluate()
+                logger.debug(f"model_performance: {model_performance}")
                 model_performance = [ds_name, model.get_name(),*model_performance]
                 performance_statistic.update(model_performance)
                 [ds_name, model.get_name(),*model_performance]

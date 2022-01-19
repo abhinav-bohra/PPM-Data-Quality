@@ -12,19 +12,17 @@ warnings.filterwarnings("ignore")
 from .imports import *
 from .preprocessing import *
 from .pipeline import *
-
+import sklearn
 from fastai import *
 from fastai.text import *
 import logging
  
-# Create and configure logger
-logging.basicConfig(filename="debug.log",format='%(asctime)s %(message)s',filemode='w')
-# Creating an object
+ #Logging
+logging.basicConfig(filename="logs/baselines.log",format='',filemode='w')
 logger = logging.getLogger() 
-# Setting the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
-# Test messages
-logger.debug("--Logging--")
+logging.getLogger('numba').setLevel(logging.WARNING)
+logger.debug("--Baselines Logging--")
 
 # Cell
 def maeDurDaysNormalize(p,yb,mean=0,std=0,unit=60*60*24):
@@ -50,6 +48,24 @@ def maeDurDaysMinMax(p,yb,minn=0,maxx=0,unit=60*60*24):
 # Cell
 def _accuracy_idx(a,b,i): return accuracy(listify(a)[i],listify(b)[i])
 
+def _precision_idx(a,b,i): 
+  pred = listify(a)[i]
+  targ = listify(b)[i]
+  pred,targ = flatten_check(pred.argmax(dim=-1), targ)
+  return sklearn.metrics.precision_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+
+def _recall_idx(a,b,i): 
+  pred = listify(a)[i]
+  targ = listify(b)[i]
+  pred,targ = flatten_check(pred.argmax(dim=-1), targ)
+  return sklearn.metrics.recall_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+
+def _f1_score_idx(a,b,i): 
+  pred = listify(a)[i]
+  targ = listify(b)[i]
+  pred,targ = flatten_check(pred.argmax(dim=-1), targ)
+  return sklearn.metrics.f1_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+
 # Cell
 class AvgMetric(Metric):
     "Average the values of `func` taking into account potential different batch sizes"
@@ -74,15 +90,30 @@ def get_metrics(o,date_col='timestamp_Relative_elapsed'):
     for i in range(number_cats):
         accuracy_func=partial(_accuracy_idx,i=i)
         accuracy_func.__name__= f"acc_{o.ycat_names[i]}"
-        accuracy_func=AvgMetric(accuracy_func)
-        accuracies.append(accuracy_func)
-
-    # for i in range(number_cats):
-    #     F1Score_func=F1Score()
-    #     F1Score_func.__name__= f"F1Score_{o.ycat_names[i]}"
-    #     F1Score_func=AvgMetric(F1Score_func)
-    #     accuracies.append(F1Score_func)
+        avg_accuracy_func=AvgMetric(accuracy_func)
+        accuracies.append(avg_accuracy_func)
     
+    precisions=[]
+    for i in range(number_cats):
+        precision_func=partial(_precision_idx,i=i)
+        precision_func.__name__= f"pre_{o.ycat_names[i]}"
+        avg_precision_func=AvgMetric(precision_func)
+        precisions.append(avg_precision_func)
+
+    recalls=[]
+    for i in range(number_cats):
+        recall_func=partial(_recall_idx,i=i)
+        recall_func.__name__= f"rec_{o.ycat_names[i]}"
+        avg_recall_func=AvgMetric(recall_func)
+        recalls.append(avg_recall_func)
+
+    f1_scores=[]
+    for i in range(number_cats):
+        f1_score_func=partial(_f1_score_idx,i=i)
+        f1_score_func.__name__= f"f1_score_{o.ycat_names[i]}"
+        avg_f1_score_func=AvgMetric(f1_score_func)
+        f1_scores.append(avg_f1_score_func)
+ 
     mae_days=None
     if len(o.ycont_names)>0:
         if 'minmax' in o.ycont_names[0]: # Here we expect only one timestamp
@@ -95,7 +126,8 @@ def get_metrics(o,date_col='timestamp_Relative_elapsed'):
             mae_days=lambda p,y: maeDurDaysNormalize(listify(p)[-1],listify(y)[-1],mean=mean,std=std)
         mae_days.__name__='mae_days'
     
-    return L(accuracies)+mae_days
+    metrics = L(accuracies) + L(precisions) + L(recalls) + L(f1_scores) + mae_days
+    return metrics
 
 # Cell
 def multi_loss_sum(o,p,y):
@@ -255,24 +287,22 @@ class PPM_Camargo_Spezialized(PPModel):
         print('Next event prediction training')
         dls=o.get_dls(bs=self.bs)
         m=self.model(o)
-        self.nsp,self.nrp,self.dtnp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
-                                                   output_index=[1,2,3])
-
+        self.nsp_acc,self.nrp_acc,self.nsp_pre,self.nrp_pre, \
+        self.nsp_rec,self.nrp_rec,self.nsp_f1,self.nrp_f1,self.dtnp = self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
+                                                   output_index=[1,2,3,4,5,6,7,8,9])
         # Last event prediction training
         print('Last event prediction training')
         dls=o.get_dls(outcome=True,bs=self.bs)
         m=self.model(o)
-        self.op,self.lrp,self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
-                                                 output_index=[1,2,3])
+        self.op_acc,self.lrp_acc,self.op_pre,self.lrp_pre, \
+        self.op_rec,self.lrp_rec,self.op_f1,self.lrp_f1,self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
+                                                   output_index=[1,2,3,4,5,6,7,8,9])
+        
 
-
-
-    def next_step_prediction(self): return self.nsp
-
-    def next_resource_prediction(self):return self.nrp
-
-    def last_resource_prediction(self): return self.lrp
-    def outcome_prediction(self): return self.op
+    def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
+    def next_resource_prediction(self):return self.nrp_acc, self.nrp_pre, self.nrp_rec, self.nrp_f1
+    def last_resource_prediction(self): return self.lrp_acc, self.lrp_pre, self.lrp_rec, self.lrp_f1
+    def outcome_prediction(self): return self.op_acc, self.op_pre, self.op_rec, self.op_f1
     def duration_to_next_event_prediction(self): return self.dtnp
     def duration_to_end_prediction(self): return self.dtlp
     def activity_suffix_prediction(self): pass
@@ -409,23 +439,23 @@ class PPM_Tax_Spezialized(PPModel):
         print('Next event prediction training')
         dls=o.get_dls(bs=self.bs)
         m=self.model(o)
-        self.nsp,self.dtnp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
-                                                   output_index=[1,2])
+        self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1, self.dtnp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
+                                                   output_index=[1,2,3,4,5])
 
 
         # Last event prediction training
         print('Last event prediction training')
         dls=o.get_dls(outcome=True,bs=self.bs)
         m=self.model(o)
-        self.op,self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
-                                                 output_index=[1,2])
+        self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
+                                                 output_index=[1,2,3,4,5])
 
 
 
-    def next_step_prediction(self): return self.nsp
+    def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
 
 
-    def outcome_prediction(self): return self.op
+    def outcome_prediction(self): return self.op_acc, self.op_pre, self.op_rec, self.op_f1
     def duration_to_next_event_prediction(self): return self.dtnp
     def duration_to_end_prediction(self): return self.dtlp
     def activity_suffix_prediction(self): pass
