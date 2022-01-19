@@ -8,9 +8,7 @@
 06_nb_all_benchmark.ipynb
 README.md
 _Latex_export.ipynb
-pipeline.log
 prediction_evaluation.py
-preprocess.log
 requirements.txt
 settings.ini
 setup.py
@@ -116,6 +114,7 @@ event_logs/Mobis.csv
 event_logs/Mobis_const.csv
 event_logs/Mobis_mode_case.csv
 event_logs/Mobis_mode_event.csv
+logs/preprocess.log
 mppn/_nbdev.py
 mppn/baselines.py
 mppn/imports.py
@@ -145,5 +144,3 @@ mppn/results/run_7_results.csv
 mppn/results/run_8_results.csv
 mppn/results/run_9_results.csv
 test/run0_Helpdesk_splits.pickle
-test/models/run0/Helpdesk/MPPN/_tmp.pth
-test/models/run0/Helpdesk/MPPN/setup.pth

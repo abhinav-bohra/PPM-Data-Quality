@@ -23,7 +23,7 @@ ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 if exp == "MV":
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_const, EventLogs.BPIC_12_mode_event, EventLogs.BPIC_12_mode_case, \
   EventLogs.BPIC_12_W, EventLogs.BPIC_12_W_const, EventLogs.BPIC_12_W_mode_event, EventLogs.BPIC_12_W_mode_case, \
-  EventLogs.BPIC_12_Wc, EventLogs.BPIC_12_Wc_const, EventLogs.BPIC_12_Wc_mode_event, EventLogs.BPIC_12_Wc_mode_case,\
+  EventLogs.BPIC_12_Wcomplete, EventLogs.BPIC_12_Wc_const, EventLogs.BPIC_12_Wc_mode_event, EventLogs.BPIC_12_Wc_mode_case,\
   EventLogs.BPIC_13_CP, EventLogs.BPIC_13_CP_const, EventLogs.BPIC_13_CP_mode_event, EventLogs.BPIC_13_CP_mode_case,\
   EventLogs.Mobis, EventLogs.Mobis_const, EventLogs.Mobis_mode_event, EventLogs.Mobis_mode_case]
   save_dir = f"01_Missing-Values/{save_folder}"
