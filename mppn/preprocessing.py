@@ -4,17 +4,19 @@ __all__ = ['EventLogs', 'import_log', 'drop_long_traces', 'RandomTraceSplitter',
            'Categorify', 'FillStrategy', 'FillMissing', 'Normalize', 'Base_Date_Encodings', 'encode_date',
            'decode_date', 'Datetify', 'MinMax', 'OneHot', 'subsequences_fast', 'PPDset', 'get_dls']
 
+# Cell
 import pandas as pd
 pd.set_option('display.max_columns', None)
-# Cell
 from .imports import *
 from imblearn.under_sampling import NearMiss 
-
 import logging
-# logging.basicConfig(filename="preprocess.log",format='',filemode='w')
-# logger = logging.getLogger() 
-# logger.setLevel(logging.DEBUG)
-# logger.debug("--Preprocessing Logging--")
+
+#Logging
+logging.basicConfig(filename="logs/preprocess.log",format='',filemode='w')
+logger = logging.getLogger() 
+logger.setLevel(logging.DEBUG)
+logging.getLogger('numba').setLevel(logging.WARNING)
+logger.debug("--Preprocessing Logging--")
 
 # Cell
 class EventLogs:

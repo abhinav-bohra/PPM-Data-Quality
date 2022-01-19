@@ -9,9 +9,11 @@ from .preprocessing import *
 import pickle
 import logging
 
-logging.basicConfig(filename="pipeline.log",format='',filemode='w')
+#Logging
+logging.basicConfig(filename="logs/pipeline.log",format='',filemode='w')
 logger = logging.getLogger() 
 logger.setLevel(logging.DEBUG)
+logging.getLogger('numba').setLevel(logging.WARNING)
 logger.debug("--Pipeline Logging--")
 
 # Cell
@@ -217,7 +219,6 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
-            log = log[:250]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             if store:
@@ -235,8 +236,6 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
                 model_performance = [ds_name, model.get_name(),*model_performance]
                 performance_statistic.update(model_performance)
                 [ds_name, model.get_name(),*model_performance]
-                df = performance_statistic.to_df()
-                if store: df.to_csv(store_path/f"run_{r}_results.csv")
 
         df = performance_statistic.to_df()
         results.append(df)

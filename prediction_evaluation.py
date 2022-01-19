@@ -18,8 +18,7 @@ args = parser.parse_args()
 exp = args.exp
 save_folder = args.save_folder 
 save_dir = f"{save_folder}"
-ppms=[PPM_MPPN]
-# ,PPM_MiDA,PPM_Camargo_concat
+ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
 if exp == "MV":
   logs = [EventLogs.BPIC_12_const, EventLogs.BPIC_12_mode_event, EventLogs.BPIC_12_mode_case, \

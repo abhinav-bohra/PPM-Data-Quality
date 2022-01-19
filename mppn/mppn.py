@@ -12,10 +12,11 @@ from .baselines import *
 
 import logging
  
-logging.basicConfig(filename="mppn.log",format='',filemode='w')
-logger1 = logging.getLogger() 
-logger1.setLevel(logging.DEBUG)
-logger1.debug("--MPPN Logging--")
+logging.basicConfig(filename="logs/mppn.log",format='',filemode='w')
+logger = logging.getLogger() 
+logger.setLevel(logging.DEBUG)
+logging.getLogger('numba').setLevel(logging.WARNING)
+logger.debug("--MPPN Logging--")
 
 class BaseMPPN(nn.Module):
 
@@ -445,7 +446,6 @@ class PPM_MPPN(PPModel):
         dls=self.o.get_dls(after_batch=gaf_transform,bs=self.bs,outcome=outcome)
         loss=partial(multi_loss_sum,self.o)
         metrics=get_metrics(self.o)
-        logger1.debug(metrics)
         return self._train_validate(dls,m,loss=loss,metrics=metrics,output_index=[1,2,3,4])
 
     def next_resource_prediction(self):return self.next_step_prediction(outcome=False,col='resource')
