@@ -11,10 +11,10 @@ from .imports import *
 from imblearn.under_sampling import NearMiss 
 
 import logging
-logging.basicConfig(filename="preprocess.log",format='',filemode='w')
-logger = logging.getLogger() 
-logger.setLevel(logging.DEBUG)
-logger.debug("--Preprocessing Logging--")
+# logging.basicConfig(filename="preprocess.log",format='',filemode='w')
+# logger = logging.getLogger() 
+# logger.setLevel(logging.DEBUG)
+# logger.debug("--Preprocessing Logging--")
 
 # Cell
 class EventLogs:

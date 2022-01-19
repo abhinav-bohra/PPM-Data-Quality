@@ -17,10 +17,10 @@ from fastai import *
 from fastai.text import *
 import logging
  
-logging.basicConfig(filename="baselines.log",format='',filemode='w')
-logger = logging.getLogger() 
-logger.setLevel(logging.DEBUG)
-logger.debug("--Baselines Logging--")
+# logging.basicConfig(filename="baselines.log",format='',filemode='w')
+# logger = logging.getLogger() 
+# logger.setLevel(logging.DEBUG)
+# logger.debug("--Baselines Logging--")
 
 # Cell
 def maeDurDaysNormalize(p,yb,mean=0,std=0,unit=60*60*24):
