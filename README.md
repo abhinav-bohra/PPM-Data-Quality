@@ -17,10 +17,6 @@ pip install -r requirements.txt
 
 ## Experiments
 
-```
-cd IBM-Data-Quality
-```
-
 ### Missing Value
 ```
 export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
