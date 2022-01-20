@@ -20,7 +20,11 @@ pip install -r requirements.txt
 ```
 export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
 
-!python prediction_evaluation.py --exp CI --balancing_technique NM --save_folder test 
+!python prediction_evaluation.py --exp CI --balancing_technique NM --save_folder results 
+
+or
+
+!python prediction_evaluation.py --exp MV --save_folder results 
 ```
 
 --exp : Experiment Mode
