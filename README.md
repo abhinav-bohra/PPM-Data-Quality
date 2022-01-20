@@ -20,13 +20,18 @@ pip install -r requirements.txt
 ```
 export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
 
-python prediction_evaluation.py --exp MV --save_folder results
+!python prediction_evaluation.py --exp CI --balancing_technique NM --save_folder test 
 ```
 
 --exp : Experiment Mode
 - MV for Missing Values
 - CI for Class Imbalance
 - test for Testing
+
+--exp : Balancing Technique
+- NM for Near Miss
+- CONN for Condensed Nearest Neighbour
+- NCR for Neighbourhood Cleaning Rule
 
 --save_folder : Name of folder to save model checkpoints and results.<br><br>
 
