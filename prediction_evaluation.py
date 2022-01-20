@@ -15,12 +15,15 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--exp', default="MV",type=str, help='MV - Missing Values, CI - Class Imbalance')    
 parser.add_argument('--save_folder', default="MV",type=str, help='Folder for saving results')        
 parser.add_argument('--gpu', default="0",type=str, help='GPU Device number')    
+parser.add_argument('--balancing_technique', default="0",type=str, help='Can be one of [NM,CONN,NCR]')    
 
 #Args
 args = parser.parse_args()
 exp_mode = args.exp
 save_folder = args.save_folder 
 gpu_id = args.gpu
+balancing_technique = args.balancing_technique
+
 save_dir = f"{save_folder}"
 ppms=[PPM_Camargo_concat]
 # PPM_Tax_Spezialized,PPM_MPPN,
@@ -39,6 +42,7 @@ elif exp_mode == "CI":
   save_dir = f"02_Class-Imbalance/{save_folder}"
   import mppn.preprocessing as mp
   mp.ci_flag = True
+  mp.balancing_technique = balancing_technique
 elif exp_mode == "test":
   logs=[EventLogs.Helpdesk]
   save_dir = f"{save_folder}"

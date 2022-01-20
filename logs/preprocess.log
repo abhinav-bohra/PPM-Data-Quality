@@ -3,20 +3,50 @@
 --Baselines Logging--
 --MPPN Logging--
 --BEFORE--
-torch.Size([1193, 2, 64])
-torch.Size([1193, 64])
+torch.Size([1137, 2, 64])
+torch.Size([1137, 64])
+---Applying NearMiss---
+36.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([773, 2, 64])
-torch.Size([773, 64])
+torch.Size([722, 2, 64])
+torch.Size([722, 64])
 --BEFORE--
-torch.Size([84, 2, 64])
-torch.Size([84, 64])
+torch.Size([140, 2, 64])
+torch.Size([140, 64])
+---Applying NearMiss---
+34.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([41, 2, 64])
-torch.Size([41, 64])
+torch.Size([93, 2, 64])
+torch.Size([93, 64])
 --BEFORE--
 torch.Size([261, 2, 64])
 torch.Size([261, 64])
+---Applying NearMiss---
+31.0% reduction in size by undersampling wrt activity
 --AFTER--
 torch.Size([181, 2, 64])
 torch.Size([181, 64])
+--BEFORE--
+torch.Size([1137, 2, 64])
+torch.Size([1137, 64])
+---Applying NearMiss---
+36.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([724, 2, 64])
+torch.Size([724, 64])
+--BEFORE--
+torch.Size([140, 2, 64])
+torch.Size([140, 64])
+---Applying NearMiss---
+33.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([94, 2, 64])
+torch.Size([94, 64])
+--BEFORE--
+torch.Size([261, 2, 64])
+torch.Size([261, 64])
+---Applying NearMiss---
+41.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([155, 2, 64])
+torch.Size([155, 64])

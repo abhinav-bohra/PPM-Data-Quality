@@ -11,7 +11,7 @@ from .imports import *
 from imblearn.under_sampling import NearMiss
 import logging
 ci_flag = False
-
+balancing_technique = None
 #Logging
 logging.basicConfig(filename="logs/preprocess.log",format='',filemode='w')
 logger = logging.getLogger() 
@@ -378,14 +378,6 @@ class PPDset(torch.utils.data.Dataset):
         if len(ys)==1: ys=ys[0]
         return (*xs,ys)
 
-# def Balance(technique,X,y):
-#   if technique == "NearMiss":
-#     logger.debug("---Applying NearMiss---")
-#     nm = NearMiss()
-#     X_res, y_res = nm.fit_resample(X, y)
-#     return X_res, y_res
-#   return X,y
-
 def getStrategy(my_list):
     avg = int(len(my_list)/len(set(my_list)))
     freq = {}
@@ -402,7 +394,7 @@ def getStrategy(my_list):
     # logger.debug(f"Imbalance Ratio is {ir}")
     return freq
 
-def Balance(xs,ys):
+def getBalanceData(func,xs,ys):
   x = list(xs)
   for i in range(len(xs)):
     if len(xs[i].size())==2:
@@ -411,14 +403,31 @@ def Balance(xs,ys):
   x = torch.cat(x, dim=1)
   x = list(torch.flatten(x, start_dim=1).numpy())
   y = list(ys[0].numpy())
-  nm = NearMiss(n_neighbors=1,sampling_strategy=getStrategy(y))
-  x_res, y_res = nm.fit_resample(x, y)
-  indices = torch.tensor(nm.sample_indices_)
+
+  x_res, y_res = func.fit_resample(x, y)
+  indices = torch.tensor(func.sample_indices_)
+  
   xs_under = tuple([torch.index_select(xs[i], 0, indices) for i in range(len(xs))])
   ys_under = tuple([torch.index_select(ys[i], 0, indices) for i in range(len(ys))])
+  
   r = xs_under[0].size(0)/xs[0].size(0)
   logger.debug(f"{round(1-r,2)*100}% reduction in size by undersampling wrt activity" )
+  
   return xs_under, ys_under
+
+def Balance(xs,ys):
+  y_labels = list(ys[0].numpy())
+  if balancing_technique == "NM":
+    logger.debug("---Applying NearMiss---")
+    func = NearMiss(n_neighbors=1,sampling_strategy=getStrategy(y_labels))
+    return getBalanceData(func,xs,ys)
+  elif balancing_technique == "CONN":
+    logger.debug("---Applying COndensedNearestNeighbour---")
+  elif balancing_technique == "NCR":
+    logger.debug("---Applying NeighbourhoodCleaningRule ---")
+  else:
+    logger.debug("---Invalid Balancing Technique---")
+  return xs,ys
 
 # Cell
 @delegates(TfmdDL)
@@ -450,7 +459,7 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         # logger.debug(s.ycont_names)
         # logger.debug(yconts.size())
         
-        logger.debug("--BEFORE--")
+        logger.debug("\n--BEFORE--")
         for i in range(len(xs)):
           logger.debug(xs[i].size())
         if ci_flag:
