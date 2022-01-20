@@ -22,7 +22,7 @@ exp = args.exp
 save_folder = args.save_folder 
 gpu_id = args.gpu
 save_dir = f"{save_folder}"
-ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
+ppms=[PPM_MiDA,PPM_MPPN,PPM_Camargo_concat]
 
 #Experiment MOdes
 if exp == "MV":

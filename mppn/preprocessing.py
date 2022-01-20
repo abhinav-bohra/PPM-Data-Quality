@@ -384,31 +384,29 @@ class PPDset(torch.utils.data.Dataset):
 #     X_res, y_res = nm.fit_resample(X, y)
 #     return X_res, y_res
 #   return X,y
-# from imblearn.under_sampling import NearMiss 
-def CountFrequency(my_list):
-    logger.debug("--------------------------------")
-    avg = len(set(my_list)/len(my_list)
-    # Creating an empty dictionary
+
+def getStrategy(my_list):
+    avg = int(len(my_list)/len(set(my_list)))
     freq = {}
     for items in my_list:
         freq[items] = my_list.count(items)
-    logger.debug(freq)
-    return freq, avg
 
-def Balance(xs,ys):#pass xs, ys
+    ir = round(max(freq.values())/min(freq.values()))
+    logger.debug(f"Imbalance Ratio is {ir}")
+    for key in freq:
+      if freq[key] > avg:
+        freq[key]=avg
+
+    ir = round(max(freq.values())/min(freq.values()))
+    logger.debug(f"Imbalance Ratio is {ir}")
+    return freq
+
+def Balance(xs,ys):
   x = torch.cat((xs[0],torch.unsqueeze(xs[1], dim=1)), dim=1)
   x = list(torch.flatten(x, start_dim=1).numpy())
   y = list(ys[0].numpy())
-  logger.debug(y)
-  logger.debug(len(set(y)))
-  logger.debug(len((y)))
-  counts, avg = CountFrequency(y)
-  for key in counts:
-    if counts[key] > avg:
-      counts[key]=avg
-  nm = NearMiss(sampling_strategy=counts)
+  nm = NearMiss(n_neighbors =1,sampling_strategy=getStrategy(y))
   x_res, y_res = nm.fit_resample(x, y)
-  counts_res, avg_res = CountFrequency(y_res)
   indices = torch.tensor(nm.sample_indices_)
   xs_under = tuple([torch.index_select(xs[0], 0, indices),torch.index_select(xs[1], 0, indices)])
   ys_under = tuple([torch.index_select(ys[0], 0, indices),torch.index_select(ys[1], 0, indices),torch.index_select(ys[2], 0, indices)])
@@ -430,35 +428,24 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         xcats=tensor(wds[:,:len(s.cat_names)]).long() # torch.Size([312, 1, 64])
         xs=tuple([i.squeeze() for i in [xcats,xconts] if i.shape[1]>0])
         ys=tuple([ycats[:,i] for i in range(ycats.shape[1])])+tuple([yconts[:,i] for i in range(yconts.shape[1])])
-        xs,ys = Balance(xs,ys)
-        ds.append(PPDset((*xs,ys)))
+        
         # logger.debug("\n---S---")
         # logger.debug(s.iloc[0])
         
-        # logger.debug("\n---X---")
-        # logger.debug(s.cat_names)
-        # logger.debug(xcats.size())
-        # logger.debug(s.cat_names)
-        # logger.debug(xconts.size())
+        logger.debug("\n---X---")
+        logger.debug(s.cat_names)
+        logger.debug(xcats.size())
+        logger.debug(s.cont_names)
+        logger.debug(xconts.size())
 
-        # logger.debug("\n---Y---")
-        # logger.debug(s.ycat_names)
-        # logger.debug(ycats.size())
-        # logger.debug(s.ycont_names)
-        # logger.debug(yconts.size())
+        logger.debug("\n---Y---")
+        logger.debug(s.ycat_names)
+        logger.debug(ycats.size())
+        logger.debug(s.ycont_names)
+        logger.debug(yconts.size())
         
-        # logger.debug("\n---XS & YS ---")
-        # logger.debug(f"xs is {len(xs)} X {xs[0].size()} {xs[1].size()} {type(xs)}")
-        # logger.debug(f"ys is {len(ys)} X {ys[0].size()} {ys[1].size()} {ys[2].size()} {type(ys)}")
+        ds.append(PPDset((*xs,ys)))
         
-        # logger.debug("\n---Datapoints---")
-        # logger.debug(f"xs[0] is {xs[0][0]}")
-        # logger.debug(f"xs[1] is {xs[1][0]}")
-        # logger.debug(f"xs[0] size is {xs[0].size()}")
-        # logger.debug(f"xs[1] size is {xs[1].size()}")
-        # logger.debug(f"ys[0] is {ys[0][0]}")
-        # logger.debug(f"ys[1] is {ys[1][0]}")
-        # logger.debug(f"ys[2] is {ys[2][0]}")
 
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)
 PPObj.get_dls= get_dls
