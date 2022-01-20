@@ -9,9 +9,14 @@ import pandas as pd
 pd.set_option('display.max_columns', None)
 from .imports import *
 from imblearn.under_sampling import NearMiss
+from imblearn.under_sampling import CondensedNearestNeighbour
+from imblearn.under_sampling import NeighbourhoodCleaningRule 
 import logging
+
+#Global Vars
 ci_flag = False
 balancing_technique = None
+
 #Logging
 logging.basicConfig(filename="logs/preprocess.log",format='',filemode='w')
 logger = logging.getLogger() 
@@ -419,12 +424,16 @@ def Balance(xs,ys):
   y_labels = list(ys[0].numpy())
   if balancing_technique == "NM":
     logger.debug("---Applying NearMiss---")
-    func = NearMiss(n_neighbors=1,sampling_strategy=getStrategy(y_labels))
-    return getBalanceData(func,xs,ys)
+    nm = NearMiss(n_neighbors=1,sampling_strategy=getStrategy(y_labels))
+    return getBalanceData(nm,xs,ys)
   elif balancing_technique == "CONN":
     logger.debug("---Applying COndensedNearestNeighbour---")
+    conn = CondensedNearestNeighbour()
+    return getBalanceData(conn,xs,ys)
   elif balancing_technique == "NCR":
     logger.debug("---Applying NeighbourhoodCleaningRule ---")
+    ncr = NeighbourhoodCleaningRule()
+    return getBalanceData(ncr,xs,ys)
   else:
     logger.debug("---Invalid Balancing Technique---")
   return xs,ys
