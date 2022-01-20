@@ -2,3 +2,21 @@
 --Pipeline Logging--
 --Baselines Logging--
 --MPPN Logging--
+--BEFORE--
+torch.Size([1193, 2, 64])
+torch.Size([1193, 64])
+--AFTER--
+torch.Size([773, 2, 64])
+torch.Size([773, 64])
+--BEFORE--
+torch.Size([84, 2, 64])
+torch.Size([84, 64])
+--AFTER--
+torch.Size([41, 2, 64])
+torch.Size([41, 64])
+--BEFORE--
+torch.Size([261, 2, 64])
+torch.Size([261, 64])
+--AFTER--
+torch.Size([181, 2, 64])
+torch.Size([181, 64])

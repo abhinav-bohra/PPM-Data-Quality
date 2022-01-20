@@ -35,10 +35,10 @@ if exp_mode == "MV":
   EventLogs.Mobis, EventLogs.Mobis_const, EventLogs.Mobis_mode_event, EventLogs.Mobis_mode_case]
   save_dir = f"01_Missing-Values/{save_folder}"
 elif exp_mode == "CI":
-  #One with high imbalance & one with low
-  logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.MobisEventLogs.BPIC_15_5,EventLogs.Helpdesk]
+  logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.BPIC_15_5,EventLogs.Mobis,EventLogs.Helpdesk]
   save_dir = f"02_Class-Imbalance/{save_folder}"
-  ci_flag=True
+  import mppn.preprocessing as mp
+  mp.ci_flag = True
 elif exp_mode == "test":
   logs=[EventLogs.Helpdesk]
   save_dir = f"{save_folder}"

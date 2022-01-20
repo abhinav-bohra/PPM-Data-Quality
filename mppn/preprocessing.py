@@ -393,21 +393,22 @@ def getStrategy(my_list):
         freq[items] = my_list.count(items)
 
     ir = round(max(freq.values())/min(freq.values()))
-    logger.debug(f"Imbalance Ratio is {ir}")
+    # logger.debug(f"Imbalance Ratio is {ir}")
     for key in freq:
       if freq[key] > avg:
         freq[key]=avg
 
     ir = round(max(freq.values())/min(freq.values()))
-    logger.debug(f"Imbalance Ratio is {ir}")
+    # logger.debug(f"Imbalance Ratio is {ir}")
     return freq
 
 def Balance(xs,ys):
+  x = list(xs)
   for i in range(len(xs)):
     if len(xs[i].size())==2:
-      xs[i] = torch.unsqueeze(xs[i], dim=1) 
+      x[i] = torch.unsqueeze(xs[i], dim=1) 
       
-  x = torch.cat(xs, dim=1)
+  x = torch.cat(x, dim=1)
   x = list(torch.flatten(x, start_dim=1).numpy())
   y = list(ys[0].numpy())
   nm = NearMiss(n_neighbors=1,sampling_strategy=getStrategy(y))
@@ -415,8 +416,8 @@ def Balance(xs,ys):
   indices = torch.tensor(nm.sample_indices_)
   xs_under = tuple([torch.index_select(xs[i], 0, indices) for i in range(len(xs))])
   ys_under = tuple([torch.index_select(ys[i], 0, indices) for i in range(len(ys))])
-  print(f"{round((1-(len(x_res))/len(x)),2)*100}% reduction in size by undersampling wrt activity" )
-  logger.debug(f"{round((1-(len(x_res))/len(x)),2)*100}% reduction in size by undersampling wrt activity" )
+  r = xs_under[0].size(0)/xs[0].size(0)
+  logger.debug(f"{round(1-r,2)*100}% reduction in size by undersampling wrt activity" )
   return xs_under, ys_under
 
 # Cell
@@ -448,13 +449,20 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         # logger.debug(ycats.size())
         # logger.debug(s.ycont_names)
         # logger.debug(yconts.size())
-
+        
+        logger.debug("--BEFORE--")
+        for i in range(len(xs)):
+          logger.debug(xs[i].size())
         if ci_flag:
           try:
+            # logger.debug("Balancing Dataset...")
             xs,ys = Balance(xs,ys)
           except Exception as E:
-            logger.debug(f"Exception Occurred while BALANCING DATASET: {E}")
+            logger.debug(f"\nException Occurred while BALANCING DATASET: {E}\n")
           
+        logger.debug("--AFTER--")
+        for i in range(len(xs)):
+          logger.debug(xs[i].size())
         ds.append(PPDset((*xs,ys)))
         
 
