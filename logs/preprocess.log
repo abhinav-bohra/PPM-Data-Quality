@@ -4,13 +4,46 @@
 --MPPN Logging--
 
 ---X---
-['activity', 'resource']
-torch.Size([154809, 2, 64])
-['AMOUNT_REQ', 'timestamp_Relative_elapsed']
-torch.Size([154809, 2, 64])
+['activity_0', 'activity_1', 'activity_2', 'activity_3', 'activity_4', 'activity_5', 'activity_6', 'activity_7', 'activity_8', 'activity_9', 'activity_10', 'activity_11', 'activity_12', 'activity_13', 'activity_14', 'activity_15', 'activity_16', 'activity_17', 'activity_18', 'activity_19', 'activity_20', 'activity_21', 'activity_22', 'activity_23', 'activity_24', 'activity_25', 'activity_26', 'activity_27', 'activity_28', 'activity_29', 'activity_30', 'activity_31', 'activity_32', 'activity_33']
+torch.Size([247, 34, 64])
+['timestamp_secSinceSunNoon', 'timestamp_secSinceNoon', 'timestamp_Relative_elapsed']
+torch.Size([247, 3, 64])
 
 ---Y---
 ['activity']
-torch.Size([154809, 1])
-[]
-torch.Size([154809, 0])
+torch.Size([247, 1])
+['timestamp_Relative_elapsed']
+torch.Size([247, 1])
+Imbalance Ratio is 25
+Imbalance Ratio is 7
+35.0% reduction in size by undersampling wrt activity
+
+---X---
+['activity_0', 'activity_1', 'activity_2', 'activity_3', 'activity_4', 'activity_5', 'activity_6', 'activity_7', 'activity_8', 'activity_9', 'activity_10', 'activity_11', 'activity_12', 'activity_13', 'activity_14', 'activity_15', 'activity_16', 'activity_17', 'activity_18', 'activity_19', 'activity_20', 'activity_21', 'activity_22', 'activity_23', 'activity_24', 'activity_25', 'activity_26', 'activity_27', 'activity_28', 'activity_29', 'activity_30', 'activity_31', 'activity_32', 'activity_33']
+torch.Size([13, 34, 64])
+['timestamp_secSinceSunNoon', 'timestamp_secSinceNoon', 'timestamp_Relative_elapsed']
+torch.Size([13, 3, 64])
+
+---Y---
+['activity']
+torch.Size([13, 1])
+['timestamp_Relative_elapsed']
+torch.Size([13, 1])
+Imbalance Ratio is 3
+Imbalance Ratio is 1
+31.0% reduction in size by undersampling wrt activity
+
+---X---
+['activity_0', 'activity_1', 'activity_2', 'activity_3', 'activity_4', 'activity_5', 'activity_6', 'activity_7', 'activity_8', 'activity_9', 'activity_10', 'activity_11', 'activity_12', 'activity_13', 'activity_14', 'activity_15', 'activity_16', 'activity_17', 'activity_18', 'activity_19', 'activity_20', 'activity_21', 'activity_22', 'activity_23', 'activity_24', 'activity_25', 'activity_26', 'activity_27', 'activity_28', 'activity_29', 'activity_30', 'activity_31', 'activity_32', 'activity_33']
+torch.Size([71, 34, 64])
+['timestamp_secSinceSunNoon', 'timestamp_secSinceNoon', 'timestamp_Relative_elapsed']
+torch.Size([71, 3, 64])
+
+---Y---
+['activity']
+torch.Size([71, 1])
+['timestamp_Relative_elapsed']
+torch.Size([71, 1])
+Imbalance Ratio is 7
+Imbalance Ratio is 3
+20.0% reduction in size by undersampling wrt activity

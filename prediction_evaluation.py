@@ -22,7 +22,7 @@ exp = args.exp
 save_folder = args.save_folder 
 gpu_id = args.gpu
 save_dir = f"{save_folder}"
-ppms=[PPM_MiDA,PPM_MPPN,PPM_Camargo_concat]
+ppms=[PPM_Tax_Spezialized,PPM_MPPN,PPM_Camargo_concat]
 
 #Experiment MOdes
 if exp == "MV":
@@ -35,7 +35,7 @@ if exp == "MV":
   save_dir = f"01_Missing-Values/{save_folder}"
 elif exp == "CI":
   #One with high imbalance & one with low
-  logs=[EventLogs.BPIC_15_5,EventLogs.Helpdesk]
+  logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.Mobis,EventLogs.BPIC_15_5,EventLogs.Helpdesk]
   save_dir = f"02_Class-Imbalance/{save_folder}"
 elif exp == "test":
   logs=[EventLogs.Helpdesk]

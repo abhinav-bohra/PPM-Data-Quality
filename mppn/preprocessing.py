@@ -402,18 +402,18 @@ def getStrategy(my_list):
     return freq
 
 def Balance(xs,ys):
-  if len(xs[0].size()) ==2:
-    xs[0]= torch.unsqueeze(xs[0], dim=1)
-  if len(xs[1].size()) ==2:
-    xs[1]= torch.unsqueeze(xs[1], dim=1)
-  x = torch.cat((xs[0],xs[1]), dim=1)
+  for i in range(len(xs)):
+    if len(xs[i].size())==2:
+      xs[i] = torch.unsqueeze(xs[i], dim=1) 
+      
+  x = torch.cat(xs, dim=1)
   x = list(torch.flatten(x, start_dim=1).numpy())
   y = list(ys[0].numpy())
-  nm = NearMiss(n_neighbors =1,sampling_strategy=getStrategy(y))
+  nm = NearMiss(n_neighbors=1,sampling_strategy=getStrategy(y))
   x_res, y_res = nm.fit_resample(x, y)
   indices = torch.tensor(nm.sample_indices_)
-  xs_under = tuple([torch.index_select(xs[0], 0, indices),torch.index_select(xs[1], 0, indices)])
-  ys_under = tuple([torch.index_select(ys[0], 0, indices),torch.index_select(ys[1], 0, indices),torch.index_select(ys[2], 0, indices)])
+  xs_under = tuple([torch.index_select(xs[i], 0, indices) for i in range(len(xs))])
+  ys_under = tuple([torch.index_select(ys[i], 0, indices) for i in range(len(ys))])
   print(f"{round((1-(len(x_res))/len(x)),2)*100}% reduction in size by undersampling wrt activity" )
   logger.debug(f"{round((1-(len(x_res))/len(x)),2)*100}% reduction in size by undersampling wrt activity" )
   return xs_under, ys_under
@@ -435,17 +435,17 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         # logger.debug("\n---S---")
         # logger.debug(s.iloc[0])
         
-        logger.debug("\n---X---")
-        logger.debug(s.cat_names)
-        logger.debug(xcats.size())
-        logger.debug(s.cont_names)
-        logger.debug(xconts.size())
+        # logger.debug("\n---X---")
+        # logger.debug(s.cat_names)
+        # logger.debug(xcats.size())
+        # logger.debug(s.cont_names)
+        # logger.debug(xconts.size())
 
-        logger.debug("\n---Y---")
-        logger.debug(s.ycat_names)
-        logger.debug(ycats.size())
-        logger.debug(s.ycont_names)
-        logger.debug(yconts.size())
+        # logger.debug("\n---Y---")
+        # logger.debug(s.ycat_names)
+        # logger.debug(ycats.size())
+        # logger.debug(s.ycont_names)
+        # logger.debug(yconts.size())
         
         xs,ys = Balance(xs,ys)
         ds.append(PPDset((*xs,ys)))
