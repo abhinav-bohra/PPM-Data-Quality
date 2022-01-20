@@ -377,13 +377,41 @@ class PPDset(torch.utils.data.Dataset):
         if len(ys)==1: ys=ys[0]
         return (*xs,ys)
 
-def Balance(technique,X,y):
-  if technique == "NearMiss":
-    logger.debug("---Applying NearMiss---")
-    nm = NearMiss()
-    X_res, y_res = nm.fit_resample(X, y)
-    return X_res, y_res
-  return X,y
+# def Balance(technique,X,y):
+#   if technique == "NearMiss":
+#     logger.debug("---Applying NearMiss---")
+#     nm = NearMiss()
+#     X_res, y_res = nm.fit_resample(X, y)
+#     return X_res, y_res
+#   return X,y
+# from imblearn.under_sampling import NearMiss 
+def CountFrequency(my_list):
+     
+    # Creating an empty dictionary
+    freq = {}
+    for items in my_list:
+        freq[items] = my_list.count(items)
+     
+    for key, value in freq.items():
+        logger.debug ("% d : % d"%(key, value))
+
+def Balance(xs,ys):#pass xs, ys
+  x = torch.cat((xs[0],torch.unsqueeze(xs[1], dim=1)), dim=1)
+  x = list(torch.flatten(x, start_dim=1).numpy())
+  y = list(ys[0].numpy())
+  logger.debug(y)
+  logger.debug(len(set(y)))
+  logger.debug(len((y)))
+  CountFrequency(y)
+  # logger.debug(f"{round((len(set(y))/len(y))*100,2)} % are unique labels" )
+  nm = NearMiss(sampling_strategy={1:500})
+  x_res, y_res = nm.fit_resample(x, y)
+  indices = torch.tensor(nm.sample_indices_)
+  xs_under = tuple([torch.index_select(xs[0], 0, indices),torch.index_select(xs[1], 0, indices)])
+  ys_under = tuple([torch.index_select(ys[0], 0, indices),torch.index_select(ys[1], 0, indices),torch.index_select(ys[2], 0, indices)])
+  print(f"{round((1-(len(x_res))/len(x)),2)*100}% reduction in size by undersampling wrt activity" )
+  logger.debug(f"{round((1-(len(x_res))/len(x)),2)*100}% reduction in size by undersampling wrt activity" )
+  return xs_under, ys_under
 
 # Cell
 @delegates(TfmdDL)
@@ -399,6 +427,7 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         xcats=tensor(wds[:,:len(s.cat_names)]).long() # torch.Size([312, 1, 64])
         xs=tuple([i.squeeze() for i in [xcats,xconts] if i.shape[1]>0])
         ys=tuple([ycats[:,i] for i in range(ycats.shape[1])])+tuple([yconts[:,i] for i in range(yconts.shape[1])])
+        xs,ys = Balance(xs,ys)
         ds.append(PPDset((*xs,ys)))
         # logger.debug("\n---S---")
         # logger.debug(s.iloc[0])
@@ -421,6 +450,9 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         
         # logger.debug("\n---Datapoints---")
         # logger.debug(f"xs[0] is {xs[0][0]}")
+        # logger.debug(f"xs[1] is {xs[1][0]}")
+        # logger.debug(f"xs[0] size is {xs[0].size()}")
+        # logger.debug(f"xs[1] size is {xs[1].size()}")
         # logger.debug(f"ys[0] is {ys[0][0]}")
         # logger.debug(f"ys[1] is {ys[1][0]}")
         # logger.debug(f"ys[2] is {ys[2][0]}")
