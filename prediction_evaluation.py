@@ -18,14 +18,14 @@ parser.add_argument('--gpu', default="0",type=str, help='GPU Device number')
 
 #Args
 args = parser.parse_args()
-exp = args.exp
+exp_mode = args.exp
 save_folder = args.save_folder 
 gpu_id = args.gpu
 save_dir = f"{save_folder}"
-ppms=[PPM_Tax_Spezialized,PPM_MPPN,PPM_Camargo_concat]
-
+ppms=[PPM_Camargo_concat]
+# PPM_Tax_Spezialized,PPM_MPPN,
 #Experiment MOdes
-if exp == "MV":
+if exp_mode == "MV":
   #All datasets with missing values
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_const, EventLogs.BPIC_12_mode_event, EventLogs.BPIC_12_mode_case, \
   EventLogs.BPIC_12_W, EventLogs.BPIC_12_W_const, EventLogs.BPIC_12_W_mode_event, EventLogs.BPIC_12_W_mode_case, \
@@ -33,11 +33,11 @@ if exp == "MV":
   EventLogs.BPIC_13_CP, EventLogs.BPIC_13_CP_const, EventLogs.BPIC_13_CP_mode_event, EventLogs.BPIC_13_CP_mode_case,\
   EventLogs.Mobis, EventLogs.Mobis_const, EventLogs.Mobis_mode_event, EventLogs.Mobis_mode_case]
   save_dir = f"01_Missing-Values/{save_folder}"
-elif exp == "CI":
+elif exp_mode == "CI":
   #One with high imbalance & one with low
-  logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.Mobis,EventLogs.BPIC_15_5,EventLogs.Helpdesk]
+  logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.MobisEventLogs.BPIC_15_5,EventLogs.Helpdesk]
   save_dir = f"02_Class-Imbalance/{save_folder}"
-elif exp == "test":
+elif exp_mode == "test":
   logs=[EventLogs.Helpdesk]
   save_dir = f"{save_folder}"
   ppms=[PPM_Camargo_concat]

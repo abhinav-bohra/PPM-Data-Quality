@@ -8,7 +8,8 @@ __all__ = ['EventLogs', 'import_log', 'drop_long_traces', 'RandomTraceSplitter',
 import pandas as pd
 pd.set_option('display.max_columns', None)
 from .imports import *
-from imblearn.under_sampling import NearMiss 
+from imblearn.under_sampling import NearMiss
+from .prediction_evaluation import exp_mode
 import logging
 
 #Logging
@@ -422,7 +423,7 @@ def Balance(xs,ys):
 @delegates(TfmdDL)
 def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id',bs=64,**kwargs):
     ds=[]
-    for s in ppo.subsets(): #train dev and test sets
+    for s in ppo.subsets(): #train, dev and test sets
         wds,idx=windows(s.xs,s.event_ids)
         if not outcome: y=s.ys.iloc[idx]
         else: y=s.ys.groupby(s.items.index).transform('last').iloc[idx]
@@ -432,6 +433,7 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         xcats=tensor(wds[:,:len(s.cat_names)]).long() # torch.Size([312, 1, 64])
         xs=tuple([i.squeeze() for i in [xcats,xconts] if i.shape[1]>0])
         ys=tuple([ycats[:,i] for i in range(ycats.shape[1])])+tuple([yconts[:,i] for i in range(yconts.shape[1])])
+        
         # logger.debug("\n---S---")
         # logger.debug(s.iloc[0])
         
@@ -446,9 +448,12 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         # logger.debug(ycats.size())
         # logger.debug(s.ycont_names)
         # logger.debug(yconts.size())
-        
-        xs,ys = Balance(xs,ys)
-        ds.append(PPDset((*xs,ys)))
+        if exp_mode =="CI"
+          try:
+            xs,ys = Balance(xs,ys)
+          except Exception as E:
+            logger.debug(f"Exception Occurred while BALANCING DATASET: {E}")
+          ds.append(PPDset((*xs,ys)))
         
 
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)

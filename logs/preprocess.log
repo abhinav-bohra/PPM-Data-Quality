@@ -2,48 +2,111 @@
 --Pipeline Logging--
 --Baselines Logging--
 --MPPN Logging--
-
----X---
-['activity_0', 'activity_1', 'activity_2', 'activity_3', 'activity_4', 'activity_5', 'activity_6', 'activity_7', 'activity_8', 'activity_9', 'activity_10', 'activity_11', 'activity_12', 'activity_13', 'activity_14', 'activity_15', 'activity_16', 'activity_17', 'activity_18', 'activity_19', 'activity_20', 'activity_21', 'activity_22', 'activity_23', 'activity_24', 'activity_25', 'activity_26', 'activity_27', 'activity_28', 'activity_29', 'activity_30', 'activity_31', 'activity_32', 'activity_33']
-torch.Size([247, 34, 64])
-['timestamp_secSinceSunNoon', 'timestamp_secSinceNoon', 'timestamp_Relative_elapsed']
-torch.Size([247, 3, 64])
-
----Y---
-['activity']
-torch.Size([247, 1])
-['timestamp_Relative_elapsed']
-torch.Size([247, 1])
-Imbalance Ratio is 25
-Imbalance Ratio is 7
-35.0% reduction in size by undersampling wrt activity
-
----X---
-['activity_0', 'activity_1', 'activity_2', 'activity_3', 'activity_4', 'activity_5', 'activity_6', 'activity_7', 'activity_8', 'activity_9', 'activity_10', 'activity_11', 'activity_12', 'activity_13', 'activity_14', 'activity_15', 'activity_16', 'activity_17', 'activity_18', 'activity_19', 'activity_20', 'activity_21', 'activity_22', 'activity_23', 'activity_24', 'activity_25', 'activity_26', 'activity_27', 'activity_28', 'activity_29', 'activity_30', 'activity_31', 'activity_32', 'activity_33']
-torch.Size([13, 34, 64])
-['timestamp_secSinceSunNoon', 'timestamp_secSinceNoon', 'timestamp_Relative_elapsed']
-torch.Size([13, 3, 64])
-
----Y---
-['activity']
-torch.Size([13, 1])
-['timestamp_Relative_elapsed']
-torch.Size([13, 1])
-Imbalance Ratio is 3
-Imbalance Ratio is 1
+Imbalance Ratio is 28
+Imbalance Ratio is 8
 31.0% reduction in size by undersampling wrt activity
-
----X---
-['activity_0', 'activity_1', 'activity_2', 'activity_3', 'activity_4', 'activity_5', 'activity_6', 'activity_7', 'activity_8', 'activity_9', 'activity_10', 'activity_11', 'activity_12', 'activity_13', 'activity_14', 'activity_15', 'activity_16', 'activity_17', 'activity_18', 'activity_19', 'activity_20', 'activity_21', 'activity_22', 'activity_23', 'activity_24', 'activity_25', 'activity_26', 'activity_27', 'activity_28', 'activity_29', 'activity_30', 'activity_31', 'activity_32', 'activity_33']
-torch.Size([71, 34, 64])
-['timestamp_secSinceSunNoon', 'timestamp_secSinceNoon', 'timestamp_Relative_elapsed']
-torch.Size([71, 3, 64])
-
----Y---
-['activity']
-torch.Size([71, 1])
-['timestamp_Relative_elapsed']
-torch.Size([71, 1])
+Imbalance Ratio is 1
+Imbalance Ratio is 1
+0.0% reduction in size by undersampling wrt activity
 Imbalance Ratio is 7
 Imbalance Ratio is 3
 20.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 19
+Imbalance Ratio is 8
+33.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 1
+Imbalance Ratio is 1
+Exception Occurred while BALANCING DATASET: The target 'y' needs to have more than 1 class. Got 1 class instead
+Imbalance Ratio is 8
+Imbalance Ratio is 4
+39.0% reduction in size by undersampling wrt activity
+model_performance: (0.05263157933950424, 0.043478260869565216, 0.002288329519450801, 0.004347826086956522, None, None, None, None, None, None, None, None, 0.0, 0.0, 0.0, 0.0, 1.0303597450256348, 3.334916114807129, None, None)
+Imbalance Ratio is 28
+Imbalance Ratio is 8
+31.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 1
+Imbalance Ratio is 1
+0.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 7
+Imbalance Ratio is 3
+20.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 28
+Imbalance Ratio is 8
+31.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 1
+Imbalance Ratio is 1
+0.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 7
+Imbalance Ratio is 3
+20.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 37
+Imbalance Ratio is 10
+40.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 1
+Imbalance Ratio is 1
+Exception Occurred while BALANCING DATASET: The target 'y' needs to have more than 1 class. Got 1 class instead
+Imbalance Ratio is 18
+Imbalance Ratio is 6
+37.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 12
+Imbalance Ratio is 5
+28.000000000000004% reduction in size by undersampling wrt activity
+Imbalance Ratio is 1
+Imbalance Ratio is 1
+Exception Occurred while BALANCING DATASET: The target 'y' needs to have more than 1 class. Got 1 class instead
+Imbalance Ratio is 5
+Imbalance Ratio is 3
+24.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 19
+Imbalance Ratio is 8
+33.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 1
+Imbalance Ratio is 1
+Exception Occurred while BALANCING DATASET: The target 'y' needs to have more than 1 class. Got 1 class instead
+Imbalance Ratio is 8
+Imbalance Ratio is 4
+39.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 8
+Imbalance Ratio is 1
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+Imbalance Ratio is 1
+Imbalance Ratio is 1
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+Imbalance Ratio is 4
+Imbalance Ratio is 1
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+Imbalance Ratio is 29
+Imbalance Ratio is 10
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+Imbalance Ratio is 1
+Imbalance Ratio is 1
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+Imbalance Ratio is 5
+Imbalance Ratio is 3
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+model_performance: (0.07017543911933899, 0.05797101449275362, 0.005699177438307873, 0.010302457466918715, 0.2888889014720917, 0.14727272727272728, 0.1117857142857143, 0.12324561403508771, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.773491144180298, 4.132010459899902, None, None)
+Exception Occurred while BALANCING DATASET: 'tuple' object does not support item assignment
+Exception Occurred while BALANCING DATASET: 'tuple' object does not support item assignment
+Exception Occurred while BALANCING DATASET: 'tuple' object does not support item assignment
+Exception Occurred while BALANCING DATASET: 'tuple' object does not support item assignment
+Exception Occurred while BALANCING DATASET: 'tuple' object does not support item assignment
+Exception Occurred while BALANCING DATASET: 'tuple' object does not support item assignment
+model_performance: (0.15492957830429077, 0.12723614413755258, 0.0382374402819655, 0.05230245613805283, 0.28169015049934387, 0.27318868163938587, 0.2317541613316261, 0.24499516833850707, 0.11267605423927307, 0.39906103286384975, 0.10328638497652581, 0.10783676417479235, 0.8873239159584045, 0.4507042253521127, 0.44366197183098594, 0.4471553731839858, 3.8178091049194336, 2.3589794635772705, None, None)
+Imbalance Ratio is 26
+Imbalance Ratio is 7
+33.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 2
+Imbalance Ratio is 1
+17.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 7
+Imbalance Ratio is 3
+20.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 12
+Imbalance Ratio is 6
+32.0% reduction in size by undersampling wrt activity
+Imbalance Ratio is 1
+Imbalance Ratio is 1
+Exception Occurred while BALANCING DATASET: The target 'y' needs to have more than 1 class. Got 1 class instead
+Imbalance Ratio is 8
+Imbalance Ratio is 4
+39.0% reduction in size by undersampling wrt activity
