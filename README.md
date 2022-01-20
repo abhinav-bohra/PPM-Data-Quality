@@ -21,16 +21,16 @@ pip install -r requirements.txt
 ```
 export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
 
-!python prediction_evaluation.py --exp CI --balancing_technique NM --save_folder results 
+!python prediction_evaluation.py --exp MV --save_folder results 
 ```
 
 ### Class Imbalance
 ```
 export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
 
-!python prediction_evaluation.py --exp MV --save_folder results 
+!python prediction_evaluation.py --exp CI --balancing_technique NM --save_folder results 
 ```
-
+<br>
 --exp : Experiment Mode
 - MV for Missing Values
 - CI for Class Imbalance
