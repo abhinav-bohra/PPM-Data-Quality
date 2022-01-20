@@ -3,18 +3,14 @@
 --Baselines Logging--
 --MPPN Logging--
 
----S---
-
 ---X---
 ['activity', 'resource']
-torch.Size([153409, 2, 64])
+torch.Size([154809, 2, 64])
 ['AMOUNT_REQ', 'timestamp_Relative_elapsed']
-torch.Size([153409, 2, 64])
+torch.Size([154809, 2, 64])
 
 ---Y---
 ['activity']
-torch.Size([153409, 1])
+torch.Size([154809, 1])
 []
-torch.Size([153409, 0])
-
----XS & YS ---
+torch.Size([154809, 0])

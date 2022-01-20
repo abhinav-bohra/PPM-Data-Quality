@@ -402,7 +402,11 @@ def getStrategy(my_list):
     return freq
 
 def Balance(xs,ys):
-  x = torch.cat((xs[0],torch.unsqueeze(xs[1], dim=1)), dim=1)
+  if len(xs[0].size()) ==2:
+    xs[0]= torch.unsqueeze(xs[0], dim=1)
+  if len(xs[1].size()) ==2:
+    xs[1]= torch.unsqueeze(xs[1], dim=1)
+  x = torch.cat((xs[0],xs[1]), dim=1)
   x = list(torch.flatten(x, start_dim=1).numpy())
   y = list(ys[0].numpy())
   nm = NearMiss(n_neighbors =1,sampling_strategy=getStrategy(y))
@@ -428,7 +432,6 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         xcats=tensor(wds[:,:len(s.cat_names)]).long() # torch.Size([312, 1, 64])
         xs=tuple([i.squeeze() for i in [xcats,xconts] if i.shape[1]>0])
         ys=tuple([ycats[:,i] for i in range(ycats.shape[1])])+tuple([yconts[:,i] for i in range(yconts.shape[1])])
-        
         # logger.debug("\n---S---")
         # logger.debug(s.iloc[0])
         
@@ -444,6 +447,7 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         logger.debug(s.ycont_names)
         logger.debug(yconts.size())
         
+        xs,ys = Balance(xs,ys)
         ds.append(PPDset((*xs,ys)))
         
 
