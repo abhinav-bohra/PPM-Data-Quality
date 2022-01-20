@@ -386,14 +386,14 @@ class PPDset(torch.utils.data.Dataset):
 #   return X,y
 # from imblearn.under_sampling import NearMiss 
 def CountFrequency(my_list):
-     
+    logger.debug("--------------------------------")
+    avg = len(set(my_list)/len(my_list)
     # Creating an empty dictionary
     freq = {}
     for items in my_list:
         freq[items] = my_list.count(items)
-     
-    for key, value in freq.items():
-        logger.debug ("% d : % d"%(key, value))
+    logger.debug(freq)
+    return freq, avg
 
 def Balance(xs,ys):#pass xs, ys
   x = torch.cat((xs[0],torch.unsqueeze(xs[1], dim=1)), dim=1)
@@ -402,10 +402,13 @@ def Balance(xs,ys):#pass xs, ys
   logger.debug(y)
   logger.debug(len(set(y)))
   logger.debug(len((y)))
-  CountFrequency(y)
-  # logger.debug(f"{round((len(set(y))/len(y))*100,2)} % are unique labels" )
-  nm = NearMiss(sampling_strategy={1:500})
+  counts, avg = CountFrequency(y)
+  for key in counts:
+    if counts[key] > avg:
+      counts[key]=avg
+  nm = NearMiss(sampling_strategy=counts)
   x_res, y_res = nm.fit_resample(x, y)
+  counts_res, avg_res = CountFrequency(y_res)
   indices = torch.tensor(nm.sample_indices_)
   xs_under = tuple([torch.index_select(xs[0], 0, indices),torch.index_select(xs[1], 0, indices)])
   ys_under = tuple([torch.index_select(ys[0], 0, indices),torch.index_select(ys[1], 0, indices),torch.index_select(ys[2], 0, indices)])
