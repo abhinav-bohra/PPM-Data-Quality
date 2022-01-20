@@ -28,7 +28,7 @@ export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
 - CI for Class Imbalance
 - test for Testing
 
---exp : Balancing Technique
+--balancing_technique : Balancing Technique
 - NM for Near Miss
 - CONN for Condensed Nearest Neighbour
 - NCR for Neighbourhood Cleaning Rule
