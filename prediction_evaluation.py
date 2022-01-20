@@ -24,7 +24,8 @@ gpu_id = args.gpu
 save_dir = f"{save_folder}"
 ppms=[PPM_Camargo_concat]
 # PPM_Tax_Spezialized,PPM_MPPN,
-#Experiment MOdes
+
+#Experiment Modes
 if exp_mode == "MV":
   #All datasets with missing values
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_const, EventLogs.BPIC_12_mode_event, EventLogs.BPIC_12_mode_case, \
@@ -37,6 +38,7 @@ elif exp_mode == "CI":
   #One with high imbalance & one with low
   logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.MobisEventLogs.BPIC_15_5,EventLogs.Helpdesk]
   save_dir = f"02_Class-Imbalance/{save_folder}"
+  ci_flag=True
 elif exp_mode == "test":
   logs=[EventLogs.Helpdesk]
   save_dir = f"{save_folder}"

@@ -9,8 +9,8 @@ import pandas as pd
 pd.set_option('display.max_columns', None)
 from .imports import *
 from imblearn.under_sampling import NearMiss
-from .prediction_evaluation import exp_mode
 import logging
+ci_flag = False
 
 #Logging
 logging.basicConfig(filename="logs/preprocess.log",format='',filemode='w')
@@ -448,12 +448,14 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         # logger.debug(ycats.size())
         # logger.debug(s.ycont_names)
         # logger.debug(yconts.size())
-        if exp_mode =="CI"
+
+        if ci_flag:
           try:
             xs,ys = Balance(xs,ys)
           except Exception as E:
             logger.debug(f"Exception Occurred while BALANCING DATASET: {E}")
-          ds.append(PPDset((*xs,ys)))
+          
+        ds.append(PPDset((*xs,ys)))
         
 
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)

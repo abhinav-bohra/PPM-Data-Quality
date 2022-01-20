@@ -186,7 +186,7 @@ def _store_path(save_dir,results_dir=Path('./')):
 
 # Cell
 @delegates(PPModel)
-def runner(dataset_urls,ppm_classes,save_dir,ci_mode,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
+def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
            **kwargs):
     store_path= _store_path(save_dir) if store else None
     '''
@@ -204,7 +204,7 @@ def runner(dataset_urls,ppm_classes,save_dir,ci_mode,store=True,runs=1,sample=Fa
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
-            log = log[:500]
+            log = log[:1000]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             if store:
