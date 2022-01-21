@@ -473,7 +473,7 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
           logger.debug(xs[i].size())
         if ci_flag:
           try:
-            # logger.debug("Balancing Dataset...")
+            logger.debug("Balancing Dataset...")
             xs,ys = Balance(xs,ys)
           except Exception as E:
             logger.debug(f"\nException Occurred while BALANCING DATASET: {E}\n")

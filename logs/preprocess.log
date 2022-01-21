@@ -4,78 +4,44 @@
 --MPPN Logging--
 
 --BEFORE--
-torch.Size([289, 2, 64])
-torch.Size([289, 64])
-
----Applying Near Miss---
-Imbalance Ratio is 29
-Imbalance Ratio is 14
-45.0% reduction in size by undersampling wrt activity
+torch.Size([12036, 2, 64])
+torch.Size([12036, 64])
 --AFTER--
-torch.Size([160, 2, 64])
-torch.Size([160, 64])
+torch.Size([12036, 2, 64])
+torch.Size([12036, 64])
 
 --BEFORE--
-torch.Size([28, 2, 64])
-torch.Size([28, 64])
-
----Applying Near Miss---
-Imbalance Ratio is 3
-Imbalance Ratio is 2
-14.000000000000002% reduction in size by undersampling wrt activity
+torch.Size([1372, 2, 64])
+torch.Size([1372, 64])
 --AFTER--
-torch.Size([24, 2, 64])
-torch.Size([24, 64])
+torch.Size([1372, 2, 64])
+torch.Size([1372, 64])
 
 --BEFORE--
-torch.Size([74, 2, 64])
-torch.Size([74, 64])
-
----Applying Near Miss---
-Imbalance Ratio is 21
-Imbalance Ratio is 10
-43.0% reduction in size by undersampling wrt activity
+torch.Size([3360, 2, 64])
+torch.Size([3360, 64])
 --AFTER--
-torch.Size([42, 2, 64])
-torch.Size([42, 64])
+torch.Size([3360, 2, 64])
+torch.Size([3360, 64])
 
 --BEFORE--
-torch.Size([289, 2, 64])
-torch.Size([289, 64])
-
----Applying Near Miss---
-Imbalance Ratio is 1
-Imbalance Ratio is 1
-
-Exception Occurred while BALANCING DATASET: The target 'y' needs to have more than 1 class. Got 1 class instead
-
+torch.Size([12036, 2, 64])
+torch.Size([12036, 64])
 --AFTER--
-torch.Size([289, 2, 64])
-torch.Size([289, 64])
+torch.Size([12036, 2, 64])
+torch.Size([12036, 64])
 
 --BEFORE--
-torch.Size([28, 2, 64])
-torch.Size([28, 64])
-
----Applying Near Miss---
-Imbalance Ratio is 1
-Imbalance Ratio is 1
-
-Exception Occurred while BALANCING DATASET: The target 'y' needs to have more than 1 class. Got 1 class instead
-
+torch.Size([1372, 2, 64])
+torch.Size([1372, 64])
 --AFTER--
-torch.Size([28, 2, 64])
-torch.Size([28, 64])
+torch.Size([1372, 2, 64])
+torch.Size([1372, 64])
 
 --BEFORE--
-torch.Size([74, 2, 64])
-torch.Size([74, 64])
-
----Applying Near Miss---
-Imbalance Ratio is 14
-Imbalance Ratio is 7
-43.0% reduction in size by undersampling wrt activity
+torch.Size([3360, 2, 64])
+torch.Size([3360, 64])
 --AFTER--
-torch.Size([42, 2, 64])
-torch.Size([42, 64])
-model_performance: (0.4523809552192688, 0.2714285714285714, 0.13873626373626374, 0.1813186813186813, 0.0714285746216774, 0.07142857142857142, 0.00510204081632653, 0.009523809523809523, 0.7142857313156128, 0.25, 0.17857142857142858, 0.20833333333333334, 0.8809523582458496, 0.5, 0.44047619047619047, 0.4683544303797468, 9.27964973449707, 8.590888023376465, None, None)
+torch.Size([3360, 2, 64])
+torch.Size([3360, 64])
+model_performance: (0.7875000238418579, 0.5023775134844946, 0.4451547451392186, 0.46866925801051285, 0.43244048953056335, 0.16712824458815803, 0.08967234219003978, 0.11073443269001915, 0.8107143044471741, 0.46349206349206346, 0.37700892857142865, 0.4144959229066631, 0.9940476417541504, 0.9523809523809523, 0.9494047619047619, 0.9508397691868075, 7.621997833251953, 6.760105609893799, None, None)

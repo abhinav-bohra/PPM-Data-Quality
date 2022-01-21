@@ -22,11 +22,13 @@ args = parser.parse_args()
 exp_mode = args.exp
 save_folder = args.save_folder 
 gpu_id = args.gpu
+if exp_mode == "CI" :
 balancing_technique = args.balancing_technique
+else:
+  balancing_technique = None
 
 save_dir = f"{save_folder}"
-ppms=[PPM_Camargo_concat]
-# PPM_Tax_Spezialized,PPM_MPPN,
+ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
 #Experiment Modes
 if exp_mode == "MV":
@@ -38,9 +40,7 @@ if exp_mode == "MV":
   EventLogs.Mobis, EventLogs.Mobis_const, EventLogs.Mobis_mode_event, EventLogs.Mobis_mode_case]
   save_dir = f"01_Missing-Values/{save_folder}"
 elif exp_mode == "CI":
-  # logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.BPIC_15_5,EventLogs.Mobis,EventLogs.Helpdesk]
-  logs=[EventLogs.Helpdesk]
-  ppms=[PPM_Camargo_concat]
+  logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.BPIC_15_5,EventLogs.Mobis,EventLogs.Helpdesk]
   save_dir = f"02_Class-Imbalance/{save_folder}"
   import mppn.preprocessing as mp
   mp.ci_flag = True
