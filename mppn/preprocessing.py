@@ -390,16 +390,16 @@ def getStrategy(my_list):
         freq[items] = my_list.count(items)
 
     ir = round(max(freq.values())/min(freq.values()))
-    # logger.debug(f"Imbalance Ratio is {ir}")
+    logger.debug(f"Imbalance Ratio is {ir}")
     for key in freq:
       if freq[key] > avg:
         freq[key]=avg
 
     ir = round(max(freq.values())/min(freq.values()))
-    # logger.debug(f"Imbalance Ratio is {ir}")
+    logger.debug(f"Imbalance Ratio is {ir}")
     return freq
 
-def getBalanceData(func,xs,ys):
+def getBalancedData(func,xs,ys):
   x = list(xs)
   for i in range(len(xs)):
     if len(xs[i].size())==2:
@@ -423,19 +423,19 @@ def getBalanceData(func,xs,ys):
 def Balance(xs,ys):
   y_labels = list(ys[0].numpy())
   if balancing_technique == "NM":
-    logger.debug("---Applying NearMiss---")
+    logger.debug("\n---Applying Near Miss---")
     nm = NearMiss(n_neighbors=1,sampling_strategy=getStrategy(y_labels))
-    return getBalanceData(nm,xs,ys)
+    return getBalancedData(nm,xs,ys)
   elif balancing_technique == "CONN":
-    logger.debug("---Applying COndensedNearestNeighbour---")
+    logger.debug("\n---Applying COndensed Nearest Neighbour---")
     conn = CondensedNearestNeighbour()
-    return getBalanceData(conn,xs,ys)
+    return getBalancedData(conn,xs,ys)
   elif balancing_technique == "NCR":
-    logger.debug("---Applying NeighbourhoodCleaningRule ---")
+    logger.debug("\n---Applying Neighbourhood Cleaning Rule ---")
     ncr = NeighbourhoodCleaningRule()
-    return getBalanceData(ncr,xs,ys)
+    return getBalancedData(ncr,xs,ys)
   else:
-    logger.debug("---Invalid Balancing Technique---")
+    logger.debug("\n---Invalid Balancing Technique---")
   return xs,ys
 
 # Cell

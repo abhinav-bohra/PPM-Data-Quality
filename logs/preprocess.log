@@ -2,51 +2,76 @@
 --Pipeline Logging--
 --Baselines Logging--
 --MPPN Logging--
+
 --BEFORE--
-torch.Size([1137, 2, 64])
-torch.Size([1137, 64])
----Applying NearMiss---
-36.0% reduction in size by undersampling wrt activity
+torch.Size([12035, 2, 64])
+torch.Size([12035, 64])
+
+---Applying Near Miss---
+Imbalance Ratio is 3578
+Imbalance Ratio is 925
+65.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([722, 2, 64])
-torch.Size([722, 64])
+torch.Size([4220, 2, 64])
+torch.Size([4220, 64])
+
 --BEFORE--
-torch.Size([140, 2, 64])
-torch.Size([140, 64])
----Applying NearMiss---
-34.0% reduction in size by undersampling wrt activity
+torch.Size([1373, 2, 64])
+torch.Size([1373, 64])
+
+---Applying Near Miss---
+Imbalance Ratio is 415
+Imbalance Ratio is 137
+56.99999999999999% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([93, 2, 64])
-torch.Size([93, 64])
+torch.Size([597, 2, 64])
+torch.Size([597, 64])
+
 --BEFORE--
-torch.Size([261, 2, 64])
-torch.Size([261, 64])
----Applying NearMiss---
-31.0% reduction in size by undersampling wrt activity
+torch.Size([3360, 2, 64])
+torch.Size([3360, 64])
+
+---Applying Near Miss---
+Imbalance Ratio is 338
+Imbalance Ratio is 124
+54.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([181, 2, 64])
-torch.Size([181, 64])
+torch.Size([1560, 2, 64])
+torch.Size([1560, 64])
+
 --BEFORE--
-torch.Size([1137, 2, 64])
-torch.Size([1137, 64])
----Applying NearMiss---
-36.0% reduction in size by undersampling wrt activity
+torch.Size([12035, 2, 64])
+torch.Size([12035, 64])
+
+---Applying Near Miss---
+Imbalance Ratio is 3992
+Imbalance Ratio is 668
+83.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([724, 2, 64])
-torch.Size([724, 64])
+torch.Size([2065, 2, 64])
+torch.Size([2065, 64])
+
 --BEFORE--
-torch.Size([140, 2, 64])
-torch.Size([140, 64])
----Applying NearMiss---
-33.0% reduction in size by undersampling wrt activity
+torch.Size([1373, 2, 64])
+torch.Size([1373, 64])
+
+---Applying Near Miss---
+Imbalance Ratio is 680
+Imbalance Ratio is 228
+66.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([94, 2, 64])
-torch.Size([94, 64])
+torch.Size([470, 2, 64])
+torch.Size([470, 64])
+
 --BEFORE--
-torch.Size([261, 2, 64])
-torch.Size([261, 64])
----Applying NearMiss---
-41.0% reduction in size by undersampling wrt activity
+torch.Size([3360, 2, 64])
+torch.Size([3360, 64])
+
+---Applying Near Miss---
+Imbalance Ratio is 1670
+Imbalance Ratio is 420
+74.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([155, 2, 64])
-torch.Size([155, 64])
+torch.Size([860, 2, 64])
+torch.Size([860, 64])
+model_performance: (0.6262820363044739, 0.4940694226408512, 0.49452991452991457, 0.4920918692864281, 0.2102564126253128, 0.07469668508130047, 0.02009986096524558, 0.02907746787803535, 0.7383720874786377, 0.4546511627906976, 0.3428294573643411, 0.3868417656834761, 0.9767441749572754, 0.9755813953488373, 0.9697674418604652, 0.9710594315245478, 7.179359436035156, 7.10527229309082, None, None)

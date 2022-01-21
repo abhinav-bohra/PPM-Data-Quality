@@ -13,7 +13,6 @@ requirements.txt
 settings.ini
 setup.py
 01_Missing-Values/fill_missing_values.py
-01_Missing-Values/test/run0_BPIC12_splits.pickle
 02_Class-Imbalance/eda.py
 02_Class-Imbalance/imbalance_degree.py
 02_Class-Imbalance/results_old/No Technique/run0_BPIC15_5_splits.pickle
@@ -78,12 +77,7 @@ setup.py
 02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_resource_prediction.pth
 02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_step_prediction.pth
 02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/outcome_prediction.pth
-02_Class-Imbalance/test/run0_BPIC15_5_splits.pickle
-02_Class-Imbalance/test/run0_Helpdesk_splits.pickle
-02_Class-Imbalance/test/run_0_results.csv
-02_Class-Imbalance/test/models/run0/BPIC15_5/Camargo_concat/setup.pth
-02_Class-Imbalance/test/models/run0/Helpdesk/Camargo_concat/_tmp.pth
-02_Class-Imbalance/test/models/run0/Helpdesk/Camargo_concat/setup.pth
+__pycache__/prediction_evaluation.cpython-37.pyc
 dist/mppn-0.0.1-py3.7.egg
 event_logs/BPIC12.csv
 event_logs/BPIC12_A.csv
@@ -144,5 +138,3 @@ mppn/results/run_6_results.csv
 mppn/results/run_7_results.csv
 mppn/results/run_8_results.csv
 mppn/results/run_9_results.csv
-test/run0_Helpdesk_splits.pickle
-test/models/run0/Helpdesk/Camargo_concat/_tmp.pth
