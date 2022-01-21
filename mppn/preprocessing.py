@@ -435,7 +435,7 @@ def Balance(xs,ys):
     ncr = NeighbourhoodCleaningRule()
     return getBalancedData(ncr,xs,ys)
   else:
-    logger.debug("\n---Invalid Balancing Technique---")
+    logger.debug("\n---Balancing Technique: {balancing_technique}---")
   return xs,ys
 
 # Cell

@@ -23,9 +23,9 @@ exp_mode = args.exp
 save_folder = args.save_folder 
 gpu_id = args.gpu
 if exp_mode == "CI" :
-balancing_technique = args.balancing_technique
+  balancing_technique = args.balancing_technique
 else:
-  balancing_technique = None
+  balancing_technique = "None"
 
 save_dir = f"{save_folder}"
 ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
