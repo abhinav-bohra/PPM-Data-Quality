@@ -442,9 +442,7 @@ def Balance(xs,ys):
 @delegates(TfmdDL)
 def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id',bs=64,**kwargs):
     ds=[]
-    cnt=0
     for s in ppo.subsets(): #train, dev and test sets
-        cnt=cnt+1
         wds,idx=windows(s.xs,s.event_ids)
         if not outcome: y=s.ys.iloc[idx]
         else: y=s.ys.groupby(s.items.index).transform('last').iloc[idx]
@@ -483,15 +481,8 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         logger.debug("--AFTER--")
         for i in range(len(xs)):
           logger.debug(xs[i].size())
-
-        if(cnt==3):
-          with open('xs.pickle', 'wb') as f:
-            pickle.dump(xs, f)
-          with open('ys.pickle', 'wb') as f:
-            pickle.dump(ys, f)
             
         ds.append(PPDset((*xs,ys)))
         
-
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)
 PPObj.get_dls= get_dls
