@@ -11,7 +11,7 @@ dataset = "Helpdesk"
 # obj[0] -> Inputs,  obj[1] -> Preds,  obj[2] -> Targets (True Outputs)
 #--------------------------------------------------------------------------------------------
 
-obj = pd.read_pickle(r'data1.pickle')
+obj = pd.read_pickle(rf'test/models/run0/{dataset}/{model}/preds.pickle')
 x_input = obj[0] 
 case_len =[int(torch.count_nonzero(ele[0])) for ele in x_input[0]]
 num_cats = x_input[0].size(1)
@@ -44,7 +44,7 @@ results = list()
 for case in case_len_grps:
   case_len_df = groups.get_group(case)
   cr_act = classification_report(case_len_df['targ_act'], case_len_df['pred_act'], output_dict = True)
-  cr_res = classification_report(case_len_df['targ_act'], case_len_df['pred_act'], output_dict = True)
+  cr_res = classification_report(case_len_df['targ_res'], case_len_df['pred_res'], output_dict = True)
   results.append([case, cr_act['accuracy'], cr_act['macro avg']['precision'], cr_act['macro avg']['recall'], cr_act['macro avg']['f1-score'], cr_res['accuracy'], cr_res['macro avg']['precision'], cr_res['macro avg']['recall'], cr_res['macro avg']['f1-score']])
   
 df_results = pd.DataFrame(results, columns = ['Case Len','Activity Acc', 'Activity Pre', 'Activity Rec', 'Activity F1', 'Resource Acc', 'Resource Pre', 'Resource Rec', 'Resource F1'])
