@@ -1,0 +1,320 @@
+========================================================================= 
+Log Path: ./log/2022-01-27 18-25-43_file.log 
+Working Directory: /content/IBM-Data-Quality/03_Class-Overlap 
+User Name: root 
+R Version: 4.1.2 (2021-11-01) 
+Machine: d039b2549366 x86_64 
+Operating System: Linux 5.4.144+ #1 SMP Tue Dec 7 09:58:10 PST 2021 
+[1] "Base Packages: tools stats graphics grDevices utils datasets methods\n               base \nOther Packages: logr_1.2.8 ECoL_0.3.0 "
+Log Start Time: 2022-01-27 18:25:43 
+========================================================================= 
+
+---- Running check_overlap.r ---- 
+
+NOTE: Log Print Time:  2022-01-27 18:25:43 
+NOTE: Elapsed Time in seconds: 0.00439763069152832 
+
+[1] "[ERROR][ BPIC12_A.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:43 
+NOTE: Elapsed Time in seconds: 0.285642147064209 
+
+[1] "[ERROR][ BPIC12_A.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:43 
+NOTE: Elapsed Time in seconds: 0.00783586502075195 
+
+[1] "[ERROR][ BPIC12_const.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:44 
+NOTE: Elapsed Time in seconds: 1.13909029960632 
+
+[1] "[ERROR][ BPIC12_const.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:44 
+NOTE: Elapsed Time in seconds: 0.00907325744628906 
+
+[1] "[ERROR][ BPIC12_mode_case.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:45 
+NOTE: Elapsed Time in seconds: 1.01115942001343 
+
+[1] "[ERROR][ BPIC12_mode_case.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:45 
+NOTE: Elapsed Time in seconds: 0.00789785385131836 
+
+[1] "[ERROR][ BPIC12_mode_event.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:46 
+NOTE: Elapsed Time in seconds: 0.9911949634552 
+
+[1] "[ERROR][ BPIC12_mode_event.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:46 
+NOTE: Elapsed Time in seconds: 0.0142347812652588 
+
+[1] "[ERROR][ BPIC12_O.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:46 
+NOTE: Elapsed Time in seconds: 0.115185737609863 
+
+[1] "[ERROR][ BPIC12_O.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:46 
+NOTE: Elapsed Time in seconds: 0.00845932960510254 
+
+[1] "[ERROR][ BPIC12_W_const.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:47 
+NOTE: Elapsed Time in seconds: 0.600989818572998 
+
+[1] "[ERROR][ BPIC12_W_const.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:47 
+NOTE: Elapsed Time in seconds: 0.00804662704467773 
+
+[1] "[ERROR][ BPIC12_W_mode_case.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:47 
+NOTE: Elapsed Time in seconds: 0.631310701370239 
+
+[1] "[ERROR][ BPIC12_W_mode_case.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:47 
+NOTE: Elapsed Time in seconds: 0.00763249397277832 
+
+[1] "[ERROR][ BPIC12_W_mode_event.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:48 
+NOTE: Elapsed Time in seconds: 0.623890161514282 
+
+[1] "[ERROR][ BPIC12_W_mode_event.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:48 
+NOTE: Elapsed Time in seconds: 0.00853157043457031 
+
+[1] "[ERROR][ BPIC12_W.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:49 
+NOTE: Elapsed Time in seconds: 0.676347255706787 
+
+[1] "[ERROR][ BPIC12_W.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:49 
+NOTE: Elapsed Time in seconds: 0.00824737548828125 
+
+[1] "[ERROR][ BPIC12_Wc_const.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:49 
+NOTE: Elapsed Time in seconds: 0.268607616424561 
+
+[1] "[ERROR][ BPIC12_Wc_const.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:49 
+NOTE: Elapsed Time in seconds: 0.00788187980651855 
+
+[1] "[ERROR][ BPIC12_Wc_mode_case.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:49 
+NOTE: Elapsed Time in seconds: 0.256361722946167 
+
+[1] "[ERROR][ BPIC12_Wc_mode_case.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:49 
+NOTE: Elapsed Time in seconds: 0.00879383087158203 
+
+[1] "[ERROR][ BPIC12_Wc_mode_event.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:50 
+NOTE: Elapsed Time in seconds: 0.25166130065918 
+
+[1] "[ERROR][ BPIC12_Wc_mode_event.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:50 
+NOTE: Elapsed Time in seconds: 0.00487136840820312 
+
+[1] "[ERROR][ BPIC12_Wc.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:50 
+NOTE: Elapsed Time in seconds: 0.281346797943115 
+
+[1] "[ERROR][ BPIC12_Wc.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:50 
+NOTE: Elapsed Time in seconds: 0.0057837963104248 
+
+[1] "[ERROR][ BPIC12.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.897455930709839 
+
+[1] "[ERROR][ BPIC12.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.00645041465759277 
+
+[1] "[ERROR][ BPIC13_CP_const.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.041679859161377 
+
+[1] "[ERROR][ BPIC13_CP_const.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.00732183456420898 
+
+[1] "[ERROR][ BPIC13_CP_mode_case.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.040379524230957 
+
+[1] "[ERROR][ BPIC13_CP_mode_case.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.00745320320129395 
+
+[1] "[ERROR][ BPIC13_CP_mode_event.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.0627598762512207 
+
+[1] "[ERROR][ BPIC13_CP_mode_event.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.00855422019958496 
+
+[1] "[ERROR][ BPIC13_CP.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.0380294322967529 
+
+[1] "[ERROR][ BPIC13_CP.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.00954675674438477 
+
+[1] "[ERROR][ BPIC15_1.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.0647051334381104 
+
+[1] "[ERROR][ BPIC15_1.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.0072474479675293 
+
+[1] "[ERROR][ BPIC15_2.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.0549874305725098 
+
+[1] "[ERROR][ BPIC15_2.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.00936150550842285 
+
+[1] "[ERROR][ BPIC15_3.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.076596736907959 
+
+[1] "[ERROR][ BPIC15_3.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.00814342498779297 
+
+[1] "[ERROR][ BPIC15_4.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.102299213409424 
+
+[1] "[ERROR][ BPIC15_4.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.00494790077209473 
+
+[1] "[ERROR][ BPIC15_5.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.0789499282836914 
+
+[1] "[ERROR][ BPIC15_5.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:51 
+NOTE: Elapsed Time in seconds: 0.0125453472137451 
+
+[1] "[ERROR][ BPIC17_O.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:53 
+NOTE: Elapsed Time in seconds: 1.76846241950989 
+
+[1] "[ERROR][ BPIC17_O.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:53 
+NOTE: Elapsed Time in seconds: 0.00772190093994141 
+
+[1] "[ERROR][ BPIC20_RFP.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:53 
+NOTE: Elapsed Time in seconds: 0.237228393554688 
+
+[1] "[ERROR][ BPIC20_RFP.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:53 
+NOTE: Elapsed Time in seconds: 0.00906205177307129 
+
+[1] "[ERROR][ Helpdesk.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:53 
+NOTE: Elapsed Time in seconds: 0.055340051651001 
+
+[1] "[ERROR][ Helpdesk.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:53 
+NOTE: Elapsed Time in seconds: 0.0115597248077393 
+
+[1] "[ERROR][ Mobis_const.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:54 
+NOTE: Elapsed Time in seconds: 0.656329154968262 
+
+[1] "[ERROR][ Mobis_const.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:54 
+NOTE: Elapsed Time in seconds: 0.00502419471740723 
+
+[1] "[ERROR][ Mobis_mode_case.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:55 
+NOTE: Elapsed Time in seconds: 0.579522132873535 
+
+[1] "[ERROR][ Mobis_mode_case.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:55 
+NOTE: Elapsed Time in seconds: 0.00687527656555176 
+
+[1] "[ERROR][ Mobis_mode_event.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:55 
+NOTE: Elapsed Time in seconds: 0.462654590606689 
+
+[1] "[ERROR][ Mobis_mode_event.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:55 
+NOTE: Elapsed Time in seconds: 0.00906014442443848 
+
+[1] "[ERROR][ Mobis.csv ][ACTIVITY]:  Error in featurebased(activity ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:56 
+NOTE: Elapsed Time in seconds: 0.474862575531006 
+
+[1] "[ERROR][ Mobis.csv ][RESOURCE]:  Error in featurebased(resource ~ ., data): could not find function \"featurebased\"\n"
+
+NOTE: Log Print Time:  2022-01-27 18:25:56 
+NOTE: Elapsed Time in seconds: 0.0082700252532959 
+
+========================================================================= 
+Log End Time: 2022-01-27 18:25:56 
+Log Elapsed Time: 0 00:00:13 
+========================================================================= 
