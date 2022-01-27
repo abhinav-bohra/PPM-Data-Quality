@@ -4,6 +4,8 @@ import pandas as pd
 warnings.filterwarnings('ignore')
 from sklearn.metrics import classification_report
 
+model = "Camargo_concat"
+dataset = "Helpdesk"
 #--------------------------------------------------------------------------------------------
 # Get Ground Truth and Predictions
 # obj[0] -> Inputs,  obj[1] -> Preds,  obj[2] -> Targets (True Outputs)
@@ -46,4 +48,4 @@ for case in case_len_grps:
   results.append([case, cr_act['accuracy'], cr_act['macro avg']['precision'], cr_act['macro avg']['recall'], cr_act['macro avg']['f1-score'], cr_res['accuracy'], cr_res['macro avg']['precision'], cr_res['macro avg']['recall'], cr_res['macro avg']['f1-score']])
   
 df_results = pd.DataFrame(results, columns = ['Case Len','Activity Acc', 'Activity Pre', 'Activity Rec', 'Activity F1', 'Resource Acc', 'Resource Pre', 'Resource Rec', 'Resource F1'])
-df_results.to_csv(f'case_eval.csv',index=False)
+df_results.to_csv(f"test/models/run0/{dataset}/{model}/case_eval.csv",index=False)

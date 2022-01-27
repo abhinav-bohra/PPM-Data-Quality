@@ -71,19 +71,18 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
       SaveModelCallback(fname=model_name)
       ]
     learn=Learner(dls, m, path=store_path, model_dir=model_dir, loss_func=loss ,metrics=metrics,cbs=cbs)
-    logger.debug(store_path)
             
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
         data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
-        with open('data.pickle', 'wb') as f:
+        with open(f'{store_path}/preds.pickle', 'wb') as f:
             pickle.dump(data, f)
         return learn.validate(dl=dls[2])[output_index]
     else:
         with HideOutput(),learn.no_bar():
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
             data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
-            with open('data.pickle', 'wb') as f:
+            with open(f'{store_path}/preds.pickle', 'wb') as f:
                 pickle.dump(data, f)
             return learn.validate(dl=dls[2])[output_index]
 
