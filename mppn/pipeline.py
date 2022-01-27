@@ -79,7 +79,7 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
         with HideOutput(),learn.no_bar():
             import pickle
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
-            data =tuple((learn.get_preds(dl=dls[2], with_input=True, with_decoded=True)))
+            data =tuple((learn.get_preds(dl=dls[2], with_input=True)))
             with open('data1.pickle', 'wb') as f:
                 pickle.dump(data, f)
             # logger.debug(preds)
