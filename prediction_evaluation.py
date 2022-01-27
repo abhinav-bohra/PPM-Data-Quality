@@ -22,11 +22,13 @@ args = parser.parse_args()
 exp_mode = args.exp
 save_folder = args.save_folder 
 gpu_id = args.gpu
-balancing_technique = args.balancing_technique
+if exp_mode == "CI" :
+  balancing_technique = args.balancing_technique
+else:
+  balancing_technique = "None"
 
 save_dir = f"{save_folder}"
-ppms=[PPM_Camargo_concat]
-# PPM_Tax_Spezialized,PPM_MPPN,
+ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
 #Experiment Modes
 if exp_mode == "MV":
@@ -80,7 +82,7 @@ if not isnotebook():
         ppm_sel=L(ppms)[ppm_idx]
         
         runner(log_sel,ppm_sel,attr_dict=attr_dict, sample=sample,store=store,epoch=epoch,tqdm=tqdm_console,
-               print_output=print_output,bs=bs,patience=patience,min_delta=min_delta,runs=runs,save_dir=save_dir)
+               print_output=print_output,bs=bs,patience=patience,min_delta=min_delta,runs=runs,save_dir=save_dir,balancing_technique=balancing_technique)
 
     if __name__ == '__main__':
         fire.Fire(command_line)

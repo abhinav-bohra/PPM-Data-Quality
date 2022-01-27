@@ -165,7 +165,7 @@ class Performance_Statistic():
     'Creates a results dataframe, that shows the performance of all models on all datasets on all tasks.'
     def __init__(self):
         self.df = pd.DataFrame(
-        columns=['Dataset', 'Model', 'Next Step Acc','Next Step Pre','Next Step Rec','Next Step F1',\
+        columns=['Dataset', 'Model', 'Balancing Technique', 'Next Step Acc','Next Step Pre','Next Step Rec','Next Step F1',\
          'Next Resource Acc','Next Resource Pre','Next Resource Rec','Next Resource F1', \
          'Last Resource Acc','Last Resource Pre','Last Resource Rec','Last Resource F1', \
          'Outcome Acc','Outcome Pre','Outcome Rec','Outcome F1', \
@@ -186,7 +186,7 @@ def _store_path(save_dir,results_dir=Path('./')):
 
 # Cell
 @delegates(PPModel)
-def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
+def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
            **kwargs):
     store_path= _store_path(save_dir) if store else None
     '''
@@ -204,7 +204,6 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
-            # log = log[:500]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             if store:
@@ -219,7 +218,7 @@ def runner(dataset_urls,ppm_classes,save_dir,store=True,runs=1,sample=False,vali
                 model=ppm_class(log,ds_name,splits,store=model_path,sample=sample,**kwargs)
                 model_performance = model.evaluate()
                 logger.debug(f"model_performance: {model_performance}")
-                model_performance = [ds_name, model.get_name(),*model_performance]
+                model_performance = [ds_name, model.get_name(),balancing_technique,*model_performance]
                 performance_statistic.update(model_performance)
                 [ds_name, model.get_name(),*model_performance]
 
