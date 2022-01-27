@@ -1,0 +1,196 @@
+=========================================================================
+Log Path: ./log/2022-01-27 19-23-56_file.log
+Program Path: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class_Overlap/check_overlap.r
+Working Directory: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class_Overlap
+User Name: abhin
+R Version: 4.1.2 (2021-11-01)
+Machine: ABHINAV-BOHRA-P x86-64
+Operating System: Windows 10 x64 build 22000
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.8 ECoL_0.4.2 
+Log Start Time: 2022-01-27 19:23:56
+=========================================================================
+
+---- Running check_overlap.r ----
+
+NOTE: Log Print Time:  2022-01-27 19:23:56
+NOTE: Elapsed Time in seconds: 0.0101690292358398
+
+[ERROR][ BPIC12.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:23:58
+NOTE: Elapsed Time in seconds: 1.884192943573
+
+[ERROR][ BPIC12_A.csv ][RESOURCE]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:01
+NOTE: Elapsed Time in seconds: 2.60596704483032
+
+[ERROR][ BPIC12_const.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:02
+NOTE: Elapsed Time in seconds: 1.80366897583008
+
+[ERROR][ BPIC12_mode_case.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:06
+NOTE: Elapsed Time in seconds: 3.44632506370544
+
+[ERROR][ BPIC12_mode_event.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:09
+NOTE: Elapsed Time in seconds: 3.66651487350464
+
+[ERROR][ BPIC12_O.csv ][RESOURCE]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:13
+NOTE: Elapsed Time in seconds: 3.48282217979431
+
+[ERROR][ BPIC12_Wc.csv ][RESOURCE]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:34
+NOTE: Elapsed Time in seconds: 20.6048798561096
+
+[ERROR][ BPIC12_Wc_const.csv ][RESOURCE]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:35
+NOTE: Elapsed Time in seconds: 1.4936511516571
+
+[ERROR][ BPIC12_Wc_mode_case.csv ][RESOURCE]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:37
+NOTE: Elapsed Time in seconds: 1.55203700065613
+
+[ERROR][ BPIC12_Wc_mode_event.csv ][RESOURCE]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:38
+NOTE: Elapsed Time in seconds: 1.22300696372986
+
+[ERROR][ BPIC15_1.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:48
+NOTE: Elapsed Time in seconds: 9.85430097579956
+
+[ERROR][ BPIC15_2.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:48
+NOTE: Elapsed Time in seconds: 0.229503870010376
+
+[ERROR][ BPIC15_3.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:48
+NOTE: Elapsed Time in seconds: 0.266356229782104
+
+[ERROR][ BPIC15_3.csv ][RESOURCE]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:48
+NOTE: Elapsed Time in seconds: 0.0103178024291992
+
+[ERROR][ BPIC15_4.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:48
+NOTE: Elapsed Time in seconds: 0.0926530361175537
+
+[ERROR][ BPIC15_5.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:49
+NOTE: Elapsed Time in seconds: 0.236966133117676
+
+[ERROR][ BPIC15_5.csv ][RESOURCE]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:49
+NOTE: Elapsed Time in seconds: 0.00949001312255859
+
+[ERROR][ BPIC17_O.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:51
+NOTE: Elapsed Time in seconds: 2.71036982536316
+
+[ERROR][ BPIC17_O.csv ][RESOURCE]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:51
+NOTE: Elapsed Time in seconds: 0.0121221542358398
+
+[ERROR][ Helpdesk.csv ][ACTIVITY]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:52
+NOTE: Elapsed Time in seconds: 1.05558490753174
+
+[ERROR][ Helpdesk.csv ][RESOURCE]:  Error in featurebased.default(modFrame[, -1, drop = FALSE], modFrame[, : number of examples in the minority class should be >= 2
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:52
+NOTE: Elapsed Time in seconds: 0.012347936630249
+
+[ERROR][ Mobis.csv ][ACTIVITY]:  Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]): contrasts can be applied only to factors with 2 or more levels
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:53
+NOTE: Elapsed Time in seconds: 1.02928018569946
+
+[ERROR][ Mobis.csv ][RESOURCE]:  Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]): contrasts can be applied only to factors with 2 or more levels
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:53
+NOTE: Elapsed Time in seconds: 0.0129959583282471
+
+[ERROR][ Mobis_const.csv ][ACTIVITY]:  Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]): contrasts can be applied only to factors with 2 or more levels
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:54
+NOTE: Elapsed Time in seconds: 0.765784025192261
+
+[ERROR][ Mobis_const.csv ][RESOURCE]:  Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]): contrasts can be applied only to factors with 2 or more levels
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:54
+NOTE: Elapsed Time in seconds: 0.0149369239807129
+
+[ERROR][ Mobis_mode_case.csv ][ACTIVITY]:  Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]): contrasts can be applied only to factors with 2 or more levels
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:55
+NOTE: Elapsed Time in seconds: 0.907301902770996
+
+[ERROR][ Mobis_mode_case.csv ][RESOURCE]:  Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]): contrasts can be applied only to factors with 2 or more levels
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:55
+NOTE: Elapsed Time in seconds: 0.012578010559082
+
+[ERROR][ Mobis_mode_event.csv ][ACTIVITY]:  Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]): contrasts can be applied only to factors with 2 or more levels
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:56
+NOTE: Elapsed Time in seconds: 0.870038986206055
+
+[ERROR][ Mobis_mode_event.csv ][RESOURCE]:  Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]): contrasts can be applied only to factors with 2 or more levels
+
+
+NOTE: Log Print Time:  2022-01-27 19:24:56
+NOTE: Elapsed Time in seconds: 0.0176939964294434
+
+=========================================================================
+Log End Time: 2022-01-27 19:24:56
+Log Elapsed Time: 0 00:00:59
+=========================================================================

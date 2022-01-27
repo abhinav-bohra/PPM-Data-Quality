@@ -1,0 +1,90 @@
+=========================================================================
+Log Path: ./log/2022-01-27 19-29-19_file.log
+Program Path: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class_Overlap/check_overlap.r
+Working Directory: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class_Overlap
+User Name: abhin
+R Version: 4.1.2 (2021-11-01)
+Machine: ABHINAV-BOHRA-P x86-64
+Operating System: Windows 10 x64 build 22000
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.8 ECoL_0.4.2 
+Log Start Time: 2022-01-27 19:29:19
+=========================================================================
+
+---- Running check_overlap.r ----
+
+NOTE: Log Print Time:  2022-01-27 19:29:19
+NOTE: Elapsed Time in seconds: 0.0112571716308594
+
+[ERROR][ BPIC12.csv ][ACTIVITY]:  Error: cannot allocate vector of size 394.8 Gb
+
+
+NOTE: Log Print Time:  2022-01-27 19:29:26
+NOTE: Elapsed Time in seconds: 6.71154689788818
+
+[ERROR][ BPIC12.csv ][RESOURCE]:  Error: cannot allocate vector of size 394.8 Gb
+
+
+NOTE: Log Print Time:  2022-01-27 19:29:31
+NOTE: Elapsed Time in seconds: 4.54801511764526
+
+[ERROR][ BPIC12_A.csv ][ACTIVITY]:  Error: cannot allocate vector of size 24.3 Gb
+
+
+NOTE: Log Print Time:  2022-01-27 19:29:32
+NOTE: Elapsed Time in seconds: 1.40979695320129
+
+[ERROR][ BPIC12_A.csv ][RESOURCE]:  Error: cannot allocate vector of size 24.3 Gb
+
+
+NOTE: Log Print Time:  2022-01-27 19:29:33
+NOTE: Elapsed Time in seconds: 1.13231897354126
+
+[ERROR][ BPIC12_const.csv ][ACTIVITY]:  Error: cannot allocate vector of size 458.9 Gb
+
+
+NOTE: Log Print Time:  2022-01-27 19:29:40
+NOTE: Elapsed Time in seconds: 6.56041598320007
+
+[ERROR][ BPIC12_const.csv ][RESOURCE]:  Error: cannot allocate vector of size 458.9 Gb
+
+
+NOTE: Log Print Time:  2022-01-27 19:29:45
+NOTE: Elapsed Time in seconds: 5.12439799308777
+
+[ERROR][ BPIC12_mode_case.csv ][ACTIVITY]:  Error: cannot allocate vector of size 458.9 Gb
+
+
+NOTE: Log Print Time:  2022-01-27 19:29:51
+NOTE: Elapsed Time in seconds: 6.68908309936523
+
+[ERROR][ BPIC12_mode_case.csv ][RESOURCE]:  Error: cannot allocate vector of size 458.9 Gb
+
+
+NOTE: Log Print Time:  2022-01-27 19:30:00
+NOTE: Elapsed Time in seconds: 8.85909485816956
+
+cannot allocate vector of size 458.9 Gb
+
+NOTE: Log Print Time:  2022-01-27 19:30:06
+NOTE: Elapsed Time in seconds: 5.52835297584534
+
+Error in data.frame(event_logs, activity_f1_mean, activity_f1_std, activity_f2_mean,  : 
+  arguments imply differing number of rows: 30, 4
+
+
+NOTE: Log Print Time:  2022-01-27 19:30:06
+NOTE: Elapsed Time in seconds: 0.0174171924591064
+
+Error in as.data.frame.default(x[[i]], optional = TRUE) : 
+  cannot coerce class '"function"' to a data.frame
+Calls: write.csv ... data.frame -> as.data.frame -> as.data.frame.default
+
+
+NOTE: Log Print Time:  2022-01-27 19:30:06
+NOTE: Elapsed Time in seconds: 0.0192499160766602
+
+=========================================================================
+Log End Time: 2022-01-27 19:30:06
+Log Elapsed Time: 0 00:00:46
+=========================================================================

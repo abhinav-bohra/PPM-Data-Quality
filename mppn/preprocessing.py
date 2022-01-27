@@ -390,13 +390,13 @@ def getStrategy(my_list):
         freq[items] = my_list.count(items)
 
     ir = round(max(freq.values())/min(freq.values()))
-    # logger.debug(f"Imbalance Ratio is {ir}")
+    logger.debug(f"Imbalance Ratio is {ir}")
     for key in freq:
       if freq[key] > avg:
         freq[key]=avg
 
     ir = round(max(freq.values())/min(freq.values()))
-    # logger.debug(f"Imbalance Ratio is {ir}")
+    logger.debug(f"Imbalance Ratio is {ir}")
     return freq
 
 def getBalanceData(func,xs,ys):
