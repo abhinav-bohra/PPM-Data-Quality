@@ -67,9 +67,10 @@ def save_features(obj, store_path):
   case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
   df.insert(0, "case_len", case_len, True)
 
+  store_path = str(store_path)
   model_name = store_path.split('/')[-2]
   ds_name = store_path.split('/')[-1]
-  df.to_csv(f'03_Class-Overlap/{model_name}_{ds_name}.csv', index=False)
+  df.to_csv(f'03_Class-Overlap/features/{model_name}_{ds_name}.csv', index=False)
   logger.debug(f"Features saved at - 03_Class-Overlap/{model_name}_{ds_name}.csv")
 
 # Cell
@@ -240,6 +241,7 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
+            log = log[:250]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             if store:

@@ -1,1 +1,49 @@
 --Preprocessing Logging--
+--Pipeline Logging--
+--Baselines Logging--
+--MPPN Logging--
+
+--BEFORE--
+torch.Size([138, 2, 64])
+torch.Size([138, 64])
+--AFTER--
+torch.Size([138, 2, 64])
+torch.Size([138, 64])
+
+--BEFORE--
+torch.Size([19, 2, 64])
+torch.Size([19, 64])
+--AFTER--
+torch.Size([19, 2, 64])
+torch.Size([19, 64])
+
+--BEFORE--
+torch.Size([38, 2, 64])
+torch.Size([38, 64])
+--AFTER--
+torch.Size([38, 2, 64])
+torch.Size([38, 64])
+Features saved at - 03_Class-Overlap/Helpdesk_Camargo_concat.csv
+
+--BEFORE--
+torch.Size([138, 2, 64])
+torch.Size([138, 64])
+--AFTER--
+torch.Size([138, 2, 64])
+torch.Size([138, 64])
+
+--BEFORE--
+torch.Size([19, 2, 64])
+torch.Size([19, 64])
+--AFTER--
+torch.Size([19, 2, 64])
+torch.Size([19, 64])
+
+--BEFORE--
+torch.Size([38, 2, 64])
+torch.Size([38, 64])
+--AFTER--
+torch.Size([38, 2, 64])
+torch.Size([38, 64])
+Features saved at - 03_Class-Overlap/Helpdesk_Camargo_concat.csv
+model_performance: (0.5789473652839661, 0.4, 0.23750000000000002, 0.2962962962962963, 0.2368421107530594, 0.1, 0.023684210526315787, 0.038297872340425525, 0.5, 0.5, 0.25, 0.3333333333333333, 1.0, 1.0, 1.0, 1.0, 11.146744728088379, 6.243957042694092, None, None)
