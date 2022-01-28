@@ -8,11 +8,13 @@
 06_nb_all_benchmark.ipynb
 README.md
 _Latex_export.ipynb
+data.pickle
 prediction_evaluation.py
 requirements.txt
 settings.ini
 setup.py
 01_Missing-Values/fill_missing_values.py
+02_Class-Imbalance/case_eval.py
 02_Class-Imbalance/eda.py
 02_Class-Imbalance/imbalance_degree.py
 02_Class-Imbalance/results_old/No Technique/run0_BPIC15_5_splits.pickle
@@ -79,6 +81,10 @@ setup.py
 02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/outcome_prediction.pth
 03_Class-Overlap/check_overlap.r
 03_Class-Overlap/class_overlap_scores.csv
+03_Class-Overlap/log/2022-01-27 18-22-07_file.log
+03_Class-Overlap/log/2022-01-27 18-22-59_file.log
+03_Class-Overlap/log/2022-01-27 18-23-36_file.log
+03_Class-Overlap/log/2022-01-27 18-25-43_file.log
 03_Class-Overlap/log/2022-01-27 19-21-24_file.log
 03_Class-Overlap/log/2022-01-27 19-22-32_file.log
 03_Class-Overlap/log/2022-01-27 19-23-56_file.log
@@ -145,3 +151,8 @@ mppn/results/run_6_results.csv
 mppn/results/run_7_results.csv
 mppn/results/run_8_results.csv
 mppn/results/run_9_results.csv
+test/run0_Helpdesk_splits.pickle
+test/run_0_results.csv
+test/models/run0/Helpdesk/Camargo_concat/case_eval.csv
+test/models/run0/Helpdesk/Camargo_concat/preds.pickle
+test/models/run0/Helpdesk/Camargo_concat/setup.pth

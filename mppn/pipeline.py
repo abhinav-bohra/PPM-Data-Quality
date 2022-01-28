@@ -77,6 +77,8 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
         data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
         with open(f'{store_path}/preds.pickle', 'wb') as f:
             pickle.dump(data, f)
+        with open(f'{store_path}/dls.pickle', 'wb') as g:
+            pickle.dump(dls, g)
         return learn.validate(dl=dls[2])[output_index]
     else:
         with HideOutput(),learn.no_bar():
@@ -84,6 +86,8 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
             data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
             with open(f'{store_path}/preds.pickle', 'wb') as f:
                 pickle.dump(data, f)
+            with open(f'{store_path}/dls.pickle', 'wb') as g:
+                pickle.dump(dls, g)
             return learn.validate(dl=dls[2])[output_index]
 
 # Cell
