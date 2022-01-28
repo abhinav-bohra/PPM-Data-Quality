@@ -130,7 +130,7 @@ def get_metrics(o,date_col='timestamp_Relative_elapsed'):
     return metrics
 
 # Cell
-def multi_loss_sum(o,p,y):
+def multi_loss_sum(o,p,y, reduction=None):
     p,y=listify(p),listify(y)
     len_cat,len_cont=len(o.ycat_names),len(o.ycont_names)
     cross_entropies=[F.cross_entropy(p[i],y[i]) for i in range(len_cat)]

@@ -77,6 +77,13 @@ setup.py
 02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_resource_prediction.pth
 02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_step_prediction.pth
 02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/outcome_prediction.pth
+03_Class-Overlap/check_overlap.r
+03_Class-Overlap/class_overlap_scores.csv
+03_Class-Overlap/log/2022-01-27 19-21-24_file.log
+03_Class-Overlap/log/2022-01-27 19-22-32_file.log
+03_Class-Overlap/log/2022-01-27 19-23-56_file.log
+03_Class-Overlap/log/2022-01-27 19-29-19_file.log
+03_Class-Overlap/log/2022-01-27 19-29-19_file.msg
 __pycache__/prediction_evaluation.cpython-37.pyc
 dist/mppn-0.0.1-py3.7.egg
 event_logs/BPIC12.csv

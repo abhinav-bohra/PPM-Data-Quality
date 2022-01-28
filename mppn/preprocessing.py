@@ -481,8 +481,8 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         logger.debug("--AFTER--")
         for i in range(len(xs)):
           logger.debug(xs[i].size())
+            
         ds.append(PPDset((*xs,ys)))
         
-
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)
 PPObj.get_dls= get_dls
