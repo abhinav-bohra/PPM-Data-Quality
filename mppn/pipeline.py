@@ -78,6 +78,9 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
     else:
         with HideOutput(),learn.no_bar(),learn.no_logging():
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
+            preds, targs = learn.get_preds(dl=dls[2], with_decoded=True)
+            logger.debug(preds)
+            logger.debug(targs)
             return learn.validate(dl=dls[2])[output_index]
 
 # Cell
