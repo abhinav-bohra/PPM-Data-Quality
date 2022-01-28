@@ -6,8 +6,8 @@ __all__ = ['RNNwEmbedding', 'HideOutput', 'training_loop', 'train_validate', 'PP
 # Cell
 from .imports import *
 from .preprocessing import *
-import pickle
-import logging
+import torch, pickle, logging
+import pandas as pd
 
 #Logging
 logging.basicConfig(filename="logs/pipeline.log",format='',filemode='w')
@@ -48,6 +48,30 @@ class HideOutput:
         sys.stdout.close()
         sys.stdout = self._original_stdout
 
+#Cell
+def save_features(obj, store_path):
+  train = obj[0].dataset
+  dev = obj[1].dataset
+  test = obj[2].dataset
+  ds = train + dev + test
+
+  features = list()
+  for row in ds:
+    x_cats = tuple([t for t in row[0]])
+    x_conts = tuple([row[1]])
+    new_row = (torch.cat(x_cats + x_conts)).cpu().detach().numpy()
+    features.append(new_row)
+
+  cols = [f"act_{i}" for i in range(0,64)] + [f"res_{i}" for i in range(0,64)] + [f"time_{i}" for i in range(0,64)]
+  df = pd.DataFrame(features, columns = cols)
+  case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
+  df.insert(0, "case_len", case_len, True)
+
+  model_name = store_path.split('/')[-2]
+  ds_name = store_path.split('/')[-1]
+  df.to_csv(f'03_Class-Overlap/{model_name}_{ds_name}.csv', index=False)
+  logger.debug(f"Features saved at - 03_Class-Overlap/{model_name}_{ds_name}.csv")
+
 # Cell
 def training_loop(learn,epoch,print_output,lr_find):
     '''
@@ -79,6 +103,7 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
             pickle.dump(data, f)
         with open(f'{store_path}/dls.pickle', 'wb') as g:
             pickle.dump(dls, g)
+        save_features(dls, store_path)
         return learn.validate(dl=dls[2])[output_index]
     else:
         with HideOutput(),learn.no_bar():
@@ -88,6 +113,7 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
                 pickle.dump(data, f)
             with open(f'{store_path}/dls.pickle', 'wb') as g:
                 pickle.dump(dls, g)
+            save_features(dls, store_path)
             return learn.validate(dl=dls[2])[output_index]
 
 # Cell
