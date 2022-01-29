@@ -2,6 +2,9 @@
 
 __all__ = ['logs', 'ppms', 'isnotebook', 'prepare_for_export', 'get_single_col_dfs']
 
+#------------------------------------------------------------------------------------------
+# Imports
+#------------------------------------------------------------------------------------------
 # Cell
 from mppn.imports import *
 from mppn.preprocessing import *
@@ -10,18 +13,23 @@ from mppn.baselines import *
 from mppn.mppn import *
 import argparse
 
-#Command Line Arguments
+#------------------------------------------------------------------------------------------
+# Command Line Arguments
+#------------------------------------------------------------------------------------------
 parser = argparse.ArgumentParser()
 parser.add_argument('--exp', default="MV",type=str, help='MV - Missing Values, CI - Class Imbalance')    
 parser.add_argument('--save_folder', default="MV",type=str, help='Folder for saving results')        
 parser.add_argument('--gpu', default="0",type=str, help='GPU Device number')    
 parser.add_argument('--balancing_technique', default="0",type=str, help='Can be one of [NM,CONN,NCR]')    
 
-#Args
+#------------------------------------------------------------------------------------------
+# Arguments and Global Variables
+#------------------------------------------------------------------------------------------
 args = parser.parse_args()
 exp_mode = args.exp
 save_folder = args.save_folder 
 gpu_id = args.gpu
+
 if exp_mode == "CI" :
   balancing_technique = args.balancing_technique
 else:
@@ -30,7 +38,10 @@ else:
 save_dir = f"{save_folder}"
 ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
-#Experiment Modes
+
+#------------------------------------------------------------------------------------------
+# Experiment Modes
+#------------------------------------------------------------------------------------------
 if exp_mode == "MV":
   #All datasets with missing values
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_const, EventLogs.BPIC_12_mode_event, EventLogs.BPIC_12_mode_case, \
@@ -55,10 +66,17 @@ else:
   EventLogs.BPIC_15_3, EventLogs.BPIC_15_4, EventLogs.BPIC_15_5, EventLogs. BPIC_17_OFFER, \
   EventLogs.BPIC_20_RFP, EventLogs.Helpdesk, EventLogs.Mobis]
 
-#Setting cuda device
+
+#------------------------------------------------------------------------------------------
+# Setting cuda device
+#------------------------------------------------------------------------------------------
 device = f'cuda:{gpu_id}' if torch.cuda.is_available() else 'cpu'
 print(device)
+
+
+#------------------------------------------------------------------------------------------
 # Cell
+#------------------------------------------------------------------------------------------
 import fire
 
 def isnotebook():
@@ -86,3 +104,7 @@ if not isnotebook():
 
     if __name__ == '__main__':
         fire.Fire(command_line)
+
+#------------------------------------------------------------------------------------------
+# End
+#------------------------------------------------------------------------------------------

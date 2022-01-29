@@ -4,4 +4,3 @@ from fastai.metrics import accuracy
 from fastai.learner import *
 from fastai.callback.all import *
 from math import sqrt
-

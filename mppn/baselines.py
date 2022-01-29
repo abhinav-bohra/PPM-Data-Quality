@@ -6,18 +6,21 @@ __all__ = ['maeDurDaysNormalize', 'maeDurDaysMinMax', 'AvgMetric', 'get_metrics'
            'Tax_et_al_shared', 'Tax_et_al_mixed', 'PPM_Tax_Spezialized', 'PPM_Tax_Shared', 'PPM_Tax_Mixed', 'MiDA',
            'PPM_MiDA', 'create_attr_dict', 'attr_list', 'attr_dict']
 
-# Cell
-import warnings
+
+#------------------------------------------------------------------------------------------
+# Imports
+#------------------------------------------------------------------------------------------
+import warnings, logging, sklearn
 warnings.filterwarnings("ignore")
 from .imports import *
 from .preprocessing import *
 from .pipeline import *
-import sklearn
 from fastai import *
 from fastai.text import *
-import logging
  
- #Logging
+#------------------------------------------------------------------------------------------
+# Logging
+#------------------------------------------------------------------------------------------
 logging.basicConfig(filename="logs/baselines.log",format='',filemode='w')
 logger = logging.getLogger() 
 logger.setLevel(logging.DEBUG)
@@ -130,7 +133,7 @@ def get_metrics(o,date_col='timestamp_Relative_elapsed'):
     return metrics
 
 # Cell
-def multi_loss_sum(o,p,y):
+def multi_loss_sum(o,p,y, reduction=None):
     p,y=listify(p),listify(y)
     len_cat,len_cont=len(o.ycat_names),len(o.ycont_names)
     cross_entropies=[F.cross_entropy(p[i],y[i]) for i in range(len_cat)]
@@ -223,7 +226,6 @@ class Camargo_concat(torch.nn.Module) :
 # Cell
 class Camargo_fullconcat(torch.nn.Module) :
 
-
     def __init__(self, o  ) :
         super().__init__()
 
@@ -298,7 +300,6 @@ class PPM_Camargo_Spezialized(PPModel):
         self.op_rec,self.lrp_rec,self.op_f1,self.lrp_f1,self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
                                                    output_index=[1,2,3,4,5,6,7,8,9])
         
-
     def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
     def next_resource_prediction(self):return self.nrp_acc, self.nrp_pre, self.nrp_rec, self.nrp_f1
     def last_resource_prediction(self): return self.lrp_acc, self.lrp_pre, self.lrp_rec, self.lrp_f1
@@ -340,7 +341,6 @@ class Evermann(torch.nn.Module) :
         hidden_dim=125
         emb_dim = 5
 
-
         self.embeddings = nn.Embedding(vocab_size, emb_dim)
         self.lstm = nn.LSTM(emb_dim, hidden_dim, batch_first=True, num_layers=2)
         self.linear = nn.Linear(hidden_dim, vocab_size)
@@ -352,7 +352,6 @@ class Evermann(torch.nn.Module) :
         x, _ = self.lstm(x)
         x = self.linear(x[:,-1])
         return F.softmax(x,dim=1)
-
 
 # Cell
 class PPM_Evermann(PPM_RNNwEmbedding):
@@ -370,7 +369,6 @@ class Tax_et_al_spezialized(torch.nn.Module) :
         self.linear_act = nn.Linear(hidden_dim, vocab_size)
         self.linear_tim = nn.Linear(hidden_dim, 1)
 
-
     def forward(self, xcat,xcont):
         x_act,x_tim = xcat.permute(0,2,1),xcont.squeeze().permute(0,2,1)
         x_act, _ = self.lstm_act(x_act.float())
@@ -387,7 +385,6 @@ class Tax_et_al_shared(torch.nn.Module) :
         vocab_size=len(o.procs.categorify[o.y_names[0]])
         hidden_dim=125
         self.lstm = nn.LSTM(vocab_size+3, hidden_dim, batch_first=True, num_layers=2)
-
         self.linear_act = nn.Linear(hidden_dim, vocab_size)
         self.linear_tim = nn.Linear(hidden_dim, 1)
 
@@ -421,7 +418,6 @@ class Tax_et_al_mixed(torch.nn.Module) :
 
     def forward(self,xcat,xcont):
         x_act,x_tim = xcat.permute(0,2,1),xcont.squeeze().permute(0,2,1)
-
 
         x_concat=torch.cat((x_act.float(), x_tim), 2)
         x_concat, _ = self.lstm(x_concat)
@@ -458,15 +454,12 @@ class PPM_Tax_Spezialized(PPModel):
         self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1, self.dtnp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
                                                    output_index=[1,2,3,4,5])
 
-
         # Last event prediction training
         print('Last event prediction training')
         dls=o.get_dls(outcome=True,bs=self.bs)
         m=self.model(o)
         self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
                                                  output_index=[1,2,3,4,5])
-
-
 
     def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
     def next_resource_prediction(self): return None,None,None,None
@@ -483,8 +476,6 @@ class PPM_Tax_Shared(PPM_Tax_Spezialized):
 
 class PPM_Tax_Mixed(PPM_Tax_Spezialized):
     model = Tax_et_al_mixed
-
-
 
 # Cell
 class MiDA(Module):
@@ -511,7 +502,6 @@ class MiDA(Module):
         else:
             self.lin=nn.Linear(hidden_dim2,1)
             self.is_classifier=False
-
 
     def forward(self, x_cat,x_cont):
         if self.n_emb != 0:
@@ -550,10 +540,6 @@ class PPM_MiDA(PPModel):
                      cat_names=cat_names,date_names=date_names,cont_names=cont_names,
                      splits=self.splits)
 
-
-
-
-
     def next_step_prediction(self,col='activity',outcome=False):
         seq_len=(self.o.items.event_id.max()) # seq_len = max trace len, Todo make it nicer
         self.o.set_y_names(col)
@@ -565,11 +551,6 @@ class PPM_MiDA(PPModel):
         output_index = list(range(1, len(metrics)+1))
         return self._train_validate(dls,m,loss=loss,metrics=metrics,output_index=output_index)
 
-
-
-
-
-
     def next_resource_prediction(self):return self.next_step_prediction(outcome=False,col='resource')
 
     def last_resource_prediction(self): return self.next_step_prediction(outcome=True,col='resource')
@@ -580,10 +561,6 @@ class PPM_MiDA(PPModel):
 
     def duration_to_end_prediction(self):
         return self.next_step_prediction(outcome=True,col='timestamp_Relative_elapsed')
-
-
-
-
 
 # Cell
 def create_attr_dict(attr_list):
@@ -629,6 +606,5 @@ attr_list=[
     ['Mobis_mode_event','activity, resource, type','cost','timestamp'],
     ['Mobis_mode_case','activity, resource, type','cost','timestamp']   
 ]
-
 
 attr_dict=create_attr_dict(attr_list)

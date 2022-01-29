@@ -4,44 +4,46 @@
 --MPPN Logging--
 
 --BEFORE--
-torch.Size([289, 2, 64])
-torch.Size([289, 64])
+torch.Size([138, 2, 64])
+torch.Size([138, 64])
 --AFTER--
-torch.Size([289, 2, 64])
-torch.Size([289, 64])
+torch.Size([138, 2, 64])
+torch.Size([138, 64])
 
 --BEFORE--
-torch.Size([28, 2, 64])
-torch.Size([28, 64])
+torch.Size([19, 2, 64])
+torch.Size([19, 64])
 --AFTER--
-torch.Size([28, 2, 64])
-torch.Size([28, 64])
+torch.Size([19, 2, 64])
+torch.Size([19, 64])
 
 --BEFORE--
-torch.Size([74, 2, 64])
-torch.Size([74, 64])
+torch.Size([38, 2, 64])
+torch.Size([38, 64])
 --AFTER--
-torch.Size([74, 2, 64])
-torch.Size([74, 64])
+torch.Size([38, 2, 64])
+torch.Size([38, 64])
+Features saved at - 03_Class-Overlap/Helpdesk_Camargo_concat.csv
 
 --BEFORE--
-torch.Size([289, 2, 64])
-torch.Size([289, 64])
+torch.Size([138, 2, 64])
+torch.Size([138, 64])
 --AFTER--
-torch.Size([289, 2, 64])
-torch.Size([289, 64])
+torch.Size([138, 2, 64])
+torch.Size([138, 64])
 
 --BEFORE--
-torch.Size([28, 2, 64])
-torch.Size([28, 64])
+torch.Size([19, 2, 64])
+torch.Size([19, 64])
 --AFTER--
-torch.Size([28, 2, 64])
-torch.Size([28, 64])
+torch.Size([19, 2, 64])
+torch.Size([19, 64])
 
 --BEFORE--
-torch.Size([74, 2, 64])
-torch.Size([74, 64])
+torch.Size([38, 2, 64])
+torch.Size([38, 64])
 --AFTER--
-torch.Size([74, 2, 64])
-torch.Size([74, 64])
-model_performance: (0.7297297120094299, 0.41709566709566714, 0.36276925421662265, 0.38573565291712003, 0.29729729890823364, 0.15315315315315314, 0.07090631003674482, 0.08918884322110128, 0.7162162065505981, 0.28378378378378377, 0.19932432432432431, 0.23377769661553446, 0.9324324131011963, 0.5675675675675675, 0.5337837837837838, 0.5499890134036476, 8.325204849243164, 9.008580207824707, None, None)
+torch.Size([38, 2, 64])
+torch.Size([38, 64])
+Features saved at - 03_Class-Overlap/Helpdesk_Camargo_concat.csv
+model_performance: (0.5789473652839661, 0.4, 0.23750000000000002, 0.2962962962962963, 0.2368421107530594, 0.1, 0.023684210526315787, 0.038297872340425525, 0.5, 0.5, 0.25, 0.3333333333333333, 1.0, 1.0, 1.0, 1.0, 11.146744728088379, 6.243957042694092, None, None)

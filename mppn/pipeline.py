@@ -3,13 +3,17 @@
 __all__ = ['RNNwEmbedding', 'HideOutput', 'training_loop', 'train_validate', 'PPModel', 'get_ds_name',
            'Performance_Statistic', 'runner']
 
-# Cell
+#------------------------------------------------------------------------------------------
+# Imports
+#------------------------------------------------------------------------------------------
 from .imports import *
 from .preprocessing import *
-import pickle
-import logging
+import torch, pickle, logging
+import pandas as pd
 
-#Logging
+#------------------------------------------------------------------------------------------
+# Logging
+#------------------------------------------------------------------------------------------
 logging.basicConfig(filename="logs/pipeline.log",format='',filemode='w')
 logger = logging.getLogger() 
 logger.setLevel(logging.DEBUG)
@@ -48,6 +52,31 @@ class HideOutput:
         sys.stdout.close()
         sys.stdout = self._original_stdout
 
+#Cell
+def save_features(obj, store_path):
+  train = obj[0].dataset
+  dev = obj[1].dataset
+  test = obj[2].dataset
+  ds = train + dev + test
+
+  features = list()
+  for row in ds:
+    x_cats = tuple([t for t in row[0]])
+    x_conts = tuple([row[1]])
+    new_row = (torch.cat(x_cats + x_conts)).cpu().detach().numpy()
+    features.append(new_row)
+
+  cols = [f"act_{i}" for i in range(0,64)] + [f"res_{i}" for i in range(0,64)] + [f"time_{i}" for i in range(0,64)]
+  df = pd.DataFrame(features, columns = cols)
+  case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
+  df.insert(0, "case_len", case_len, True)
+
+  store_path = str(store_path)
+  model_name = store_path.split('/')[-2]
+  ds_name = store_path.split('/')[-1]
+  df.to_csv(f'03_Class-Overlap/features/{model_name}_{ds_name}.csv', index=False)
+  logger.debug(f"Features saved at - 03_Class-Overlap/{model_name}_{ds_name}.csv")
+
 # Cell
 def training_loop(learn,epoch,print_output,lr_find):
     '''
@@ -71,20 +100,29 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
       SaveModelCallback(fname=model_name)
       ]
     learn=Learner(dls, m, path=store_path, model_dir=model_dir, loss_func=loss ,metrics=metrics,cbs=cbs)
-
+            
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
+        data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
+        with open(f'{store_path}/preds.pickle', 'wb') as f:
+            pickle.dump(data, f)
+        with open(f'{store_path}/dls.pickle', 'wb') as g:
+            pickle.dump(dls, g)
+        save_features(dls, store_path)
         return learn.validate(dl=dls[2])[output_index]
     else:
-        with HideOutput(),learn.no_bar(),learn.no_logging():
+        with HideOutput(),learn.no_bar():
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
-            preds, targs = learn.get_preds(dl=dls[2], with_decoded=True)
-            logger.debug(preds)
-            logger.debug(targs)
+            data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
+            with open(f'{store_path}/preds.pickle', 'wb') as f:
+                pickle.dump(data, f)
+            with open(f'{store_path}/dls.pickle', 'wb') as g:
+                pickle.dump(dls, g)
+            save_features(dls, store_path)
             return learn.validate(dl=dls[2])[output_index]
 
-# Cell
 
+# Cell
 # Todo: Add Logging
 class PPModel():
 
@@ -207,6 +245,7 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
+            log = log[:250]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             if store:

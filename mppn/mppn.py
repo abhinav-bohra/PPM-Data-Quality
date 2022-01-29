@@ -4,19 +4,24 @@ __all__ = ['BaseMPPN', 'MPPNClassifier', 'MPPNMultitask', 'load_checkpoint', 'mp
            'mppn_representation_learning_model', 'mppn_fine_tuning_model', 'gaf_transform',
            'mppn_get_output_attributes', 'PPM_MPPN']
 
-# Cell
+#------------------------------------------------------------------------------------------
+# Imports
+#------------------------------------------------------------------------------------------
+import logging
 from .imports import *
 from .preprocessing import *
 from .pipeline import *
 from .baselines import *
 
-import logging
- 
+#------------------------------------------------------------------------------------------
+# Logging
+#------------------------------------------------------------------------------------------ 
 logging.basicConfig(filename="logs/mppn.log",format='',filemode='w')
 logger = logging.getLogger() 
 logger.setLevel(logging.DEBUG)
 logging.getLogger('numba').setLevel(logging.WARNING)
 logger.debug("--MPPN Logging--")
+
 
 class BaseMPPN(nn.Module):
 
@@ -77,17 +82,13 @@ class BaseMPPN(nn.Module):
             """size of v: [batch_size, feature_size, ?, ?], last two should be 1, 1"""
             """Reduce dimensions from 4 to 2 (first is batchsize)"""
             v = v.view(v.size(0), self.feature_size)
-
-
             view_pool.append(v)
-
 
         pooled_view = view_pool[0]
         """Max-pooling of all views"""
         if self.mode == 1:
             for i in range(1, len(view_pool)):
                 pooled_view = torch.max(pooled_view, view_pool[i])
-
         else:
             """Concatenate features from all perspectives"""
             pooled_view = torch.cat(view_pool, dim=1)
@@ -102,9 +103,7 @@ class BaseMPPN(nn.Module):
 
         param_CNN = sum(p.numel() for p in self.MLP.parameters() if p.requires_grad)
         param_MLP = sum(p.numel() for p in self.MLP.parameters() if p.requires_grad)
-
         params = param_CNN + param_MLP
-
         return params
 
 # Cell
@@ -165,7 +164,6 @@ class MPPNMultitask(BaseMPPN):
     def forward(self, x):
 
         x = x.transpose(0, 1)
-
         view_pool = []
 
         for v in x:
@@ -192,7 +190,6 @@ class MPPNMultitask(BaseMPPN):
             # print(pooled_view.size())
 
         shared = self.MLP(pooled_view)
-
         outputs = []
 
         """Predict each attribute"""
@@ -203,7 +200,6 @@ class MPPNMultitask(BaseMPPN):
                 outputs.append(head(shared))
 
         return outputs
-
 
     def create_head(self, num_classes):
         """Create a head, i.e. a subnetwork to predict a certain attribute in multi-task fashion"""
@@ -221,37 +217,18 @@ class MPPNMultitask(BaseMPPN):
         param_CNN = sum(p.numel() for p in self.MLP.parameters() if p.requires_grad)
         param_MLP = sum(p.numel() for p in self.MLP.parameters() if p.requires_grad)
         param_heads = sum(p.numel() for head in self.heads for p in head.parameters() if p.requires_grad)
-
         params = param_CNN + param_MLP + param_heads
 
         return params
 
 # Cell
-
 def load_checkpoint(path, filename):
-    """
-    Load checkpoint from disk
-
-    Parameters
-    ----------
-    path
-    filename
-
-    Returns
-    -------
-
-    """
-    #print('\n==> Loading checkpoint..')
     loadpath = os.path.join(path, filename + '_checkpoint.pth.tar')
-
     assert os.path.isfile(loadpath), 'Error: no checkpoint file found!'
-
     checkpoint = torch.load(loadpath)
-
     return checkpoint
 
 # Cell
-
 import torch.utils.model_zoo as model_zoo
 model_urls = {
     'alexnet': 'https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth',
@@ -288,7 +265,6 @@ def mppn_pretraining_model(pretrained=False, **kwargs):
     return model
 
 # Cell
-
 def mppn_representation_learning_model(pretrained, num_perspectives, output_attr, feature_size=64, representation_dim=128):
     """Returns a model for representation learning (multitask). CNN is pretrained on GAF images"""
     model = MPPNMultitask(num_perspectives, output_attr, feature_size, representation_dim)
@@ -307,7 +283,6 @@ def mppn_representation_learning_model(pretrained, num_perspectives, output_attr
     return model
 
 # Cell
-
 def mppn_fine_tuning_model(representation_model, num_perspectives, num_classes):
     """
     Fine-tune a MPPN model that has been trained as representation model on a specific task
@@ -319,14 +294,9 @@ def mppn_fine_tuning_model(representation_model, num_perspectives, num_classes):
     Returns
     -------
     """
-
-
     model = MPPNClassifier(num_perspectives, num_classes=num_classes)
-
     model.CNN = representation_model.CNN
     model.MLP = representation_model.MLP
-
-
     return model
 
 # Cell
@@ -358,13 +328,11 @@ def _gaf_attr(x,transformer):
     return x
 
 
-
 class gaf_transform(ItemTransform):
     def __init__(self,gs=64):
         self.transformer=GramianAngularField(image_size=gs,sample_range=None, method="s", overlapping=True)
 
     def encodes(self,e): return _gaf_loop(e,self.transformer)
-
 
 
 # Cell
@@ -408,7 +376,6 @@ class PPM_MPPN(PPModel):
                 listify(self.attr_dict[self.ds_name]['num attr']),
                 listify(self.attr_dict[self.ds_name]['date attr']))
 
-
     def setup(self):
         def act_acc(p,y): return accuracy(p[0],y[0])
         def act_pre(p,y): return precision(p[0],y[0])
@@ -436,9 +403,6 @@ class PPM_MPPN(PPModel):
         time_metric=lambda p,y: maeDurDaysNormalize(listify(p)[-1],listify(y)[-1],mean=self.mean,std=self.std)
         self._train_validate(dls,self.pretrain,loss=loss,metrics=[act_acc,act_pre, act_rec, act_f1, res_acc, res_pre, res_rec, res_f1,time_metric])
 
-
-
-
     def next_step_prediction(self,col='activity',outcome=False):
         pretrain=copy.deepcopy(self.pretrain)
         m = mppn_fine_tuning_model(pretrain, len(self.output_attributes), self.output_attributes[col])
@@ -449,10 +413,8 @@ class PPM_MPPN(PPModel):
         return self._train_validate(dls,m,loss=loss,metrics=metrics,output_index=[1,2,3,4])
 
     def next_resource_prediction(self):return self.next_step_prediction(outcome=False,col='resource')
-
     def last_resource_prediction(self): return self.next_step_prediction(outcome=True,col='resource')
     def outcome_prediction(self): return self.next_step_prediction(outcome=True)
-
     def duration_to_next_event_prediction(self,outcome=False,col='timestamp_Relative_elapsed'):
         pretrain=copy.deepcopy(self.pretrain)
         time=partial(maeDurDaysNormalize,mean=self.mean,std=self.std)
@@ -461,10 +423,6 @@ class PPM_MPPN(PPModel):
         dls=self.o.get_dls(after_batch=gaf_transform,bs=self.bs,outcome=outcome)
         xb,yb=dls.one_batch()
         return self._train_validate(dls,m,loss=mae,metrics=time)
-
-
     def duration_to_end_prediction(self):return self.duration_to_next_event_prediction(outcome=True)
-
-
     def activity_suffix_prediction(self): pass
     def resource_suffix_prediction(self): pass

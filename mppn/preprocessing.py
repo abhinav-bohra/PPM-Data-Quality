@@ -4,20 +4,24 @@ __all__ = ['EventLogs', 'import_log', 'drop_long_traces', 'RandomTraceSplitter',
            'Categorify', 'FillStrategy', 'FillMissing', 'Normalize', 'Base_Date_Encodings', 'encode_date',
            'decode_date', 'Datetify', 'MinMax', 'OneHot', 'subsequences_fast', 'PPDset', 'get_dls']
 
-# Cell
+#------------------------------------------------------------------------------------------
+# Imports
+#------------------------------------------------------------------------------------------
+import logging
 import pandas as pd
 pd.set_option('display.max_columns', None)
 from .imports import *
 from imblearn.under_sampling import NearMiss
 from imblearn.under_sampling import CondensedNearestNeighbour
 from imblearn.under_sampling import NeighbourhoodCleaningRule 
-import logging
 
-#Global Vars
+# Global Variables
 ci_flag = False
 balancing_technique = None
 
-#Logging
+#------------------------------------------------------------------------------------------
+# Logging
+#------------------------------------------------------------------------------------------
 logging.basicConfig(filename="logs/preprocess.log",format='',filemode='w')
 logger = logging.getLogger() 
 logger.setLevel(logging.DEBUG)
@@ -119,7 +123,6 @@ class PPObj(CollBase, GetAttr, FilteredBase):
         self.procs = Pipeline(procs)
         self.splits=splits
         if do_setup: self.setup()
-
 
     @property
     def y_names(self): return self.ycat_names+self.ycont_names
@@ -438,6 +441,7 @@ def Balance(xs,ys):
     logger.debug("\n---Balancing Technique: {balancing_technique}---")
   return xs,ys
 
+
 # Cell
 @delegates(TfmdDL)
 def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id',bs=64,**kwargs):
@@ -446,27 +450,12 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         wds,idx=windows(s.xs,s.event_ids)
         if not outcome: y=s.ys.iloc[idx]
         else: y=s.ys.groupby(s.items.index).transform('last').iloc[idx]
-        ycats=tensor(y[s.ycat_names].values).long() #['activity', 'resource'] torch.Size([342, 2])
-        yconts=tensor(y[s.ycont_names].values).float() #['timestamp_Relative_elapsed'] torch.Size([342, 1])
-        xconts=tensor(wds[:,len(s.cat_names):]).float() # torch.Size([312, 2, 64])
-        xcats=tensor(wds[:,:len(s.cat_names)]).long() # torch.Size([312, 1, 64])
+        ycats=tensor(y[s.ycat_names].values).long() 
+        yconts=tensor(y[s.ycont_names].values).float() 
+        xconts=tensor(wds[:,len(s.cat_names):]).float() 
+        xcats=tensor(wds[:,:len(s.cat_names)]).long() 
         xs=tuple([i.squeeze() for i in [xcats,xconts] if i.shape[1]>0])
         ys=tuple([ycats[:,i] for i in range(ycats.shape[1])])+tuple([yconts[:,i] for i in range(yconts.shape[1])])
-        
-        # logger.debug("\n---S---")
-        # logger.debug(s.iloc[0])
-        
-        # logger.debug("\n---X---")
-        # logger.debug(s.cat_names)
-        # logger.debug(xcats.size())
-        # logger.debug(s.cont_names)
-        # logger.debug(xconts.size())
-
-        # logger.debug("\n---Y---")
-        # logger.debug(s.ycat_names)
-        # logger.debug(ycats.size())
-        # logger.debug(s.ycont_names)
-        # logger.debug(yconts.size())
         
         logger.debug("\n--BEFORE--")
         for i in range(len(xs)):
@@ -481,8 +470,8 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         logger.debug("--AFTER--")
         for i in range(len(xs)):
           logger.debug(xs[i].size())
+            
         ds.append(PPDset((*xs,ys)))
         
-
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)
 PPObj.get_dls= get_dls
