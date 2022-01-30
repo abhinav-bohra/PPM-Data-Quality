@@ -77,7 +77,9 @@ def save_features(obj, store_path):
   model_name = store_path.split('/')[-2]
   ds_name = store_path.split('/')[-1]
   df.to_csv(f'03_Class-Overlap/features/{model_name}_{ds_name}.csv', index=False)
+  df.to_csv(f'{store_path}/features.csv', index=False)
   logger.debug(f"Features saved at - 03_Class-Overlap/{model_name}_{ds_name}.csv")
+  logger.debug(f"Features saved at - {store_path}/features.csv")
 
 # Cell
 def training_loop(learn,epoch,print_output,lr_find):
