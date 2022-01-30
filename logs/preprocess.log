@@ -2,48 +2,467 @@
 --Pipeline Logging--
 --Baselines Logging--
 --MPPN Logging--
+**************************************************
+BPIC12
+MPPN
+**************************************************
 
 --BEFORE--
-torch.Size([138, 2, 64])
-torch.Size([138, 64])
+torch.Size([544, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 71
+Imbalance Ratio is 15
+37.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([138, 2, 64])
-torch.Size([138, 64])
+torch.Size([344, 3, 64])
 
 --BEFORE--
-torch.Size([19, 2, 64])
-torch.Size([19, 64])
+torch.Size([40, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 4
+Imbalance Ratio is 1
+43.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([19, 2, 64])
-torch.Size([19, 64])
+torch.Size([23, 3, 64])
 
 --BEFORE--
-torch.Size([38, 2, 64])
-torch.Size([38, 64])
+torch.Size([121, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 22
+Imbalance Ratio is 4
+36.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([38, 2, 64])
-torch.Size([38, 64])
-Features saved at - 03_Class-Overlap/Helpdesk_Camargo_concat.csv
+torch.Size([77, 3, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MPPN.csv
 
 --BEFORE--
-torch.Size([138, 2, 64])
-torch.Size([138, 64])
+torch.Size([544, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 71
+Imbalance Ratio is 15
+37.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([138, 2, 64])
-torch.Size([138, 64])
+torch.Size([344, 3, 64])
 
 --BEFORE--
-torch.Size([19, 2, 64])
-torch.Size([19, 64])
+torch.Size([40, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 4
+Imbalance Ratio is 1
+43.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([19, 2, 64])
-torch.Size([19, 64])
+torch.Size([23, 3, 64])
 
 --BEFORE--
-torch.Size([38, 2, 64])
-torch.Size([38, 64])
+torch.Size([121, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 22
+Imbalance Ratio is 4
+36.0% reduction in size by undersampling wrt activity
 --AFTER--
-torch.Size([38, 2, 64])
-torch.Size([38, 64])
-Features saved at - 03_Class-Overlap/Helpdesk_Camargo_concat.csv
-model_performance: (0.5789473652839661, 0.4, 0.23750000000000002, 0.2962962962962963, 0.2368421107530594, 0.1, 0.023684210526315787, 0.038297872340425525, 0.5, 0.5, 0.25, 0.3333333333333333, 1.0, 1.0, 1.0, 1.0, 11.146744728088379, 6.243957042694092, None, None)
+torch.Size([77, 3, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MPPN.csv
+
+--BEFORE--
+torch.Size([544, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 91
+Imbalance Ratio is 16
+39.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([333, 3, 64])
+
+--BEFORE--
+torch.Size([40, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 3
+Imbalance Ratio is 2
+25.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([30, 3, 64])
+
+--BEFORE--
+torch.Size([121, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 25
+Imbalance Ratio is 6
+41.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([71, 3, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MPPN.csv
+
+--BEFORE--
+torch.Size([544, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 16
+Imbalance Ratio is 6
+25.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([407, 3, 64])
+
+--BEFORE--
+torch.Size([40, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 19
+Imbalance Ratio is 10
+45.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([22, 3, 64])
+
+--BEFORE--
+torch.Size([121, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 24
+Imbalance Ratio is 12
+33.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([81, 3, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MPPN.csv
+
+--BEFORE--
+torch.Size([544, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 24
+Imbalance Ratio is 7
+38.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([339, 3, 64])
+
+--BEFORE--
+torch.Size([40, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 19
+Imbalance Ratio is 10
+45.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([22, 3, 64])
+
+--BEFORE--
+torch.Size([121, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 35
+Imbalance Ratio is 20
+32.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([82, 3, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MPPN.csv
+
+--BEFORE--
+torch.Size([544, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 19
+Imbalance Ratio is 1
+
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+
+--AFTER--
+torch.Size([544, 3, 64])
+
+--BEFORE--
+torch.Size([40, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 4
+Imbalance Ratio is 1
+
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+
+--AFTER--
+torch.Size([40, 3, 64])
+
+--BEFORE--
+torch.Size([121, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 6
+Imbalance Ratio is 1
+
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+
+--AFTER--
+torch.Size([121, 3, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MPPN.csv
+
+--BEFORE--
+torch.Size([544, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 29
+Imbalance Ratio is 10
+
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+
+--AFTER--
+torch.Size([544, 3, 64])
+
+--BEFORE--
+torch.Size([40, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 19
+Imbalance Ratio is 10
+
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+
+--AFTER--
+torch.Size([40, 3, 64])
+
+--BEFORE--
+torch.Size([121, 3, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 24
+Imbalance Ratio is 10
+
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+
+--AFTER--
+torch.Size([121, 3, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MPPN.csv
+model_performance: (0.3246753215789795, 0.22789115646258504, 0.18797177843304128, 0.17792701402195357, 0.056338027119636536, 0.05007824726134585, 0.011128499391410189, 0.01821027173139849, 0.0, 0.0, 0.0, 0.0, 0.3658536672592163, 0.17827050997782706, 0.19357336430507163, 0.18556885691255934, 1.8419651985168457, 3.645437240600586, None, None)
+**************************************************
+BPIC12
+MiDA
+**************************************************
+
+--BEFORE--
+torch.Size([544, 2, 64])
+torch.Size([544, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 71
+Imbalance Ratio is 15
+37.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([344, 2, 64])
+torch.Size([344, 2, 64])
+
+--BEFORE--
+torch.Size([40, 2, 64])
+torch.Size([40, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 4
+Imbalance Ratio is 1
+43.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([23, 2, 64])
+torch.Size([23, 2, 64])
+
+--BEFORE--
+torch.Size([121, 2, 64])
+torch.Size([121, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 22
+Imbalance Ratio is 4
+36.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([77, 2, 64])
+torch.Size([77, 2, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MiDA.csv
+
+--BEFORE--
+torch.Size([544, 2, 64])
+torch.Size([544, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 91
+Imbalance Ratio is 16
+39.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([333, 2, 64])
+torch.Size([333, 2, 64])
+
+--BEFORE--
+torch.Size([40, 2, 64])
+torch.Size([40, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 3
+Imbalance Ratio is 2
+25.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([30, 2, 64])
+torch.Size([30, 2, 64])
+
+--BEFORE--
+torch.Size([121, 2, 64])
+torch.Size([121, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 25
+Imbalance Ratio is 6
+41.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([71, 2, 64])
+torch.Size([71, 2, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MiDA.csv
+
+--BEFORE--
+torch.Size([544, 2, 64])
+torch.Size([544, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 16
+Imbalance Ratio is 6
+25.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([407, 2, 64])
+torch.Size([407, 2, 64])
+
+--BEFORE--
+torch.Size([40, 2, 64])
+torch.Size([40, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 19
+Imbalance Ratio is 10
+45.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([22, 2, 64])
+torch.Size([22, 2, 64])
+
+--BEFORE--
+torch.Size([121, 2, 64])
+torch.Size([121, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 24
+Imbalance Ratio is 12
+33.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([81, 2, 64])
+torch.Size([81, 2, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MiDA.csv
+
+--BEFORE--
+torch.Size([544, 2, 64])
+torch.Size([544, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 24
+Imbalance Ratio is 7
+38.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([339, 2, 64])
+torch.Size([339, 2, 64])
+
+--BEFORE--
+torch.Size([40, 2, 64])
+torch.Size([40, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 19
+Imbalance Ratio is 10
+45.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([22, 2, 64])
+torch.Size([22, 2, 64])
+
+--BEFORE--
+torch.Size([121, 2, 64])
+torch.Size([121, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 35
+Imbalance Ratio is 20
+32.0% reduction in size by undersampling wrt activity
+--AFTER--
+torch.Size([82, 2, 64])
+torch.Size([82, 2, 64])
+Features saved at - 03_Class-Overlap/BPIC12_MiDA.csv
+
+--BEFORE--
+torch.Size([544, 2, 64])
+torch.Size([544, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 19
+Imbalance Ratio is 1
+
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+
+--AFTER--
+torch.Size([544, 2, 64])
+torch.Size([544, 2, 64])
+
+--BEFORE--
+torch.Size([40, 2, 64])
+torch.Size([40, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 4
+Imbalance Ratio is 1
+
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+
+--AFTER--
+torch.Size([40, 2, 64])
+torch.Size([40, 2, 64])
+
+--BEFORE--
+torch.Size([121, 2, 64])
+torch.Size([121, 2, 64])
+Balancing Dataset...
+
+---Applying Near Miss---
+Imbalance Ratio is 6
+Imbalance Ratio is 1
+
+Exception Occurred while BALANCING DATASET: Unknown label type: 'continuous'
+
+--AFTER--
+torch.Size([121, 2, 64])
+torch.Size([121, 2, 64])

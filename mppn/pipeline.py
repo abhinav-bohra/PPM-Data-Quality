@@ -61,12 +61,14 @@ def save_features(obj, store_path):
 
   features = list()
   for row in ds:
-    x_cats = tuple([t for t in row[0]])
-    x_conts = tuple([row[1]])
-    new_row = (torch.cat(x_cats + x_conts)).cpu().detach().numpy()
-    features.append(new_row)
+    x = (list(row))[:-1]
+    x_ = [torch.flatten(t) for t in x]
+    ftr = torch.hstack(x_)
+    ftr = ftr.detach().cpu().numpy()
+    features.append(ftr)
 
-  cols = [f"act_{i}" for i in range(0,64)] + [f"res_{i}" for i in range(0,64)] + [f"time_{i}" for i in range(0,64)]
+  num_features = len(features[0])
+  cols = [f"feat_{i}" for i in range(0,num_features)]
   df = pd.DataFrame(features, columns = cols)
   case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
   df.insert(0, "case_len", case_len, True)
@@ -257,6 +259,10 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
                 ppm_class=ppm_classes[j]
                 model_path=store_path/'models'/f"run{r}" if store else None
                 model=ppm_class(log,ds_name,splits,store=model_path,sample=sample,**kwargs)
+                logger.debug("*"*50)
+                logger.debug(ds_name)
+                logger.debug(model.get_name())
+                logger.debug("*"*50)
                 model_performance = model.evaluate()
                 logger.debug(f"model_performance: {model_performance}")
                 model_performance = [ds_name, model.get_name(),balancing_technique,*model_performance]
