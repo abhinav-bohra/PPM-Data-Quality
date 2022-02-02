@@ -60,12 +60,20 @@ def save_features(obj, store_path):
   ds = train + dev + test
 
   features = list()
+  targets = list()
   for row in ds:
+    #Features
     x = (list(row))[:-1]
     x_ = [torch.flatten(t) for t in x]
     ftr = torch.hstack(x_)
     ftr = ftr.detach().cpu().numpy()
     features.append(ftr)
+    #Targets
+    y = (list(row))[-1]
+    y_ = [torch.flatten(t) for t in y]
+    tar = torch.hstack(y_)
+    tar = tar.detach().cpu().numpy()
+    targets.append(tar)
 
   num_features = len(features[0])
   cols = [f"feat_{i}" for i in range(0,num_features)]
@@ -78,8 +86,16 @@ def save_features(obj, store_path):
   ds_name = store_path.split('/')[-1]
   df.to_csv(f'03_Class-Overlap/features/{model_name}_{ds_name}.csv', index=False)
   df.to_csv(f'{store_path}/features.csv', index=False)
-  logger.debug(f"Features saved at - 03_Class-Overlap/{model_name}_{ds_name}.csv")
+  logger.debug(f"Features saved at - 03_Class-Overlap/features/{model_name}_{ds_name}.csv")
   logger.debug(f"Features saved at - {store_path}/features.csv")
+  
+  num_targets = len(targets[0])
+  cols = [f"targ_{i}" for i in range(0,num_targets)]
+  df = pd.DataFrame(targets, columns = cols)
+  df.to_csv(f'03_Class-Overlap/targets/{model_name}_{ds_name}.csv', index=False)
+  df.to_csv(f'{store_path}/targets.csv', index=False)
+  logger.debug(f"Features saved at - 03_Class-Overlap/targets/{model_name}_{ds_name}.csv")
+  logger.debug(f"Features saved at - {store_path}/targets.csv")
 
 # Cell
 def training_loop(learn,epoch,print_output,lr_find):

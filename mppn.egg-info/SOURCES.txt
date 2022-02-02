@@ -78,11 +78,12 @@ setup.py
 02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_resource_prediction.pth
 02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/next_step_prediction.pth
 02_Class-Imbalance/results_old/Under Sampling/models/run0/Helpdesk_under_both/MiDA/outcome_prediction.pth
-03_Class-Overlap/check_overlap _fts.r
 03_Class-Overlap/check_overlap_ds.r
 03_Class-Overlap/check_overlap_fts.r
 03_Class-Overlap/class_overlap_scores.csv
 03_Class-Overlap/create_features.py
+03_Class-Overlap/features/BPIC12_MPPN.csv
+03_Class-Overlap/features/BPIC12_MiDA.csv
 03_Class-Overlap/features/Helpdesk_Camargo_concat.csv
 03_Class-Overlap/log/2022-01-27 18-22-07_file.log
 03_Class-Overlap/log/2022-01-27 18-22-59_file.log
@@ -96,6 +97,7 @@ setup.py
 03_Class-Overlap/log/2022-01-29 01-56-38_file.log
 03_Class-Overlap/log/2022-01-29 01-57-58_file.log
 03_Class-Overlap/log/2022-01-29 01-58-43_file.log
+dist/mppn-0.0.1-py3.7.egg
 event_logs/BPIC12.csv
 event_logs/BPIC12_A.csv
 event_logs/BPIC12_O.csv
@@ -140,6 +142,11 @@ mppn.egg-info/entry_points.txt
 mppn.egg-info/not-zip-safe
 mppn.egg-info/requires.txt
 mppn.egg-info/top_level.txt
+mppn/__pycache__/baselines.cpython-37.pyc
+mppn/__pycache__/imports.cpython-37.pyc
+mppn/__pycache__/mppn.cpython-37.pyc
+mppn/__pycache__/pipeline.cpython-37.pyc
+mppn/__pycache__/preprocessing.cpython-37.pyc
 mppn/results/run_0_results.csv
 mppn/results/run_1_results.csv
 mppn/results/run_2_results.csv
