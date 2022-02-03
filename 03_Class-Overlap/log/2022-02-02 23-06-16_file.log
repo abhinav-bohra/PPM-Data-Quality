@@ -1,0 +1,54 @@
+=========================================================================
+Log Path: ./log/2022-02-02 23-06-16_file.log
+Program Path: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap/check_overlap_fts.r
+Working Directory: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap
+User Name: abhin
+R Version: 4.1.2 (2021-11-01)
+Machine: ABHINAV-BOHRA-P x86-64
+Operating System: Windows 10 x64 build 22000
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.8 ECoL_0.4.2 
+Log Start Time: 2022-02-02 23:06:16
+=========================================================================
+
+---- Running check_overlap_fts.r ----
+
+NOTE: Log Print Time:  2022-02-02 23:06:16
+NOTE: Elapsed Time in seconds: 0.0156240463256836
+
+Error: unexpected string constant in:
+"                        feat_f1_mean<<-c(feat_f1_mean,na[1])
+                        log_print(paste("[ERROR][",log,"][""]: ""
+
+
+NOTE: Log Print Time:  2022-02-02 23:06:16
+NOTE: Elapsed Time in seconds: 0
+
+Error: unexpected '}' in "                    }"
+
+
+NOTE: Log Print Time:  2022-02-02 23:06:16
+NOTE: Elapsed Time in seconds: 0.0156221389770508
+
+Error: unexpected ')' in "                )"
+
+
+NOTE: Log Print Time:  2022-02-02 23:06:16
+NOTE: Elapsed Time in seconds: 0
+
+Error: unexpected '}' in "        }"
+
+
+NOTE: Log Print Time:  2022-02-02 23:06:16
+NOTE: Elapsed Time in seconds: 0
+
+Error: unexpected '}' in "}"
+
+
+NOTE: Log Print Time:  2022-02-02 23:06:16
+NOTE: Elapsed Time in seconds: 0.0156228542327881
+
+=========================================================================
+Log End Time: 2022-02-02 23:06:16
+Log Elapsed Time: 0 00:00:00
+=========================================================================

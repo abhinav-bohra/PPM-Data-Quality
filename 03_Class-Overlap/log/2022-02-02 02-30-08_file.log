@@ -1,0 +1,294 @@
+=========================================================================
+Log Path: ./log/2022-02-02 02-30-08_file.log
+Program Path: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap/check_overlap_ds.r
+Working Directory: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap
+User Name: abhin
+R Version: 4.1.2 (2021-11-01)
+Machine: ABHINAV-BOHRA-P x86-64
+Operating System: Windows 10 x64 build 22000
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.8 ECoL_0.4.2 
+Log Start Time: 2022-02-02 02:30:08
+=========================================================================
+
+---- Running check_overlap.r ----
+
+NOTE: Log Print Time:  2022-02-02 02:30:08
+NOTE: Elapsed Time in seconds: 0.0155880451202393
+
+[ERROR][ BPIC12.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:09
+NOTE: Elapsed Time in seconds: 1.4128201007843
+
+[ERROR][ BPIC12.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:09
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC12_A.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:09
+NOTE: Elapsed Time in seconds: 0.267040014266968
+
+[ERROR][ BPIC12_A.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:09
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC12_const.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:11
+NOTE: Elapsed Time in seconds: 1.35499000549316
+
+[ERROR][ BPIC12_const.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:11
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC12_mode_case.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:12
+NOTE: Elapsed Time in seconds: 1.43186688423157
+
+[ERROR][ BPIC12_mode_case.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:12
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC12_mode_event.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:13
+NOTE: Elapsed Time in seconds: 1.33083200454712
+
+[ERROR][ BPIC12_mode_event.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:13
+NOTE: Elapsed Time in seconds: 0.0155730247497559
+
+[ERROR][ BPIC12_O.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:14
+NOTE: Elapsed Time in seconds: 0.141104936599731
+
+[ERROR][ BPIC12_O.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:14
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC12_W.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:14
+NOTE: Elapsed Time in seconds: 0.784939050674438
+
+[ERROR][ BPIC12_W.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:14
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC12_W_const.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:15
+NOTE: Elapsed Time in seconds: 0.790571928024292
+
+[ERROR][ BPIC12_W_const.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:15
+NOTE: Elapsed Time in seconds: 0.0155720710754395
+
+[ERROR][ BPIC12_W_mode_case.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:16
+NOTE: Elapsed Time in seconds: 0.81578803062439
+
+[ERROR][ BPIC12_W_mode_case.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:16
+NOTE: Elapsed Time in seconds: 0.012505054473877
+
+[ERROR][ BPIC12_W_mode_event.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:17
+NOTE: Elapsed Time in seconds: 0.80420184135437
+
+[ERROR][ BPIC12_W_mode_event.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:17
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC12_Wc.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:17
+NOTE: Elapsed Time in seconds: 0.360275030136108
+
+[ERROR][ BPIC12_Wc.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:17
+NOTE: Elapsed Time in seconds: 0.0156199932098389
+
+[ERROR][ BPIC12_Wc_const.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0.345659971237183
+
+[ERROR][ BPIC12_Wc_const.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0.0155642032623291
+
+[ERROR][ BPIC12_Wc_mode_case.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0.361644983291626
+
+[ERROR][ BPIC12_Wc_mode_case.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC12_Wc_mode_event.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0.360257863998413
+
+[ERROR][ BPIC12_Wc_mode_event.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC13_CP.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0.0473690032958984
+
+[ERROR][ BPIC13_CP.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC13_CP_const.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0.0468690395355225
+
+[ERROR][ BPIC13_CP_const.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC13_CP_mode_case.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0.0312950611114502
+
+[ERROR][ BPIC13_CP_mode_case.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0.0160138607025146
+
+[ERROR][ BPIC13_CP_mode_event.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0.0312981605529785
+
+[ERROR][ BPIC13_CP_mode_event.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:18
+NOTE: Elapsed Time in seconds: 0.0155699253082275
+
+[ERROR][ BPIC15_1.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:19
+NOTE: Elapsed Time in seconds: 0.0785980224609375
+
+[ERROR][ BPIC15_1.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:19
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC15_2.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:19
+NOTE: Elapsed Time in seconds: 0.0785670280456543
+
+[ERROR][ BPIC15_2.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:19
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][ BPIC15_3.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:19
+NOTE: Elapsed Time in seconds: 0.095801830291748
+
+[ERROR][ BPIC15_3.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:19
+NOTE: Elapsed Time in seconds: 0.0140030384063721
+
+[ERROR][ BPIC15_4.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:19
+NOTE: Elapsed Time in seconds: 0.0624921321868896
+
+[ERROR][ BPIC15_4.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:19
+NOTE: Elapsed Time in seconds: 0.0156219005584717
+
+[ERROR][ BPIC15_5.csv ][ACTIVITY]:  Error in featurebased.formula(activity ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:19
+NOTE: Elapsed Time in seconds: 0.0941200256347656
+
+[ERROR][ BPIC15_5.csv ][RESOURCE]:  Error in featurebased.formula(resource ~ ., data): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 02:30:19
+NOTE: Elapsed Time in seconds: 0
+

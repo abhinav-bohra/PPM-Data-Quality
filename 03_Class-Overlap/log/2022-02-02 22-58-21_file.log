@@ -1,0 +1,410 @@
+=========================================================================
+Log Path: ./log/2022-02-02 22-58-21_file.log
+Program Path: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap/check_overlap_fts.r
+Working Directory: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap
+User Name: abhin
+R Version: 4.1.2 (2021-11-01)
+Machine: ABHINAV-BOHRA-P x86-64
+Operating System: Windows 10 x64 build 22000
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.8 ECoL_0.4.2 
+Log Start Time: 2022-02-02 22:58:21
+=========================================================================
+
+---- Running check_overlap_fts.r ----
+
+NOTE: Log Print Time:  2022-02-02 22:58:21
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][Helpdesk_Camargo_concat.csv][case_len]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_1]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_2]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_3]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_4]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_5]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_6]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_7]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_8]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_9]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_10]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_11]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_12]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_13]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_14]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_15]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_16]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_17]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_18]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_19]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_20]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_21]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_22]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_23]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_24]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_25]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_26]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_27]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_28]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_29]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_30]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_31]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_32]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_33]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_34]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_35]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_36]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_37]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_38]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_39]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_40]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_41]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_42]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_43]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_44]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_45]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_46]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_47]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_48]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_49]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_50]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_51]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_52]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_53]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_54]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_55]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_56]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_57]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_58]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_59]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_60]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_61]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_62]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_63]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_64]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_65]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_66]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_67]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_68]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_69]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_70]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_71]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_72]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_73]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_74]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_75]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_76]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_77]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_78]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_79]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_80]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_81]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_82]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_83]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_84]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_85]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_86]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_87]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_88]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_89]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_90]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_91]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_92]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_93]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_94]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_95]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_96]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_97]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_98]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_99]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_100]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_101]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_102]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_103]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_104]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_105]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_106]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_107]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_108]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_109]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_110]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_111]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_112]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_113]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_114]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_115]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_116]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_117]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_118]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_119]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_120]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_121]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_122]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_123]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_124]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_125]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_126]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_127]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_128]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_129]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_130]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_131]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_132]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_133]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_134]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_135]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_136]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_137]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_138]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_139]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_140]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_141]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_142]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_143]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_144]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_145]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_146]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_147]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_148]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_149]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_150]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_151]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_152]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_153]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_154]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_155]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_156]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_157]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_158]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_159]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_160]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_161]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_162]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_163]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_164]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_165]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_166]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_167]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_168]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_169]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_170]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_171]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_172]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_173]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_174]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_175]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_176]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_177]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_178]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_179]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_180]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_181]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_182]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_183]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_184]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_185]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_186]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_187]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_188]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_189]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_190]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_191]: Error in featurebased.default(paste(as.data.frame(feat), "~ ."), df): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 22:58:23
+NOTE: Elapsed Time in seconds: 1.94485592842102
+
+=========================================================================
+Log End Time: 2022-02-02 22:58:23
+Log Elapsed Time: 0 00:00:01
+=========================================================================

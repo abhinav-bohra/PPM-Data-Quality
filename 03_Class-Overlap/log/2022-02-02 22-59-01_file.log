@@ -1,0 +1,410 @@
+=========================================================================
+Log Path: ./log/2022-02-02 22-59-01_file.log
+Program Path: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap/check_overlap_fts.r
+Working Directory: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap
+User Name: abhin
+R Version: 4.1.2 (2021-11-01)
+Machine: ABHINAV-BOHRA-P x86-64
+Operating System: Windows 10 x64 build 22000
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.8 ECoL_0.4.2 
+Log Start Time: 2022-02-02 22:59:01
+=========================================================================
+
+---- Running check_overlap_fts.r ----
+
+NOTE: Log Print Time:  2022-02-02 22:59:01
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][Helpdesk_Camargo_concat.csv][case_len]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_1]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_2]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_3]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_4]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_5]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_6]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_7]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_8]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_9]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_10]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_11]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_12]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_13]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_14]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_15]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_16]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_17]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_18]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_19]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_20]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_21]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_22]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_23]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_24]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_25]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_26]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_27]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_28]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_29]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_30]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_31]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_32]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_33]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_34]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_35]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_36]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_37]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_38]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_39]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_40]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_41]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_42]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_43]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_44]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_45]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_46]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_47]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_48]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_49]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_50]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_51]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_52]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_53]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_54]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_55]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_56]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_57]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_58]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_59]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_60]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_61]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_62]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_63]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_64]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_65]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_66]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_67]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_68]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_69]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_70]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_71]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_72]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_73]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_74]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_75]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_76]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_77]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_78]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_79]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_80]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_81]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_82]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_83]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_84]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_85]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_86]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_87]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_88]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_89]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_90]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_91]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_92]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_93]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_94]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_95]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_96]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_97]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_98]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_99]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_100]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_101]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_102]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_103]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_104]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_105]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_106]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_107]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_108]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_109]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_110]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_111]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_112]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_113]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_114]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_115]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_116]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_117]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_118]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_119]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_120]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_121]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_122]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_123]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_124]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_125]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_126]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_127]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_128]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_129]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_130]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_131]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_132]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_133]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_134]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_135]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_136]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_137]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_138]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_139]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_140]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_141]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_142]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_143]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_144]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_145]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_146]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_147]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_148]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_149]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_150]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_151]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_152]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_153]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_154]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_155]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_156]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_157]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_158]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_159]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_160]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_161]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_162]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_163]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_164]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_165]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_166]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_167]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_168]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_169]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_170]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_171]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_172]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_173]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_174]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_175]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_176]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_177]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_178]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_179]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_180]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_181]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_182]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_183]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_184]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_185]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_186]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_187]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_188]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_189]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_190]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+[ERROR][Helpdesk_Camargo_concat.csv][feat_191]: Error in as.data.frame(feat_63): object 'feat_63' not found
+
+
+NOTE: Log Print Time:  2022-02-02 22:59:03
+NOTE: Elapsed Time in seconds: 1.77233600616455
+
+=========================================================================
+Log End Time: 2022-02-02 22:59:03
+Log Elapsed Time: 0 00:00:01
+=========================================================================

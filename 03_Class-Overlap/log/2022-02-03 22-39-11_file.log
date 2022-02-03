@@ -1,0 +1,30 @@
+=========================================================================
+Log Path: ./log/2022-02-03 22-39-11_file.log
+Program Path: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap/check_overlap_fts.r
+Working Directory: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap
+User Name: abhin
+R Version: 4.1.2 (2021-11-01)
+Machine: ABHINAV-BOHRA-P x86-64
+Operating System: Windows 10 x64 build 22000
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.8 ECoL_0.4.2 
+Log Start Time: 2022-02-03 22:39:11
+=========================================================================
+
+---- Running check_overlap_fts.r ----
+
+NOTE: Log Print Time:  2022-02-03 22:39:11
+NOTE: Elapsed Time in seconds: 0.00698018074035645
+
+Error in paste("[ERROR][", log, "][", 1, "]: ", e, sep = "") : 
+  cannot coerce type 'special' to vector of type 'character'
+Calls: tryCatch ... tryCatchOne -> <Anonymous> -> log_print -> print -> paste
+
+
+NOTE: Log Print Time:  2022-02-03 22:39:12
+NOTE: Elapsed Time in seconds: 1.09233689308167
+
+=========================================================================
+Log End Time: 2022-02-03 22:39:12
+Log Elapsed Time: 0 00:00:01
+=========================================================================

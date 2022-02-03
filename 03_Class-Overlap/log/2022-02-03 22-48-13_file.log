@@ -1,0 +1,22 @@
+=========================================================================
+Log Path: ./log/2022-02-03 22-48-13_file.log
+Program Path: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap/check_overlap_fts.r
+Working Directory: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap
+User Name: abhin
+R Version: 4.1.2 (2021-11-01)
+Machine: ABHINAV-BOHRA-P x86-64
+Operating System: Windows 10 x64 build 22000
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.8 ECoL_0.4.2 
+Log Start Time: 2022-02-03 22:48:13
+=========================================================================
+
+---- Running check_overlap_fts.r ----
+
+NOTE: Log Print Time:  2022-02-03 22:48:13
+NOTE: Elapsed Time in seconds: 0.0199410915374756
+
+=========================================================================
+Log End Time: 2022-02-03 22:48:14
+Log Elapsed Time: 0 00:00:01
+=========================================================================

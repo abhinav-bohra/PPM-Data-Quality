@@ -1,0 +1,32 @@
+=========================================================================
+Log Path: ./log/2022-02-02 23-01-24_file.log
+Program Path: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap/check_overlap_fts.r
+Working Directory: C:/Users/abhin/Abhinav Bohra/My Documents/Internships/Internship IBM (Dec-Mar 2022)/IBM-Data-Quality/03_Class-Overlap
+User Name: abhin
+R Version: 4.1.2 (2021-11-01)
+Machine: ABHINAV-BOHRA-P x86-64
+Operating System: Windows 10 x64 build 22000
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.8 ECoL_0.4.2 
+Log Start Time: 2022-02-02 23:01:24
+=========================================================================
+
+---- Running check_overlap_fts.r ----
+
+NOTE: Log Print Time:  2022-02-02 23:01:24
+NOTE: Elapsed Time in seconds: 0
+
+[ERROR][Helpdesk_Camargo_concat.csv][c("case_len", "feat_1", "feat_2", "feat_3", "feat_4", "feat_5", "feat_6", "feat_7", "feat_8", "feat_9", "feat_10", "feat_11", "feat_12", "feat_13", "feat_14", "feat_15", "feat_16", "feat_17", "feat_18", "feat_19", "feat_20", "feat_21", "feat_22", "feat_23", "feat_24", "feat_25", "feat_26", "feat_27", "feat_28", "feat_29", "feat_30", "feat_31", "feat_32", "feat_33", "feat_34", "feat_35", "feat_36", "feat_37", "feat_38", "feat_39", "feat_40", "feat_41", "feat_42", "feat_43", "feat_44", "feat_45", "feat_46", 
+"feat_47", "feat_48", "feat_49", "feat_50", "feat_51", "feat_52", "feat_53", "feat_54", "feat_55", "feat_56", "feat_57", "feat_58", "feat_59", "feat_60", "feat_61", "feat_62", "feat_63", "feat_64", "feat_65", "feat_66", "feat_67", "feat_68", "feat_69", "feat_70", "feat_71", "feat_72", "feat_73", "feat_74", "feat_75", "feat_76", "feat_77", "feat_78", "feat_79", "feat_80", "feat_81", "feat_82", "feat_83", "feat_84", "feat_85", "feat_86", "feat_87", "feat_88", "feat_89", "feat_90", "feat_91", "feat_92", 
+"feat_93", "feat_94", "feat_95", "feat_96", "feat_97", "feat_98", "feat_99", "feat_100", "feat_101", "feat_102", "feat_103", "feat_104", "feat_105", "feat_106", "feat_107", "feat_108", "feat_109", "feat_110", "feat_111", "feat_112", "feat_113", "feat_114", "feat_115", "feat_116", "feat_117", "feat_118", "feat_119", "feat_120", "feat_121", "feat_122", "feat_123", "feat_124", "feat_125", "feat_126", "feat_127", "feat_128", "feat_129", "feat_130", "feat_131", "feat_132", "feat_133", "feat_134", "feat_135", 
+"feat_136", "feat_137", "feat_138", "feat_139", "feat_140", "feat_141", "feat_142", "feat_143", "feat_144", "feat_145", "feat_146", "feat_147", "feat_148", "feat_149", "feat_150", "feat_151", "feat_152", "feat_153", "feat_154", "feat_155", "feat_156", "feat_157", "feat_158", "feat_159", "feat_160", "feat_161", "feat_162", "feat_163", "feat_164", "feat_165", "feat_166", "feat_167", "feat_168", "feat_169", "feat_170", "feat_171", "feat_172", "feat_173", "feat_174", "feat_175", "feat_176", "feat_177", 
+"feat_178", "feat_179", "feat_180", "feat_181", "feat_182", "feat_183", "feat_184", "feat_185", "feat_186", "feat_187", "feat_188", "feat_189", "feat_190", "feat_191")]: Error in featurebased.default(paste(feat[1], "~ ."), df): data argument must be a data.frame
+
+
+NOTE: Log Print Time:  2022-02-02 23:01:25
+NOTE: Elapsed Time in seconds: 1.30162906646729
+
+=========================================================================
+Log End Time: 2022-02-02 23:01:25
+Log Elapsed Time: 0 00:00:01
+=========================================================================
