@@ -401,7 +401,7 @@ class PPM_MPPN(PPModel):
         dls=self.o.get_dls(after_batch=gaf_transform,bs=self.bs)
         loss=partial(multi_loss_sum,self.o)
         time_metric=lambda p,y: maeDurDaysNormalize(listify(p)[-1],listify(y)[-1],mean=self.mean,std=self.std)
-        self._train_validate(o,dls,self.pretrain,loss=loss,metrics=[act_acc,act_pre, act_rec, act_f1, res_acc, res_pre, res_rec, res_f1,time_metric])
+        self._train_validate(self.o,dls,self.pretrain,loss=loss,metrics=[act_acc,act_pre, act_rec, act_f1, res_acc, res_pre, res_rec, res_f1,time_metric])
 
     def next_step_prediction(self,col='activity',outcome=False):
         pretrain=copy.deepcopy(self.pretrain)
@@ -410,7 +410,7 @@ class PPM_MPPN(PPModel):
         dls=self.o.get_dls(after_batch=gaf_transform,bs=self.bs,outcome=outcome)
         loss=partial(multi_loss_sum,self.o)
         metrics=get_metrics(self.o)
-        return self._train_validate(o,dls,m,loss=loss,metrics=metrics,output_index=[1,2,3,4])
+        return self._train_validate(self.o,dls,m,loss=loss,metrics=metrics,output_index=[1,2,3,4])
 
     def next_resource_prediction(self):return self.next_step_prediction(outcome=False,col='resource')
     def last_resource_prediction(self): return self.next_step_prediction(outcome=True,col='resource')
@@ -422,7 +422,7 @@ class PPM_MPPN(PPModel):
         self.o.ycat_names,self.o.ycont_names=L(),L(col)
         dls=self.o.get_dls(after_batch=gaf_transform,bs=self.bs,outcome=outcome)
         xb,yb=dls.one_batch()
-        return self._train_validate(o,dls,m,loss=mae,metrics=time)
+        return self._train_validate(self.o,dls,m,loss=mae,metrics=time)
     def duration_to_end_prediction(self):return self.duration_to_next_event_prediction(outcome=True)
     def activity_suffix_prediction(self): pass
     def resource_suffix_prediction(self): pass
