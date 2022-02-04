@@ -56,8 +56,8 @@ elif exp_mode == "CI":
   mp.balancing_technique = balancing_technique
 
 elif exp_mode == "default":
-  logs=[EventLogs.Helpdesk]
-  ppms=[PPM_Camargo_concat]
+  logs=[EventLogs.Helpdesk,EventLogs.Mobis]
+  ppms=[PPM_Camargo_concat, PPM_MPPN]
 
 else:
   logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.BPIC_15_5,EventLogs.Mobis,EventLogs.Helpdesk]

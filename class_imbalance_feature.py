@@ -1,8 +1,14 @@
 import os,csv
+import argparse
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
 from class_imbalance_degree import imbalance_degree
+#------------------------------------------------------------------------------------------
+# Command Line Arguments
+#------------------------------------------------------------------------------------------
+parser = argparse.ArgumentParser()
+parser.add_argument('--folder', default="results_default",type=str, help='results folder')    
 
 #--------------------------------------------------------------------------------------------
 # Helper Function
@@ -35,7 +41,7 @@ def class_imbalance_analysis(df,cat_col):
   sim_func = ["EU","CH","KL","HE","TV","CS"]
   for sf in sim_func:
     id_scores.append(imbalance_degree(np.array(df[cat_col]), sf))
-  metrics = [size,num_classes,frequency_dist,empirical_dist,ir, multi_group, minority_percent]
+  metrics = [size,num_classes,ir, multi_group, minority_percent]
   metrics = metrics + id_scores
   return metrics
 
@@ -44,22 +50,29 @@ def class_imbalance_analysis(df,cat_col):
 #--------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-	fields = ["Dataset","Column","Size of Dataset","Num Classes","Frequency Distribution","Empirical Distribution","Imbalance Ratio",\
-	 "Multi-Minority/Majority","Minority Class", "Euclidean distance",	"Chebyshev distance",\
-	 "Kullback Leibler divergence","Hellinger distance","Total variation distance","Chi-square divergence"]
-												
-	rows = list()
-	datasets = ['ok']
-	for dataset in datasets:
-		df = pd.read_csv(f"03_Class-Overlap/targets/Helpdesk_Camargo_concat.csv")
-		df = df.dropna() 
-		cat_cols = df.columns.tolist()
-		for col in cat_cols:
-			row = [dataset,col] + (class_imbalance_analysis(df,col))
-			rows.append(row)
+  fields = ["Dataset","Model","Column","Size of Dataset","Num Classes","Imbalance Ratio",\
+   "Multi-Minority/Majority","Minority Class", "Euclidean distance", "Chebyshev distance",\
+ "Kullback Leibler divergence","Hellinger distance","Total variation distance","Chi-square divergence"]
+  rows = list()
+  args = parser.parse_args()
+  folder = args.folder
+  path = f"{folder}/models/run0"
+  logs = os.listdir(path)
+  for log in logs:
+    models = os.listdir(f"{path}/{log}")
+    for model in models:
+      dataset_path = f"{path}/{log}/{model}/targets.csv"
+      df = pd.read_csv(dataset_path)
+      df = df.dropna()
+      all_cols = df.columns.tolist()
 
-	with open("class_imbalance_results.csv", 'w') as csvfile: 
-	    csvwriter = csv.writer(csvfile)
-	    csvwriter.writerow(fields) 
-	    csvwriter.writerows(rows)
-	csvfile.close()
+      for col in all_cols:
+        if "CAT" in col: #Consider only categorical columns
+          row = [log,model,col] + (class_imbalance_analysis(df,col))
+          rows.append(row)
+
+  with open(f"{folder}/class_imbalance_results.csv",'w', newline='') as csvfile: 
+      csvwriter = csv.writer(csvfile)
+      csvwriter.writerow(fields) 
+      csvwriter.writerows(rows)
+  csvfile.close()

@@ -44,7 +44,7 @@ def class_imbalance_analysis(df,cat_col):
 #--------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-	datasets = list(os.listdir('../event_logs/'))
+	datasets = list(os.listdir('event_logs/'))
 	cat_cols = ['activity','resource']
 
 	fields = ["Dataset","Column","Size of Dataset","Num Classes","Frequency Distribution","Empirical Distribution","Imbalance Ratio",\

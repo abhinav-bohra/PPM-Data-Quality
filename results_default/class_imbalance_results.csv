@@ -1,0 +1,3 @@
+Dataset,Model,Column,Size of Dataset,Num Classes,Imbalance Ratio,Multi-Minority/Majority,Minority Class,Euclidean distance,Chebyshev distance,Kullback Leibler divergence,Hellinger distance,Total variation distance,Chi-square divergence
+Helpdesk,Camargo_concat,CAT_activity_0,16768,6,5558,Multi-minority,83.0,4.993346547749859,4.993344465648855,4.976725443790797,4.94646765538043,4.993344465648855,4.986737363926563
+Helpdesk,Camargo_concat,CAT_resource_0,16768,12,6680,Multi-minority,83.0,9.878082864350716,9.856106870229008,9.875346438195269,9.916741081108336,9.988406488549618,9.771029516666358

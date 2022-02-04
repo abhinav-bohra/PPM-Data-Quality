@@ -19,8 +19,10 @@ pip install -r requirements.txt
 
 ### Class Imbalance
 
+NOTE: Run all of the following commands from IBM-Data-Quality folder
+
 Step 1: Basic Set-up
-Set models and datasets in 'default' (line 59: prediction_evaluation.py)
+Set models and datasets in 'default' (line 58: prediction_evaluation.py)
 Set the same models and datasets in 'CI' mode as well.(line 51: prediction_evaluation.py)
 List of supported models and datasets - [link]list (Please use the exact names)
 
@@ -47,7 +49,6 @@ Step 4: Compute Case-level results
 ```
 
 Step 5: Get results after class imbalance remiditions (undersampling)
-Run the following commands from IBM-Data-Quality folder
 
 ```
 !python prediction_evaluation.py --exp CI --balancing_technique NM --save_folder results_nm
@@ -64,13 +65,21 @@ Step 6: Compute Class Imbalance Score on undersampled features
 ```
 
 Step 7: Compute Case-level results
-Run the following command from IBM-Data-Quality folder
 
 ```
 !python case_eval.py --folder results_nm
 !python case_eval.py --folder results_conn
 !python case_eval.py --folder results_ncr
 ```
+
+
+### Class Overlap
+Step 1: Compute Class Overlap (F1 & F2) Score on features
+
+```
+!python class_overlap.py --folder results_defaults
+```
+
 
 
 For each model, checkpoints are saved as .pth files in 01_Missing-Values/results/models/
