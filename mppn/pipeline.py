@@ -78,15 +78,17 @@ def save_features(obj, store_path, o):
 
   #Saving Features
   num_features = len(features[0])
+  feat_size = num_features//len(o.x_names)
   ft_cols = []
-  for y_name in o.y_names:
-    if y_name in o.cat_names:
+  for x_name in o.x_names:
+    if x_name in o.cat_names:
         varType = "CAT"
-    elif y_name in o.cont_names:
+    elif x_name in o.cont_names:
         varType = "CONT"
     else:
         varType = "OTHER"
-    ft_cols.concat([f"{varType}_{y_name}_{i}" for i in range(0,num_features)])
+    ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
+    
   df = pd.DataFrame(features, columns = ft_cols)
   case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
   df.insert(0, "case_len", case_len, True)
@@ -95,6 +97,7 @@ def save_features(obj, store_path, o):
   
   #Saving Targets
   num_targets = len(targets[0])
+  targ_size = num_targets//len(o.y_names)
   tg_cols = []
   for y_name in o.y_names:
     if y_name in o.cat_names:
@@ -103,7 +106,8 @@ def save_features(obj, store_path, o):
         varType = "CONT"
     else:
         varType = "OTHER"
-    tg_cols.concat([f"{varType}_{y_name}_{i}" for i in range(0,num_targets)])
+    tg_cols = tg_cols + [f"{varType}_{y_name}_{i}" for i in range(0,targ_size)]
+    
   df = pd.DataFrame(targets, columns = tg_cols)
   df.to_csv(f'{store_path}/targets.csv', index=False)
   logger.debug(f"Targets saved at - {store_path}/targets.csv")
@@ -297,7 +301,6 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
                 ppm_class=ppm_classes[j]
                 model_path=store_path/'models'/f"run{r}" if store else None
                 model=ppm_class(log,ds_name,splits,store=model_path,sample=sample,**kwargs)
-
                 logger.debug("*"*50)
                 logger.debug(ds_name)
                 logger.debug(model.get_name())
