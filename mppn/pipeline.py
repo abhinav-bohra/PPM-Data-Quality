@@ -65,12 +65,16 @@ def save_features(obj, store_path, o):
   for row in ds:
     #Features
     x = (list(row))[:-1]
+    if(len(x.size())==0):#scalar
+      x = x.unsqueeze(0)
     x_ = [torch.flatten(t) for t in x]
     ftr = torch.hstack(x_)
     ftr = ftr.detach().cpu().numpy()
     features.append(ftr)
     #Targets
     y = (list(row))[-1]
+    if(len(y.size())==0):#scalar
+      y = y.unsqueeze(0)
     y_ = [torch.flatten(t) for t in y]
     tar = torch.hstack(y_)
     tar = tar.detach().cpu().numpy()

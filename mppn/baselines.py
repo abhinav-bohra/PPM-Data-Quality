@@ -549,7 +549,7 @@ class PPM_MiDA(PPModel):
         loss=partial(multi_loss_sum,self.o)
         metrics=get_metrics(self.o)
         output_index = list(range(1, len(metrics)+1))
-        return self._train_validate(o,dls,m,loss=loss,metrics=metrics,output_index=output_index)
+        return self._train_validate(self.o,dls,m,loss=loss,metrics=metrics,output_index=output_index)
 
     def next_resource_prediction(self):return self.next_step_prediction(outcome=False,col='resource')
 
