@@ -21,7 +21,7 @@ from fastai.text import *
 #------------------------------------------------------------------------------------------
 # Logging
 #------------------------------------------------------------------------------------------
-logging.basicConfig(filename="logs/baselines.log",format='',filemode='w')
+logging.basicConfig(filename="baselines.log",format='',filemode='w')
 logger = logging.getLogger() 
 logger.setLevel(logging.DEBUG)
 logging.getLogger('numba').setLevel(logging.WARNING)
@@ -290,14 +290,14 @@ class PPM_Camargo_Spezialized(PPModel):
         dls=o.get_dls(bs=self.bs)
         m=self.model(o)
         self.nsp_acc,self.nrp_acc,self.nsp_pre,self.nrp_pre, \
-        self.nsp_rec,self.nrp_rec,self.nsp_f1,self.nrp_f1,self.dtnp = self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
+        self.nsp_rec,self.nrp_rec,self.nsp_f1,self.nrp_f1,self.dtnp = self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
                                                    output_index=[1,2,3,4,5,6,7,8,9])
         # Last event prediction training
         print('Last event prediction training')
         dls=o.get_dls(outcome=True,bs=self.bs)
         m=self.model(o)
         self.op_acc,self.lrp_acc,self.op_pre,self.lrp_pre, \
-        self.op_rec,self.lrp_rec,self.op_f1,self.lrp_f1,self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
+        self.op_rec,self.lrp_rec,self.op_f1,self.lrp_f1,self.dtlp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
                                                    output_index=[1,2,3,4,5,6,7,8,9])
         
     def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
@@ -327,7 +327,7 @@ class PPM_RNNwEmbedding(PPModel):
         m=self.model(o)
         metrics=get_metrics(o)
         output_index = list(range(1, len(metrics)+1))
-        return self._train_validate(dls,m,metrics=metrics,output_index=output_index)
+        return self._train_validate(o,dls,m,metrics=metrics,output_index=output_index)
 
     def next_resource_prediction(self): return self.next_step_prediction(col='resource')
     def last_resource_prediction(self): return self.next_step_prediction(col='resource',outcome=True)
@@ -451,14 +451,14 @@ class PPM_Tax_Spezialized(PPModel):
         print('Next event prediction training')
         dls=o.get_dls(bs=self.bs)
         m=self.model(o)
-        self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1, self.dtnp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
+        self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1, self.dtnp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
                                                    output_index=[1,2,3,4,5])
 
         # Last event prediction training
         print('Last event prediction training')
         dls=o.get_dls(outcome=True,bs=self.bs)
         m=self.model(o)
-        self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(dls,m,loss=loss,metrics=get_metrics(o),
+        self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
                                                  output_index=[1,2,3,4,5])
 
     def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
@@ -549,7 +549,7 @@ class PPM_MiDA(PPModel):
         loss=partial(multi_loss_sum,self.o)
         metrics=get_metrics(self.o)
         output_index = list(range(1, len(metrics)+1))
-        return self._train_validate(dls,m,loss=loss,metrics=metrics,output_index=output_index)
+        return self._train_validate(o,dls,m,loss=loss,metrics=metrics,output_index=output_index)
 
     def next_resource_prediction(self):return self.next_step_prediction(outcome=False,col='resource')
 

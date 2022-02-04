@@ -22,7 +22,7 @@ balancing_technique = None
 #------------------------------------------------------------------------------------------
 # Logging
 #------------------------------------------------------------------------------------------
-logging.basicConfig(filename="logs/preprocess.log",format='',filemode='w')
+logging.basicConfig(filename="preprocess.log",format='',filemode='w')
 logger = logging.getLogger() 
 logger.setLevel(logging.DEBUG)
 logging.getLogger('numba').setLevel(logging.WARNING)

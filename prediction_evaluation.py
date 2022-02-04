@@ -17,10 +17,10 @@ import argparse
 # Command Line Arguments
 #------------------------------------------------------------------------------------------
 parser = argparse.ArgumentParser()
-parser.add_argument('--exp', default="MV",type=str, help='MV - Missing Values, CI - Class Imbalance')    
-parser.add_argument('--save_folder', default="MV",type=str, help='Folder for saving results')        
+parser.add_argument('--exp', default="default",type=str, help='MV - Missing Values, CI - Class Imbalance, Default - default mode')    
+parser.add_argument('--save_folder', default="results_default",type=str, help='Folder for saving results')        
 parser.add_argument('--gpu', default="0",type=str, help='GPU Device number')    
-parser.add_argument('--balancing_technique', default="0",type=str, help='Can be one of [NM,CONN,NCR]')    
+parser.add_argument('--balancing_technique', default="NM",type=str, help='Can be one of [NM,CONN,NCR]')    
 
 #------------------------------------------------------------------------------------------
 # Arguments and Global Variables
@@ -29,18 +29,15 @@ args = parser.parse_args()
 exp_mode = args.exp
 save_folder = args.save_folder 
 gpu_id = args.gpu
+save_dir = f"{save_folder}"
 
 if exp_mode == "CI" :
   balancing_technique = args.balancing_technique
 else:
   balancing_technique = "None"
 
-save_dir = f"{save_folder}"
-ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
-
-
 #------------------------------------------------------------------------------------------
-# Experiment Modes
+# Setting up models and logs based on experiment mode
 #------------------------------------------------------------------------------------------
 if exp_mode == "MV":
   #All datasets with missing values
@@ -49,22 +46,26 @@ if exp_mode == "MV":
   EventLogs.BPIC_12_Wcomplete, EventLogs.BPIC_12_Wc_const, EventLogs.BPIC_12_Wc_mode_event, EventLogs.BPIC_12_Wc_mode_case,\
   EventLogs.BPIC_13_CP, EventLogs.BPIC_13_CP_const, EventLogs.BPIC_13_CP_mode_event, EventLogs.BPIC_13_CP_mode_case,\
   EventLogs.Mobis, EventLogs.Mobis_const, EventLogs.Mobis_mode_event, EventLogs.Mobis_mode_case]
-  save_dir = f"01_Missing-Values/{save_folder}"
+  ppms=[PPM_Camargo_concat]
+
 elif exp_mode == "CI":
-  logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.BPIC_15_5,EventLogs.Mobis,EventLogs.Helpdesk]
-  save_dir = f"02_Class-Imbalance/{save_folder}"
+  logs=[EventLogs.Helpdesk]
+  ppms=[PPM_Camargo_concat]
   import mppn.preprocessing as mp
   mp.ci_flag = True
   mp.balancing_technique = balancing_technique
-elif exp_mode == "test":
+
+elif exp_mode == "default":
   logs=[EventLogs.Helpdesk]
-  save_dir = f"{save_folder}"
   ppms=[PPM_Camargo_concat]
+
 else:
+  logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.BPIC_15_5,EventLogs.Mobis,EventLogs.Helpdesk]
   logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_A, EventLogs.BPIC_12_O, EventLogs.BPIC_12_W, \
   EventLogs.BPIC_12_Wcomplete, EventLogs.BPIC_13_CP, EventLogs.BPIC_15_1, EventLogs.BPIC_15_2, \
   EventLogs.BPIC_15_3, EventLogs.BPIC_15_4, EventLogs.BPIC_15_5, EventLogs. BPIC_17_OFFER, \
   EventLogs.BPIC_20_RFP, EventLogs.Helpdesk, EventLogs.Mobis]
+  ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
 
 
 #------------------------------------------------------------------------------------------

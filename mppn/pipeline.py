@@ -14,7 +14,7 @@ import pandas as pd
 #------------------------------------------------------------------------------------------
 # Logging
 #------------------------------------------------------------------------------------------
-logging.basicConfig(filename="logs/pipeline.log",format='',filemode='w')
+logging.basicConfig(filename="pipeline.log",format='',filemode='w')
 logger = logging.getLogger() 
 logger.setLevel(logging.DEBUG)
 logging.getLogger('numba').setLevel(logging.WARNING)
@@ -28,9 +28,7 @@ class RNNwEmbedding(torch.nn.Module) :
         emb_size = int(sqrt(vocab_size))+1
         hidden_six = 20
         self.emb = nn.Embedding(vocab_size,emb_size)
-
         self.rnn = nn.RNN(emb_size, hidden_six, batch_first=True, num_layers=2)
-
         self.linear = nn.Linear(hidden_six, vocab_size)
 
     def forward(self, x):
@@ -53,11 +51,14 @@ class HideOutput:
         sys.stdout = self._original_stdout
 
 #Cell
-def save_features(obj, store_path):
+def save_features(obj, store_path, o):
   train = obj[0].dataset
   dev = obj[1].dataset
   test = obj[2].dataset
   ds = train + dev + test
+  store_path = str(store_path)
+  model_name = store_path.split('/')[-2]
+  ds_name = store_path.split('/')[-1]
 
   features = list()
   targets = list()
@@ -75,27 +76,38 @@ def save_features(obj, store_path):
     tar = tar.detach().cpu().numpy()
     targets.append(tar)
 
+  #Saving Features
   num_features = len(features[0])
-  cols = [f"feat_{i}" for i in range(0,num_features)]
-  df = pd.DataFrame(features, columns = cols)
+  ft_cols = []
+  for y_name in o.y_names:
+    if y_name in o.cat_names:
+        varType = "CAT"
+    elif y_name in o.cont_names:
+        varType = "CONT"
+    else:
+        varType = "OTHER"
+    ft_cols.concat([f"{varType}_{y_name}_{i}" for i in range(0,num_features)])
+  df = pd.DataFrame(features, columns = ft_cols)
   case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
   df.insert(0, "case_len", case_len, True)
-
-  store_path = str(store_path)
-  model_name = store_path.split('/')[-2]
-  ds_name = store_path.split('/')[-1]
-  df.to_csv(f'03_Class-Overlap/features/{model_name}_{ds_name}.csv', index=False)
   df.to_csv(f'{store_path}/features.csv', index=False)
-  logger.debug(f"Features saved at - 03_Class-Overlap/features/{model_name}_{ds_name}.csv")
   logger.debug(f"Features saved at - {store_path}/features.csv")
   
+  #Saving Targets
   num_targets = len(targets[0])
-  cols = [f"targ_{i}" for i in range(0,num_targets)]
-  df = pd.DataFrame(targets, columns = cols)
-  df.to_csv(f'03_Class-Overlap/targets/{model_name}_{ds_name}.csv', index=False)
+  tg_cols = []
+  for y_name in o.y_names:
+    if y_name in o.cat_names:
+        varType = "CAT"
+    elif y_name in o.cont_names:
+        varType = "CONT"
+    else:
+        varType = "OTHER"
+    tg_cols.concat([f"{varType}_{y_name}_{i}" for i in range(0,num_targets)])
+  df = pd.DataFrame(targets, columns = tg_cols)
   df.to_csv(f'{store_path}/targets.csv', index=False)
-  logger.debug(f"Features saved at - 03_Class-Overlap/targets/{model_name}_{ds_name}.csv")
-  logger.debug(f"Features saved at - {store_path}/targets.csv")
+  logger.debug(f"Targets saved at - {store_path}/targets.csv")
+
 
 # Cell
 def training_loop(learn,epoch,print_output,lr_find):
@@ -109,7 +121,7 @@ def training_loop(learn,epoch,print_output,lr_find):
     else: learn.fit(epoch,0.01)
 
 # Cell
-def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=20,print_output=True,model_dir=".",lr_find=True,
+def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_output=True,model_dir=".",lr_find=True,
                    output_index=1,patience=3,min_delta=0.005,show_plot=True,store_path='tmp',model_name='.model'):
     '''
     Trains a model on the training set with early stopping based on the validation loss.
@@ -120,25 +132,33 @@ def train_validate(dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,epoch=2
       SaveModelCallback(fname=model_name)
       ]
     learn=Learner(dls, m, path=store_path, model_dir=model_dir, loss_func=loss ,metrics=metrics,cbs=cbs)
-            
+    
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
         data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
-        with open(f'{store_path}/preds.pickle', 'wb') as f:
-            pickle.dump(data, f)
-        with open(f'{store_path}/dls.pickle', 'wb') as g:
-            pickle.dump(dls, g)
-        save_features(dls, store_path)
+        save_features(dls, store_path, o)
+        
+        with open(f'{store_path}/preds.pickle', 'wb') as f1:
+            pickle.dump(data, f1)
+        with open(f'{store_path}/dls.pickle', 'wb') as f2:
+            pickle.dump(dls, f2)
+        with open(f'{store_path}/PPObj.pickle', 'wb') as f3:
+            pickle.dump(o, f3)
+
         return learn.validate(dl=dls[2])[output_index]
     else:
         with HideOutput(),learn.no_bar():
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
             data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
-            with open(f'{store_path}/preds.pickle', 'wb') as f:
-                pickle.dump(data, f)
-            with open(f'{store_path}/dls.pickle', 'wb') as g:
-                pickle.dump(dls, g)
-            save_features(dls, store_path)
+            save_features(dls, store_path, o)
+            
+            with open(f'{store_path}/preds.pickle', 'wb') as f1:
+                pickle.dump(data, f1)
+            with open(f'{store_path}/dls.pickle', 'wb') as f2:
+                pickle.dump(dls, f2)
+            with open(f'{store_path}/PPObj.pickle', 'wb') as f3:
+                pickle.dump(o, f3)
+            
             return learn.validate(dl=dls[2])[output_index]
 
 
@@ -192,13 +212,13 @@ class PPModel():
         
         return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, lrp_acc,lrp_pre,lrp_rec,lrp_f1, op_acc,op_pre,op_rec,op_f1, dtnep, dtep, asp, rsp
 
-    def _train_validate(self,dls,m,metrics=[accuracy,F1Score],loss=F.cross_entropy,output_index=1):
+    def _train_validate(self,o,dls,m,metrics=accuracy,loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
         if self.store:
             ins_stack=inspect.stack()
             model_name=str(ins_stack[2][3]) if str(ins_stack[2][3])!='__evaluate' else str(ins_stack[1][3])
             store=self.store/self.ds_name/self.get_name()
-        return train_validate(dls,m,metrics=metrics,loss=loss,output_index=output_index, #Only change these
+        return train_validate(o,dls,m,metrics=metrics,loss=loss,output_index=output_index, #Only change these
                               epoch=self.epoch,print_output=self.print_output,patience=self.patience,
                               min_delta=self.min_delta,show_plot=False,store_path=store,model_name=model_name,
                               lr_find=self.lr_find)
@@ -277,6 +297,7 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
                 ppm_class=ppm_classes[j]
                 model_path=store_path/'models'/f"run{r}" if store else None
                 model=ppm_class(log,ds_name,splits,store=model_path,sample=sample,**kwargs)
+
                 logger.debug("*"*50)
                 logger.debug(ds_name)
                 logger.debug(model.get_name())

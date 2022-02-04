@@ -17,33 +17,61 @@ pip install -r requirements.txt
 
 ## Experiments
 
-### Missing Value
-```
-export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
-
-!python prediction_evaluation.py --exp MV --save_folder results 
-```
-
 ### Class Imbalance
+
+Step 1: Basic Set-up
+Set models and datasets in 'default' (line 59: prediction_evaluation.py)
+Set the same models and datasets in 'CI' mode as well.(line 51: prediction_evaluation.py)
+List of supported models and datasets - [link]list (Please use the exact names)
+
 ```
 export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
-
-!python prediction_evaluation.py --exp CI --balancing_technique NM --save_folder results 
 ```
 
+Step 2: Get Default Results
 
+```
+!python prediction_evaluation.py --exp default --save_folder results_default
+```
 
---exp : Experiment Mode
-- MV for Missing Values
-- CI for Class Imbalance
-- test for Testing
+Step 3: Compute Class Imbalance Score on default features
 
---balancing_technique : Balancing Technique
-- NM for Near Miss
-- CONN for Condensed Nearest Neighbour
-- NCR for Neighbourhood Cleaning Rule
+```
+! python class_imbalance.py --folder results_default 
+```
 
---save_folder : Name of folder to save model checkpoints and results.<br><br>
+Step 4: Compute Case-level results
+
+```
+! python case_eval.py --folder results_default 
+```
+
+Step 5: Get results after class imbalance remiditions (undersampling)
+Run the following commands from IBM-Data-Quality folder
+
+```
+!python prediction_evaluation.py --exp CI --balancing_technique NM --save_folder results_nm
+!python prediction_evaluation.py --exp CI --balancing_technique CONN --save_folder results_conn
+!python prediction_evaluation.py --exp CI --balancing_technique NCR --save_folder results_ncr
+```
+
+Step 6: Compute Class Imbalance Score on undersampled features
+
+```
+!python class_imbalance.py --folder results_nm
+!python class_imbalance.py --folder results_conn
+!python class_imbalance.py --folder results_ncr
+```
+
+Step 7: Compute Case-level results
+Run the following command from IBM-Data-Quality folder
+
+```
+!python case_eval.py --folder results_nm
+!python case_eval.py --folder results_conn
+!python case_eval.py --folder results_ncr
+```
+
 
 For each model, checkpoints are saved as .pth files in 01_Missing-Values/results/models/
 
