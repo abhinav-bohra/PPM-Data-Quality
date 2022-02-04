@@ -76,3 +76,4 @@ if __name__ == "__main__":
       csvwriter.writerow(fields) 
       csvwriter.writerows(rows)
   csvfile.close()
+print("[SUCCESS] Computed Class Imbalance successfully")

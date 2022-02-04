@@ -39,7 +39,7 @@ python prediction_evaluation.py --exp default --save_folder results_default
 Step 3: Compute Class Imbalance Score on default features
 
 ```
-python class_imbalance.py --folder results_default 
+python class_imbalance_feature.py --folder results_default 
 ```
 
 Step 4: Compute Case-level results
@@ -48,7 +48,7 @@ Step 4: Compute Case-level results
 python case_eval.py --folder results_default 
 ```
 
-Step 5: Get results after class imbalance remiditions (undersampling)
+Step 5: Get results after class imbalance remediations (undersampling)
 
 ```
 python prediction_evaluation.py --exp CI --balancing_technique NM --save_folder results_nm
@@ -59,12 +59,12 @@ python prediction_evaluation.py --exp CI --balancing_technique NCR --save_folder
 Step 6: Compute Class Imbalance Score on undersampled features
 
 ```
-python class_imbalance.py --folder results_nm
-python class_imbalance.py --folder results_conn
-python class_imbalance.py --folder results_ncr
+python class_imbalance_feature.py --folder results_nm
+python class_imbalance_feature.py --folder results_conn
+python class_imbalance_feature.py --folder results_ncr
 ```
 
-Step 7: Compute Case-level results
+Step 7: Compute Case-level results after undersampling
 
 ```
 python case_eval.py --folder results_nm
@@ -74,10 +74,10 @@ python case_eval.py --folder results_ncr
 
 
 ### Class Overlap
-Step 1: Compute Class Overlap (F1 & F2) Score on features
+Step 1: Compute Class Overlap (F1 & F2) Score on default features
 
 ```
-python class_overlap.py --folder results_defaults
+python class_overlap.py --folder results_default
 ```
 
 
