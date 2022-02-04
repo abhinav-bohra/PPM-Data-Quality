@@ -1,9 +1,0 @@
-Dataset,Model,Case Length,CAT_activity_0_F1,CAT_resource_0_F1,CONT_timestamp_Relative_elapsed_0_F1,CAT_activity_0_F2,CAT_resource_0_F2,CONT_timestamp_Relative_elapsed_0_F2
-Helpdesk,Camargo_concat,DATASET-LEVEL,1.0,0.9909765509053132,0.3523474536742569,nan,0.0,0.0
-Helpdesk,Camargo_concat,1,1.0,0.9676638349514564,0.0,nan,nan,nan
-Helpdesk,Camargo_concat,2,1.0,0.9633336999963333,0.0,nan,nan,nan
-Helpdesk,Camargo_concat,3,1.0,0.6595141700404856,0.0,nan,nan,nan
-Helpdesk,Camargo_concat,4,1.0,0.7266763848396501,0.0,nan,nan,nan
-Helpdesk,Camargo_concat,5,1.0,0.0,0.0,nan,nan,nan
-Helpdesk,Camargo_concat,6,nan,nan,nan,nan,nan,nan
-Helpdesk,Camargo_concat,7,nan,nan,nan,nan,nan,nan
