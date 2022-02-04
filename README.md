@@ -23,6 +23,7 @@ NOTE: Run all of the following commands from IBM-Data-Quality folder
 
 Step 1: Basic Set-up
 Set models and datasets in 'default' (line 58: prediction_evaluation.py)
+
 Set the same models and datasets in 'CI' mode as well.(line 51: prediction_evaluation.py)
 List of supported models and datasets - [link]list (Please use the exact names)
 
