@@ -22,16 +22,15 @@ pip install -r requirements.txt
 NOTE: Run all of the following commands from IBM-Data-Quality folder
 
 Step 1: Basic Set-up
-Set models and datasets in 'default' (line 58: prediction_evaluation.py)
 
-Set the same models and datasets in 'CI' mode as well.(line 51: prediction_evaluation.py)
-List of supported models and datasets - [link]list (Please use the exact names)
+Set models and logs in 'default' mode (line 58: prediction_evaluation.py)  
+Set the same models and logs in 'CI' mode as well (line 51: prediction_evaluation.py)
 
 ```
 export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
 ```
 
-Step 2: Get Default Results
+Step 2: Get Default results
 
 ```
 python prediction_evaluation.py --exp default --save_folder results_default
