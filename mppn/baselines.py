@@ -319,7 +319,7 @@ class PPM_Camargo_Spezialized(PPModel):
     procs=[Categorify,Datetify,Normalize,FillMissing]
 
     def setup(self):
-        o=PPObj(self.log,self.procs,cat_names=self.cat_names,date_names=self.date_names,y_names=self.y_names,
+        self.o=PPObj(self.log,self.procs,cat_names=self.cat_names,date_names=self.date_names,y_names=self.y_names,
                 cont_names=self.cont_names,splits=self.splits)
         
     def next_step_prediction(self,col='activity',outcome=False):
@@ -517,11 +517,11 @@ class PPM_Tax_Spezialized(PPModel):
            Normalize,FillMissing]
 
     def setup(self):
-        o=PPObj(self.log,self.procs,cat_names=self.cat_names,date_names=self.date_names,y_names=self.y_names,
+        self.o=PPObj(self.log,self.procs,cat_names=self.cat_names,date_names=self.date_names,y_names=self.y_names,
                 cont_names=self.cont_names,splits=self.splits)
 
         loss=partial(multi_loss_sum,o)
-        
+
     def next_step_prediction(self,col='activity',outcome=False):
         self.o.set_y_names(col)
         print(self.o.y_names)
