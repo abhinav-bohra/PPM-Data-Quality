@@ -270,6 +270,45 @@ class Camargo_fullconcat(torch.nn.Module) :
         return x_act,x_res,x_tim
 
 # Cell
+# class PPM_Camargo_Spezialized(PPModel):
+
+#     model = Camargo_specialized
+#     date_names=['timestamp']
+#     cat_names=['activity','resource']
+#     y_names=['activity','resource','timestamp_Relative_elapsed']
+#     cont_names=None
+#     procs=[Categorify,Datetify,Normalize,FillMissing]
+
+#     def setup(self):
+#         o=PPObj(self.log,self.procs,cat_names=self.cat_names,date_names=self.date_names,y_names=self.y_names,
+#                 cont_names=self.cont_names,splits=self.splits)
+
+#         loss=partial(multi_loss_sum,o)
+
+#         # Next event prediction training
+#         print('Next event prediction training')
+#         dls=o.get_dls(bs=self.bs)
+#         m=self.model(o)
+#         self.nsp_acc,self.nrp_acc,self.nsp_pre,self.nrp_pre, \
+#         self.nsp_rec,self.nrp_rec,self.nsp_f1,self.nrp_f1,self.dtnp = self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
+#                                                    output_index=[1,2,3,4,5,6,7,8,9])
+#         # Last event prediction training
+#         print('Last event prediction training')
+#         dls=o.get_dls(outcome=True,bs=self.bs)
+#         m=self.model(o)
+#         self.op_acc,self.lrp_acc,self.op_pre,self.lrp_pre, \
+#         self.op_rec,self.lrp_rec,self.op_f1,self.lrp_f1,self.dtlp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
+#                                                    output_index=[1,2,3,4,5,6,7,8,9])
+        
+#     def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
+#     def next_resource_prediction(self):return self.nrp_acc, self.nrp_pre, self.nrp_rec, self.nrp_f1
+#     def last_resource_prediction(self): return self.lrp_acc, self.lrp_pre, self.lrp_rec, self.lrp_f1
+#     def outcome_prediction(self): return self.op_acc, self.op_pre, self.op_rec, self.op_f1
+#     def duration_to_next_event_prediction(self): return self.dtnp
+#     def duration_to_end_prediction(self): return self.dtlp
+#     def activity_suffix_prediction(self): pass
+#     def resource_suffix_prediction(self): pass
+
 class PPM_Camargo_Spezialized(PPModel):
 
     model = Camargo_specialized
@@ -282,30 +321,27 @@ class PPM_Camargo_Spezialized(PPModel):
     def setup(self):
         o=PPObj(self.log,self.procs,cat_names=self.cat_names,date_names=self.date_names,y_names=self.y_names,
                 cont_names=self.cont_names,splits=self.splits)
-
-        loss=partial(multi_loss_sum,o)
-
-        # Next event prediction training
-        print('Next event prediction training')
-        dls=o.get_dls(bs=self.bs)
-        m=self.model(o)
-        self.nsp_acc,self.nrp_acc,self.nsp_pre,self.nrp_pre, \
-        self.nsp_rec,self.nrp_rec,self.nsp_f1,self.nrp_f1,self.dtnp = self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
-                                                   output_index=[1,2,3,4,5,6,7,8,9])
-        # Last event prediction training
-        print('Last event prediction training')
-        dls=o.get_dls(outcome=True,bs=self.bs)
-        m=self.model(o)
-        self.op_acc,self.lrp_acc,self.op_pre,self.lrp_pre, \
-        self.op_rec,self.lrp_rec,self.op_f1,self.lrp_f1,self.dtlp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
-                                                   output_index=[1,2,3,4,5,6,7,8,9])
         
-    def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
-    def next_resource_prediction(self):return self.nrp_acc, self.nrp_pre, self.nrp_rec, self.nrp_f1
-    def last_resource_prediction(self): return self.lrp_acc, self.lrp_pre, self.lrp_rec, self.lrp_f1
-    def outcome_prediction(self): return self.op_acc, self.op_pre, self.op_rec, self.op_f1
-    def duration_to_next_event_prediction(self): return self.dtnp
-    def duration_to_end_prediction(self): return self.dtlp
+    def next_step_prediction(self,col='activity',outcome=False):
+        self.o.set_y_names(col)
+        print(self.o.y_names)
+        dls=self.o.get_dls(bs=self.bs,outcome=outcome)
+        m=self.model(self.o)
+        loss=partial(multi_loss_sum,self.o)
+        metrics=get_metrics(self.o)
+        output_index = list(range(1, len(metrics)+1))
+        return self._train_validate(self.o,dls,m,loss=loss,metrics=metrics,output_index=output_index)
+
+    def next_resource_prediction(self):return self.next_step_prediction(outcome=False,col='resource')
+
+    def last_resource_prediction(self): return self.next_step_prediction(outcome=True,col='resource')
+    def outcome_prediction(self): return self.next_step_prediction(outcome=True,col='activity')
+
+    def duration_to_next_event_prediction(self):
+        return self.next_step_prediction(outcome=False,col='timestamp_Relative_elapsed')
+
+    def duration_to_end_prediction(self):
+        return self.next_step_prediction(outcome=True,col='timestamp_Relative_elapsed')
     def activity_suffix_prediction(self): pass
     def resource_suffix_prediction(self): pass
 
@@ -430,6 +466,45 @@ class Tax_et_al_mixed(torch.nn.Module) :
         x_tim=self.linear_tim(x_tim[:,-1])
         return x_act,x_tim
 
+# class PPM_Tax_Spezialized(PPModel):
+
+#     model = Tax_et_al_spezialized
+#     date_names=['timestamp']
+#     cat_names=['activity']
+#     y_names=['activity','timestamp_Relative_elapsed']
+#     cont_names=None
+#     procs=[Categorify,OneHot,Datetify(date_encodings=['secSinceSunNoon','secSinceNoon','Relative_elapsed']),
+#            Normalize,FillMissing]
+
+#     def setup(self):
+#         o=PPObj(self.log,self.procs,cat_names=self.cat_names,date_names=self.date_names,y_names=self.y_names,
+#                 cont_names=self.cont_names,splits=self.splits)
+
+#         loss=partial(multi_loss_sum,o)
+
+#         # Next event prediction training
+#         print('Next event prediction training')
+#         dls=o.get_dls(bs=self.bs)
+#         m=self.model(o)
+#         self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1, self.dtnp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
+#                                                    output_index=[1,2,3,4,5])
+
+#         # Last event prediction training
+#         print('Last event prediction training')
+#         dls=o.get_dls(outcome=True,bs=self.bs)
+#         m=self.model(o)
+#         self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
+#                                                  output_index=[1,2,3,4,5])
+
+#     def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
+#     def next_resource_prediction(self): return None,None,None,None
+#     def last_resource_prediction(self): return None,None,None,None
+#     def outcome_prediction(self): return self.op_acc, self.op_pre, self.op_rec, self.op_f1
+#     def duration_to_next_event_prediction(self): return self.dtnp
+#     def duration_to_end_prediction(self): return self.dtlp
+#     def activity_suffix_prediction(self): pass
+#     def resource_suffix_prediction(self): pass
+
 # Cell
 class PPM_Tax_Spezialized(PPModel):
 
@@ -446,27 +521,25 @@ class PPM_Tax_Spezialized(PPModel):
                 cont_names=self.cont_names,splits=self.splits)
 
         loss=partial(multi_loss_sum,o)
+        
+    def next_step_prediction(self,col='activity',outcome=False):
+        self.o.set_y_names(col)
+        print(self.o.y_names)
+        dls=self.o.get_dls(bs=self.bs,outcome=outcome)
+        m=self.model(self.o)
+        loss=partial(multi_loss_sum,self.o)
+        metrics=get_metrics(self.o)
+        output_index = list(range(1, len(metrics)+1))
+        return self._train_validate(self.o,dls,m,loss=loss,metrics=metrics,output_index=output_index)
 
-        # Next event prediction training
-        print('Next event prediction training')
-        dls=o.get_dls(bs=self.bs)
-        m=self.model(o)
-        self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1, self.dtnp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
-                                                   output_index=[1,2,3,4,5])
-
-        # Last event prediction training
-        print('Last event prediction training')
-        dls=o.get_dls(outcome=True,bs=self.bs)
-        m=self.model(o)
-        self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
-                                                 output_index=[1,2,3,4,5])
-
-    def next_step_prediction(self): return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
     def next_resource_prediction(self): return None,None,None,None
     def last_resource_prediction(self): return None,None,None,None
-    def outcome_prediction(self): return self.op_acc, self.op_pre, self.op_rec, self.op_f1
-    def duration_to_next_event_prediction(self): return self.dtnp
-    def duration_to_end_prediction(self): return self.dtlp
+    def outcome_prediction(self): return self.next_step_prediction(outcome=True,col='activity')
+
+    def duration_to_next_event_prediction(self):
+        return self.next_step_prediction(outcome=False,col='timestamp_Relative_elapsed')
+    def duration_to_end_prediction(self):
+        return self.next_step_prediction(outcome=True,col='timestamp_Relative_elapsed')
     def activity_suffix_prediction(self): pass
     def resource_suffix_prediction(self): pass
 
