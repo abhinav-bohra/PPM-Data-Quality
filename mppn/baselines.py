@@ -285,7 +285,7 @@ class PPM_Camargo_Spezialized(PPModel):
         
     def next_step_prediction(self): 
         print('Next event prediction training')
-        loss=partial(multi_loss_sum,o)
+        loss=partial(multi_loss_sum,self.o)
         dls=o.get_dls(bs=self.bs)
         m=self.model(self.o)
         self.nsp_acc,self.nrp_acc,self.nsp_pre,self.nrp_pre, \
@@ -295,9 +295,9 @@ class PPM_Camargo_Spezialized(PPModel):
     def next_resource_prediction(self):return self.nrp_acc, self.nrp_pre, self.nrp_rec, self.nrp_f1
     def last_resource_prediction(self): 
         print('Last event prediction training')
-        loss=partial(multi_loss_sum,o)
+        loss=partial(multi_loss_sum,self.o)
         dls=o.get_dls(outcome=True,bs=self.bs)
-        m=self.model(o)
+        m=self.model(self.o)
         self.op_acc,self.lrp_acc,self.op_pre,self.lrp_pre, \
         self.op_rec,self.lrp_rec,self.op_f1,self.lrp_f1,self.dtlp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
                                                    output_index=[1,2,3,4,5,6,7,8,9])
@@ -484,7 +484,7 @@ class PPM_Tax_Spezialized(PPModel):
     def next_step_prediction(self): 
         # Next event prediction training
         print('Next event prediction training')
-        loss=partial(multi_loss_sum,o)
+        loss=partial(multi_loss_sum,self.o)
         dls=o.get_dls(bs=self.bs)
         m=self.model(self.o)
         self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1, self.dtnp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
@@ -495,7 +495,7 @@ class PPM_Tax_Spezialized(PPModel):
     def outcome_prediction(self): 
         # Last event prediction training
         print('Last event prediction training')
-        loss=partial(multi_loss_sum,o)
+        loss=partial(multi_loss_sum,self.o)
         dls=o.get_dls(outcome=True,bs=self.bs)
         m=self.model(self.o)
         self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(o,dls,m,loss=loss,metrics=get_metrics(o),
