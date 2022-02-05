@@ -25,13 +25,13 @@ for log in logs:
 		# Features and Targets
 		#------------------------------------------------------------------------------------------
 		#Features
-		df = pd.read_csv(f"{path}/{log}/{model}/features.csv")
+		df = pd.read_csv(f"{path}/{log}/{model}/features-setup.csv")
 		df = df.loc[:, (df != 0).any(axis=0)] #Drop columns with no non-zero value
 		df = df.dropna() #Drop null values, if any
 		features = df.drop(columns=["case_len"]) #Drop Case_len column as it is not a feature
 		feature_cols = list(features.columns) # feature names 
 		#Targets
-		targets = pd.read_csv(f"{path}/{log}/{model}/targets.csv")
+		targets = pd.read_csv(f"{path}/{log}/{model}/targets-setup.csv")
 		targets = targets.dropna() #Drop null values, if any
 		target_cols = list(targets.columns) #target names
 		#Checking if both are aligned or not

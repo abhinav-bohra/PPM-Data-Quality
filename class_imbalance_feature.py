@@ -61,7 +61,7 @@ if __name__ == "__main__":
   for log in logs:
     models = os.listdir(f"{path}/{log}")
     for model in models:
-      dataset_path = f"{path}/{log}/{model}/targets.csv"
+      dataset_path = f"{path}/{log}/{model}/targets-setup.csv"
       df = pd.read_csv(dataset_path)
       df = df.dropna()
       all_cols = df.columns.tolist()
