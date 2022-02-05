@@ -56,7 +56,7 @@ elif exp_mode == "CI":
   mp.balancing_technique = balancing_technique
 
 elif exp_mode == "default":
-  logs=[EventLogs.BPIC_12, EventLogs.Helpdesk]
+  logs=[EventLogs.BPIC_12]
   ppms=[PPM_Camargo_concat, PPM_Tax_Spezialized, PPM_MiDA, PPM_MPPN ]
 
 else:
