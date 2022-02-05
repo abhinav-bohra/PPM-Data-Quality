@@ -289,7 +289,7 @@ class PPM_Camargo_Spezialized(PPModel):
         dls=self.o.get_dls(bs=self.bs)
         m=self.model(self.o)
         self.nsp_acc,self.nrp_acc,self.nsp_pre,self.nrp_pre, \
-        self.nsp_rec,self.nrp_rec,self.nsp_f1,self.nrp_f1,self.dtnp = self._train_validate(self.o,dls,m,loss=loss,metrics=get_metrics(o),
+        self.nsp_rec,self.nrp_rec,self.nsp_f1,self.nrp_f1,self.dtnp = self._train_validate(self.o,dls,m,loss=loss,metrics=get_metrics(self.o),
                                                    output_index=[1,2,3,4,5,6,7,8,9])
         return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
     def next_resource_prediction(self):return self.nrp_acc, self.nrp_pre, self.nrp_rec, self.nrp_f1
@@ -299,7 +299,7 @@ class PPM_Camargo_Spezialized(PPModel):
         dls=self.o.get_dls(outcome=True,bs=self.bs)
         m=self.model(self.o)
         self.op_acc,self.lrp_acc,self.op_pre,self.lrp_pre, \
-        self.op_rec,self.lrp_rec,self.op_f1,self.lrp_f1,self.dtlp=self._train_validate(self.o,dls,m,loss=loss,metrics=get_metrics(o),
+        self.op_rec,self.lrp_rec,self.op_f1,self.lrp_f1,self.dtlp=self._train_validate(self.o,dls,m,loss=loss,metrics=get_metrics(self.o),
                                                    output_index=[1,2,3,4,5,6,7,8,9])
         return self.lrp_acc, self.lrp_pre, self.lrp_rec, self.lrp_f1
     def outcome_prediction(self): return self.op_acc, self.op_pre, self.op_rec, self.op_f1
@@ -487,7 +487,7 @@ class PPM_Tax_Spezialized(PPModel):
         loss=partial(multi_loss_sum,self.o)
         dls=self.o.get_dls(bs=self.bs)
         m=self.model(self.o)
-        self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1, self.dtnp=self._train_validate(self.o,dls,m,loss=loss,metrics=get_metrics(o),
+        self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1, self.dtnp=self._train_validate(self.o,dls,m,loss=loss,metrics=get_metrics(self.o),
                                                    output_index=[1,2,3,4,5])
         return self.nsp_acc, self.nsp_pre, self.nsp_rec, self.nsp_f1
     def next_resource_prediction(self): return None,None,None,None
@@ -498,7 +498,7 @@ class PPM_Tax_Spezialized(PPModel):
         loss=partial(multi_loss_sum,self.o)
         dls=self.o.get_dls(outcome=True,bs=self.bs)
         m=self.model(self.o)
-        self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(self.o,dls,m,loss=loss,metrics=get_metrics(o),
+        self.op_acc, self.op_pre, self.op_rec, self.op_f1, self.dtlp=self._train_validate(self.o,dls,m,loss=loss,metrics=get_metrics(self.o),
                                                  output_index=[1,2,3,4,5])
         return self.op_acc, self.op_pre, self.op_rec, self.op_f1
     def duration_to_next_event_prediction(self): return self.dtnp
