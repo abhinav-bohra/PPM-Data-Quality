@@ -51,30 +51,34 @@ class HideOutput:
         sys.stdout = self._original_stdout
 
 #Cell
-def save_features(obj, store_path, o):
+def save_features(obj, store_path, o, task_name):
   train = obj[0].dataset
   dev = obj[1].dataset
   test = obj[2].dataset
   ds = train + dev + test
   store_path = str(store_path)
-  model_name = store_path.split('/')[-2]
-  ds_name = store_path.split('/')[-1]
 
   features = list()
   targets = list()
   for row in ds:
     #Features
     x = (list(row))[:-1]
-    if(len(x.size())==0):#scalar
-      x = x.unsqueeze(0)
+    try:
+      if(len(x.size())==0):#scalar
+        x = x.unsqueeze(0)
+    except:
+      pass
     x_ = [torch.flatten(t) for t in x]
     ftr = torch.hstack(x_)
     ftr = ftr.detach().cpu().numpy()
     features.append(ftr)
     #Targets
     y = (list(row))[-1]
-    if(len(y.size())==0):#scalar
-      y = y.unsqueeze(0)
+    try:
+      if(len(y.size())==0):#scalar
+        y = y.unsqueeze(0)
+    except:
+      pass
     y_ = [torch.flatten(t) for t in y]
     tar = torch.hstack(y_)
     tar = tar.detach().cpu().numpy()
@@ -96,25 +100,25 @@ def save_features(obj, store_path, o):
   df = pd.DataFrame(features, columns = ft_cols)
   case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
   df.insert(0, "case_len", case_len, True)
-  df.to_csv(f'{store_path}/features.csv', index=False)
-  logger.debug(f"Features saved at - {store_path}/features.csv")
+  df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
+  logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
   
   #Saving Targets
   num_targets = len(targets[0])
   targ_size = num_targets//len(o.y_names)
   tg_cols = []
   for y_name in o.y_names:
-    if y_name in o.cat_names:
+    if y_name in o.ycat_names:
         varType = "CAT"
-    elif y_name in o.cont_names:
+    elif y_name in o.ycont_names:
         varType = "CONT"
     else:
         varType = "OTHER"
     tg_cols = tg_cols + [f"{varType}_{y_name}_{i}" for i in range(0,targ_size)]
     
   df = pd.DataFrame(targets, columns = tg_cols)
-  df.to_csv(f'{store_path}/targets.csv', index=False)
-  logger.debug(f"Targets saved at - {store_path}/targets.csv")
+  df.to_csv(f'{store_path}/targets-{task_name}.csv', index=False)
+  logger.debug(f"Targets saved at - {store_path}/targets-{task_name}.csv")
 
 
 # Cell
@@ -141,16 +145,19 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
       ]
     learn=Learner(dls, m, path=store_path, model_dir=model_dir, loss_func=loss ,metrics=metrics,cbs=cbs)
     
+    logger.debug("-----"*10)
+    logger.debug(f"TASK NAME: {model_name}")
+    logger.debug("-----"*10)
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
         data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
-        save_features(dls, store_path, o)
+        save_features(dls, store_path, o, model_name)
         
-        with open(f'{store_path}/preds.pickle', 'wb') as f1:
+        with open(f'{store_path}/preds-{model_name}.pickle', 'wb') as f1:
             pickle.dump(data, f1)
-        with open(f'{store_path}/dls.pickle', 'wb') as f2:
+        with open(f'{store_path}/dls-{model_name}.pickle', 'wb') as f2:
             pickle.dump(dls, f2)
-        with open(f'{store_path}/PPObj.pickle', 'wb') as f3:
+        with open(f'{store_path}/PPObj-{model_name}.pickle', 'wb') as f3:
             pickle.dump(o, f3)
 
         return learn.validate(dl=dls[2])[output_index]
@@ -158,13 +165,13 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
         with HideOutput(),learn.no_bar():
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
             data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
-            save_features(dls, store_path, o)
+            save_features(dls, store_path, o, model_name)
             
-            with open(f'{store_path}/preds.pickle', 'wb') as f1:
+            with open(f'{store_path}/preds-{model_name}.pickle', 'wb') as f1:
                 pickle.dump(data, f1)
-            with open(f'{store_path}/dls.pickle', 'wb') as f2:
+            with open(f'{store_path}/dls-{model_name}.pickle', 'wb') as f2:
                 pickle.dump(dls, f2)
-            with open(f'{store_path}/PPObj.pickle', 'wb') as f3:
+            with open(f'{store_path}/PPObj-{model_name}.pickle', 'wb') as f3:
                 pickle.dump(o, f3)
             
             return learn.validate(dl=dls[2])[output_index]
@@ -293,6 +300,7 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
+            log=log[:1000]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             if store:

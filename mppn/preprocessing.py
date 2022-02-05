@@ -457,20 +457,19 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         xs=tuple([i.squeeze() for i in [xcats,xconts] if i.shape[1]>0])
         ys=tuple([ycats[:,i] for i in range(ycats.shape[1])])+tuple([yconts[:,i] for i in range(yconts.shape[1])])
         
-        logger.debug("\n--BEFORE--")
-        for i in range(len(xs)):
-          logger.debug(xs[i].size())
         if ci_flag:
-          try:
-            logger.debug("Balancing Dataset...")
-            xs,ys = Balance(xs,ys)
-          except Exception as E:
-            logger.debug(f"\nException Occurred while BALANCING DATASET: {E}\n")
+          logger.debug("\n--BEFORE--")
+          for i in range(len(xs)):
+            logger.debug(xs[i].size())
+            try:
+              logger.debug("Balancing Dataset...")
+              xs,ys = Balance(xs,ys)
+            except Exception as E:
+              logger.debug(f"\nException Occurred while BALANCING DATASET: {E}\n")
+          logger.debug("--AFTER--")
+          for i in range(len(xs)):
+            logger.debug(xs[i].size())
           
-        logger.debug("--AFTER--")
-        for i in range(len(xs)):
-          logger.debug(xs[i].size())
-            
         ds.append(PPDset((*xs,ys)))
         
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)

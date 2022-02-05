@@ -1,0 +1,163 @@
+--Preprocessing Logging--
+--Pipeline Logging--
+--Baselines Logging--
+--MPPN Logging--
+**************************************************
+Helpdesk
+MPPN
+*************************************************TASK NAME: setup
+Features saved at - results_default2/models/run0/BPIC12/MPPN/features-setup.csv
+Targets saved at - results_default2/models/run0/BPIC12/MPPN/targets-setup.csv
+TASK NAME: next_step_prediction
+ 'resource', 'timestamp_Relative_elapsed']
+y_vars: ['activity', 'resource', 'timestamp_Relative_elapsed']
+target_index: 0
+s.y_names: ['activity', 'resource', 'timestamp_Relative_elapsed']
+y_vars: ['activity', 'resource', 'timestamp_Relative_elapsed']
+target_index: 0
+setup
+Features saved at - results_default2/models/run0/Helpdesk/MPPN/features-setup.csv
+Targets saved at - results_default2/models/run0/Helpdesk/MPPN/targets-setup.csv
+------------------------------
+False
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+next_step_prediction
+Features saved at - results_default2/models/run0/Helpdesk/MPPN/features-next_step_prediction.csv
+Targets saved at - results_default2/models/run0/Helpdesk/MPPN/targets-next_step_prediction.csv
+------------------------------
+False
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+next_resource_prediction
+Features saved at - results_default2/models/run0/Helpdesk/MPPN/features-next_resource_prediction.csv
+Targets saved at - results_default2/models/run0/Helpdesk/MPPN/targets-next_resource_prediction.csv
+------------------------------
+True
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+last_resource_prediction
+Features saved at - results_default2/models/run0/Helpdesk/MPPN/features-last_resource_prediction.csv
+Targets saved at - results_default2/models/run0/Helpdesk/MPPN/targets-last_resource_prediction.csv
+------------------------------
+True
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+outcome_prediction
+Features saved at - results_default2/models/run0/Helpdesk/MPPN/features-outcome_prediction.csv
+Targets saved at - results_default2/models/run0/Helpdesk/MPPN/targets-outcome_prediction.csv
+------------------------------
+False
+s.y_names: ['timestamp_Relative_elapsed']
+y_vars: ['timestamp_Relative_elapsed']
+target_index: 0
+s.y_names: ['timestamp_Relative_elapsed']
+y_vars: ['timestamp_Relative_elapsed']
+target_index: 0
+s.y_names: ['timestamp_Relative_elapsed']
+y_vars: ['timestamp_Relative_elapsed']
+target_index: 0
+duration_to_next_event_prediction
+Features saved at - results_default2/models/run0/Helpdesk/MPPN/features-duration_to_next_event_prediction.csv
+Targets saved at - results_default2/models/run0/Helpdesk/MPPN/targets-duration_to_next_event_prediction.csv
+------------------------------
+True
+s.y_names: ['timestamp_Relative_elapsed']
+y_vars: ['timestamp_Relative_elapsed']
+target_index: 0
+s.y_names: ['timestamp_Relative_elapsed']
+y_vars: ['timestamp_Relative_elapsed']
+target_index: 0
+s.y_names: ['timestamp_Relative_elapsed']
+y_vars: ['timestamp_Relative_elapsed']
+target_index: 0
+duration_to_end_prediction
+Features saved at - results_default2/models/run0/Helpdesk/MPPN/features-duration_to_end_prediction.csv
+Targets saved at - results_default2/models/run0/Helpdesk/MPPN/targets-duration_to_end_prediction.csv
+model_performance: (0.744966447353363, 0.3946607009694258, 0.3409447403653081, 0.3627685434529, 0.48322147130966187, 0.30764075377182365, 0.24022849911124686, 0.2618293900876849, 0.7785235047340393, 0.42841163310961966, 0.34340044742729303, 0.37879587606220444, 0.9664429426193237, 0.785234899328859, 0.7684563758389261, 0.7765046106836907, 7.846131801605225, 8.425952911376953, None, None)
+**************************************************
+Helpdesk
+MiDA
+**************************************************
+------------------------------
+False
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+next_step_prediction
+Features saved at - results_default2/models/run0/Helpdesk/MiDA/features-next_step_prediction.csv
+Targets saved at - results_default2/models/run0/Helpdesk/MiDA/targets-next_step_prediction.csv
+------------------------------
+False
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+next_resource_prediction
+Features saved at - results_default2/models/run0/Helpdesk/MiDA/features-next_resource_prediction.csv
+Targets saved at - results_default2/models/run0/Helpdesk/MiDA/targets-next_resource_prediction.csv
+------------------------------
+True
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+s.y_names: ['resource']
+y_vars: ['resource']
+target_index: 0
+last_resource_prediction
+Features saved at - results_default2/models/run0/Helpdesk/MiDA/features-last_resource_prediction.csv
+Targets saved at - results_default2/models/run0/Helpdesk/MiDA/targets-last_resource_prediction.csv
+------------------------------
+True
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+s.y_names: ['activity']
+y_vars: ['activity']
+target_index: 0
+outcome_prediction
