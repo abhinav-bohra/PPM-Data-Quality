@@ -62,28 +62,28 @@ def save_features(obj, store_path, o, task_name):
 	features = list()
 	targets = list()
 	for row in ds:
-	#Features
-	x = (list(row))[:-1]
-	try:
-	  if(len(x.size())==0):#scalar
-	    x = x.unsqueeze(0)
-	except:
-	  pass
-	x_ = [torch.flatten(t) for t in x]
-	ftr = torch.hstack(x_)
-	ftr = ftr.detach().cpu().numpy()
-	features.append(ftr)
-	#Targets
-	y = (list(row))[-1]
-	try:
-	  if(len(y.size())==0):#scalar
-	    y = y.unsqueeze(0)
-	except:
-	  pass
-	y_ = [torch.flatten(t) for t in y]
-	tar = torch.hstack(y_)
-	tar = tar.detach().cpu().numpy()
-	targets.append(tar)
+		#Features
+		x = (list(row))[:-1]
+		try:
+		  if(len(x.size())==0):#scalar
+		    x = x.unsqueeze(0)
+		except:
+		  pass
+		x_ = [torch.flatten(t) for t in x]
+		ftr = torch.hstack(x_)
+		ftr = ftr.detach().cpu().numpy()
+		features.append(ftr)
+		#Targets
+		y = (list(row))[-1]
+		try:
+		  if(len(y.size())==0):#scalar
+		    y = y.unsqueeze(0)
+		except:
+		  pass
+		y_ = [torch.flatten(t) for t in y]
+		tar = torch.hstack(y_)
+		tar = tar.detach().cpu().numpy()
+		targets.append(tar)
 
 	#-------------------------------------------------------------------------------
 	#Saving Features
@@ -92,13 +92,13 @@ def save_features(obj, store_path, o, task_name):
 	feat_size = num_features//len(o.x_names)
 	ft_cols = []
 	for x_name in o.x_names:
-	if x_name in o.cat_names:
-	    varType = "CAT"
-	elif x_name in o.cont_names:
-	    varType = "CONT"
-	else:
-	    varType = "OTHER"
-	ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
+		if x_name in o.cat_names:
+		    varType = "CAT"
+		elif x_name in o.cont_names:
+		    varType = "CONT"
+		else:
+		    varType = "OTHER"
+		ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
 
 	df = pd.DataFrame(features, columns = ft_cols)
 	case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
@@ -114,16 +114,15 @@ def save_features(obj, store_path, o, task_name):
 	targ_size = num_targets//len(o.y_names)
 	tg_cols = []
 	for y_name in o.y_names:
-	if y_name in o.ycat_names:
-	    varType = "CAT"
-	elif y_name in o.ycont_names:
-	    varType = "CONT"
-	else:
-	    varType = "OTHER"
-	tg_cols = tg_cols + [f"{varType}_{y_name}_{i}" for i in range(0,targ_size)]
-
+		if y_name in o.ycat_names:
+		    varType = "CAT"
+		elif y_name in o.ycont_names:
+		    varType = "CONT"
+		else:
+		    varType = "OTHER"
+		tg_cols = tg_cols + [f"{varType}_{y_name}_{i}" for i in range(0,targ_size)]
 	df = pd.DataFrame(targets, columns = tg_cols)
-
+	
 	#-------------------------------------------------------------------------------
 	# Handling Camargo and Tax targets
 	#-------------------------------------------------------------------------------
