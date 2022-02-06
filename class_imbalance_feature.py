@@ -1,3 +1,4 @@
+import glob
 import os,csv
 import argparse
 import pandas as pd
@@ -48,6 +49,12 @@ def class_imbalance_analysis(df,cat_col):
 #--------------------------------------------------------------------------------------------
 # Main Function
 #--------------------------------------------------------------------------------------------
+column_names = {
+  'targets-next_step_prediction.csv': 'NEXT ACTIVITY',
+  'targets-outcome_prediction.csv': 'OUTCOME ACTIVITY',
+  'targets-next_resource_prediction.csv': 'NEXT RESOURCE',
+  'targets-last_resource_prediction.csv': 'LAST RESOURCE'
+}
 
 if __name__ == "__main__":
   fields = ["Dataset","Model","Column","Size of Dataset","Num Classes","Imbalance Ratio",\
@@ -61,15 +68,22 @@ if __name__ == "__main__":
   for log in logs:
     models = os.listdir(f"{path}/{log}")
     for model in models:
-      dataset_path = f"{path}/{log}/{model}/targets-setup.csv"
-      df = pd.read_csv(dataset_path)
-      df = df.dropna()
-      all_cols = df.columns.tolist()
-
+      #Concatante all target dataframes
+      targets = glob.glob(f"{path}/{log}/{model}/targets*.csv")
+      files = [t.split('\\')[1] for t in targets if "duration" not in t and "setup" not in t] #Consider only categorical columns
+      target_dfs = list()
+      for file in files:
+        dataset_path = f"{path}/{log}/{model}/{file}"
+        df = pd.read_csv(dataset_path)
+        df = df.dropna()
+        df = df.rename(columns={df.columns[0]:column_names[file]})
+        target_dfs.append(df)
+      
+      df_final = pd.concat(target_dfs, axis=1)
+      all_cols = df_final.columns.tolist()
       for col in all_cols:
-        if "CAT" in col: #Consider only categorical columns
-          row = [log,model,col] + (class_imbalance_analysis(df,col))
-          rows.append(row)
+        row = [log,model,col] + (class_imbalance_analysis(df_final,col))
+        rows.append(row)
 
   with open(f"{folder}/class_imbalance_results.csv",'w', newline='') as csvfile: 
       csvwriter = csv.writer(csvfile)
