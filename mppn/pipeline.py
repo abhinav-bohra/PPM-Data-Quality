@@ -241,7 +241,7 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
             if "Camargo" in model:
                 preds1 = (preds[0],preds[1][0],preds[2][0])
                 preds2 = (preds[0],preds[1][1],preds[2][1])
-                preds3 = (preds[0],preds[1][1],preds[2][2])
+                preds3 = (preds[0],preds[1][2],preds[2][2])
                 if "next" in task_name:
                     with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
                         pickle.dump(preds1, f1)
