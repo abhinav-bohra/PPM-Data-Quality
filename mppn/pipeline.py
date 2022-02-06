@@ -138,12 +138,12 @@ def save_features(obj, store_path, o, task_name):
 			logger.debug(f"Targets saved at - {store_path}/targets-next_resource_prediction.csv")
 			logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
 		else:
-		df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
-		df2.to_csv(f'{store_path}/targets-last_resource_prediction.csv', index=False)
-		df3.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
-		logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
-		logger.debug(f"Targets saved at - {store_path}/targets-last_resource_prediction.csv")
-		logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
+			df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
+			df2.to_csv(f'{store_path}/targets-last_resource_prediction.csv', index=False)
+			df3.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
+			logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
+			logger.debug(f"Targets saved at - {store_path}/targets-last_resource_prediction.csv")
+			logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
 
 	elif "Tax" in model_name:
 		df1 = pd.DataFrame(df.iloc[:,0])
