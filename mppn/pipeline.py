@@ -183,12 +183,16 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
       EarlyStoppingCallback(monitor='valid_loss',min_delta=min_delta, patience=patience),
       SaveModelCallback(fname=model_name)
       ]
+    
     learn=Learner(dls, m, path=store_path, model_dir=model_dir, loss_func=loss ,metrics=metrics,cbs=cbs)
+    
     task_name=model_name
-    model = store_path.split('/')[-1]
+    model = str(store_path).split('/')[-1]
+
     logger.debug("-----"*10)
     logger.debug(f"TASK NAME: {task_name}")
     logger.debug("-----"*10)
+    
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
         preds=tuple((learn.get_preds(dl=dls[2], with_input=True)))
@@ -228,7 +232,7 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
             with open(f'{store_path}/preds-{task_name}.pickle', 'wb') as f1:
                 pickle.dump(preds, f1)
         return learn.validate(dl=dls[2])[output_index]
-        
+
     else:
         with HideOutput(),learn.no_bar():
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
