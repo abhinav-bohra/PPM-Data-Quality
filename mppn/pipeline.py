@@ -57,6 +57,7 @@ def save_features(obj, store_path, o, task_name):
   test = obj[2].dataset
   ds = train + dev + test
   store_path = str(store_path)
+  model_name = store_path.split('/')[-2]
 
   features = list()
   targets = list()
@@ -84,7 +85,9 @@ def save_features(obj, store_path, o, task_name):
     tar = tar.detach().cpu().numpy()
     targets.append(tar)
 
+  #-------------------------------------------------------------------------------
   #Saving Features
+  #-------------------------------------------------------------------------------
   num_features = len(features[0])
   feat_size = num_features//len(o.x_names)
   ft_cols = []
@@ -101,9 +104,12 @@ def save_features(obj, store_path, o, task_name):
   case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
   df.insert(0, "case_len", case_len, True)
   df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
+  df.to_csv(f'{store_path}/features.csv', index=False)
   logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
   
+  #-------------------------------------------------------------------------------
   #Saving Targets
+  #-------------------------------------------------------------------------------
   num_targets = len(targets[0])
   targ_size = num_targets//len(o.y_names)
   tg_cols = []
@@ -117,9 +123,47 @@ def save_features(obj, store_path, o, task_name):
     tg_cols = tg_cols + [f"{varType}_{y_name}_{i}" for i in range(0,targ_size)]
     
   df = pd.DataFrame(targets, columns = tg_cols)
-  df.to_csv(f'{store_path}/targets-{task_name}.csv', index=False)
-  logger.debug(f"Targets saved at - {store_path}/targets-{task_name}.csv")
 
+  #-------------------------------------------------------------------------------
+  # Handling Camargo and Tax targets
+  #-------------------------------------------------------------------------------
+  if "Camargo" in model_name:
+  	df1 = pd.DataFrame(df.iloc[:,0])
+  	df2 = pd.DataFrame(df.iloc[:,1])
+  	df3 = pd.DataFrame(df.iloc[:,2])	
+  	if "next" in task_name:
+	  	df1.to_csv(f'{store_path}/targets-next_step_prediction.csv', index=False)
+		df2.to_csv(f'{store_path}/targets-next_resource_prediction.csv', index=False)
+		df3.to_csv(f'{store_path}/targets-duration_to_next_event_prediction.csv', index=False)
+		logger.debug(f"Targets saved at - {store_path}/targets-next_step_prediction.csv")
+		logger.debug(f"Targets saved at - {store_path}/targets-next_resource_prediction.csv")
+		logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
+	else:
+	  	df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
+		df2.to_csv(f'{store_path}/targets-last_resource_prediction.csv', index=False)
+		df3.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
+		logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
+		logger.debug(f"Targets saved at - {store_path}/targets-last_resource_prediction.csv")
+		logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
+
+  elif "Tax" in model_name:
+  	df1 = pd.DataFrame(df.iloc[:,0])
+  	df2 = pd.DataFrame(df.iloc[:,1])	
+  	if "next" in task_name:
+	  	df1.to_csv(f'{store_path}/targets-next_step_prediction.csv', index=False)
+		df2.to_csv(f'{store_path}/targets-duration_to_next_event_prediction.csv', index=False)
+		logger.debug(f"Targets saved at - {store_path}/targets-next_step_prediction.csv")
+		logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
+	else:
+	  	df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
+		df2.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
+		logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
+		logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
+
+	else:
+	  df.to_csv(f'{store_path}/targets-{task_name}.csv', index=False)
+	  logger.debug(f"Targets saved at - {store_path}/targets-{task_name}.csv")
+  #-------------------------------------------------------------------------------
 
 # Cell
 def training_loop(learn,epoch,print_output,lr_find):
@@ -150,11 +194,11 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
     logger.debug("-----"*10)
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
-        data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
+        preds=tuple((learn.get_preds(dl=dls[2], with_input=True)))
         save_features(dls, store_path, o, model_name)
         
         with open(f'{store_path}/preds-{model_name}.pickle', 'wb') as f1:
-            pickle.dump(data, f1)
+            pickle.dump(preds, f1)
         with open(f'{store_path}/dls-{model_name}.pickle', 'wb') as f2:
             pickle.dump(dls, f2)
         with open(f'{store_path}/PPObj-{model_name}.pickle', 'wb') as f3:
@@ -164,11 +208,11 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
     else:
         with HideOutput(),learn.no_bar():
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
-            data=tuple((learn.get_preds(dl=dls[2], with_input=True)))
+            preds=tuple((learn.get_preds(dl=dls[2], with_input=True)))
             save_features(dls, store_path, o, model_name)
             
             with open(f'{store_path}/preds-{model_name}.pickle', 'wb') as f1:
-                pickle.dump(data, f1)
+                pickle.dump(preds, f1)
             with open(f'{store_path}/dls-{model_name}.pickle', 'wb') as f2:
                 pickle.dump(dls, f2)
             with open(f'{store_path}/PPObj-{model_name}.pickle', 'wb') as f3:

@@ -18,8 +18,10 @@ folder = args.folder
 path = f"{folder}/models/run0"
 logs = os.listdir(path)
 for log in logs:
+	print(log)
 	models = os.listdir(f"{path}/{log}")
 	for model in models:
+		print(model)
 		features = glob.glob(f"{path}/{log}/{model}/features*.csv")
 		pivot_file = features[0].split('\\')[1]
 		df_pivot = pd.read_csv(f"{path}/{log}/{model}/{pivot_file}")
