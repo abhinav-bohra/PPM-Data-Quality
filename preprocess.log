@@ -9,14 +9,18 @@ Camargo_concat
 --------------------------------------------------
 TASK NAME: next_step_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/Camargo_concat/features-next_step_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/Camargo_concat/targets-next_step_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/Camargo_concat/features-next_step_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/Camargo_concat/targets-next_step_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/Camargo_concat/targets-next_resource_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/Camargo_concat/targets-duration_to_next_event_prediction.csv
 --------------------------------------------------
 TASK NAME: last_resource_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/Camargo_concat/features-last_resource_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/Camargo_concat/targets-last_resource_prediction.csv
-model_performance: (0.1666666716337204, 0.045454545454545456, 0.007575757575757576, 0.012987012987012986, 0.2857142984867096, 0.16666666666666666, 0.047619047619047616, 0.07407407407407408, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.045958518981934, 4.801101207733154, None, None)
+Features saved at - results_default3/models/run0/BPIC12/Camargo_concat/features-last_resource_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/Camargo_concat/targets-outcome_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/Camargo_concat/targets-last_resource_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/Camargo_concat/targets-duration_to_end_prediction.csv
+model_performance: (0.1666666716337204, 0.045454545454545456, 0.007575757575757576, 0.012987012987012986, 0.4523809552192688, 0.3506944444444444, 0.31321839080459773, 0.2531735843674226, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.7498924136161804, 4.76754903793335, None, None)
 **************************************************
 BPIC12
 Tax_Spezialized
@@ -24,14 +28,16 @@ Tax_Spezialized
 --------------------------------------------------
 TASK NAME: next_step_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/Tax_Spezialized/features-next_step_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/Tax_Spezialized/targets-next_step_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/Tax_Spezialized/features-next_step_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/Tax_Spezialized/targets-next_step_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/Tax_Spezialized/targets-duration_to_next_event_prediction.csv
 --------------------------------------------------
 TASK NAME: outcome_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/Tax_Spezialized/features-outcome_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/Tax_Spezialized/targets-outcome_prediction.csv
-model_performance: (0.1666666716337204, 0.045454545454545456, 0.007575757575757576, 0.012987012987012986, None, None, None, None, None, None, None, None, 0.0, 0.0, 0.0, 0.0, 2.5841622352600098, 4.6797356605529785, None, None)
+Features saved at - results_default3/models/run0/BPIC12/Tax_Spezialized/features-outcome_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/Tax_Spezialized/targets-outcome_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/Tax_Spezialized/targets-duration_to_end_prediction.csv
+model_performance: (0.0476190485060215, 0.045454545454545456, 0.0021645021645021645, 0.004132231404958677, None, None, None, None, None, None, None, None, 0.0, 0.0, 0.0, 0.0, 1.8473310470581055, 4.6296706199646, None, None)
 **************************************************
 BPIC12
 MiDA
@@ -39,34 +45,34 @@ MiDA
 --------------------------------------------------
 TASK NAME: next_step_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MiDA/features-next_step_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MiDA/targets-next_step_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/MiDA/features-next_step_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MiDA/targets-next_step_prediction.csv
 --------------------------------------------------
 TASK NAME: next_resource_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MiDA/features-next_resource_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MiDA/targets-next_resource_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/MiDA/features-next_resource_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MiDA/targets-next_resource_prediction.csv
 --------------------------------------------------
 TASK NAME: last_resource_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MiDA/features-last_resource_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MiDA/targets-last_resource_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/MiDA/features-last_resource_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MiDA/targets-last_resource_prediction.csv
 --------------------------------------------------
 TASK NAME: outcome_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MiDA/features-outcome_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MiDA/targets-outcome_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/MiDA/features-outcome_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MiDA/targets-outcome_prediction.csv
 --------------------------------------------------
 TASK NAME: duration_to_next_event_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MiDA/features-duration_to_next_event_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MiDA/targets-duration_to_next_event_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/MiDA/features-duration_to_next_event_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MiDA/targets-duration_to_next_event_prediction.csv
 --------------------------------------------------
 TASK NAME: duration_to_end_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MiDA/features-duration_to_end_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MiDA/targets-duration_to_end_prediction.csv
-model_performance: (0.0476190485060215, 0.045454545454545456, 0.0021645021645021645, 0.004132231404958677, 0.1190476194024086, 0.16666666666666666, 0.01984126984126984, 0.035460992907801414, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, [1.8901140689849854], [6.149741172790527], None, None)
+Features saved at - results_default3/models/run0/BPIC12/MiDA/features-duration_to_end_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MiDA/targets-duration_to_end_prediction.csv
+model_performance: (0.1666666716337204, 0.045454545454545456, 0.0077605321507760545, 0.01325757575757576, 0.1190476194024086, 0.16666666666666666, 0.01984126984126984, 0.035460992907801414, 0.0, 0.0, 0.0, 0.0, 0.0476190485060215, 0.028985507246376812, 0.3333333333333333, 0.05333333333333334, [1.502363681793213], [5.9401068687438965], None, None)
 **************************************************
 BPIC12
 MPPN
@@ -74,36 +80,36 @@ MPPN
 --------------------------------------------------
 TASK NAME: setup
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MPPN/features-setup.csv
-Targets saved at - results_default2/models/run0/BPIC12/MPPN/targets-setup.csv
+Features saved at - results_default3/models/run0/BPIC12/MPPN/features-setup.csv
+Targets saved at - results_default3/models/run0/BPIC12/MPPN/targets-setup.csv
 --------------------------------------------------
 TASK NAME: next_step_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MPPN/features-next_step_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MPPN/targets-next_step_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/MPPN/features-next_step_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MPPN/targets-next_step_prediction.csv
 --------------------------------------------------
 TASK NAME: next_resource_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MPPN/features-next_resource_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MPPN/targets-next_resource_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/MPPN/features-next_resource_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MPPN/targets-next_resource_prediction.csv
 --------------------------------------------------
 TASK NAME: last_resource_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MPPN/features-last_resource_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MPPN/targets-last_resource_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/MPPN/features-last_resource_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MPPN/targets-last_resource_prediction.csv
 --------------------------------------------------
 TASK NAME: outcome_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MPPN/features-outcome_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MPPN/targets-outcome_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/MPPN/features-outcome_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MPPN/targets-outcome_prediction.csv
 --------------------------------------------------
 TASK NAME: duration_to_next_event_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MPPN/features-duration_to_next_event_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MPPN/targets-duration_to_next_event_prediction.csv
+Features saved at - results_default3/models/run0/BPIC12/MPPN/features-duration_to_next_event_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MPPN/targets-duration_to_next_event_prediction.csv
 --------------------------------------------------
 TASK NAME: duration_to_end_prediction
 --------------------------------------------------
-Features saved at - results_default2/models/run0/BPIC12/MPPN/features-duration_to_end_prediction.csv
-Targets saved at - results_default2/models/run0/BPIC12/MPPN/targets-duration_to_end_prediction.csv
-model_performance: (0.190476194024086, 0.10064935064935066, 0.045003607503607504, 0.0546969696969697, 0.095238097012043, 0.03571428571428571, 0.04395604395604396, 0.03940886699507389, 0.0, 0.0, 0.0, 0.0, 0.4523809552192688, 0.3333333333333333, 0.15833333333333333, 0.21468926553672313, 2.347412347793579, 4.71980619430542, None, None)
+Features saved at - results_default3/models/run0/BPIC12/MPPN/features-duration_to_end_prediction.csv
+Targets saved at - results_default3/models/run0/BPIC12/MPPN/targets-duration_to_end_prediction.csv
+model_performance: (0.2380952388048172, 0.1461038961038961, 0.05934343434343435, 0.08035714285714285, 0.6190476417541504, 0.45138888888888884, 0.4903381642512078, 0.43783993783993785, 0.02380952425301075, 0.005434782608695652, 0.041666666666666664, 0.009615384615384614, 0.5476190447807312, 0.545766590389016, 0.5454545454545454, 0.5452991452991454, 1.8918466567993164, 5.067054748535156, None, None)
