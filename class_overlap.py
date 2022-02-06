@@ -29,10 +29,11 @@ column_names = {
   'targets-duration_to_end_prediction.csv': 'DURATION TO END'
 }
 
-rows = list()
+results = dict()
 for log in logs:
 	models = os.listdir(f"{path}/{log}")
 	for model in models:
+		rows = list()
 		#------------------------------------------------------------------------------------------
 		# Features and Targets
 		#------------------------------------------------------------------------------------------
@@ -40,11 +41,7 @@ for log in logs:
 		df = pd.read_csv(f"{path}/{log}/{model}/features.csv")
 		df = df.loc[:, (df != 0).any(axis=0)] #Drop columns with no non-zero value
 		df = df.dropna() #Drop null values, if any
-		try:
-			features = df.drop(columns=["case_len"]) #Drop Case_len column as it is not a feature
-		except:
-			print(log,model)
-			continue
+		features = df.drop('case_len',axis=1) #Drop Case_len column as it is not a feature
 		feature_cols = list(features.columns) # feature names 
 		#Targets
 		targets = glob.glob(f"{path}/{log}/{model}/targets*.csv")
@@ -75,13 +72,13 @@ for log in logs:
 			try:
 				f1_all, f1_max, f1_nanmax = mfe.ft_f1(X,y)
 			except Exception as e:
-				f1_all, f1_max, f1_nanmax = None,None,None
+				f1_all, f1_max, f1_nanmax = 'NA','NA','NA'
 				print("[ERROR][Class Overlap F1] -", e)
 			try:
 				f2 = mfe.ft_f2(X,y)
 				f2 = np.nanmean(f2)
 			except Exception as e:
-				f2 = None
+				f2 = 'NA'
 				print("[ERROR][Class Overlap F2] -", e)
 
 			f1_scores.append(f1_nanmax)
@@ -99,10 +96,8 @@ for log in logs:
 		for case in case_len_grps:
 			case_len_df = groups.get_group(case)
 			case_level_targets  = case_len_df[target_cols]
-			try:
-				case_level_features = case_len_df.drop(columns=["case_len"] + target_cols) #Drop Case_len & target column as it is not a feature
-			except:
-				print(case_len_df.head(1))
+			case_level_features = case_len_df.drop(columns=["case_len"] + target_cols) #Drop Case_len & target column as it is not a feature
+			
 			X = case_level_features.to_numpy()
 			f1_scores = list()
 			f2_scores = list()
@@ -112,13 +107,13 @@ for log in logs:
 				try:
 					f1_all, f1_max, f1_nanmax = mfe.ft_f1(X,y)
 				except Exception as e:
-					f1_all, f1_max, f1_nanmax = None,None,None
+					f1_all, f1_max, f1_nanmax = 'NA','NA','NA'
 					print("[ERROR][Class Overlap F1] -", e)
 				try:
 					f2 = mfe.ft_f2(X,y)
 					f2 = np.nanmean(f2)
 				except Exception as e:
-					f2 = None
+					f2 = 'NA'
 					print("[ERROR][Class Overlap F2] -", e)
 
 				f1_scores.append(f1_nanmax)
@@ -126,12 +121,14 @@ for log in logs:
 
 			rows.append([log, model, case] + f1_scores + f2_scores)
 		print(f"[SUCCESS][{log}][{model}] Computed Case level Class overlap successfully")
+		fields = ['Dataset', 'Model', 'Case Length'] + [f"{t}_F1" for t in target_cols] + [f"{t}_F2" for t in target_cols]
+		df_res = pd.DataFrame(rows, columns=fields)
+		df_res = df_res.fillna('nan')
+		results[f'{log}_{model}']=df_res
 
-fields = ['Dataset', 'Model', 'Case Length'] + [f"{t}_F1" for t in target_cols] + [f"{t}_F2" for t in target_cols]
 #------------------------------------------------------------------------------------------
 # Save Results
 #------------------------------------------------------------------------------------------
-with open(f"{folder}/class_overlap_results.csv", 'w', newline='') as csvfile: 
-    csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(fields) 
-    csvwriter.writerows(rows)
+with pd.ExcelWriter(f'{folder}/class_overlap.xlsx') as writer:
+  for key in results:
+     results[key].to_excel(writer, sheet_name=key)

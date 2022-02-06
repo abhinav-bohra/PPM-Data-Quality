@@ -119,6 +119,9 @@ for log in logs:
 
     results[f'{log}_{model}'] = pd.DataFrame(case_results)
 
+#------------------------------------------------------------------------------------------
+# Save Results
+#------------------------------------------------------------------------------------------
 with pd.ExcelWriter(f'{folder}/case_eval.xlsx') as writer:
   for key in results:
      results[key].to_excel(writer, sheet_name=key)
