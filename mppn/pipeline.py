@@ -101,7 +101,7 @@ def save_features(obj, store_path, o, task_name):
         ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
 
     df = pd.DataFrame(features, columns = ft_cols)
-    case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
+    case_len =[int(torch.count_nonzero(row[-2][0])) for row in ds]
     df.insert(0, "case_len", case_len, True)
     df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
     df.to_csv(f'{store_path}/features.csv', index=False)
