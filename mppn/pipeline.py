@@ -52,93 +52,93 @@ class HideOutput:
 
 #Cell
 def save_features(obj, store_path, o, task_name):
-  train = obj[0].dataset
-  dev = obj[1].dataset
-  test = obj[2].dataset
-  ds = train + dev + test
-  store_path = str(store_path)
-  model_name = store_path.split('/')[-2]
+	train = obj[0].dataset
+	dev = obj[1].dataset
+	test = obj[2].dataset
+	ds = train + dev + test
+	store_path = str(store_path)
+	model_name = store_path.split('/')[-2]
 
-  features = list()
-  targets = list()
-  for row in ds:
-    #Features
-    x = (list(row))[:-1]
-    try:
-      if(len(x.size())==0):#scalar
-        x = x.unsqueeze(0)
-    except:
-      pass
-    x_ = [torch.flatten(t) for t in x]
-    ftr = torch.hstack(x_)
-    ftr = ftr.detach().cpu().numpy()
-    features.append(ftr)
-    #Targets
-    y = (list(row))[-1]
-    try:
-      if(len(y.size())==0):#scalar
-        y = y.unsqueeze(0)
-    except:
-      pass
-    y_ = [torch.flatten(t) for t in y]
-    tar = torch.hstack(y_)
-    tar = tar.detach().cpu().numpy()
-    targets.append(tar)
+	features = list()
+	targets = list()
+	for row in ds:
+	#Features
+	x = (list(row))[:-1]
+	try:
+	  if(len(x.size())==0):#scalar
+	    x = x.unsqueeze(0)
+	except:
+	  pass
+	x_ = [torch.flatten(t) for t in x]
+	ftr = torch.hstack(x_)
+	ftr = ftr.detach().cpu().numpy()
+	features.append(ftr)
+	#Targets
+	y = (list(row))[-1]
+	try:
+	  if(len(y.size())==0):#scalar
+	    y = y.unsqueeze(0)
+	except:
+	  pass
+	y_ = [torch.flatten(t) for t in y]
+	tar = torch.hstack(y_)
+	tar = tar.detach().cpu().numpy()
+	targets.append(tar)
 
-  #-------------------------------------------------------------------------------
-  #Saving Features
-  #-------------------------------------------------------------------------------
-  num_features = len(features[0])
-  feat_size = num_features//len(o.x_names)
-  ft_cols = []
-  for x_name in o.x_names:
-    if x_name in o.cat_names:
-        varType = "CAT"
-    elif x_name in o.cont_names:
-        varType = "CONT"
-    else:
-        varType = "OTHER"
-    ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
-    
-  df = pd.DataFrame(features, columns = ft_cols)
-  case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
-  df.insert(0, "case_len", case_len, True)
-  df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
-  df.to_csv(f'{store_path}/features.csv', index=False)
-  logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
-  
-  #-------------------------------------------------------------------------------
-  #Saving Targets
-  #-------------------------------------------------------------------------------
-  num_targets = len(targets[0])
-  targ_size = num_targets//len(o.y_names)
-  tg_cols = []
-  for y_name in o.y_names:
-    if y_name in o.ycat_names:
-        varType = "CAT"
-    elif y_name in o.ycont_names:
-        varType = "CONT"
-    else:
-        varType = "OTHER"
-    tg_cols = tg_cols + [f"{varType}_{y_name}_{i}" for i in range(0,targ_size)]
-    
-  df = pd.DataFrame(targets, columns = tg_cols)
-
-  #-------------------------------------------------------------------------------
-  # Handling Camargo and Tax targets
-  #-------------------------------------------------------------------------------
-  if "Camargo" in model_name:
-	df1 = pd.DataFrame(df.iloc[:,0])
-	df2 = pd.DataFrame(df.iloc[:,1])
-	df3 = pd.DataFrame(df.iloc[:,2])
-	if "next" in task_name:
-		df1.to_csv(f'{store_path}/targets-next_step_prediction.csv', index=False)
-		df2.to_csv(f'{store_path}/targets-next_resource_prediction.csv', index=False)
-		df3.to_csv(f'{store_path}/targets-duration_to_next_event_prediction.csv', index=False)
-		logger.debug(f"Targets saved at - {store_path}/targets-next_step_prediction.csv")
-		logger.debug(f"Targets saved at - {store_path}/targets-next_resource_prediction.csv")
-		logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
+	#-------------------------------------------------------------------------------
+	#Saving Features
+	#-------------------------------------------------------------------------------
+	num_features = len(features[0])
+	feat_size = num_features//len(o.x_names)
+	ft_cols = []
+	for x_name in o.x_names:
+	if x_name in o.cat_names:
+	    varType = "CAT"
+	elif x_name in o.cont_names:
+	    varType = "CONT"
 	else:
+	    varType = "OTHER"
+	ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
+
+	df = pd.DataFrame(features, columns = ft_cols)
+	case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
+	df.insert(0, "case_len", case_len, True)
+	df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
+	df.to_csv(f'{store_path}/features.csv', index=False)
+	logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
+
+	#-------------------------------------------------------------------------------
+	#Saving Targets
+	#-------------------------------------------------------------------------------
+	num_targets = len(targets[0])
+	targ_size = num_targets//len(o.y_names)
+	tg_cols = []
+	for y_name in o.y_names:
+	if y_name in o.ycat_names:
+	    varType = "CAT"
+	elif y_name in o.ycont_names:
+	    varType = "CONT"
+	else:
+	    varType = "OTHER"
+	tg_cols = tg_cols + [f"{varType}_{y_name}_{i}" for i in range(0,targ_size)]
+
+	df = pd.DataFrame(targets, columns = tg_cols)
+
+	#-------------------------------------------------------------------------------
+	# Handling Camargo and Tax targets
+	#-------------------------------------------------------------------------------
+	if "Camargo" in model_name:
+		df1 = pd.DataFrame(df.iloc[:,0])
+		df2 = pd.DataFrame(df.iloc[:,1])
+		df3 = pd.DataFrame(df.iloc[:,2])
+		if "next" in task_name:
+			df1.to_csv(f'{store_path}/targets-next_step_prediction.csv', index=False)
+			df2.to_csv(f'{store_path}/targets-next_resource_prediction.csv', index=False)
+			df3.to_csv(f'{store_path}/targets-duration_to_next_event_prediction.csv', index=False)
+			logger.debug(f"Targets saved at - {store_path}/targets-next_step_prediction.csv")
+			logger.debug(f"Targets saved at - {store_path}/targets-next_resource_prediction.csv")
+			logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
+		else:
 		df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
 		df2.to_csv(f'{store_path}/targets-last_resource_prediction.csv', index=False)
 		df3.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
@@ -146,7 +146,7 @@ def save_features(obj, store_path, o, task_name):
 		logger.debug(f"Targets saved at - {store_path}/targets-last_resource_prediction.csv")
 		logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
 
-  elif "Tax" in model_name:
+	elif "Tax" in model_name:
 	df1 = pd.DataFrame(df.iloc[:,0])
 	df2 = pd.DataFrame(df.iloc[:,1])
 	if "next" in task_name:
@@ -160,10 +160,10 @@ def save_features(obj, store_path, o, task_name):
 		logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
 		logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
 
-  else:
+	else:
 	df.to_csv(f'{store_path}/targets-{task_name}.csv', index=False)
 	logger.debug(f"Targets saved at - {store_path}/targets-{task_name}.csv")
-  #-------------------------------------------------------------------------------
+	#-------------------------------------------------------------------------------
 
 # Cell
 def training_loop(learn,epoch,print_output,lr_find):
