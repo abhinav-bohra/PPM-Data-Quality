@@ -19,6 +19,15 @@ parser.add_argument('--folder', default="results_default",type=str, help='result
 args = parser.parse_args()
 folder = args.folder
 
+column_names = {
+  'preds-next_step_prediction.pickle': 'NEXT ACTIVITY',
+  'preds-outcome_prediction.pickle': 'OUTCOME ACTIVITY',
+  'preds-next_resource_prediction.pickle': 'NEXT RESOURCE',
+  'preds-last_resource_prediction.pickle': 'LAST RESOURCE',
+  'preds-duration_to_next_event_prediction.pickle': 'DURATION TO NEXT EVENT',
+  'preds-duration_to_end_prediction.pickle': 'DURATION TO END'
+}
+
 #--------------------------------------------------------------------------------------------
 # Get Ground Truth and Predictions
 # dls[0] -> Inputs,  dls[1] -> Preds,  dls[2] -> Targets (True Outputs)
@@ -29,6 +38,12 @@ logs = os.listdir(path)
 for log in logs:
   models = os.listdir(f"{path}/{log}")
   for model in models: 
+    targets = glob.glob(f"{path}/{log}/{model}/preds-*.pickle")
+    files = [t.split('\\')[1] for t in targets if "setup" not in t]
+    target_dfs = list()
+    for file in files:
+      dataset_path = f"{path}/{log}/{model}/{file}"
+      
     dls = pd.read_pickle(rf'{path}/{log}/{model}/preds.pickle')
     PPObj = pd.read_pickle(rf'{path}/{log}/{model}/PPObj.pickle')
     x_input = dls[0] 

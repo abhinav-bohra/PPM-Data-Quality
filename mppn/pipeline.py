@@ -100,13 +100,12 @@ def save_features(obj, store_path, o, task_name):
 		    varType = "OTHER"
 		ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
 
-	df = pd.DataFrame(features, columns = ft_cols)
-    logger.debug(row[0][-1])
-	case_len =[int(torch.count_nonzero(row[0][-1])) for row in ds]
-	df.insert(0, "case_len", case_len, True)
-	df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
-	df.to_csv(f'{store_path}/features.csv', index=False)
-	logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
+    df = pd.DataFrame(features, columns = ft_cols)
+    case_len =[int(torch.count_nonzero(row[0][-1])) for row in ds]
+    df.insert(0, "case_len", case_len, True)
+    df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
+    df.to_csv(f'{store_path}/features.csv', index=False)
+    logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
 
 	#-------------------------------------------------------------------------------
 	#Saving Targets
