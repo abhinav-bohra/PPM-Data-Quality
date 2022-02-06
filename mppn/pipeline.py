@@ -101,7 +101,7 @@ def save_features(obj, store_path, o, task_name):
 		ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
 
 	df = pd.DataFrame(features, columns = ft_cols)
-	case_len =[int(torch.count_nonzero(row[0][0])) for row in ds]
+	case_len =[int(torch.count_nonzero(row[-1][0])) for row in ds]
 	df.insert(0, "case_len", case_len, True)
 	df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
 	df.to_csv(f'{store_path}/features.csv', index=False)
@@ -184,35 +184,90 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
       SaveModelCallback(fname=model_name)
       ]
     learn=Learner(dls, m, path=store_path, model_dir=model_dir, loss_func=loss ,metrics=metrics,cbs=cbs)
-    
+    task_name=model_name
+    model = store_path.split('/')[-1]
     logger.debug("-----"*10)
-    logger.debug(f"TASK NAME: {model_name}")
+    logger.debug(f"TASK NAME: {task_name}")
     logger.debug("-----"*10)
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
         preds=tuple((learn.get_preds(dl=dls[2], with_input=True)))
-        save_features(dls, store_path, o, model_name)
-        
-        with open(f'{store_path}/preds-{model_name}.pickle', 'wb') as f1:
-            pickle.dump(preds, f1)
-        with open(f'{store_path}/dls-{model_name}.pickle', 'wb') as f2:
-            pickle.dump(dls, f2)
-        with open(f'{store_path}/PPObj-{model_name}.pickle', 'wb') as f3:
-            pickle.dump(o, f3)
-
+        save_features(dls, store_path, o, task_name)
+        if "Camargo" in model:
+            preds1 = (preds[0],preds[1][0],preds[2][0])
+            preds2 = (preds[0],preds[1][1],preds[2][1])
+            preds3 = (preds[0],preds[1][1],preds[2][2])
+            if "next" in task_name:
+                with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds1, f1)
+                with open(f'{store_path}/preds-next_resource_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds2, f1)
+                with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds3, f1)
+            else:
+                with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds1, f1)
+                with open(f'{store_path}/preds-last_resource_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds2, f1)
+                with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds3, f1)
+        elif "Tax" in model:
+            preds1 = (preds[0],preds[1][0],preds[2][0])
+            preds2 = (preds[0],preds[1][1],preds[2][1])
+            if "next" in task_name:
+                with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds1, f1)
+                with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds2, f1)
+            else:
+                with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds1, f1)
+                with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds2, f1)
+        else:
+            with open(f'{store_path}/preds-{task_name}.pickle', 'wb') as f1:
+                pickle.dump(preds, f1)
         return learn.validate(dl=dls[2])[output_index]
+        
     else:
         with HideOutput(),learn.no_bar():
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
             preds=tuple((learn.get_preds(dl=dls[2], with_input=True)))
-            save_features(dls, store_path, o, model_name)
-            
-            with open(f'{store_path}/preds-{model_name}.pickle', 'wb') as f1:
-                pickle.dump(preds, f1)
-            with open(f'{store_path}/dls-{model_name}.pickle', 'wb') as f2:
-                pickle.dump(dls, f2)
-            with open(f'{store_path}/PPObj-{model_name}.pickle', 'wb') as f3:
-                pickle.dump(o, f3)
+            save_features(dls, store_path, o, task_name)
+            if "Camargo" in model:
+                preds1 = (preds[0],preds[1][0],preds[2][0])
+                preds2 = (preds[0],preds[1][1],preds[2][1])
+                preds3 = (preds[0],preds[1][1],preds[2][2])
+                if "next" in task_name:
+                    with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds1, f1)
+                    with open(f'{store_path}/preds-next_resource_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds2, f1)
+                    with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds3, f1)
+                else:
+                    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds1, f1)
+                    with open(f'{store_path}/preds-last_resource_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds2, f1)
+                    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds3, f1)
+            elif "Tax" in model:
+                preds1 = (preds[0],preds[1][0],preds[2][0])
+                preds2 = (preds[0],preds[1][1],preds[2][1])
+                if "next" in task_name:
+                    with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds1, f1)
+                    with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds2, f1)
+                else:
+                    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds1, f1)
+                    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds2, f1)
+            else:
+                with open(f'{store_path}/preds-{task_name}.pickle', 'wb') as f1:
+                    pickle.dump(preds, f1)
             
             return learn.validate(dl=dls[2])[output_index]
 
