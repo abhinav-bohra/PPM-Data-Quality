@@ -57,7 +57,7 @@ def save_features(obj, store_path, o, task_name):
 	test = obj[2].dataset
 	ds = train + dev + test
 	store_path = str(store_path)
-	model_name = store_path.split('/')[-2]
+	model_name = store_path.split('/')[-1]
 
 	features = list()
 	targets = list()
@@ -122,7 +122,6 @@ def save_features(obj, store_path, o, task_name):
 		    varType = "OTHER"
 		tg_cols = tg_cols + [f"{varType}_{y_name}_{i}" for i in range(0,targ_size)]
 	df = pd.DataFrame(targets, columns = tg_cols)
-	
 	#-------------------------------------------------------------------------------
 	# Handling Camargo and Tax targets
 	#-------------------------------------------------------------------------------
@@ -144,7 +143,6 @@ def save_features(obj, store_path, o, task_name):
 			logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
 			logger.debug(f"Targets saved at - {store_path}/targets-last_resource_prediction.csv")
 			logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
-
 	elif "Tax" in model_name:
 		df1 = pd.DataFrame(df.iloc[:,0])
 		df2 = pd.DataFrame(df.iloc[:,1])
@@ -158,7 +156,6 @@ def save_features(obj, store_path, o, task_name):
 			df2.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
 			logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
 			logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
-
 	else:
 		df.to_csv(f'{store_path}/targets-{task_name}.csv', index=False)
 		logger.debug(f"Targets saved at - {store_path}/targets-{task_name}.csv")
