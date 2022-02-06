@@ -101,7 +101,8 @@ def save_features(obj, store_path, o, task_name):
 		ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
 
 	df = pd.DataFrame(features, columns = ft_cols)
-	case_len =[int(torch.count_nonzero(row[-1][0])) for row in ds]
+    logger.debug(row[0][-1])
+	case_len =[int(torch.count_nonzero(row[0][-1])) for row in ds]
 	df.insert(0, "case_len", case_len, True)
 	df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
 	df.to_csv(f'{store_path}/features.csv', index=False)
@@ -192,7 +193,7 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
     logger.debug("-----"*10)
     logger.debug(f"TASK NAME: {task_name}")
     logger.debug("-----"*10)
-    
+
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
         preds=tuple((learn.get_preds(dl=dls[2], with_input=True)))
