@@ -7,7 +7,7 @@ import pandas as pd
 warnings.filterwarnings('ignore')
 from sklearn.metrics import classification_report
 from sklearn.metrics import mean_squared_error
-
+torch.set_printoptions(profile="full")
 #------------------------------------------------------------------------------------------
 # Command Line Arguments
 #------------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ parser.add_argument('--folder', default="results_default",type=str, help='result
 args = parser.parse_args()
 folder = args.folder
 
-column_names = {
+task_names = {
   'preds-next_step_prediction.pickle': 'NEXT ACTIVITY',
   'preds-outcome_prediction.pickle': 'OUTCOME ACTIVITY',
   'preds-next_resource_prediction.pickle': 'NEXT RESOURCE',
@@ -33,77 +33,96 @@ column_names = {
 # Get Ground Truth and Predictions
 # data[0] -> Inputs,  data[1] -> Preds,  data[2] -> Targets (True Outputs)
 #--------------------------------------------------------------------------------------------
-results = list()
+
 path = f"{folder}/models/run0"
 logs = os.listdir(path)
+results = {}
+
 for log in logs:
   models = os.listdir(f"{path}/{log}")
   for model in models: 
-    pred_files = glob.glob(f"{path}/{log}/{model}/preds-*.pickle")
-    files = [p.split('\\')[1] for p in pred_files if "setup" not in p]
-    for file in files:
-      print(model, log)
-      case_len = pd.read_csv(f"{path}/{log}/{model}/features.csv")['case_len']
-      preds_path = f"{path}/{log}/{model}/{file}"
-      data = pd.read_pickle(preds_path)
-      preds = data[1]
-      # preds =[torch.argmax(data[1][i],dim=1) for i in range(0,data[1].size(0))]
-      targs = data[2]
-      print(file)
-      print(len(preds))
-      print(len(targs))
-      print(len(case_len))
-      print(data[1].size())
-#     case_len =[int(torch.count_nonzero(ele[0])) for ele in x_input[0]]
-#     num_cats = len(PPObj.ycat_names)
-#     num_conts = len(PPObj.ycont_names)
-#     preds.append(torch.squeeze(data[1][num_cats]))
-#     preds = tuple(preds)
-#     targs = data[2]
-#     preds = ([pred.tolist() for pred in preds])
-#     targs = ([targ.tolist() for targ in targs])
+    print(model, log)
+    case_results = {
+      'log': list(),
+      'model': list(),
+      'case_len': list(),
+      'NEXT ACTIVITY ACC': list(),'NEXT ACTIVITY PRE': list(),'NEXT ACTIVITY REC': list(),'NEXT ACTIVITY F1': list(),
+      'OUTCOME ACTIVITY ACC': list(),'OUTCOME ACTIVITY PRE': list(),'OUTCOME ACTIVITY REC': list(),'OUTCOME ACTIVITY F1': list(),
+      'NEXT RESOURCE ACC': list(),'NEXT RESOURCE PRE': list(),'NEXT RESOURCE REC': list(),'NEXT RESOURCE F1': list(),
+      'LAST RESOURCE ACC': list(),'LAST RESOURCE PRE': list(),'LAST RESOURCE REC': list(),'LAST RESOURCE F1': list(),
+      'DURATION TO NEXT EVENT MSE': list(),
+      'DURATION TO END MSE': list()
+    }
 
-#     y_cols = list()
-#     for y in PPObj.y_names:
-#       if y in PPObj.ycat_names:
-#         y_cols.append("CAT_" + y)
-#       if y in PPObj.ycont_names:
-#         y_cols.append("CONT_" + y)
+    #Get case_len
+    pred_file = pd.read_pickle(f"{path}/{log}/{model}/preds-next_step_prediction.pickle") #Consider only categorical columns
+    xyz = [int(torch.count_nonzero(row)) for row in pred_file[0][-1]]
+    print(xyz)
+    print(pred_file[0][-1])
+    num_cases = len(set([int(torch.count_nonzero(row)) for row in pred_file[0][-1]]))
+    case_results['log'] = [log]*num_cases
+    case_results['model'] = [model]*num_cases
+    result_na = ['NA']*num_cases
+    for task in task_names:
+      preds_path = f"{path}/{log}/{model}/{task}"
+      if os.path.exists(preds_path):        
+        data = pd.read_pickle(preds_path)
+        if "duration" in task:
+          preds = torch.squeeze(data[1]).tolist()
+        else:
+          preds =[torch.argmax(data[1][i],dim=0).item() for i in range(0,data[1].size(0))]
+        targs = data[2].tolist()
+        case_len =[int(torch.count_nonzero(row)) for row in data[0][-1]]
+        assert len(preds) == len(targs)
+        assert len(preds) == len(case_len)
 
-#     columns = ['case_len'] + [f"pred_{y}" for y in y_cols] + [f"targ_{y}" for y in y_cols]
-#     data = [case_len] + preds + targs
-#     df_dict = dict()
-#     for d,c in zip(data, columns):
-#       df_dict[c] = d
-#     df = pd.DataFrame(df_dict)
-    
-#     #--------------------------------------------------------------------------------------------
-#     # Group by case_len and evaluate
-#     #--------------------------------------------------------------------------------------------
-#     groups = df.groupby('case_len')
-#     case_len_grps = list(groups.groups.keys())
-#     for case in case_len_grps:
-#       case_len_df = groups.get_group(case)
-#       result = [log, model, case]
-#       for y in PPObj.ycat_names:
-#         cr = classification_report(case_len_df[f'targ_CAT_{y}'], case_len_df[f'pred_CAT_{y}'], output_dict = True)
-#         result = result + ([cr['accuracy'], cr['macro avg']['precision'], cr['macro avg']['recall'], cr['macro avg']['f1-score']])
+        columns = ['case_len', f'pred_{task_names[task]}',f'targ_{task_names[task]}']
+        data = [case_len, preds, targs]        
+        df_dict = dict()
+        for d,c in zip(data, columns):
+          df_dict[c] = d
+        try:
+          df = pd.DataFrame(df_dict)
+        except Exception as e:
+          print(e)
+          print(model,log,task)
+          print(len(preds))
+          print(len(targs))
+          print(len(case_len))
+          print(len(data))
       
-#       for y in PPObj.ycont_names:
-#         result = result + ([mean_squared_error(case_len_df[f'targ_CONT_{y}'], case_len_df[f'pred_CONT_{y}'])])
-      
-#       results.append(result)
+        #--------------------------------------------------------------------------------------------
+        # Group by case_len and evaluate
+        #--------------------------------------------------------------------------------------------
+        groups = df.groupby('case_len')
+        case_len_grps = list(groups.groups.keys())
+        case_results['case_len'] = case_len_grps
+        for case in case_len_grps:
+          case_len_df = groups.get_group(case)
+          if "duration" not in task:
+            cr = classification_report(case_len_df[ f'targ_{task_names[task]}'], case_len_df[ f'pred_{task_names[task]}'], output_dict = True)
+            case_results[f'{task_names[task]} ACC'].append(cr['accuracy'])
+            case_results[f'{task_names[task]} PRE'].append(cr['macro avg']['precision'])
+            case_results[f'{task_names[task]} REC'].append(cr['macro avg']['recall'])
+            case_results[f'{task_names[task]} F1'].append(cr['macro avg']['f1-score'])
+          else:
+            y_true = case_len_df[f'targ_{task_names[task]}']
+            y_pred = case_len_df[f'targ_{task_names[task]}']
+            mse = mean_squared_error(y_true,y_pred)
+            case_results[f'{task_names[task]} MSE'].append(mse)
+      else:
+        if "duration" not in task:
+          case_results[f'{task_names[task]} ACC']=result_na
+          case_results[f'{task_names[task]} PRE']=result_na
+          case_results[f'{task_names[task]} REC']=result_na
+          case_results[f'{task_names[task]} F1']=result_na
+        else:
+          case_results[f'{task_names[task]} MSE']=result_na
 
-# # Columns
-# columns = ['Dataset','Model','Case Length']
-# measures = ['Acc', 'Pre', 'Rec', 'F1']
-# for y in PPObj.ycat_names:
-# 	for m in measures:
-# 		columns.append(f'{y}_{m}')
+    results[f'{log}_{model}'] = pd.DataFrame(case_results)
 
-# for y in PPObj.ycont_names:
-# 	columns.append(f'{y}_MSE')
-
-# df_results = pd.DataFrame(results, columns = columns)
-# df_results.to_csv(f"{folder}/case_eval.csv",index=False)
-# print("[SUCCESS] Computed Case level Results successfully")
+with pd.ExcelWriter(f'{folder}/case_eval.xlsx') as writer:
+  for key in results:
+     results[key].to_excel(writer, sheet_name=key)
+     
+print("[SUCCESS] Computed Case level Results successfully")

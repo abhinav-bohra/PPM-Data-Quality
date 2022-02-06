@@ -39,7 +39,7 @@ python prediction_evaluation.py --exp default --save_folder results_default
 Step 3: Compute Class Imbalance Score on default features
 
 ```
-python class_imbalance_feature.py --folder results_default 
+python class_imbalance_target.py --folder results_default 
 ```
 
 Step 4: Compute Case-level results
@@ -59,9 +59,9 @@ python prediction_evaluation.py --exp CI --balancing_technique NCR --save_folder
 Step 6: Compute Class Imbalance Score on undersampled features
 
 ```
-python class_imbalance_feature.py --folder results_nm
-python class_imbalance_feature.py --folder results_conn
-python class_imbalance_feature.py --folder results_ncr
+python class_imbalance_target.py --folder results_nm
+python class_imbalance_target.py --folder results_conn
+python class_imbalance_target.py --folder results_ncr
 ```
 
 Step 7: Compute Case-level results after undersampling
