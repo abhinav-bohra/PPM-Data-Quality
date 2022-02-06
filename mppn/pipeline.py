@@ -100,12 +100,12 @@ def save_features(obj, store_path, o, task_name):
 		    varType = "OTHER"
 		ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
 
-	df = pd.DataFrame(features, columns = ft_cols)
-	case_len =[int(torch.count_nonzero(row[0][-1])) for row in ds]
-	df.insert(0, "case_len", case_len, True)
-	df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
-	df.to_csv(f'{store_path}/features.csv', index=False)
-	logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
+    df = pd.DataFrame(features, columns = ft_cols)
+    case_len =[int(torch.count_nonzero(row[0][-1])) for row in ds]
+    df.insert(0, "case_len", case_len, True)
+    df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
+    df.to_csv(f'{store_path}/features.csv', index=False)
+    logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
 
 	#-------------------------------------------------------------------------------
 	#Saving Targets
@@ -200,7 +200,7 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
         if "Camargo" in model:
             preds1 = (preds[0],preds[1][0],preds[2][0])
             preds2 = (preds[0],preds[1][1],preds[2][1])
-            preds3 = (preds[0],preds[1][1],preds[2][2])
+            preds3 = (preds[0],preds[1][2],preds[2][2])
             if "next" in task_name:
                 with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
                     pickle.dump(preds1, f1)
@@ -424,5 +424,5 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
 
         df = performance_statistic.to_df()
         results.append(df)
-        if store: df.to_csv(store_path/f"run_{r}_results.csv")
+        if store: df.to_csv(store_path/f"run_{r}_results.csv", index=False)
     return results if len(results)>1 else results[0]
