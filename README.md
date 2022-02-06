@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ### Class Imbalance
 
-NOTE: Run all of the following commands from IBM-Data-Quality folder
+NOTE: Run the following commands from IBM-Data-Quality folder
 
 Step 1: Basic Set-up
 
