@@ -57,8 +57,6 @@ for log in logs:
     #Get case_len
     pred_file = pd.read_pickle(f"{path}/{log}/{model}/preds-next_step_prediction.pickle") #Consider only categorical columns
     xyz = [int(torch.count_nonzero(row)) for row in pred_file[0][-1]]
-    print(xyz)
-    print(pred_file[0][-1])
     num_cases = len(set([int(torch.count_nonzero(row)) for row in pred_file[0][-1]]))
     case_results['log'] = [log]*num_cases
     case_results['model'] = [model]*num_cases
