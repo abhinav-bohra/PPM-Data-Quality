@@ -386,6 +386,7 @@ class PPDset(torch.utils.data.Dataset):
         if len(ys)==1: ys=ys[0]
         return (*xs,ys)
 
+
 def getStrategy(my_list):
     avg = int(len(my_list)/len(set(my_list)))
     freq = {}
@@ -401,6 +402,7 @@ def getStrategy(my_list):
     ir = round(max(freq.values())/min(freq.values()))
     logger.debug(f"Imbalance Ratio is {ir}")
     return freq
+
 
 def getBalancedData(func,xs,ys):
   x = list(xs)
@@ -422,6 +424,7 @@ def getBalancedData(func,xs,ys):
   logger.debug(f"{round(1-r,2)*100}% reduction in size by undersampling wrt activity" )
   
   return xs_under, ys_under
+
 
 def Balance(xs,ys):
   y_labels = list(ys[0].numpy())

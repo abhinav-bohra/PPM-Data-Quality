@@ -57,7 +57,7 @@ elif exp_mode == "CI":
 
 elif exp_mode == "default":
   logs=[EventLogs.BPIC_12]
-  ppms=[PPM_Camargo_concat]
+  ppms=[PPM_Tax_Spezialized,PPM_MiDA]
   # ppms=[PPM_Camargo_concat, PPM_Tax_Spezialized, PPM_MiDA, PPM_MPPN ]
 
 else:
