@@ -21,14 +21,13 @@ pip install -r requirements.txt
 
 NOTE: Run the following commands from IBM-Data-Quality folder
 
+```
+export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
+```
 Step 1: Basic Set-up
 
 Set models and logs in 'default' mode (line 58: prediction_evaluation.py)  
 Set the same models and logs in 'CI' mode as well (line 51: prediction_evaluation.py)
-
-```
-export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
-```
 
 Step 2: Get Default results
 
