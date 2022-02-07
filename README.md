@@ -78,10 +78,10 @@ Step 1: Compute Class Overlap (F1 & F2) Score on default features
 ```
 python class_overlap.py --folder results_default
 ```
+<br>
 
 
-
-For each model, checkpoints are saved as .pth files in 01_Missing-Values/results/models/
+For each model, checkpoints are saved as .pth files in results_folder/models/run0/
 
 (It saves the model's best during training)
 
