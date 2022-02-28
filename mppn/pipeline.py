@@ -51,113 +51,6 @@ class HideOutput:
         sys.stdout = self._original_stdout
 
 #Cell
-def save_features(obj, store_path, o, task_name):
-    train = obj[0].dataset
-    dev = obj[1].dataset
-    test = obj[2].dataset
-    ds = train + dev + test
-    store_path = str(store_path)
-    model_name = store_path.split('/')[-1]
-
-    features = list()
-    targets = list()
-    for row in ds:
-        #Features
-        x = (list(row))[:-1]
-        try:
-          if(len(x.size())==0):#scalar
-            x = x.unsqueeze(0)
-        except:
-          pass
-        x_ = [torch.flatten(t) for t in x]
-        ftr = torch.hstack(x_)
-        ftr = ftr.detach().cpu().numpy()
-        features.append(ftr)
-        #Targets
-        y = (list(row))[-1]
-        try:
-          if(len(y.size())==0):#scalar
-            y = y.unsqueeze(0)
-        except:
-          pass
-        y_ = [torch.flatten(t) for t in y]
-        tar = torch.hstack(y_)
-        tar = tar.detach().cpu().numpy()
-        targets.append(tar)
-
-    #-------------------------------------------------------------------------------
-    #Saving Features
-    #-------------------------------------------------------------------------------
-    num_features = len(features[0])
-    feat_size = num_features//len(o.x_names)
-    ft_cols = []
-    for x_name in o.x_names:
-        if x_name in o.cat_names:
-            varType = "CAT"
-        elif x_name in o.cont_names:
-            varType = "CONT"
-        else:
-            varType = "OTHER"
-        ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
-
-    df = pd.DataFrame(features, columns = ft_cols)
-    case_len =[int(torch.count_nonzero(row[-2][0])) for row in ds]
-    df.insert(0, "case_len", case_len, True)
-    #df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
-    df.to_csv(f'{store_path}/features.csv', index=False)
-    logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
-    #-------------------------------------------------------------------------------
-    #Saving Targets
-    #-------------------------------------------------------------------------------
-    num_targets = len(targets[0])
-    targ_size = num_targets//len(o.y_names)
-    tg_cols = []
-    for y_name in o.y_names:
-        if y_name in o.ycat_names:
-            varType = "CAT"
-        elif y_name in o.ycont_names:
-            varType = "CONT"
-        else:
-            varType = "OTHER"
-        tg_cols = tg_cols + [f"{varType}_{y_name}_{i}" for i in range(0,targ_size)]
-    df = pd.DataFrame(targets, columns = tg_cols)
-    #-------------------------------------------------------------------------------
-    # Handling Camargo and Tax targets
-    #-------------------------------------------------------------------------------
-    if "Camargo" in model_name:
-        df1 = pd.DataFrame(df.iloc[:,0])
-        df2 = pd.DataFrame(df.iloc[:,1])
-        df3 = pd.DataFrame(df.iloc[:,2])
-        if "next" in task_name:
-            df1.to_csv(f'{store_path}/targets-next_step_prediction.csv', index=False)
-            df2.to_csv(f'{store_path}/targets-next_resource_prediction.csv', index=False)
-            df3.to_csv(f'{store_path}/targets-duration_to_next_event_prediction.csv', index=False)
-            logger.debug(f"Targets saved at - {store_path}/targets-next_step_prediction.csv")
-            logger.debug(f"Targets saved at - {store_path}/targets-next_resource_prediction.csv")
-            logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
-        #else:
-        #   df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
-        #    df2.to_csv(f'{store_path}/targets-last_resource_prediction.csv', index=False)
-        #    df3.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
-        #    logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
-        #    logger.debug(f"Targets saved at - {store_path}/targets-last_resource_prediction.csv")
-        #    logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
-    elif "Tax" in model_name:
-        df1 = pd.DataFrame(df.iloc[:,0])
-        df2 = pd.DataFrame(df.iloc[:,1])
-        if "next" in task_name:
-            df1.to_csv(f'{store_path}/targets-next_step_prediction.csv', index=False)
-            df2.to_csv(f'{store_path}/targets-duration_to_next_event_prediction.csv', index=False)
-            logger.debug(f"Targets saved at - {store_path}/targets-next_step_prediction.csv")
-            logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
-        #else:
-        #    df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
-        #    df2.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
-        #    logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
-        #    logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
-    else:
-        df.to_csv(f'{store_path}/targets-{task_name}.csv', index=False)
-        logger.debug(f"Targets saved at - {store_path}/targets-{task_name}.csv")
 #----------------------------------------------------------------------------------------------------
 
 # Cell
@@ -179,8 +72,8 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
     Afterwards, applies it to the test set.
     '''
     cbs = [CudaCallback,
-      EarlyStoppingCallback(monitor='valid_loss',min_delta=min_delta, patience=patience),
-      #SaveModelCallback(fname=model_name)
+      EarlyStoppingCallback(monitor='valid_loss',min_delta=min_delta, patience=patience)
+      # SaveModelCallback(fname=model_name)
       ]
     
     learn=Learner(dls, m, path=store_path, model_dir=model_dir, loss_func=loss ,metrics=metrics,cbs=cbs)
@@ -194,84 +87,11 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
 
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
-        preds=tuple((learn.get_preds(dl=dls[2], with_input=True)))
-        save_features(dls, store_path, o, task_name)
-        if "Camargo" in model:
-            preds1 = (preds[0],preds[1][0],preds[2][0])
-            preds2 = (preds[0],preds[1][1],preds[2][1])
-            preds3 = (preds[0],preds[1][2],preds[2][2])
-            if "next" in task_name:
-                with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
-                    pickle.dump(preds1, f1)
-                with open(f'{store_path}/preds-next_resource_prediction.pickle', 'wb') as f1:
-                    pickle.dump(preds2, f1)
-                with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
-                    pickle.dump(preds3, f1)
-            #else:
-            #    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
-            #        pickle.dump(preds1, f1)
-            #    with open(f'{store_path}/preds-last_resource_prediction.pickle', 'wb') as f1:
-            #        pickle.dump(preds2, f1)
-            #    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
-            #        pickle.dump(preds3, f1)
-        elif "Tax" in model:
-            preds1 = (preds[0],preds[1][0],preds[2][0])
-            preds2 = (preds[0],preds[1][1],preds[2][1])
-            if "next" in task_name:
-                with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
-                    pickle.dump(preds1, f1)
-                with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
-                    pickle.dump(preds2, f1)
-            #else:
-            #    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
-            #       pickle.dump(preds1, f1)
-            #    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
-            #        pickle.dump(preds2, f1)
-        else:
-            with open(f'{store_path}/preds-{task_name}.pickle', 'wb') as f1:
-                pickle.dump(preds, f1)
         return learn.validate(dl=dls[2])[output_index]
 
     else:
         with HideOutput(),learn.no_bar():
-            training_loop(learn,epoch,show_plot,lr_find=lr_find)
-            preds=tuple((learn.get_preds(dl=dls[2], with_input=True)))
-            save_features(dls, store_path, o, task_name)
-            if "Camargo" in model:
-                preds1 = (preds[0],preds[1][0],preds[2][0])
-                preds2 = (preds[0],preds[1][1],preds[2][1])
-                preds3 = (preds[0],preds[1][2],preds[2][2])
-                if "next" in task_name:
-                    with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
-                        pickle.dump(preds1, f1)
-                    with open(f'{store_path}/preds-next_resource_prediction.pickle', 'wb') as f1:
-                        pickle.dump(preds2, f1)
-                    with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
-                        pickle.dump(preds3, f1)
-                #else:
-                #    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
-                #        pickle.dump(preds1, f1)
-                #    with open(f'{store_path}/preds-last_resource_prediction.pickle', 'wb') as f1:
-                #        pickle.dump(preds2, f1)
-                #    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
-                #        pickle.dump(preds3, f1)
-            elif "Tax" in model:
-                preds1 = (preds[0],preds[1][0],preds[2][0])
-                preds2 = (preds[0],preds[1][1],preds[2][1])
-                if "next" in task_name:
-                    with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
-                        pickle.dump(preds1, f1)
-                    with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
-                        pickle.dump(preds2, f1)
-                #else:
-                #    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
-                #        pickle.dump(preds1, f1)
-                #    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
-                #        pickle.dump(preds2, f1)
-            else:
-                with open(f'{store_path}/preds-{task_name}.pickle', 'wb') as f1:
-                    pickle.dump(preds, f1)
-            
+            training_loop(learn,epoch,show_plot,lr_find=lr_find)            
             return learn.validate(dl=dls[2])[output_index]
 
 
@@ -305,27 +125,25 @@ class PPModel():
         print('next_resource_prediction')
         nrp_acc,nrp_pre,nrp_rec,nrp_f1=self.next_resource_prediction()
 
-        #print('last_resource_prediction')
-        #lrp_acc,lrp_pre,lrp_rec,lrp_f1=self.last_resource_prediction()
+        print('last_resource_prediction')
+        lrp_acc,lrp_pre,lrp_rec,lrp_f1=self.last_resource_prediction()
 
-        #print('outcome_prediction')
-        #p_acc,op_pre,op_rec,op_f1=self.outcome_prediction()
+        print('outcome_prediction')
+        op_acc,op_pre,op_rec,op_f1=self.outcome_prediction()
 
         print('duration_to_next_event_prediction')
         dtnep=self.duration_to_next_event_prediction()
 
-        #print('duration_to_end_prediction')
-        #dtep=self.duration_to_end_prediction()
+        print('duration_to_end_prediction')
+        dtep=self.duration_to_end_prediction()
 
-        #print('activity_suffix_prediction')
-        #asp=self.activity_suffix_prediction()
+        print('activity_suffix_prediction')
+        asp=self.activity_suffix_prediction()
 
-        #print('resource_suffix_prediction')
-        #rsp=self.resource_suffix_prediction()
+        print('resource_suffix_prediction')
+        rsp=self.resource_suffix_prediction()
         
-        #return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, lrp_acc,lrp_pre,lrp_rec,lrp_f1, op_acc,op_pre,op_rec,op_f1, dtnep, dtep, asp, rsp
-        return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, dtnep
-
+        return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, lrp_acc,lrp_pre,lrp_rec,lrp_f1, op_acc,op_pre,op_rec,op_f1, dtnep, dtep, asp, rsp
 
     def _train_validate(self,o,dls,m,metrics=accuracy,loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
@@ -363,9 +181,9 @@ class Performance_Statistic():
         self.df = pd.DataFrame(
         columns=['Dataset', 'Model', 'Balancing Technique', 'Next Step Acc','Next Step Pre','Next Step Rec','Next Step F1',\
          'Next Resource Acc','Next Resource Pre','Next Resource Rec','Next Resource F1', \
-        # 'Last Resource Acc','Last Resource Pre','Last Resource Rec','Last Resource F1', \
-        # 'Outcome Acc','Outcome Pre','Outcome Rec','Outcome F1', \
-         'Next relative Timestamp'])#, 'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
+         'Last Resource Acc','Last Resource Pre','Last Resource Rec','Last Resource F1', \
+         'Outcome Acc','Outcome Pre','Outcome Rec','Outcome F1', \
+         'Next relative Timestamp', 'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
     def update(self,model_performance): self.df.loc[len(self.df)] = model_performance
     def to_df(self):
         return self.df
@@ -402,9 +220,9 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
             log=import_log(ds)
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
-            #if store:
-            #    with open(store_path/f'run{r}_{ds_name}_splits.pickle', "wb") as output_file:
-            #        pickle.dump(splits, output_file)
+            # if store:
+            #     with open(store_path/f'run{r}_{ds_name}_splits.pickle', "wb") as output_file:
+            #         pickle.dump(splits, output_file)
             mb=tqdm(range(len(ppm_classes)),leave=False)
             #Loop over models
             for j in mb:
