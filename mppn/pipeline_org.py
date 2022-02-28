@@ -103,7 +103,7 @@ def save_features(obj, store_path, o, task_name):
     df = pd.DataFrame(features, columns = ft_cols)
     case_len =[int(torch.count_nonzero(row[-2][0])) for row in ds]
     df.insert(0, "case_len", case_len, True)
-    #df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
+    df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
     df.to_csv(f'{store_path}/features.csv', index=False)
     logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
     #-------------------------------------------------------------------------------
@@ -135,13 +135,13 @@ def save_features(obj, store_path, o, task_name):
             logger.debug(f"Targets saved at - {store_path}/targets-next_step_prediction.csv")
             logger.debug(f"Targets saved at - {store_path}/targets-next_resource_prediction.csv")
             logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
-        #else:
-        #   df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
-        #    df2.to_csv(f'{store_path}/targets-last_resource_prediction.csv', index=False)
-        #    df3.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
-        #    logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
-        #    logger.debug(f"Targets saved at - {store_path}/targets-last_resource_prediction.csv")
-        #    logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
+        else:
+            df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
+            df2.to_csv(f'{store_path}/targets-last_resource_prediction.csv', index=False)
+            df3.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
+            logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
+            logger.debug(f"Targets saved at - {store_path}/targets-last_resource_prediction.csv")
+            logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
     elif "Tax" in model_name:
         df1 = pd.DataFrame(df.iloc[:,0])
         df2 = pd.DataFrame(df.iloc[:,1])
@@ -150,11 +150,11 @@ def save_features(obj, store_path, o, task_name):
             df2.to_csv(f'{store_path}/targets-duration_to_next_event_prediction.csv', index=False)
             logger.debug(f"Targets saved at - {store_path}/targets-next_step_prediction.csv")
             logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
-        #else:
-        #    df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
-        #    df2.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
-        #    logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
-        #    logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
+        else:
+            df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
+            df2.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
+            logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
+            logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
     else:
         df.to_csv(f'{store_path}/targets-{task_name}.csv', index=False)
         logger.debug(f"Targets saved at - {store_path}/targets-{task_name}.csv")
@@ -180,7 +180,7 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
     '''
     cbs = [CudaCallback,
       EarlyStoppingCallback(monitor='valid_loss',min_delta=min_delta, patience=patience),
-      #SaveModelCallback(fname=model_name)
+      SaveModelCallback(fname=model_name)
       ]
     
     learn=Learner(dls, m, path=store_path, model_dir=model_dir, loss_func=loss ,metrics=metrics,cbs=cbs)
@@ -195,11 +195,13 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
         preds=tuple((learn.get_preds(dl=dls[2], with_input=True)))
+        #Overwriting X with caselens
+        preds[0] = getCaselen(preds[0])
         save_features(dls, store_path, o, task_name)
         if "Camargo" in model:
-            preds1 = (preds[0],preds[1][0],preds[2][0])
-            preds2 = (preds[0],preds[1][1],preds[2][1])
-            preds3 = (preds[0],preds[1][2],preds[2][2])
+            preds1 = (getCaselen(preds[0]),preds[1][0],preds[2][0])
+            preds2 = (getCaselen(preds[0]),preds[1][1],preds[2][1])
+            preds3 = (getCaselen(preds[0]),preds[1][2],preds[2][2])
             if "next" in task_name:
                 with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
                     pickle.dump(preds1, f1)
@@ -207,26 +209,26 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
                     pickle.dump(preds2, f1)
                 with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
                     pickle.dump(preds3, f1)
-            #else:
-            #    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
-            #        pickle.dump(preds1, f1)
-            #    with open(f'{store_path}/preds-last_resource_prediction.pickle', 'wb') as f1:
-            #        pickle.dump(preds2, f1)
-            #    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
-            #        pickle.dump(preds3, f1)
+            else:
+                with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds1, f1)
+                with open(f'{store_path}/preds-last_resource_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds2, f1)
+                with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds3, f1)
         elif "Tax" in model:
-            preds1 = (preds[0],preds[1][0],preds[2][0])
-            preds2 = (preds[0],preds[1][1],preds[2][1])
+            preds1 = (getCaselen(preds[0]),preds[1][0],preds[2][0])
+            preds2 = (getCaselen(preds[0]),preds[1][1],preds[2][1])
             if "next" in task_name:
                 with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
                     pickle.dump(preds1, f1)
                 with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
                     pickle.dump(preds2, f1)
-            #else:
-            #    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
-            #       pickle.dump(preds1, f1)
-            #    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
-            #        pickle.dump(preds2, f1)
+            else:
+                with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds1, f1)
+                with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
+                    pickle.dump(preds2, f1)
         else:
             with open(f'{store_path}/preds-{task_name}.pickle', 'wb') as f1:
                 pickle.dump(preds, f1)
@@ -236,11 +238,13 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
         with HideOutput(),learn.no_bar():
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
             preds=tuple((learn.get_preds(dl=dls[2], with_input=True)))
+            #Overwriting X with caselens
+            preds[0] = getCaselen(preds[0])
             save_features(dls, store_path, o, task_name)
             if "Camargo" in model:
-                preds1 = (preds[0],preds[1][0],preds[2][0])
-                preds2 = (preds[0],preds[1][1],preds[2][1])
-                preds3 = (preds[0],preds[1][2],preds[2][2])
+                preds1 = (getCaselen(preds[0]),preds[1][0],preds[2][0])
+                preds2 = (getCaselen(preds[0]),preds[1][1],preds[2][1])
+                preds3 = (getCaselen(preds[0]),preds[1][2],preds[2][2])
                 if "next" in task_name:
                     with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
                         pickle.dump(preds1, f1)
@@ -248,26 +252,26 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
                         pickle.dump(preds2, f1)
                     with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
                         pickle.dump(preds3, f1)
-                #else:
-                #    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
-                #        pickle.dump(preds1, f1)
-                #    with open(f'{store_path}/preds-last_resource_prediction.pickle', 'wb') as f1:
-                #        pickle.dump(preds2, f1)
-                #    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
-                #        pickle.dump(preds3, f1)
+                else:
+                    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds1, f1)
+                    with open(f'{store_path}/preds-last_resource_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds2, f1)
+                    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds3, f1)
             elif "Tax" in model:
-                preds1 = (preds[0],preds[1][0],preds[2][0])
-                preds2 = (preds[0],preds[1][1],preds[2][1])
+                preds1 = (getCaselen(preds[0]),preds[1][0],preds[2][0])
+                preds2 = (getCaselen(preds[0]),preds[1][1],preds[2][1])
                 if "next" in task_name:
                     with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
                         pickle.dump(preds1, f1)
                     with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f1:
                         pickle.dump(preds2, f1)
-                #else:
-                #    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
-                #        pickle.dump(preds1, f1)
-                #    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
-                #        pickle.dump(preds2, f1)
+                else:
+                    with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds1, f1)
+                    with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f1:
+                        pickle.dump(preds2, f1)
             else:
                 with open(f'{store_path}/preds-{task_name}.pickle', 'wb') as f1:
                     pickle.dump(preds, f1)
@@ -305,27 +309,25 @@ class PPModel():
         print('next_resource_prediction')
         nrp_acc,nrp_pre,nrp_rec,nrp_f1=self.next_resource_prediction()
 
-        #print('last_resource_prediction')
-        #lrp_acc,lrp_pre,lrp_rec,lrp_f1=self.last_resource_prediction()
+        print('last_resource_prediction')
+        lrp_acc,lrp_pre,lrp_rec,lrp_f1=self.last_resource_prediction()
 
-        #print('outcome_prediction')
-        #p_acc,op_pre,op_rec,op_f1=self.outcome_prediction()
+        print('outcome_prediction')
+        op_acc,op_pre,op_rec,op_f1=self.outcome_prediction()
 
         print('duration_to_next_event_prediction')
         dtnep=self.duration_to_next_event_prediction()
 
-        #print('duration_to_end_prediction')
-        #dtep=self.duration_to_end_prediction()
+        print('duration_to_end_prediction')
+        dtep=self.duration_to_end_prediction()
 
-        #print('activity_suffix_prediction')
-        #asp=self.activity_suffix_prediction()
+        print('activity_suffix_prediction')
+        asp=self.activity_suffix_prediction()
 
-        #print('resource_suffix_prediction')
-        #rsp=self.resource_suffix_prediction()
+        print('resource_suffix_prediction')
+        rsp=self.resource_suffix_prediction()
         
-        #return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, lrp_acc,lrp_pre,lrp_rec,lrp_f1, op_acc,op_pre,op_rec,op_f1, dtnep, dtep, asp, rsp
-        return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, dtnep
-
+        return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, lrp_acc,lrp_pre,lrp_rec,lrp_f1, op_acc,op_pre,op_rec,op_f1, dtnep, dtep, asp, rsp
 
     def _train_validate(self,o,dls,m,metrics=accuracy,loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
@@ -363,9 +365,9 @@ class Performance_Statistic():
         self.df = pd.DataFrame(
         columns=['Dataset', 'Model', 'Balancing Technique', 'Next Step Acc','Next Step Pre','Next Step Rec','Next Step F1',\
          'Next Resource Acc','Next Resource Pre','Next Resource Rec','Next Resource F1', \
-        # 'Last Resource Acc','Last Resource Pre','Last Resource Rec','Last Resource F1', \
-        # 'Outcome Acc','Outcome Pre','Outcome Rec','Outcome F1', \
-         'Next relative Timestamp'])#, 'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
+         'Last Resource Acc','Last Resource Pre','Last Resource Rec','Last Resource F1', \
+         'Outcome Acc','Outcome Pre','Outcome Rec','Outcome F1', \
+         'Next relative Timestamp', 'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
     def update(self,model_performance): self.df.loc[len(self.df)] = model_performance
     def to_df(self):
         return self.df
@@ -377,7 +379,7 @@ def _store_path(save_dir,results_dir=Path('./')):
     #current_time = now.strftime("%Y-%m-%d_%H:%M:%S")
     #results_dir=results_dir/current_time
     results_dir = results_dir/save_dir
-    results_dir.mkdir(exist_ok=True)
+    results_dir.mkdir()
     return results_dir
 
 # Cell
@@ -402,9 +404,9 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
             log=import_log(ds)
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
-            #if store:
-            #    with open(store_path/f'run{r}_{ds_name}_splits.pickle', "wb") as output_file:
-            #        pickle.dump(splits, output_file)
+            if store:
+                with open(store_path/f'run{r}_{ds_name}_splits.pickle', "wb") as output_file:
+                    pickle.dump(splits, output_file)
             mb=tqdm(range(len(ppm_classes)),leave=False)
             #Loop over models
             for j in mb:

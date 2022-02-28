@@ -387,17 +387,24 @@ class PPDset(torch.utils.data.Dataset):
         return (*xs,ys)
 
 
-def getStrategy(my_list):
-    avg = int(len(my_list)/len(set(my_list)))
+def getStrategy(y_labels):
+    avg = int(len(y_labels)/len(set(y_labels)))
+
+    #Calculating frequency count of each class
     freq = {}
-    for items in my_list:
-        freq[items] = my_list.count(items)
+    for items in y_labels:
+        freq[items] = y_labels.count(items)
 
     ir = round(max(freq.values())/min(freq.values()))
     logger.debug(f"Imbalance Ratio is {ir}")
+
+    #Approach 1: Undersampling majority classes with 75% percentile 
     for key in freq:
       if freq[key] > avg:
         freq[key]=avg
+
+    #Approach 2: Undersampling majority classes with 75% percentile
+    
 
     ir = round(max(freq.values())/min(freq.values()))
     logger.debug(f"Imbalance Ratio is {ir}")
