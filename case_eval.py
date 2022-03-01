@@ -29,6 +29,19 @@ task_names = {
   'preds-duration_to_end_prediction.pickle': 'DURATION TO END'
 }
 
+def eval(case_len_df, case_results, task):
+  if "duration" not in task:
+    cr = classification_report(case_len_df[ f'targ_{task_names[task]}'], case_len_df[ f'pred_{task_names[task]}'], output_dict = True)
+    case_results[f'{task_names[task]} ACC'].append(cr['accuracy'])
+    case_results[f'{task_names[task]} PRE'].append(cr['macro avg']['precision'])
+    case_results[f'{task_names[task]} REC'].append(cr['macro avg']['recall'])
+    case_results[f'{task_names[task]} F1'].append(cr['macro avg']['f1-score'])
+  else:
+    y_true = case_len_df[f'targ_{task_names[task]}']
+    y_pred = case_len_df[f'pred_{task_names[task]}']
+    mse = mean_squared_error(y_true,y_pred)
+    case_results[f'{task_names[task]} MSE'].append(mse)
+  return case_results
 #--------------------------------------------------------------------------------------------
 # Get Ground Truth and Predictions
 # data[0] -> Inputs,  data[1] -> Preds,  data[2] -> Targets (True Outputs)
@@ -57,7 +70,8 @@ for log in logs:
 
     #Get case_len
     pred_file = pd.read_pickle(f"{path}/{log}/{model}/preds-next_step_prediction.pickle") 
-    num_cases = len(set(pred_file[0]))
+    num_cases = len(set(pred_file[0])) + 1    #Adding 1 for entire dataset
+
     #Intialization
     case_results['log'] = [log]*num_cases
     case_results['model'] = [model]*num_cases
@@ -101,17 +115,12 @@ for log in logs:
         for case in case_len_grps:
           case_len_df = groups.get_group(case)
           case_len_groups_support.append(len(case_len_df.index))
-          if "duration" not in task:
-            cr = classification_report(case_len_df[ f'targ_{task_names[task]}'], case_len_df[ f'pred_{task_names[task]}'], output_dict = True)
-            case_results[f'{task_names[task]} ACC'].append(cr['accuracy'])
-            case_results[f'{task_names[task]} PRE'].append(cr['macro avg']['precision'])
-            case_results[f'{task_names[task]} REC'].append(cr['macro avg']['recall'])
-            case_results[f'{task_names[task]} F1'].append(cr['macro avg']['f1-score'])
-          else:
-            y_true = case_len_df[f'targ_{task_names[task]}']
-            y_pred = case_len_df[f'targ_{task_names[task]}']
-            mse = mean_squared_error(y_true,y_pred)
-            case_results[f'{task_names[task]} MSE'].append(mse)
+          case_results=eval(case_len_df, case_results, task)
+        
+        #Evaluate Entire Dataset
+        case_results['case_len'].append("Entire")
+        case_len_groups_support.append(len(df.index))
+        case_results = eval(df, case_results, task)
         case_results['support'] = case_len_groups_support
       else:
         if "duration" not in task:
