@@ -23,15 +23,17 @@ logger.debug("--Pipeline Logging--")
 #------------------------------------------------------------------------------------------
 # UDFs
 #------------------------------------------------------------------------------------------
-def getCaselen(preds, model):
+def getCaselen(preds):
     case_len =[int(torch.count_nonzero(row[-1])) for row in preds[0][1]]
+    logger.debug(f"Case Len: {case_len}")
     return case_len
 
 #--------------------------------------------
 #Function to save predictions for given task
 #--------------------------------------------
-def save_preds(preds,model,store_path):
-    preds[0] = getCaselen(preds[0])
+def save_preds(preds_,model,store_path,task_name):
+    preds = list(preds_)
+    preds[0] = getCaselen(preds_[0])
     if "Camargo" in model:
         preds1 = (preds[0],preds[1][0],preds[2][0])
         preds2 = (preds[0],preds[1][1],preds[2][1])
@@ -243,16 +245,16 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
         preds=tuple(learn.get_preds(dl=dls[2], with_input=True))
-		save_features_targets(dls, store_path, o, task_name)
-		save_preds(preds,model,store_path)
+        save_features_targets(dls, store_path, o, task_name)
+        save_preds(preds,model,store_path,task_name)
         return learn.validate(dl=dls[2])[output_index]
 
     else:
         with HideOutput(),learn.no_bar():
             training_loop(learn,epoch,show_plot,lr_find=lr_find)
-            preds=tuple(learn.get_preds(dl=dls[2], with_input=True))  
-			save_features_targets(dls, store_path, o, task_name)
-			save_preds(preds,model,store_path)          
+            preds=tuple(learn.get_preds(dl=dls[2], with_input=True))
+            save_features_targets(dls, store_path, o, task_name)
+            save_preds(preds,model,store_path,task_name)          
             return learn.validate(dl=dls[2])[output_index]
 
 

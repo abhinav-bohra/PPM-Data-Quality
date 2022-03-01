@@ -55,19 +55,19 @@ def _precision_idx(a,b,i):
   pred = listify(a)[i]
   targ = listify(b)[i]
   pred,targ = flatten_check(pred.argmax(dim=-1), targ)
-  return sklearn.metrics.precision_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+  return sklearn.metrics.precision_score(targ.cpu().detach().numpy(), pred.cpu().detach().numpy(),average='macro')
 
 def _recall_idx(a,b,i): 
   pred = listify(a)[i]
   targ = listify(b)[i]
   pred,targ = flatten_check(pred.argmax(dim=-1), targ)
-  return sklearn.metrics.recall_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+  return sklearn.metrics.recall_score(targ.cpu().detach().numpy(), pred.cpu().detach().numpy(),average='macro')
 
 def _f1_score_idx(a,b,i): 
   pred = listify(a)[i]
   targ = listify(b)[i]
   pred,targ = flatten_check(pred.argmax(dim=-1), targ)
-  return sklearn.metrics.f1_score(pred.cpu().detach().numpy(), targ.cpu().detach().numpy(),average='macro')
+  return sklearn.metrics.f1_score(targ.cpu().detach().numpy(), pred.cpu().detach().numpy(),average='macro')
 
 # Cell
 class AvgMetric(Metric):
@@ -308,44 +308,6 @@ class PPM_Camargo_Spezialized(PPModel):
     def activity_suffix_prediction(self): pass
     def resource_suffix_prediction(self): pass
 
-# class PPM_Camargo_Spezialized(PPModel):
-
-#     model = Camargo_specialized
-#     date_names=['timestamp']
-#     cat_names=['activity','resource']
-#     y_names=['activity','resource','timestamp_Relative_elapsed']
-#     cont_names=None
-#     procs=[Categorify,Datetify,Normalize,FillMissing]
-
-#     def setup(self):
-#         self.o=PPObj(self.log,self.procs,cat_names=self.cat_names,date_names=self.date_names,y_names=self.y_names,
-#                 cont_names=self.cont_names,splits=self.splits)
-        
-#     def next_step_prediction(self,col='activity',outcome=False):
-#         self.o.set_y_names(col)
-#         print(self.o.y_names)
-#         dls=self.o.get_dls(bs=self.bs,outcome=outcome)
-#         m=self.model(self.o)
-#         loss=partial(multi_loss_sum,self.o)
-#         metrics=get_metrics(self.o)
-#         output_index = list(range(1, len(metrics)+1))
-#         logger.debug("PPM_Camargo_Spezialized")
-#         logger.debug(output_index)
-#         return self._train_validate(self.o,dls,m,loss=loss,metrics=metrics,output_index=output_index)
-
-#     def next_resource_prediction(self):return self.next_step_prediction(outcome=False,col='resource')
-
-#     def last_resource_prediction(self): return self.next_step_prediction(outcome=True,col='resource')
-#     def outcome_prediction(self): return self.next_step_prediction(outcome=True,col='activity')
-
-#     def duration_to_next_event_prediction(self):
-#         return self.next_step_prediction(outcome=False,col='timestamp_Relative_elapsed')
-
-#     def duration_to_end_prediction(self):
-#         return self.next_step_prediction(outcome=True,col='timestamp_Relative_elapsed')
-#     def activity_suffix_prediction(self): pass
-#     def resource_suffix_prediction(self): pass
-
 # Cell
 class PPM_Camargo_concat(PPM_Camargo_Spezialized):
     model = Camargo_concat
@@ -505,42 +467,6 @@ class PPM_Tax_Spezialized(PPModel):
     def duration_to_end_prediction(self): return self.dtlp
     def activity_suffix_prediction(self): pass
     def resource_suffix_prediction(self): pass
-
-# Cell
-# class PPM_Tax_Spezialized(PPModel):
-
-#     model = Tax_et_al_spezialized
-#     date_names=['timestamp']
-#     cat_names=['activity']
-#     y_names=['activity','timestamp_Relative_elapsed']
-#     cont_names=None
-#     procs=[Categorify,OneHot,Datetify(date_encodings=['secSinceSunNoon','secSinceNoon','Relative_elapsed']),
-#            Normalize,FillMissing]
-
-#     def setup(self):
-#         self.o=PPObj(self.log,self.procs,cat_names=self.cat_names,date_names=self.date_names,y_names=self.y_names,
-#                 cont_names=self.cont_names,splits=self.splits)
-
-#     def next_step_prediction(self,col='activity',outcome=False):
-#         self.o.set_y_names(col)
-#         print(self.o.y_names)
-#         dls=self.o.get_dls(bs=self.bs,outcome=outcome)
-#         m=self.model(self.o)
-#         loss=partial(multi_loss_sum,self.o)
-#         metrics=get_metrics(self.o)
-#         output_index = list(range(1, len(metrics)+1))
-#         return self._train_validate(self.o,dls,m,loss=loss,metrics=metrics,output_index=output_index)
-
-#     def next_resource_prediction(self): return None,None,None,None
-#     def last_resource_prediction(self): return None,None,None,None
-#     def outcome_prediction(self): return self.next_step_prediction(outcome=True,col='activity')
-
-#     def duration_to_next_event_prediction(self):
-#         return self.next_step_prediction(outcome=False,col='timestamp_Relative_elapsed')
-#     def duration_to_end_prediction(self):
-#         return self.next_step_prediction(outcome=True,col='timestamp_Relative_elapsed')
-#     def activity_suffix_prediction(self): pass
-#     def resource_suffix_prediction(self): pass
 
 # Cell
 class PPM_Tax_Shared(PPM_Tax_Spezialized):

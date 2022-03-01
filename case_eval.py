@@ -55,9 +55,9 @@ for log in logs:
     }
 
     #Get case_len
-    pred_file = pd.read_pickle(f"{path}/{log}/{model}/preds-next_step_prediction.pickle") #Consider only categorical columns
-    xyz = [int(torch.count_nonzero(row)) for row in pred_file[0][-1]]
-    num_cases = len(set([int(torch.count_nonzero(row)) for row in pred_file[0][-1]]))
+    pred_file = pd.read_pickle(f"{path}/{log}/{model}/preds-next_step_prediction.pickle") 
+    num_cases = len(set(pred_file[0]))
+    #Intialization
     case_results['log'] = [log]*num_cases
     case_results['model'] = [model]*num_cases
     result_na = ['NA']*num_cases
@@ -65,12 +65,12 @@ for log in logs:
       preds_path = f"{path}/{log}/{model}/{task}"
       if os.path.exists(preds_path):        
         data = pd.read_pickle(preds_path)
+        case_len =data[0]
         if "duration" in task:
           preds = torch.squeeze(data[1]).tolist()
         else:
           preds =[torch.argmax(data[1][i],dim=0).item() for i in range(0,data[1].size(0))]
         targs = data[2].tolist()
-        case_len =[int(torch.count_nonzero(row)) for row in data[0][-1]]
         assert len(preds) == len(targs)
         assert len(preds) == len(case_len)
 
