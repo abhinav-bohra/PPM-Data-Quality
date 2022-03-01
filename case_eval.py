@@ -60,6 +60,7 @@ for log in logs:
     #Intialization
     case_results['log'] = [log]*num_cases
     case_results['model'] = [model]*num_cases
+    case_results['support'] = ['NA']*num_cases
     result_na = ['NA']*num_cases
     for task in task_names:
       preds_path = f"{path}/{log}/{model}/{task}"
@@ -95,8 +96,10 @@ for log in logs:
         groups = df.groupby('case_len')
         case_len_grps = list(groups.groups.keys())
         case_results['case_len'] = case_len_grps
+        case_len_groups_support = list()
         for case in case_len_grps:
           case_len_df = groups.get_group(case)
+          case_len_groups_support.append(len(case_len_df.index))
           if "duration" not in task:
             cr = classification_report(case_len_df[ f'targ_{task_names[task]}'], case_len_df[ f'pred_{task_names[task]}'], output_dict = True)
             case_results[f'{task_names[task]} ACC'].append(cr['accuracy'])
@@ -108,6 +111,7 @@ for log in logs:
             y_pred = case_len_df[f'targ_{task_names[task]}']
             mse = mean_squared_error(y_true,y_pred)
             case_results[f'{task_names[task]} MSE'].append(mse)
+        case_results['support'] = case_len_groups_support
       else:
         if "duration" not in task:
           case_results[f'{task_names[task]} ACC']=result_na

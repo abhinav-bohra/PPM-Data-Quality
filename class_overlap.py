@@ -43,6 +43,7 @@ for log in logs:
 		df = df.loc[:, (df != 0).any(axis=0)] #Drop columns with no non-zero value
 		df = df.dropna() #Drop null values, if any
 		feature_cols = list(features.columns) # feature names 
+		
 		#Targets
 		targets = glob.glob(f"{path}/{log}/{model}/targets*.csv")
 		files = [t.split('\\')[1] for t in targets if "setup" not in t] #Consider only categorical columns

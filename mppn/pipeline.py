@@ -78,8 +78,6 @@ def save_features_targets(obj, store_path, o, task_name):
     dev = obj[1].dataset
     test = obj[2].dataset
     ds = train + dev + test
-    with open(f'{store_path}/ds-{task_name}.pickle', 'wb') as f:
-        pickle.dump(ds, f)
     store_path = str(store_path)
     model_name = store_path.split('/')[-1]
 
@@ -124,8 +122,12 @@ def save_features_targets(obj, store_path, o, task_name):
 
     df = pd.DataFrame(features, columns = ft_cols)
 
-    #CORRECET THIS LOGIC
-    case_len =[int(torch.count_nonzero(row[-2][0])) for row in ds]
+    if ds[0][-2].shape[0] == 64:
+      logger.debug(f"{store_path} has only 1 continous col")
+      case_len =[int(torch.count_nonzero(row[-2])) for row in ds]
+    else:
+      logger.debug(f"{store_path} has only more than 1 continous col. Size:{ds[0][-2].shape}")
+      case_len =[int(torch.count_nonzero(row[-2][0])) for row in ds]
     df.insert(0, "case_len", case_len, True)
     df.to_csv(f'{store_path}/features.csv', index=False)
     # df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
@@ -383,6 +385,7 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
+            # log=log[:350]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             # if store:
