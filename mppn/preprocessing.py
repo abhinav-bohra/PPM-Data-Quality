@@ -9,6 +9,7 @@ __all__ = ['EventLogs', 'import_log', 'drop_long_traces', 'RandomTraceSplitter',
 #------------------------------------------------------------------------------------------
 import logging
 import pandas as pd
+import numpy as np
 pd.set_option('display.max_columns', None)
 from .imports import *
 from imblearn.under_sampling import NearMiss
@@ -388,7 +389,6 @@ class PPDset(torch.utils.data.Dataset):
 
 
 def getStrategy(y_labels):
-    avg = int(len(y_labels)/len(set(y_labels)))
 
     #Calculating frequency count of each class
     freq = {}
@@ -398,13 +398,21 @@ def getStrategy(y_labels):
     ir = round(max(freq.values())/min(freq.values()))
     logger.debug(f"Imbalance Ratio is {ir}")
 
-    #Approach 1: Undersampling majority classes with 75% percentile 
+    #Approach 1: Undersampling majority classes with 75 PCTL 
+    freq_at_75_percentile = np.percentile(freq, 75)
     for key in freq:
-      if freq[key] > avg:
-        freq[key]=avg
+      if freq[key] > freq_at_75_percentile:
+        freq[key]=freq_at_75_percentile
 
-    #Approach 2: Undersampling majority classes with 75% percentile
-    
+    #Approach 2: Undersampling majority classes with 75 PCTL & oversampling minority classes with 25 PCTL
+    # freq_at_75_percentile = np.percentile(freq, 75)
+    # freq_at_25_percentile = np.percentile(freq, 25)
+    # for key in freq:
+    #   if freq[key] > freq_at_75_percentile:
+    #     freq[key]=freq_at_75_percentile
+
+    #   if freq[key] < freq_at_25_percentile:
+    #     freq[key]=freq_at_25_percentile
 
     ir = round(max(freq.values())/min(freq.values()))
     logger.debug(f"Imbalance Ratio is {ir}")
