@@ -46,6 +46,7 @@ for log in logs:
       'log': list(),
       'model': list(),
       'case_len': list(),
+      'support': list(),
       'NEXT ACTIVITY ACC': list(),'NEXT ACTIVITY PRE': list(),'NEXT ACTIVITY REC': list(),'NEXT ACTIVITY F1': list(),
       'OUTCOME ACTIVITY ACC': list(),'OUTCOME ACTIVITY PRE': list(),'OUTCOME ACTIVITY REC': list(),'OUTCOME ACTIVITY F1': list(),
       'NEXT RESOURCE ACC': list(),'NEXT RESOURCE PRE': list(),'NEXT RESOURCE REC': list(),'NEXT RESOURCE F1': list(),
