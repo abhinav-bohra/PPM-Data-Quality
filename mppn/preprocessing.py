@@ -399,14 +399,14 @@ def getStrategy(y_labels):
     logger.debug(f"Imbalance Ratio is {ir}")
 
     #Approach 1: Undersampling majority classes with 75 PCTL 
-    freq_at_75_percentile = np.percentile(freq, 75)
+    freq_at_75_percentile = round(np.percentile(list(freq.values()), 75))
     for key in freq:
       if freq[key] > freq_at_75_percentile:
         freq[key]=freq_at_75_percentile
 
     #Approach 2: Undersampling majority classes with 75 PCTL & oversampling minority classes with 25 PCTL
-    # freq_at_75_percentile = np.percentile(freq, 75)
-    # freq_at_25_percentile = np.percentile(freq, 25)
+    # freq_at_75_percentile = round(np.percentile(list(freq.values()), 75))
+    # freq_at_25_percentile = round(np.percentile(list(freq.values()), 25))
     # for key in freq:
     #   if freq[key] > freq_at_75_percentile:
     #     freq[key]=freq_at_75_percentile
@@ -464,7 +464,7 @@ def Balance(xs,ys):
 @delegates(TfmdDL)
 def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id',bs=64,**kwargs):
     ds=[]
-    i=0
+    cnt=0
     for s in ppo.subsets(): #train, dev and test sets
         wds,idx=windows(s.xs,s.event_ids)
         if not outcome: y=s.ys.iloc[idx]
@@ -483,8 +483,10 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
             try:
               logger.debug("Balancing Dataset...")
               #Balance only train & dev sets
-              if i<2:
+              if cnt<2:
                   xs,ys = Balance(xs,ys)
+              else:
+                logger.debug("Test Set")
             except Exception as E:
               logger.debug(f"\nException occurred while balancing dataset with {balancing_technique}: {E}\n")
           logger.debug("--AFTER--")
@@ -492,7 +494,7 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
             logger.debug(xs[i].size())
           
         ds.append(PPDset((*xs,ys)))
-        i=i+1
+        cnt=cnt+1
         
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)
 PPObj.get_dls= get_dls
