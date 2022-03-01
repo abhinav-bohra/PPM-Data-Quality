@@ -30,18 +30,19 @@ task_names = {
 }
 
 def eval(case_len_df, case_results, task):
+  y_true = case_len_df[f'targ_{task_names[task]}']
+  y_pred = case_len_df[f'pred_{task_names[task]}']
   if "duration" not in task:
-    cr = classification_report(case_len_df[ f'targ_{task_names[task]}'], case_len_df[ f'pred_{task_names[task]}'], output_dict = True)
+    cr = classification_report(y_true,y_pred,output_dict = True)
     case_results[f'{task_names[task]} ACC'].append(cr['accuracy'])
     case_results[f'{task_names[task]} PRE'].append(cr['macro avg']['precision'])
     case_results[f'{task_names[task]} REC'].append(cr['macro avg']['recall'])
     case_results[f'{task_names[task]} F1'].append(cr['macro avg']['f1-score'])
   else:
-    y_true = case_len_df[f'targ_{task_names[task]}']
-    y_pred = case_len_df[f'pred_{task_names[task]}']
     mse = mean_squared_error(y_true,y_pred)
     case_results[f'{task_names[task]} MSE'].append(mse)
   return case_results
+  
 #--------------------------------------------------------------------------------------------
 # Get Ground Truth and Predictions
 # data[0] -> Inputs,  data[1] -> Preds,  data[2] -> Targets (True Outputs)
