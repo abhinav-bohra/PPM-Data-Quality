@@ -23,9 +23,9 @@ logger.debug("--Pipeline Logging--")
 #------------------------------------------------------------------------------------------
 # UDFs
 #------------------------------------------------------------------------------------------
-def getCaselen(preds):
-    case_len =[int(torch.count_nonzero(row[-1])) for row in preds[0][1]]
-    logger.debug(f"Case Len: {case_len}")
+def getCaselen(X):
+    #X[-1] will be duration feature
+    case_len =[int(torch.count_nonzero(row)) for row in X[-1]]
     return case_len
 
 #--------------------------------------------
@@ -78,6 +78,8 @@ def save_features_targets(obj, store_path, o, task_name):
     dev = obj[1].dataset
     test = obj[2].dataset
     ds = train + dev + test
+    with open(f'{store_path}/ds-{task_name}.pickle', 'wb') as f:
+        pickle.dump(ds, f)
     store_path = str(store_path)
     model_name = store_path.split('/')[-1]
 

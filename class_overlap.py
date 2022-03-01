@@ -39,9 +39,9 @@ for log in logs:
 		#------------------------------------------------------------------------------------------
 		#Features
 		df = pd.read_csv(f"{path}/{log}/{model}/features.csv")
+		features = df.drop('case_len',axis=1) #Drop Case_len column as it is not a feature
 		df = df.loc[:, (df != 0).any(axis=0)] #Drop columns with no non-zero value
 		df = df.dropna() #Drop null values, if any
-		features = df.drop('case_len',axis=1) #Drop Case_len column as it is not a feature
 		feature_cols = list(features.columns) # feature names 
 		#Targets
 		targets = glob.glob(f"{path}/{log}/{model}/targets*.csv")
