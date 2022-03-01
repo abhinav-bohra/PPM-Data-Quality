@@ -25,7 +25,10 @@ logger.debug("--Pipeline Logging--")
 #------------------------------------------------------------------------------------------
 def getCaselen(X):
     #X[-1] will be duration feature
-    case_len =[int(torch.count_nonzero(row)) for row in X[-1]]
+    if X[-1][0].shape[0] == 64:
+        case_len =[int(torch.count_nonzero(row)) for row in X[-1]]
+    else:
+        case_len =[int(torch.count_nonzero(row[-1])) for row in X[-1]]
     return case_len
 
 #--------------------------------------------
@@ -126,7 +129,7 @@ def save_features_targets(obj, store_path, o, task_name):
       logger.debug(f"{store_path} has only 1 continous col")
       case_len =[int(torch.count_nonzero(row[-2])) for row in ds]
     else:
-      logger.debug(f"{store_path} has only more than 1 continous col. Size:{ds[0][-2].shape}")
+      logger.debug(f"{store_path} has more than 1 continous col. Size:{ds[0][-2].shape}")
       case_len =[int(torch.count_nonzero(row[-2][0])) for row in ds]
     df.insert(0, "case_len", case_len, True)
     df.to_csv(f'{store_path}/features.csv', index=False)
