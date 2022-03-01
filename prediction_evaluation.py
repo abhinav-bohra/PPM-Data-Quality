@@ -60,12 +60,8 @@ elif exp_mode == "default":
   ppms=[PPM_Camargo_concat, PPM_Tax_Spezialized, PPM_MiDA, PPM_MPPN ]
 
 else:
-  logs=[EventLogs.BPIC_12,EventLogs.BPIC_12_W,EventLogs.BPIC_12_Wcomplete,EventLogs.BPIC_13_CP,EventLogs.BPIC_15_5,EventLogs.Mobis,EventLogs.Helpdesk]
-  logs = [EventLogs.BPIC_12, EventLogs.BPIC_12_A, EventLogs.BPIC_12_O, EventLogs.BPIC_12_W, \
-  EventLogs.BPIC_12_Wcomplete, EventLogs.BPIC_13_CP, EventLogs.BPIC_15_1, EventLogs.BPIC_15_2, \
-  EventLogs.BPIC_15_3, EventLogs.BPIC_15_4, EventLogs.BPIC_15_5, EventLogs. BPIC_17_OFFER, \
-  EventLogs.BPIC_20_RFP, EventLogs.Helpdesk, EventLogs.Mobis]
-  ppms=[PPM_MPPN,PPM_MiDA,PPM_Camargo_concat]
+  logs=[EventLogs.Helpdesk]
+  ppms=[PPM_MiDA]
 
 
 #------------------------------------------------------------------------------------------

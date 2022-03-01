@@ -20,6 +20,164 @@ logger.setLevel(logging.DEBUG)
 logging.getLogger('numba').setLevel(logging.WARNING)
 logger.debug("--Pipeline Logging--")
 
+#------------------------------------------------------------------------------------------
+# UDFs
+#------------------------------------------------------------------------------------------
+def getCaselen(preds, model):
+    case_len =[int(torch.count_nonzero(row[-1])) for row in preds[0][1]]
+    return case_len
+
+#--------------------------------------------
+#Function to save predictions for given task
+#--------------------------------------------
+def save_preds(preds,model,store_path):
+    preds[0] = getCaselen(preds[0])
+    if "Camargo" in model:
+        preds1 = (preds[0],preds[1][0],preds[2][0])
+        preds2 = (preds[0],preds[1][1],preds[2][1])
+        preds3 = (preds[0],preds[1][2],preds[2][2])
+        if "next" in task_name:
+            with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
+                pickle.dump(preds1, f1)
+            with open(f'{store_path}/preds-next_resource_prediction.pickle', 'wb') as f2:
+                pickle.dump(preds2, f2)
+            with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f3:
+                pickle.dump(preds3, f3)
+        else:
+            with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
+                pickle.dump(preds1, f1)
+            with open(f'{store_path}/preds-last_resource_prediction.pickle', 'wb') as f2:
+                pickle.dump(preds2, f2)
+            with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f3:
+                pickle.dump(preds3, f3)
+    elif "Tax" in model:
+        preds1 = (preds[0],preds[1][0],preds[2][0])
+        preds2 = (preds[0],preds[1][1],preds[2][1])
+        if "next" in task_name:
+            with open(f'{store_path}/preds-next_step_prediction.pickle', 'wb') as f1:
+                pickle.dump(preds1, f1)
+            with open(f'{store_path}/preds-duration_to_next_event_prediction.pickle', 'wb') as f2:
+                pickle.dump(preds2, f2)
+        else:
+            with open(f'{store_path}/preds-outcome_prediction.pickle', 'wb') as f1:
+                pickle.dump(preds1, f1)
+            with open(f'{store_path}/preds-duration_to_end_prediction.pickle', 'wb') as f2:
+                pickle.dump(preds2, f2)
+    else:
+        with open(f'{store_path}/preds-{task_name}.pickle', 'wb') as f:
+            pickle.dump(preds, f)
+
+
+#--------------------------------------------
+#Function to save features & targets
+#--------------------------------------------
+def save_features_targets(obj, store_path, o, task_name):
+    train = obj[0].dataset
+    dev = obj[1].dataset
+    test = obj[2].dataset
+    ds = train + dev + test
+    store_path = str(store_path)
+    model_name = store_path.split('/')[-1]
+
+    features = list()
+    targets = list()
+    for row in ds:
+        #Features
+        x = (list(row))[:-1]
+        try:
+          if(len(x.size())==0):#scalar
+            x = x.unsqueeze(0)
+        except:
+          pass
+        x_ = [torch.flatten(t) for t in x]
+        ftr = torch.hstack(x_)
+        ftr = ftr.detach().cpu().numpy()
+        features.append(ftr)
+        #Targets
+        y = (list(row))[-1]
+        try:
+          if(len(y.size())==0):#scalar
+            y = y.unsqueeze(0)
+        except:
+          pass
+        y_ = [torch.flatten(t) for t in y]
+        tar = torch.hstack(y_)
+        tar = tar.detach().cpu().numpy()
+        targets.append(tar)
+
+    # Saving Features
+    num_features = len(features[0])
+    feat_size = num_features//len(o.x_names)
+    ft_cols = []
+    for x_name in o.x_names:
+        if x_name in o.cat_names:
+            varType = "CAT"
+        elif x_name in o.cont_names:
+            varType = "CONT"
+        else:
+            varType = "OTHER"
+        ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
+
+    df = pd.DataFrame(features, columns = ft_cols)
+
+    #CORRECET THIS LOGIC
+    case_len =[int(torch.count_nonzero(row[-2][0])) for row in ds]
+    df.insert(0, "case_len", case_len, True)
+    df.to_csv(f'{store_path}/features.csv', index=False)
+    # df.to_csv(f'{store_path}/features-{task_name}.csv', index=False)
+    logger.debug(f"Features saved at - {store_path}/features-{task_name}.csv")
+
+    # Saving Targets
+    num_targets = len(targets[0])
+    targ_size = num_targets//len(o.y_names)
+    tg_cols = []
+    for y_name in o.y_names:
+        if y_name in o.ycat_names:
+            varType = "CAT"
+        elif y_name in o.ycont_names:
+            varType = "CONT"
+        else:
+            varType = "OTHER"
+        tg_cols = tg_cols + [f"{varType}_{y_name}_{i}" for i in range(0,targ_size)]
+    df = pd.DataFrame(targets, columns = tg_cols)
+
+    # Handling Camargo and Tax targets
+    if "Camargo" in model_name:
+        df1 = pd.DataFrame(df.iloc[:,0])
+        df2 = pd.DataFrame(df.iloc[:,1])
+        df3 = pd.DataFrame(df.iloc[:,2])
+        if "next" in task_name:
+            df1.to_csv(f'{store_path}/targets-next_step_prediction.csv', index=False)
+            df2.to_csv(f'{store_path}/targets-next_resource_prediction.csv', index=False)
+            df3.to_csv(f'{store_path}/targets-duration_to_next_event_prediction.csv', index=False)
+            logger.debug(f"Targets saved at - {store_path}/targets-next_step_prediction.csv")
+            logger.debug(f"Targets saved at - {store_path}/targets-next_resource_prediction.csv")
+            logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
+        else:
+            df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
+            df2.to_csv(f'{store_path}/targets-last_resource_prediction.csv', index=False)
+            df3.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
+            logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
+            logger.debug(f"Targets saved at - {store_path}/targets-last_resource_prediction.csv")
+            logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
+    elif "Tax" in model_name:
+        df1 = pd.DataFrame(df.iloc[:,0])
+        df2 = pd.DataFrame(df.iloc[:,1])
+        if "next" in task_name:
+            df1.to_csv(f'{store_path}/targets-next_step_prediction.csv', index=False)
+            df2.to_csv(f'{store_path}/targets-duration_to_next_event_prediction.csv', index=False)
+            logger.debug(f"Targets saved at - {store_path}/targets-next_step_prediction.csv")
+            logger.debug(f"Targets saved at - {store_path}/targets-duration_to_next_event_prediction.csv")
+        else:
+            df1.to_csv(f'{store_path}/targets-outcome_prediction.csv', index=False)
+            df2.to_csv(f'{store_path}/targets-duration_to_end_prediction.csv', index=False)
+            logger.debug(f"Targets saved at - {store_path}/targets-outcome_prediction.csv")
+            logger.debug(f"Targets saved at - {store_path}/targets-duration_to_end_prediction.csv")
+    else:
+        df.to_csv(f'{store_path}/targets-{task_name}.csv', index=False)
+        logger.debug(f"Targets saved at - {store_path}/targets-{task_name}.csv")
+
+
 # Cell
 class RNNwEmbedding(torch.nn.Module) :
     def __init__(self,o) :
@@ -50,7 +208,8 @@ class HideOutput:
         sys.stdout.close()
         sys.stdout = self._original_stdout
 
-#Cell
+#----------------------------------------------------------------------------------------------------
+# Save Features & Targets
 #----------------------------------------------------------------------------------------------------
 
 # Cell
@@ -71,13 +230,9 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
     Trains a model on the training set with early stopping based on the validation loss.
     Afterwards, applies it to the test set.
     '''
-    cbs = [CudaCallback,
-      EarlyStoppingCallback(monitor='valid_loss',min_delta=min_delta, patience=patience)
-      # SaveModelCallback(fname=model_name)
-      ]
-    
+    cbs = [CudaCallback,EarlyStoppingCallback(monitor='valid_loss',min_delta=min_delta, patience=patience)]
     learn=Learner(dls, m, path=store_path, model_dir=model_dir, loss_func=loss ,metrics=metrics,cbs=cbs)
-    
+
     task_name=model_name
     model = str(store_path).split('/')[-1]
 
@@ -87,11 +242,17 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
 
     if print_output:
         training_loop(learn,epoch,show_plot,lr_find=lr_find)
+        preds=tuple(learn.get_preds(dl=dls[2], with_input=True))
+		save_features_targets(dls, store_path, o, task_name)
+		save_preds(preds,model,store_path)
         return learn.validate(dl=dls[2])[output_index]
 
     else:
         with HideOutput(),learn.no_bar():
-            training_loop(learn,epoch,show_plot,lr_find=lr_find)            
+            training_loop(learn,epoch,show_plot,lr_find=lr_find)
+            preds=tuple(learn.get_preds(dl=dls[2], with_input=True))  
+			save_features_targets(dls, store_path, o, task_name)
+			save_preds(preds,model,store_path)          
             return learn.validate(dl=dls[2])[output_index]
 
 
@@ -143,7 +304,7 @@ class PPModel():
         print('resource_suffix_prediction')
         rsp=self.resource_suffix_prediction()
         
-        return nsp_acc,nsp_pre,nsp_rec,nsp_f1, nrp_acc,nrp_pre,nrp_rec,nrp_f1, lrp_acc,lrp_pre,lrp_rec,lrp_f1, op_acc,op_pre,op_rec,op_f1, dtnep, dtep, asp, rsp
+        return nsp_acc,nsp_pre,nsp_rec,nsp_f1,nrp_acc,nrp_pre,nrp_rec,nrp_f1,lrp_acc,lrp_pre,lrp_rec,lrp_f1,op_acc,op_pre,op_rec,op_f1,dtnep,dtep,asp,rsp
 
     def _train_validate(self,o,dls,m,metrics=accuracy,loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
