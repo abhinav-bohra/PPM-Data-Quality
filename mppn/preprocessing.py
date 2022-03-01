@@ -449,7 +449,7 @@ def Balance(xs,ys):
     return getBalancedData(nm,xs,ys)
   elif balancing_technique == "CONN":
     logger.debug("\n---Applying COndensed Nearest Neighbour---")
-    conn = CondensedNearestNeighbour()
+    conn = CondensedNearestNeighbour(n_neighbors=1,sampling_strategy=getStrategy(y_labels))
     return getBalancedData(conn,xs,ys)
   elif balancing_technique == "NCR":
     logger.debug("\n---Applying Neighbourhood Cleaning Rule ---")
@@ -464,6 +464,7 @@ def Balance(xs,ys):
 @delegates(TfmdDL)
 def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id',bs=64,**kwargs):
     ds=[]
+    i=0
     for s in ppo.subsets(): #train, dev and test sets
         wds,idx=windows(s.xs,s.event_ids)
         if not outcome: y=s.ys.iloc[idx]
@@ -481,14 +482,17 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
             logger.debug(xs[i].size())
             try:
               logger.debug("Balancing Dataset...")
-              xs,ys = Balance(xs,ys)
+              #Balance only train & dev sets
+              if i<2:
+                  xs,ys = Balance(xs,ys)
             except Exception as E:
-              logger.debug(f"\nException Occurred while BALANCING DATASET: {E}\n")
+              logger.debug(f"\nException occurred while balancing dataset with {balancing_technique}: {E}\n")
           logger.debug("--AFTER--")
           for i in range(len(xs)):
             logger.debug(xs[i].size())
           
         ds.append(PPDset((*xs,ys)))
+        i=i+1
         
     return DataLoaders.from_dsets(*ds,bs=bs,**kwargs)
 PPObj.get_dls= get_dls
