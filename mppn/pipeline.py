@@ -230,6 +230,8 @@ def training_loop(learn,epoch,print_output,lr_find):
     '''
     if lr_find:
         lr=np.median([learn.lr_find(show_plot=print_output)[0] for i in range(5)])
+        #Hard coding learning rate to 0.01
+        lr=0.01
         learn.fit_one_cycle(epoch,float(lr))
     else: learn.fit(epoch,0.01)
 
