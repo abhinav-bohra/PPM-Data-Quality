@@ -36,7 +36,6 @@ task_names = {
 complete_results = {
   'log': list(),
   'model': list(),
-  'support': list(),
   'NEXT ACTIVITY ACC': list(),'NEXT ACTIVITY PRE': list(),'NEXT ACTIVITY REC': list(),'NEXT ACTIVITY F1': list(),
   'OUTCOME ACTIVITY ACC': list(),'OUTCOME ACTIVITY PRE': list(),'OUTCOME ACTIVITY REC': list(),'OUTCOME ACTIVITY F1': list(),
   'NEXT RESOURCE ACC': list(),'NEXT RESOURCE PRE': list(),'NEXT RESOURCE REC': list(),'NEXT RESOURCE F1': list(),
@@ -76,6 +75,8 @@ for log in logs:
   models = os.listdir(f"{path}/{log}")
   for model in models: 
     print(model, log)
+    complete_results['log'].append(log)
+    complete_results['model'].append(model)
     case_results = {
       'log': list(),
       'model': list(),
@@ -143,10 +144,6 @@ for log in logs:
         case_len_groups_support.append(len(df.index))
         case_results = eval(df, case_results, task)
         case_results['support'] = case_len_groups_support
-
-        complete_results['log'].append(log)
-        complete_results['model'].append(model)
-        complete_results['support'].append(len(df.index))
         complete_results = eval(df, complete_results, task)
       else:
         if "duration" not in task:
@@ -154,8 +151,13 @@ for log in logs:
           case_results[f'{task_names[task]} PRE']=result_na
           case_results[f'{task_names[task]} REC']=result_na
           case_results[f'{task_names[task]} F1']=result_na
+          complete_results[f'{task_names[task]} ACC'].append("NA")
+          complete_results[f'{task_names[task]} PRE'].append("NA")
+          complete_results[f'{task_names[task]} REC'].append("NA")
+          complete_results[f'{task_names[task]} F1'].append("NA")
         else:
           case_results[f'{task_names[task]} MSE']=result_na
+          complete_results[f'{task_names[task]} MSE'].append("NA")
 
     results[f'{log}_{model}'] = pd.DataFrame(case_results)
 
@@ -165,8 +167,10 @@ for log in logs:
 with pd.ExcelWriter(f'{folder}/case_results.xlsx') as writer:
   for key in results:
      results[key].to_excel(writer, sheet_name=key)
+  print("[SUCCESS] Computed Case level Results successfully")
 
 with pd.ExcelWriter(f'{folder}/complete_results.xlsx') as writer:
-	complete_results.to_excel(writer, sheet_name=key)
+  complete_results_df = pd.DataFrame(complete_results)
+  complete_results_df.to_excel(writer, sheet_name="complete_results")
+  print("[SUCCESS] Computed Dataset level Results successfully")
      
-print("[SUCCESS] Computed Case level Results successfully")
