@@ -390,12 +390,15 @@ class PPM_MPPN(PPModel):
                      cat_names=cat_names,date_names=date_names,cont_names=cont_names,
                      y_names=['activity','resource','timestamp_Relative_elapsed'],
                      splits=self.splits)
+        cont_names_list = self.o.cont_names        
         self.o.cont_names=['timestamp_Relative_elapsed']
         norm=Normalize()
         self.o.procs.add(norm,self.o)
         self.mean=norm.means['timestamp_Relative_elapsed']
         self.std=norm.stds['timestamp_Relative_elapsed']
-        self.o.cont_names=L(['activity_minmax','resource_minmax','timestamp_Relative_elapsed_minmax'])
+        self.o.cont_names=L(cont_names_list)
+        logger.debug(f"MPPN CONT NAMES: {self.o.cont_names}")
+        logger.debug(f"MPPN CAT NAMES: {self.o.cat_names}")          
         self.output_attributes=mppn_get_output_attributes(self.o)
         self.pretrain = mppn_representation_learning_model(False, len(self.o.cont_names), self.output_attributes)
         dls=self.o.get_dls(after_batch=gaf_transform,bs=self.bs)
