@@ -29,6 +29,26 @@ task_names = {
   'preds-duration_to_end_prediction.pickle': 'DURATION TO END'
 }
 
+
+#------------------------------------------------------------------------------------------
+# Dataframe with results on complete datasets
+#------------------------------------------------------------------------------------------
+complete_results = {
+  'log': list(),
+  'model': list(),
+  'support': list(),
+  'NEXT ACTIVITY ACC': list(),'NEXT ACTIVITY PRE': list(),'NEXT ACTIVITY REC': list(),'NEXT ACTIVITY F1': list(),
+  'OUTCOME ACTIVITY ACC': list(),'OUTCOME ACTIVITY PRE': list(),'OUTCOME ACTIVITY REC': list(),'OUTCOME ACTIVITY F1': list(),
+  'NEXT RESOURCE ACC': list(),'NEXT RESOURCE PRE': list(),'NEXT RESOURCE REC': list(),'NEXT RESOURCE F1': list(),
+  'LAST RESOURCE ACC': list(),'LAST RESOURCE PRE': list(),'LAST RESOURCE REC': list(),'LAST RESOURCE F1': list(),
+  'DURATION TO NEXT EVENT MSE': list(),
+  'DURATION TO END MSE': list()
+}
+
+
+#------------------------------------------------------------------------------------------
+# Arguments and Global Variables
+#------------------------------------------------------------------------------------------
 def eval(case_len_df, case_results, task):
   y_true = case_len_df[f'targ_{task_names[task]}']
   y_pred = case_len_df[f'pred_{task_names[task]}']
@@ -45,7 +65,7 @@ def eval(case_len_df, case_results, task):
   
 #--------------------------------------------------------------------------------------------
 # Get Ground Truth and Predictions
-# data[0] -> Inputs,  data[1] -> Preds,  data[2] -> Targets (True Outputs)
+# data[0] -> Case Length,  data[1] -> Preds,  data[2] -> Targets (True Outputs)
 #--------------------------------------------------------------------------------------------
 
 path = f"{folder}/models/run0"
@@ -123,6 +143,11 @@ for log in logs:
         case_len_groups_support.append(len(df.index))
         case_results = eval(df, case_results, task)
         case_results['support'] = case_len_groups_support
+
+        complete_results['log'].append(log)
+        complete_results['model'].append(model)
+        complete_results['support'].append(len(df.index))
+        complete_results = eval(df, complete_results, task)
       else:
         if "duration" not in task:
           case_results[f'{task_names[task]} ACC']=result_na
@@ -137,8 +162,11 @@ for log in logs:
 #------------------------------------------------------------------------------------------
 # Save Results
 #------------------------------------------------------------------------------------------
-with pd.ExcelWriter(f'{folder}/case_eval.xlsx') as writer:
+with pd.ExcelWriter(f'{folder}/case_results.xlsx') as writer:
   for key in results:
      results[key].to_excel(writer, sheet_name=key)
+
+with pd.ExcelWriter(f'{folder}/complete_results.xlsx') as writer:
+	complete_results.to_excel(writer, sheet_name=key)
      
 print("[SUCCESS] Computed Case level Results successfully")
