@@ -396,6 +396,7 @@ class PPM_MPPN(PPModel):
         self.o.procs.add(norm,self.o)
         self.mean=norm.means['timestamp_Relative_elapsed']
         self.std=norm.stds['timestamp_Relative_elapsed']
+        # self.o.cont_names=L(['activity_minmax','resource_minmax','timestamp_Relative_elapsed_minmax'])
         self.o.cont_names=L(cont_names_list)
         logger.debug(f"MPPN CONT NAMES: {self.o.cont_names}")
         logger.debug(f"MPPN CAT NAMES: {self.o.cat_names}")          
