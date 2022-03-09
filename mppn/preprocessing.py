@@ -457,6 +457,10 @@ def Balance(xs,ys):
     ncr = NeighbourhoodCleaningRule()
     return getBalancedData(ncr,xs,ys)
   elif balancing_technique == "SMOTE":
+    logger.debug("\n---Applying SMOTE ---")
+    logger.debug(xs)
+    logger.debug("--"*100)
+    logger.debug(ys)
     sm = SMOTE(random_state=42)
     return sm.fit_resample(xs, ys)
   else:
