@@ -61,7 +61,7 @@ elif exp_mode == "default":
 
 else:
   logs=[EventLogs.Helpdesk]
-  ppms=[PPM_MiDA]
+  ppms=[PPM_MPPN]
 
 
 #------------------------------------------------------------------------------------------

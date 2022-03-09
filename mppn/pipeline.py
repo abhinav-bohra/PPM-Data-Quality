@@ -36,6 +36,8 @@ def getCaselen(X):
 #Function to save predictions for given task
 #--------------------------------------------
 def save_preds(preds_,model,store_path,task_name):
+    with open(f'{store_path}/orig_preds-{task_name}.pickle', 'wb') as f:
+        pickle.dump(preds_, f)
     preds = list(preds_)
     preds[0] = getCaselen(preds_[0])
     if "Camargo" in model:
@@ -125,7 +127,8 @@ def save_features_targets(obj, store_path, o, task_name):
         ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
 
     df = pd.DataFrame(features, columns = ft_cols)
-
+    with open(f'{store_path}/orig_ds-{task_name}.pickle', 'wb') as f:
+            pickle.dump(ds, f)
     if ds[0][-2].shape[0] == 64:
       logger.debug(f"{store_path} has only 1 continous col")
       case_len =[int(torch.count_nonzero(row[-2])) for row in ds]
