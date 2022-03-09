@@ -15,6 +15,7 @@ from .imports import *
 from imblearn.under_sampling import NearMiss
 from imblearn.under_sampling import CondensedNearestNeighbour
 from imblearn.under_sampling import NeighbourhoodCleaningRule 
+from imblearn.over_sampling import SMOTE
 
 # Global Variables
 ci_flag = False
@@ -455,6 +456,9 @@ def Balance(xs,ys):
     logger.debug("\n---Applying Neighbourhood Cleaning Rule ---")
     ncr = NeighbourhoodCleaningRule()
     return getBalancedData(ncr,xs,ys)
+  elif balancing_technique == "SMOTE":
+    sm = SMOTE(random_state=42)
+    return sm.fit_resample(xs, ys)
   else:
     logger.debug("\n---Balancing Technique: {balancing_technique}---")
   return xs,ys
