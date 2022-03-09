@@ -23,23 +23,30 @@ logger.debug("--Pipeline Logging--")
 #------------------------------------------------------------------------------------------
 # UDFs
 #------------------------------------------------------------------------------------------
-def getCaselen(X):
-    #X[-1] will be duration feature
-    if X[-1][0].shape[0] == 64:
-        case_len =[int(torch.count_nonzero(row)) for row in X[-1]]
-    else:
-        case_len =[int(torch.count_nonzero(row[-1])) for row in X[-1]]
-    return case_len
+def getCaselen(X,model):
+    logger.debug(f"{model} in getCaselen function")
+    if "MPPN" in model:
+      case_len=list()
+      for row in X:
+        t1 = (row[-1][0][0])
+        t1[t1==255]=0
+        case_len.append(int(torch.count_nonzero(t1)))
+      return case_len
+    else:  
+      #X[-1] will be duration feature
+      if X[-1][0].shape[0] == 64:
+          case_len =[int(torch.count_nonzero(row)) for row in X[-1]]
+      else:
+          case_len =[int(torch.count_nonzero(row[-1])) for row in X[-1]]
+      return case_len
 
 
 #--------------------------------------------
 #Function to save predictions for given task
 #--------------------------------------------
 def save_preds(preds_,model,store_path,task_name):
-    with open(f'{store_path}/orig_preds-{task_name}.pickle', 'wb') as f:
-        pickle.dump(preds_, f)
     preds = list(preds_)
-    preds[0] = getCaselen(preds_[0])
+    preds[0] = getCaselen(preds_[0],model)
     if "Camargo" in model:
         preds1 = (preds[0],preds[1][0],preds[2][0])
         preds2 = (preds[0],preds[1][1],preds[2][1])
@@ -127,8 +134,7 @@ def save_features_targets(obj, store_path, o, task_name):
         ft_cols = ft_cols + [f"{varType}_{x_name}_{i}" for i in range(0,feat_size)]
 
     df = pd.DataFrame(features, columns = ft_cols)
-    with open(f'{store_path}/orig_ds-{task_name}.pickle', 'wb') as f:
-            pickle.dump(ds, f)
+    
     if ds[0][-2].shape[0] == 64:
       logger.debug(f"{store_path} has only 1 continous col")
       case_len =[int(torch.count_nonzero(row[-2])) for row in ds]
