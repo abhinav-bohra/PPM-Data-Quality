@@ -227,10 +227,6 @@ class HideOutput:
         sys.stdout.close()
         sys.stdout = self._original_stdout
 
-#----------------------------------------------------------------------------------------------------
-# Save Features & Targets
-#----------------------------------------------------------------------------------------------------
-
 # Cell
 def training_loop(learn,epoch,print_output,lr_find):
     '''
