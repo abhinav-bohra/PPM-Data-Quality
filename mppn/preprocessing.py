@@ -502,22 +502,23 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         ys=tuple([ycats[:,i] for i in range(ycats.shape[1])])+tuple([yconts[:,i] for i in range(yconts.shape[1])])
         
         if ci_flag:
+          #-----------------------------
           logger.debug("\n--BEFORE--")
           for i in range(len(xs)):
             logger.debug(xs[i].size())
+          #-----------------------------
+          #Balance only train & dev sets
+          if cnt<2:
             try:
-              logger.debug("Balancing Dataset...")
-              #Balance only train & dev sets
-              if cnt<2:
-                  xs,ys = Balance(xs,ys)
-              else:
-                logger.debug("Test Set")
+              xs,ys = Balance(xs,ys)
             except Exception as E:
               logger.debug(f"\nException occurred while balancing dataset with {balancing_technique}: {E}\n")
+          #-----------------------------
           logger.debug("--AFTER--")
           for i in range(len(xs)):
             logger.debug(xs[i].size())
-          
+          #-----------------------------
+
         ds.append(PPDset((*xs,ys)))
         cnt=cnt+1
         
