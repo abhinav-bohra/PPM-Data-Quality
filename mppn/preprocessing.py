@@ -431,10 +431,30 @@ def getBalancedData(func,xs,ys):
   y = list(ys[0].numpy())
 
   x_res, y_res = func.fit_resample(x, y)
-  indices = torch.tensor(func.sample_indices_)
   
-  xs_under = tuple([torch.index_select(xs[i], 0, indices) for i in range(len(xs))])
-  ys_under = tuple([torch.index_select(ys[i], 0, indices) for i in range(len(ys))])
+  if balancing_technique== "SMOTE":
+      dims = list()
+      for i in range(len(xs)):
+        if len(xs[i].size())==2:
+            dims.append(1)
+        else:
+            dims.append(xs[i].shape[1])
+
+      dim_size = len(xs[0])//64
+      x_res = torch.tensor(x_res)
+      x_res = x_res.reshape(-1,dim_size, 64)
+
+      start=0
+      x_over = list()
+      for dim in dims:
+        x_over.append(torch.tensor(x_res[:,start:start+dim,:]))
+        start = start + dim
+      y_over = [ys]
+      return x_over, y_over
+  else:
+      indices = torch.tensor(func.sample_indices_)
+      xs_under = tuple([torch.index_select(xs[i], 0, indices) for i in range(len(xs))])
+      ys_under = tuple([torch.index_select(ys[i], 0, indices) for i in range(len(ys))])
   
   r = xs_under[0].size(0)/xs[0].size(0)
   logger.debug(f"{round(1-r,2)*100}% reduction in size by undersampling wrt activity" )
@@ -458,11 +478,8 @@ def Balance(xs,ys):
     return getBalancedData(ncr,xs,ys)
   elif balancing_technique == "SMOTE":
     logger.debug("\n---Applying SMOTE ---")
-    logger.debug(xs)
-    logger.debug("--"*100)
-    logger.debug(ys)
     sm = SMOTE(random_state=42)
-    return sm.fit_resample(xs, ys)
+    return getBalancedData(sm,xs,ys)
   else:
     logger.debug("\n---Balancing Technique: {balancing_technique}---")
   return xs,ys
