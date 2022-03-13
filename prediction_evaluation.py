@@ -50,14 +50,14 @@ if exp_mode == "MV":
 
 elif exp_mode == "CI":
   logs=[EventLogs.BPIC_12, EventLogs.Helpdesk]
-  ppms=[PPM_Camargo_concat, PPM_Tax_Spezialized, PPM_MiDA, PPM_MPPN ]
+  ppms=[PPM_MiDA, PPM_MPPN ]
   import mppn.preprocessing as mp
   mp.ci_flag = True
   mp.balancing_technique = balancing_technique
 
 elif exp_mode == "default":
   logs=[EventLogs.BPIC_12, EventLogs.Helpdesk]
-  ppms=[PPM_Camargo_concat, PPM_Tax_Spezialized, PPM_MiDA, PPM_MPPN ]
+  ppms=[PPM_Camargo_concat, PPM_Tax_Spezialized, PPM_MiDA, PPM_MPPN]
 
 else:
   logs=[EventLogs.Helpdesk]
