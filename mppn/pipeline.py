@@ -386,8 +386,7 @@ def _store_path(save_dir,results_dir=Path('./')):
 # Filter Outliers
 #----------------------------------------------------------------------------------------------------------------
 def filter_outliers(log, cases,filter_percentage):
-    logger.debug(log.columns)
-    logger.debug(log)
+    log = log.reset_index()
     log = log[log['trace_id'].isin(cases)]
     df = pm4py.utils.format_dataframe(log, case_id='trace_id', activity_key='activity', timestamp_key='timestamp')
     variants_count = case_statistics.get_variant_statistics(df,
@@ -395,7 +394,7 @@ def filter_outliers(log, cases,filter_percentage):
                                                         case_statistics.Parameters.ACTIVITY_KEY: "concept:name",
                                                         case_statistics.Parameters.TIMESTAMP_KEY: "time:timestamp"})
     variants_count = sorted(variants_count, key=lambda x: x['case:concept:name'], reverse=False)
-
+    
     total_cases = len(set(df['trace_id']))
     filter_cases = int((filter_percentage*0.01)*total_cases)
     logger.debug(f"Total Cases = {total_cases}, Filtered Cases = {filter_cases}")
@@ -405,6 +404,8 @@ def filter_outliers(log, cases,filter_percentage):
         running_sum = running_sum + v['case:concept:name']
         if running_sum < filter_cases:
           filter_variants.append(v['variant'])
+        else:
+          break
 
     filtered_df=variants_filter.apply(df,filter_variants,parameters={variants_filter.Parameters.POSITIVE: False, variants_filter.Parameters.CASE_ID_KEY: "case:concept:name",
                                                                  variants_filter.Parameters.ACTIVITY_KEY: "concept:name"})
@@ -414,8 +415,7 @@ def filter_outliers(log, cases,filter_percentage):
     logger.debug(f"Dataset reduction: {round((100*(len(df) - len(filtered_df)))/len(df),2)}%")
 
     filtered_cases = set(filtered_df['trace_id'])
-    val_cases = set(filtered_val_df['event_id']) 
-    filtered_split = [case for case in cases if case not in filtered_cases]
+    filtered_split = [case for case in cases if case in filtered_cases]
     return filtered_split
 
 
