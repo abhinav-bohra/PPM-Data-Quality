@@ -443,7 +443,6 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
-            logger.debug(log)
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             
@@ -455,7 +454,6 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
                 logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}")
                 splits = tuple(splits)
             
-            train_df, val_df = get_df(log, splits)
             # if store:
             #     with open(store_path/f'run{r}_{ds_name}_splits.pickle', "wb") as output_file:
             #         pickle.dump(splits, output_file)
