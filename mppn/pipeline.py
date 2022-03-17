@@ -407,10 +407,11 @@ def filter_outliers(log, cases,filter_percentage):
         else:
           break
 
+    #df with whatever left after removing the outliers
     filtered_df=variants_filter.apply(df,filter_variants,parameters={variants_filter.Parameters.POSITIVE: False, variants_filter.Parameters.CASE_ID_KEY: "case:concept:name",
                                                                  variants_filter.Parameters.ACTIVITY_KEY: "concept:name"})
 
-    logger.debug("-- OUTLIER FILTERING -- ")
+    logger.debug("\n-- OUTLIER FILTERING -- ")
     logger.debug(f"Dataset size before: {len(df)}")
     logger.debug(f"Dataset size after:  {len(filtered_df)}")
     logger.debug(f"Dataset reduction: {round((100*(len(df) - len(filtered_df)))/len(df),2)}%")
@@ -450,10 +451,10 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
             
             if filter_percentage> 0:
                 splits = list(splits)
-                logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}")
+                logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
                 splits[0] = filter_outliers(log, splits[0],filter_percentage)
                 splits[1] = filter_outliers(log, splits[1],filter_percentage)
-                logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}")
+                logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
                 splits = tuple(splits)
             
             # if store:
