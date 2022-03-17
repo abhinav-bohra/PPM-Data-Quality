@@ -387,6 +387,7 @@ def _store_path(save_dir,results_dir=Path('./')):
 #----------------------------------------------------------------------------------------------------------------
 def filter_outliers(log, cases,filter_percentage):
     logger.debug(log.columns)
+    logger.debug(log)
     log = log[log['trace_id'].isin(cases)]
     df = pm4py.utils.format_dataframe(log, case_id='trace_id', activity_key='activity', timestamp_key='timestamp')
     variants_count = case_statistics.get_variant_statistics(df,
@@ -442,6 +443,7 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
+            logger.debug(log)
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             
