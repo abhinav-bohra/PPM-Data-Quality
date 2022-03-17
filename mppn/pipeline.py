@@ -448,10 +448,12 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             
             if filter_percentage> 0:
+                splits = list(splits)
                 logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}")
                 splits[0] = filter_outliers(log, splits[0],filter_percentage)
                 splits[1] = filter_outliers(log, splits[1],filter_percentage)
                 logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}")
+                splits = tuple(splits)
             
             train_df, val_df = get_df(log, splits)
             # if store:
