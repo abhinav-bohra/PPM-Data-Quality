@@ -397,7 +397,6 @@ def filter_outliers(log, cases,filter_percentage):
     
     total_cases = len(set(df['trace_id']))
     filter_cases = int((filter_percentage*0.01)*total_cases)
-    logger.debug(f"Total Cases = {total_cases}, Filtered Cases = {filter_cases}")
 
     running_sum, filter_variants = 0, []
     for v in variants_count:
@@ -412,6 +411,7 @@ def filter_outliers(log, cases,filter_percentage):
                                                                  variants_filter.Parameters.ACTIVITY_KEY: "concept:name"})
 
     logger.debug("\n-- OUTLIER FILTERING -- ")
+    logger.debug(f"Total Cases = {total_cases}, Filtered Cases = {filter_cases}")
     logger.debug(f"Dataset size before: {len(df)}")
     logger.debug(f"Dataset size after:  {len(filtered_df)}")
     logger.debug(f"Dataset reduction: {round((100*(len(df) - len(filtered_df)))/len(df),2)}%")
