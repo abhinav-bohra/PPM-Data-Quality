@@ -386,6 +386,7 @@ def _store_path(save_dir,results_dir=Path('./')):
 # Filter Outliers
 #----------------------------------------------------------------------------------------------------------------
 def filter_outliers(log, cases,filter_percentage):
+    logger.debug(log.columns)
     log = log[log['trace_id'].isin(cases)]
     df = pm4py.utils.format_dataframe(log, case_id='trace_id', activity_key='activity', timestamp_key='timestamp')
     variants_count = case_statistics.get_variant_statistics(df,
@@ -394,7 +395,7 @@ def filter_outliers(log, cases,filter_percentage):
                                                         case_statistics.Parameters.TIMESTAMP_KEY: "time:timestamp"})
     variants_count = sorted(variants_count, key=lambda x: x['case:concept:name'], reverse=False)
 
-    total_cases = len(set(event_log['trace_id']))
+    total_cases = len(set(df['trace_id']))
     filter_cases = int((filter_percentage*0.01)*total_cases)
     logger.debug(f"Total Cases = {total_cases}, Filtered Cases = {filter_cases}")
 
@@ -445,10 +446,10 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             
             if filter_percentage> 0:
-                logger.debug(f"train_cases:{splits[0]}, val_cases:{splits[1]}")
+                logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}")
                 splits[0] = filter_outliers(log, splits[0],filter_percentage)
                 splits[1] = filter_outliers(log, splits[1],filter_percentage)
-                logger.debug(f"train_cases:{splits[0]}, val_cases:{splits[1]}")
+                logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}")
             
             train_df, val_df = get_df(log, splits)
             # if store:
