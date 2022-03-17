@@ -6,11 +6,16 @@ __all__ = ['RNNwEmbedding', 'HideOutput', 'training_loop', 'train_validate', 'PP
 #------------------------------------------------------------------------------------------
 # Imports
 #------------------------------------------------------------------------------------------
+import pm4py
+import logging
+import pandas as pd
+import torch, pickle
 from .imports import *
 from .preprocessing import *
-import torch, pickle, logging
-import pandas as pd
-
+from pm4py.objects.log.util import dataframe_utils
+from pm4py.algo.filtering.pandas.variants import variants_filter
+from pm4py.statistics.traces.generic.pandas import case_statistics
+from pm4py.objects.conversion.log import converter as log_converter
 #------------------------------------------------------------------------------------------
 # Logging
 #------------------------------------------------------------------------------------------
@@ -377,6 +382,49 @@ def _store_path(save_dir,results_dir=Path('./')):
     results_dir.mkdir(exist_ok=True)
     return results_dir
 
+#----------------------------------------------------------------------------------------------------------------
+# Filter Outliers
+#----------------------------------------------------------------------------------------------------------------
+def filter_outliers(df,filter_percentage):
+    df = pm4py.utils.format_dataframe(df, case_id='trace_id', activity_key='activity', timestamp_key='timestamp')
+    variants_count = case_statistics.get_variant_statistics(df,
+                                            parameters={case_statistics.Parameters.CASE_ID_KEY: "case:concept:name",
+                                                        case_statistics.Parameters.ACTIVITY_KEY: "concept:name",
+                                                        case_statistics.Parameters.TIMESTAMP_KEY: "time:timestamp"})
+    variants_count = sorted(variants_count, key=lambda x: x['case:concept:name'], reverse=False)
+
+    total_cases = len(set(event_log['trace_id']))
+    filter_cases = int((filter_percentage*0.01)*total_cases)
+    logger.debug(f"Total Cases = {total_cases}, Filtered Cases = {filter_cases}")
+
+    running_sum, filter_variants = 0, []
+    for v in variants_count:
+        running_sum = running_sum + v['case:concept:name']
+        if running_sum < filter_cases:
+          filter_variants.append(v['variant'])
+
+    filtered_df=variants_filter.apply(df,filter_variants,parameters={variants_filter.Parameters.POSITIVE: False, variants_filter.Parameters.CASE_ID_KEY: "case:concept:name",
+                                                                 variants_filter.Parameters.ACTIVITY_KEY: "concept:name"})
+
+    logger.debug(f"Dataset size before: {len(df)}")
+    logger.debug(f"Dataset size after:  {len(filtered_df)}")
+    logger.debug(f"Dataset reduction: {round((100*(len(df) - len(filtered_df)))/len(df),2)}%")
+    return filtered_df
+
+
+def filter_splits(filtered_train_df, filtered_val_df):
+    orig_train_split = splits[0] 
+    orig_val_split = splits[1]
+    train_cases = set(filtered_train_df['event_id'])
+    val_cases = set(filtered_val_df['event_id']) 
+    splits[0] = [x if x not in train_cases for x in orig_train_split]
+    splits[1] = [x if x not in val_cases for x in orig_val_split]
+    return splits
+
+#----------------------------------------------------------------------------------------------------------------
+# Runner Function
+#----------------------------------------------------------------------------------------------------------------
+
 # Cell
 @delegates(PPModel)
 def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
@@ -397,12 +445,20 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
             log=import_log(ds)
-            # log=log[:350]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
+            
+            logger.debug(f"train_cases:{splits[0]}, val_cases:{splits[1]}")
+            train_df, val_df = get_df(log, splits)
+            filtered_train_df = filter_outliers(train_df,5)
+            filtered_val_df = filter_outliers(val_df,5)
+            splits = filter_splits(filtered_train_df, filtered_val_df, splits)
+            logger.debug(f"train_cases:{splits[0]}, val_cases:{splits[1]}")
+            
             # if store:
             #     with open(store_path/f'run{r}_{ds_name}_splits.pickle', "wb") as output_file:
             #         pickle.dump(splits, output_file)
+            
             mb=tqdm(range(len(ppm_classes)),leave=False)
             #Loop over models
             for j in mb:

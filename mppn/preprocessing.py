@@ -10,12 +10,13 @@ __all__ = ['EventLogs', 'import_log', 'drop_long_traces', 'RandomTraceSplitter',
 import logging
 import pandas as pd
 import numpy as np
-pd.set_option('display.max_columns', None)
+
 from .imports import *
+from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import NearMiss
 from imblearn.under_sampling import CondensedNearestNeighbour
 from imblearn.under_sampling import NeighbourhoodCleaningRule 
-from imblearn.over_sampling import SMOTE
+pd.set_option('display.max_columns', None)
 
 # Global Variables
 ci_flag = False
@@ -389,6 +390,9 @@ class PPDset(torch.utils.data.Dataset):
         return (*xs,ys)
 
 
+#----------------------------------------------------------------------------------------------------------------
+# Undersampling
+#----------------------------------------------------------------------------------------------------------------
 def getStrategy(y_labels):
 
     #Calculating frequency count of each class
@@ -490,6 +494,9 @@ def Balance(xs,ys):
   return xs,ys
 
 
+#----------------------------------------------------------------------------------------------------------------
+# get_dls function
+#----------------------------------------------------------------------------------------------------------------
 # Cell
 @delegates(TfmdDL)
 def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id',bs=64,**kwargs):
