@@ -385,17 +385,17 @@ def _store_path(save_dir,results_dir=Path('./')):
 #----------------------------------------------------------------------------------------------------------------
 # Filter Outliers
 #----------------------------------------------------------------------------------------------------------------
-def filter_outliers(log, cases,filter_percentage):
+def filter_outliers(log, cases, case_col, filter_percentage):
     log = log.reset_index()
-    log = log[log['trace_id'].isin(cases)]
-    df = pm4py.utils.format_dataframe(log, case_id='trace_id', activity_key='activity', timestamp_key='timestamp')
+    log = log[log[case_col].isin(cases)]
+    df = pm4py.utils.format_dataframe(log, case_id=case_col, activity_key='activity', timestamp_key='timestamp')
     variants_count = case_statistics.get_variant_statistics(df,
                                             parameters={case_statistics.Parameters.CASE_ID_KEY: "case:concept:name",
                                                         case_statistics.Parameters.ACTIVITY_KEY: "concept:name",
                                                         case_statistics.Parameters.TIMESTAMP_KEY: "time:timestamp"})
     variants_count = sorted(variants_count, key=lambda x: x['case:concept:name'], reverse=False)
     
-    total_cases = len(set(df['trace_id']))
+    total_cases = len(set(df[case_col]))
     filter_cases = int((filter_percentage*0.01)*total_cases)
 
     running_sum, filter_variants = 0, []
@@ -417,7 +417,7 @@ def filter_outliers(log, cases,filter_percentage):
     logger.debug(f"Dataset reduction: {round((100*(len(df) - len(filtered_df)))/len(df),2)}%")
     logger.debug("-- ----------------- -- ")
 
-    filtered_cases = set(filtered_df['trace_id'])
+    filtered_cases = set(filtered_df[case_col])
     filtered_split = [case for case in cases if case in filtered_cases]
     return filtered_split
 
@@ -451,9 +451,13 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
             
             if filter_percentage> 0:
                 splits = list(splits)
+                if ds_name == "BPIC20_RFP":
+                    case_col = "index"
+                else:
+                    case_col = "trace_id"            
                 logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
-                splits[0] = filter_outliers(log, splits[0],filter_percentage)
-                splits[1] = filter_outliers(log, splits[1],filter_percentage)
+                splits[0] = filter_outliers(log, splits[0], case_col, filter_percentage)
+                splits[1] = filter_outliers(log, splits[1], case_col, filter_percentage)
                 logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
                 splits = tuple(splits)
             
