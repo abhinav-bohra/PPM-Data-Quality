@@ -9,3 +9,4 @@ torch==1.7.1
 imblearn==0.0
 pymfe==0.4.1
 openpyxl==3.0.9
+pm4py==2.2.19.2
