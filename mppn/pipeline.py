@@ -427,7 +427,7 @@ def filter_splits(filtered_train_df, filtered_val_df):
 
 # Cell
 @delegates(PPModel)
-def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
+def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percentage,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
            **kwargs):
     store_path= _store_path(save_dir) if store else None
     '''
@@ -448,17 +448,18 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,store=True,runs
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             
-            logger.debug(f"train_cases:{splits[0]}, val_cases:{splits[1]}")
-            train_df, val_df = get_df(log, splits)
-            filtered_train_df = filter_outliers(train_df,5)
-            filtered_val_df = filter_outliers(val_df,5)
-            splits = filter_splits(filtered_train_df, filtered_val_df, splits)
-            logger.debug(f"train_cases:{splits[0]}, val_cases:{splits[1]}")
+            if filter_percentage> 0:
+                logger.debug(f"train_cases:{splits[0]}, val_cases:{splits[1]}")
+                filtered_train_df = filter_outliers(train_df,filter_percentage)
+                filtered_val_df = filter_outliers(val_df,filter_percentage)
+                splits = filter_splits(filtered_train_df, filtered_val_df, splits)
+                logger.debug(f"train_cases:{splits[0]}, val_cases:{splits[1]}")
             
+            train_df, val_df = get_df(log, splits)
             # if store:
             #     with open(store_path/f'run{r}_{ds_name}_splits.pickle', "wb") as output_file:
             #         pickle.dump(splits, output_file)
-            
+
             mb=tqdm(range(len(ppm_classes)),leave=False)
             #Loop over models
             for j in mb:

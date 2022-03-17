@@ -20,6 +20,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--exp', default="default",type=str, help='MV - Missing Values, CI - Class Imbalance, Default - default mode')    
 parser.add_argument('--save_folder', default="results_default",type=str, help='Folder for saving results')        
 parser.add_argument('--gpu', default="0",type=str, help='GPU Device number')    
+parser.add_argument('--filter_percentage', default=0,type=float, help='Outlier Filter %')    
 parser.add_argument('--balancing_technique', default="NM",type=str, help='Can be one of [NM,CONN,NCR]')    
 
 #------------------------------------------------------------------------------------------
@@ -30,6 +31,7 @@ exp_mode = args.exp
 save_folder = args.save_folder 
 gpu_id = args.gpu
 save_dir = f"{save_folder}"
+filter_percentage = args.filter_percentage
 
 if exp_mode == "CI" :
   balancing_technique = args.balancing_technique
@@ -50,7 +52,7 @@ if exp_mode == "MV":
 
 elif exp_mode == "CI":
   logs=[EventLogs.BPIC_12, EventLogs.Helpdesk]
-  ppms=[PPM_MiDA, PPM_MPPN ]
+  ppms=[PPM_MiDA, PPM_MPPN]
   import mppn.preprocessing as mp
   mp.ci_flag = True
   mp.balancing_technique = balancing_technique
@@ -97,7 +99,7 @@ if not isnotebook():
         ppm_sel=L(ppms)[ppm_idx]
         
         runner(log_sel,ppm_sel,attr_dict=attr_dict, sample=sample,store=store,epoch=epoch,tqdm=tqdm_console,
-               print_output=print_output,bs=bs,patience=patience,min_delta=min_delta,runs=runs,save_dir=save_dir,balancing_technique=balancing_technique)
+               print_output=print_output,bs=bs,patience=patience,min_delta=min_delta,runs=runs,save_dir=save_dir,balancing_technique=balancing_technique,filter_percentage=filter_percentage)
 
     if __name__ == '__main__':
         fire.Fire(command_line)
