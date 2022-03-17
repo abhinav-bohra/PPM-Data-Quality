@@ -410,9 +410,11 @@ def filter_outliers(log, cases,filter_percentage):
     filtered_df=variants_filter.apply(df,filter_variants,parameters={variants_filter.Parameters.POSITIVE: False, variants_filter.Parameters.CASE_ID_KEY: "case:concept:name",
                                                                  variants_filter.Parameters.ACTIVITY_KEY: "concept:name"})
 
+    logger.debug("-- OUTLIER FILTERING -- ")
     logger.debug(f"Dataset size before: {len(df)}")
     logger.debug(f"Dataset size after:  {len(filtered_df)}")
     logger.debug(f"Dataset reduction: {round((100*(len(df) - len(filtered_df)))/len(df),2)}%")
+    logger.debug("-- ----------------- -- ")
 
     filtered_cases = set(filtered_df['trace_id'])
     filtered_split = [case for case in cases if case in filtered_cases]
