@@ -385,7 +385,8 @@ def _store_path(save_dir,results_dir=Path('./')):
 #----------------------------------------------------------------------------------------------------------------
 # Filter Outliers
 #----------------------------------------------------------------------------------------------------------------
-def filter_outliers(df,filter_percentage):
+def filter_outliers(log, cases,filter_percentage):
+    df = df[df['trace_id'].isin(cases)]
     df = pm4py.utils.format_dataframe(df, case_id='trace_id', activity_key='activity', timestamp_key='timestamp')
     variants_count = case_statistics.get_variant_statistics(df,
                                             parameters={case_statistics.Parameters.CASE_ID_KEY: "case:concept:name",
@@ -409,17 +410,12 @@ def filter_outliers(df,filter_percentage):
     logger.debug(f"Dataset size before: {len(df)}")
     logger.debug(f"Dataset size after:  {len(filtered_df)}")
     logger.debug(f"Dataset reduction: {round((100*(len(df) - len(filtered_df)))/len(df),2)}%")
-    return filtered_df
 
-
-def filter_splits(filtered_train_df, filtered_val_df):
-    orig_train_split = splits[0] 
-    orig_val_split = splits[1]
-    train_cases = set(filtered_train_df['event_id'])
+    filtered_cases = set(filtered_df['trace_id'])
     val_cases = set(filtered_val_df['event_id']) 
-    splits[0] = [case for case in orig_train_split if case not in train_cases]
-    splits[1] = [case for case in orig_val_split if case not in val_cases]
-    return splits
+    filtered_split = [case for case in cases if case not in filtered_cases]
+    return filtered_split
+
 
 #----------------------------------------------------------------------------------------------------------------
 # Runner Function
@@ -450,9 +446,8 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
             
             if filter_percentage> 0:
                 logger.debug(f"train_cases:{splits[0]}, val_cases:{splits[1]}")
-                filtered_train_df = filter_outliers(train_df,filter_percentage)
-                filtered_val_df = filter_outliers(val_df,filter_percentage)
-                splits = filter_splits(filtered_train_df, filtered_val_df, splits)
+                splits[0] = filter_outliers(log, splits[0],filter_percentage)
+                splits[1] = filter_outliers(log, splits[1],filter_percentage)
                 logger.debug(f"train_cases:{splits[0]}, val_cases:{splits[1]}")
             
             train_df, val_df = get_df(log, splits)
