@@ -449,8 +449,12 @@ def getBalancedData(func,xs,ys):
       for dim in dims:
         x_over.append(torch.tensor(x_res[:,start:start+dim,:]))
         start = start + dim
-      logger.debug(y_res)
-      y_over = torch.tensor(y_res)
+      
+      y_over = torch.tensor([y_res]).long()
+      
+      if len(x_over) >=2:
+        x_over[0] = x_over[0].long()
+        
       return x_over, y_over
   else:
       indices = torch.tensor(func.sample_indices_)
@@ -479,7 +483,7 @@ def Balance(xs,ys):
     return getBalancedData(ncr,xs,ys)
   elif balancing_technique == "SMOTE":
     logger.debug("\n---Applying SMOTE ---")
-    sm = SMOTE(random_state=42)
+    sm = SMOTE(k_neighbors=1)
     return getBalancedData(sm,xs,ys)
   else:
     logger.debug("\n---Balancing Technique: {balancing_technique}---")
@@ -505,10 +509,10 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
         if ci_flag:
           #-----------------------------
           logger.debug("\n--BEFORE--")
-          logger.debug(len(ys))
-          logger.debug(ys[0].shape)
+          logger.debug(f"Y: {ys[0].shape}")
           for i in range(len(xs)):
-            logger.debug(xs[i].size())
+            # logger.debug(xs[i])
+            logger.debug(f"X: {xs[i].size()}")
           #-----------------------------
           #Balance only train & dev sets
           try:
@@ -518,11 +522,10 @@ def get_dls(ppo:PPObj,windows=subsequences_fast,outcome=False,event_id='event_id
             logger.debug(f"\nException occurred while balancing dataset with {balancing_technique}: {E}\n")
           #-----------------------------
           logger.debug("--AFTER--")
+          logger.debug(f"Y: {ys[0].shape}")
           for i in range(len(xs)):
-            logger.debug(xs[i].size())
+            logger.debug(f"X: {xs[i].size()}")
           #-----------------------------
-          logger.debug(ys)
-          logger.debug(ys[0].shape)
           
         ds.append(PPDset((*xs,ys)))
         cnt=cnt+1
