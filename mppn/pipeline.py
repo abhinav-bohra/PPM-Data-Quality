@@ -386,8 +386,8 @@ def _store_path(save_dir,results_dir=Path('./')):
 # Filter Outliers
 #----------------------------------------------------------------------------------------------------------------
 def filter_outliers(log, cases,filter_percentage):
-    df = df[df['trace_id'].isin(cases)]
-    df = pm4py.utils.format_dataframe(df, case_id='trace_id', activity_key='activity', timestamp_key='timestamp')
+    log = log[log['trace_id'].isin(cases)]
+    df = pm4py.utils.format_dataframe(log, case_id='trace_id', activity_key='activity', timestamp_key='timestamp')
     variants_count = case_statistics.get_variant_statistics(df,
                                             parameters={case_statistics.Parameters.CASE_ID_KEY: "case:concept:name",
                                                         case_statistics.Parameters.ACTIVITY_KEY: "concept:name",
