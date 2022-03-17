@@ -417,8 +417,8 @@ def filter_splits(filtered_train_df, filtered_val_df):
     orig_val_split = splits[1]
     train_cases = set(filtered_train_df['event_id'])
     val_cases = set(filtered_val_df['event_id']) 
-    splits[0] = [x if x not in train_cases for x in orig_train_split]
-    splits[1] = [x if x not in val_cases for x in orig_val_split]
+    splits[0] = [case for case in orig_train_split if case not in train_cases]
+    splits[1] = [case for case in orig_val_split if case not in val_cases]
     return splits
 
 #----------------------------------------------------------------------------------------------------------------
