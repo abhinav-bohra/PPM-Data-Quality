@@ -459,6 +459,10 @@ def getBalancedData(func,xs,ys):
       if len(x_over) >=2:
         x_over[0] = x_over[0].long()
         
+      for i in range(len(x_over)):
+        if x_over[i].shape[1]==1:
+          x_over[i] = torch.squeeze(x_over[i], dim=1) 
+
       return x_over, y_over
   else:
       indices = torch.tensor(func.sample_indices_)
@@ -473,21 +477,25 @@ def getBalancedData(func,xs,ys):
 
 def Balance(xs,ys):
   y_labels = list(ys[0].numpy())
+  y_counts = np.unique(y_labels, return_counts=True)
+  n_neighbors = np.min(y_counts[1], axis=0)
+  # n_neighbors = 1
+  logger.debug(f"n_neighbors={n_neighbors}")
   if balancing_technique == "NM":
     logger.debug("\n---Applying Near Miss---")
-    nm = NearMiss(n_neighbors=1,sampling_strategy=getStrategy(y_labels))
+    nm = NearMiss(n_neighbors=n_neighbors,sampling_strategy=getStrategy(y_labels))
     return getBalancedData(nm,xs,ys)
   elif balancing_technique == "CONN":
     logger.debug("\n---Applying COndensed Nearest Neighbour---")
-    conn = CondensedNearestNeighbour(n_neighbors=1,sampling_strategy=getStrategy(y_labels))
+    conn = CondensedNearestNeighbour(n_neighbors=n_neighbors,sampling_strategy=getStrategy(y_labels))
     return getBalancedData(conn,xs,ys)
   elif balancing_technique == "NCR":
     logger.debug("\n---Applying Neighbourhood Cleaning Rule ---")
-    ncr = NeighbourhoodCleaningRule()
+    ncr = NeighbourhoodCleaningRule(n_neighbors=n_neighbors)
     return getBalancedData(ncr,xs,ys)
   elif balancing_technique == "SMOTE":
     logger.debug("\n---Applying SMOTE ---")
-    sm = SMOTE(k_neighbors=1)
+    sm = SMOTE(k_neighbors=max(1, n_neighbors-1))
     return getBalancedData(sm,xs,ys)
   else:
     logger.debug("\n---Balancing Technique: {balancing_technique}---")
