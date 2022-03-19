@@ -1,4 +1,4 @@
-# IBM-Data-Quality
+# PPM-Data-Quality
 
 > This repository contains the source code of the paper Assessing Quality of Event Logs for Business Process Predictions.
 
