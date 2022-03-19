@@ -10,7 +10,7 @@ Clone the repo and run the following commands
 ```
 cd PPM-Data-Quality
 conda create --name idq python=3.7.
-conda activate idq
+conda activate ppmdq
 python setup.py install
 pip install -r requirements.txt
 ```
