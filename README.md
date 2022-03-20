@@ -91,7 +91,7 @@ python prediction_evaluation.py --exp MV --save_folder results_missing_values
 ```
 
 
-### IV. Outlier Filterng
+### IV. Outlier Filtering
 
 
 Step 1: To only filter outliers
