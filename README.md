@@ -8,9 +8,9 @@
 Clone the repo and run the following commands
 
 ```
-cd IBM-Data-Quality
-conda create --name idq python=3.7.
-conda activate idq
+cd PPM-Data-Quality
+conda create --name ppmdq python=3.7.
+conda activate ppmdq
 python setup.py install
 pip install -r requirements.txt
 ```
@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ### Class Imbalance
 
-NOTE: Run the following commands from IBM-Data-Quality folder
+NOTE: Run the following commands from PPM-Data-Quality folder
 
 ```
 export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
