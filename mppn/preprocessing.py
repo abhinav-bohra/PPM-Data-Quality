@@ -479,6 +479,7 @@ def Balance(xs,ys):
   y_labels = list(ys[0].numpy())
   y_counts = np.unique(y_labels, return_counts=True)
   n_neighbors = np.min(y_counts[1], axis=0)
+  n_neighbors = min(n_neighbors, 3)
   # n_neighbors = 1
   logger.debug(f"n_neighbors={n_neighbors}")
   if balancing_technique == "NM":
