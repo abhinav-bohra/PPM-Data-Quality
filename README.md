@@ -96,13 +96,13 @@ python prediction_evaluation.py --exp MV --save_folder results_missing_values
 
 Step 1: To only filter outliers
 ```
-python prediction_evaluation.py --exp default --filter_percentage 10 --save_folder results_outliers_filtering
+python prediction_evaluation.py --exp default --filter_percentage 10 --save_folder results_outliers
 ```
 
 Step 2: To filter outliers first and then balance the dataset
 
 ```
-python prediction_evaluation.py --exp CI  --filter_percentage 10 --balancing_technique NM --save_folder results_outliers_filtering
+python prediction_evaluation.py --exp CI --filter_percentage 10 --balancing_technique NM --save_folder results
 ```
 
 
