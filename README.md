@@ -17,13 +17,14 @@ pip install -r requirements.txt
 
 ## Experiments
 
-### Class Imbalance
-
-NOTE: Run the following commands from PPM-Data-Quality folder
+Run the following commands from PPM-Data-Quality folder
 
 ```
-export CUDA_VISIBLE_DEVICES=0,1    #Specify GPU number(s)
+export CUDA_VISIBLE_DEVICES=0,1  #Specify GPU number(s)
 ```
+
+### I. Class Imbalance
+
 Step 1: Basic Set-up
 
 Set models and logs in 'default' mode (line 58: prediction_evaluation.py)  
@@ -72,16 +73,42 @@ python case_eval.py --folder results_ncr
 ```
 
 
-### Class Overlap
+### II. Class Overlap
 Step 1: Compute Class Overlap (F1 & F2) Score on default features
 
 ```
 python class_overlap.py --folder results_default
 ```
+
+
+### III. Missing Values
+
+Step 1:  Set models and pre-processed logs in 'MV' mode (line 58: prediction_evaluation.py)  
+Step 2:  Get results on logs with filled missing values
+
+```
+python prediction_evaluation.py --exp MV --save_folder results_missing_values
+```
+
+
+### IV. Outlier Filterng
+
+
+Step 1: To only filter outliers
+```
+python prediction_evaluation.py --exp default --filter_percentage 10 --save_folder results_outliers_filtering
+```
+
+Step 2: To filter outliers first and then balance the dataset
+
+```
+python prediction_evaluation.py --exp CI  --filter_percentage 10 --balancing_technique NM --save_folder results_outliers_filtering
+```
+
+
 <br>
-
-
-For each model, checkpoints are saved as .pth files in results_folder/models/run0/
+<br>
+NOTE: For each model, checkpoints are saved as .pth files in results_folder/models/run0/
 
 (It saves the model's best during training)
 
