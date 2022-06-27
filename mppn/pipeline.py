@@ -267,7 +267,7 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
         preds=tuple(learn.get_preds(dl=dls[2], with_input=True))
         save_features_targets(dls, store_path, o, task_name)
         save_preds(preds,model,store_path,task_name)
-        return learn.validate(dl=dls[2])[output_index]
+        return learn.validate(dl=dls[2])[output_index], learn.validate(dl=dls[0])[output_index]
 
     else:
         with HideOutput(),learn.no_bar():
@@ -275,7 +275,7 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
             preds=tuple(learn.get_preds(dl=dls[2], with_input=True))
             save_features_targets(dls, store_path, o, task_name)
             save_preds(preds,model,store_path,task_name)          
-            return learn.validate(dl=dls[2])[output_index]
+            return learn.validate(dl=dls[2])[output_index], learn.validate(dl=dls[0])[output_index]
 
 
 # Cell
