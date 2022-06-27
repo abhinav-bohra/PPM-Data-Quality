@@ -303,10 +303,14 @@ class PPModel():
         self.setup()
 
         print('next_step_prediction')
-        nsp_acc,nsp_pre,nsp_rec,nsp_f1=self.next_step_prediction()
+        nsp_test, nsp_train = self.next_step_prediction()
+        nsp_acc_test,nsp_pre_test,nsp_rec_test,nsp_f1_test = nsp_test[0], nsp_test[1], nsp_test[2], nsp_test[3]
+        nsp_acc_train,nsp_pre_train,nsp_rec_train,nsp_f1_train = nsp_train[0], nsp_train[1], nsp_train[2], nsp_train[3]
 
         print('next_resource_prediction')
-        nrp_acc,nrp_pre,nrp_rec,nrp_f1=self.next_resource_prediction()
+        nrp_test, nrp_train =self.next_resource_prediction()
+        nrp_acc_test,nrp_pre_test,nrp_rec_test,nrp_f1_test = nrp_test[0], nrp_test[1], nrp_test[2], nrp_test[3]
+        nrp_acc_train,nrp_pre_train,nrp_rec_train,nrp_f1_train = nrp_train[0], nrp_train[1], nrp_train[2], nrp_train[3]
 
         #print('last_resource_prediction')
         #lrp_acc,lrp_pre,lrp_rec,lrp_f1=self.last_resource_prediction()
@@ -315,7 +319,9 @@ class PPModel():
         #op_acc,op_pre,op_rec,op_f1=self.outcome_prediction()
 
         print('duration_to_next_event_prediction')
-        dtnep=self.duration_to_next_event_prediction()
+        dtnep_test,dtnep_train=self.duration_to_next_event_prediction()
+        dtnep_test = dtnep_test[0]
+        dtnep_train = dtnep_train[0]
 
         #print('duration_to_end_prediction')
         #dtep=self.duration_to_end_prediction()
@@ -327,7 +333,8 @@ class PPModel():
         #rsp=self.resource_suffix_prediction()
         
         # return nsp_acc,nsp_pre,nsp_rec,nsp_f1,nrp_acc,nrp_pre,nrp_rec,nrp_f1,lrp_acc,lrp_pre,lrp_rec,lrp_f1,op_acc,op_pre,op_rec,op_f1,dtnep,dtep,asp,rsp
-        return nsp_acc,nsp_pre,nsp_rec,nsp_f1,nrp_acc,nrp_pre,nrp_rec,nrp_f1,dtnep
+        return nsp_acc_test,nsp_pre_test,nsp_rec_test,nsp_f1_test,nrp_acc_test,nrp_pre_test,nrp_rec_test,nrp_f1_test,dtnep_test,\
+        nsp_acc_train,nsp_pre_train,nsp_rec_train,nsp_f1_train,nrp_acc_train,nrp_pre_train,nrp_rec_train,nrp_f1_train,dtnep_train
 
     def _train_validate(self,o,dls,m,metrics=accuracy,loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
@@ -363,11 +370,15 @@ class Performance_Statistic():
     'Creates a results dataframe, that shows the performance of all models on all datasets on all tasks.'
     def __init__(self):
         self.df = pd.DataFrame(
-        columns=['Dataset', 'Model', 'Balancing Technique', 'Next Step Acc','Next Step Pre','Next Step Rec','Next Step F1',\
-        'Next Resource Acc','Next Resource Pre','Next Resource Rec','Next Resource F1', \
+            columns=['Dataset', 'Model', 'Balancing Technique', 
+        'Train Next Step Acc','Train Next Step Pre','Train Next Step Rec','Train Next Step F1',\
+        'Train Next Resource Acc','Train Next Resource Pre','Train Next Resource Rec','Train Next Resource F1','Train Next relative Timestamp',\
+        'Test Next Step Acc','Test Next Step Pre','Test Next Step Rec','Test Next Step F1', \
+        'Test Next Resource Acc','Test Next Resource Pre','Test Next Resource Rec','Test Next Resource F1','Test Next relative Timestamp'])
         #'Last Resource Acc','Last Resource Pre','Last Resource Rec','Last Resource F1', \
         #'Outcome Acc','Outcome Pre','Outcome Rec','Outcome F1', \
-        'Next relative Timestamp'])#, 'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
+        #'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
+   
     def update(self,model_performance): self.df.loc[len(self.df)] = model_performance
     def to_df(self):
         return self.df
@@ -445,7 +456,7 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
         for i in db:
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
-            log=import_log(ds)
+            log=import_log(ds)[:250]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             
