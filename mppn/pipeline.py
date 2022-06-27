@@ -320,8 +320,6 @@ class PPModel():
 
         print('duration_to_next_event_prediction')
         dtnep_test,dtnep_train=self.duration_to_next_event_prediction()
-        dtnep_test = dtnep_test[0]
-        dtnep_train = dtnep_train[0]
 
         #print('duration_to_end_prediction')
         #dtep=self.duration_to_end_prediction()
