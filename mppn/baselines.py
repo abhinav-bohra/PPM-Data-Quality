@@ -480,8 +480,8 @@ class PPM_Tax_Spezialized(PPModel):
                [ self.nsp_acc_train, self.nsp_pre_train, self.nsp_rec_train, self.nsp_f1_train],\
                [ self.nsp_acc_train_nonOut, self.nsp_pre_train_nonOut, self.nsp_rec_train_nonOut, self.nsp_f1_train_nonOut]
         
-    def next_resource_prediction(self): return [None*4],[None*4],[None*4]
-    def last_resource_prediction(self): return [None*4],[None*4],[None*4]
+    def next_resource_prediction(self): return [None]*4,[None]*4,[None]*4
+    def last_resource_prediction(self): return [None]*4,[None]*4,[None]*4
     def outcome_prediction(self): 
         # Last event prediction training
         print('Last event prediction training')
