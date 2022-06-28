@@ -30,7 +30,7 @@ parser.add_argument('--exp', default="default",type=str, help='MV - Missing Valu
 parser.add_argument('--save_folder', default="results_default",type=str, help='Folder for saving results')        
 parser.add_argument('--gpu', default="0",type=str, help='GPU Device number')    
 parser.add_argument('--filter_percentage', default=0,type=float, help='Outlier Filter %')    
-parser.add_argument('--train_nonOut', default=False,type=bool, help='Check accuracy on only the non outliers')    
+parser.add_argument('--train_nonOut', default=False, help='Check accuracy on only the non outliers')    
 parser.add_argument('--balancing_technique', default="NM",type=str, help='Can be one of [NM,CONN,NCR]')    
 
 #------------------------------------------------------------------------------------------
