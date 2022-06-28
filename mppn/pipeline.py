@@ -335,7 +335,8 @@ class PPModel():
         
         # return nsp_acc,nsp_pre,nsp_rec,nsp_f1,nrp_acc,nrp_pre,nrp_rec,nrp_f1,lrp_acc,lrp_pre,lrp_rec,lrp_f1,op_acc,op_pre,op_rec,op_f1,dtnep,dtep,asp,rsp
         return nsp_acc_test,nsp_pre_test,nsp_rec_test,nsp_f1_test,nrp_acc_test,nrp_pre_test,nrp_rec_test,nrp_f1_test,dtnep_test,\
-        nsp_acc_train,nsp_pre_train,nsp_rec_train,nsp_f1_train,nrp_acc_train,nrp_pre_train,nrp_rec_train,nrp_f1_train,dtnep_train
+        nsp_acc_train,nsp_pre_train,nsp_rec_train,nsp_f1_train,nrp_acc_train,nrp_pre_train,nrp_rec_train,nrp_f1_train,dtnep_train,\
+        nsp_acc_train_nonOut,nsp_pre_train_nonOut,nsp_rec_train_nonOut,nsp_f1_train_nonOut,nrp_acc_train_nonOut,nrp_pre_train_nonOut,nrp_rec_train_nonOut,nrp_f1_train_nonOut,dtnep_train_nonOut
 
     def _train_validate(self,o,dls,m,metrics=accuracy,loss=F.cross_entropy,output_index=1):
         store,model_name='tmp','.model'
@@ -444,7 +445,7 @@ def filter_outliers(log, cases, case_col, filter_percentage):
 
 # Cell
 @delegates(PPModel)
-def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percentage,check_non-out,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
+def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percentage,train_non_out,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
            **kwargs):
     store_path= _store_path(save_dir) if store else None
     '''
@@ -461,27 +462,29 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
         for i in db:
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
-            log=import_log(ds)[:250]
+            log=import_log(ds)[:2500]
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
-            
+            splits=list(splits)
+                
             if filter_percentage> 0:
-                splits = list(splits)
-                if ds_name == "BPIC20_RFP":
-                    case_col = "index"
-                else:
-                    case_col = "trace_id"            
+                case_col = "index" if ds_name == "BPIC20_RFP" else "trace_id"
                 logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
 
                 train_non_outlier_split = filter_outliers(log, splits[0], case_col, filter_percentage)
                 val_non_outlier_split = filter_outliers(log, splits[1], case_col, filter_percentage)
-                if check_non-out:
+
+                if train_non_out:
                     splits[0] = train_non_outlier_split
                     splits[1] = val_non_outlier_split
 
                 logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
                 splits.append(train_non_outlier_split)
-                splits = tuple(splits)
+
+            else:
+                splits.append(splits[0])
+
+            splits=tuple(splits)
             
             # if store:
             #     with open(store_path/f'run{r}_{ds_name}_splits.pickle', "wb") as output_file:
