@@ -324,7 +324,7 @@ class PPM_Camargo_Spezialized(PPModel):
                                          [self.op_acc_train, self.op_pre_train, self.op_rec_train, self.op_f1_train],\
                                          [self.op_acc_train_nonOut, self.op_pre_train_nonOut, self.op_rec_train_nonOut, self.op_f1_train_nonOut]
     def duration_to_next_event_prediction(self): return self.dtnp_test, dtnp_train, dtnp_train_nonOut
-    def duration_to_end_prediction(self): return self.dtlp_test, dtlp_train, dtlp_train_nonOut
+    def duration_to_end_prediction(self): return self.dtlp_test, self.dtlp_train, self.dtlp_train_nonOut
     def activity_suffix_prediction(self): pass
     def resource_suffix_prediction(self): pass
 
