@@ -445,7 +445,7 @@ def filter_outliers(log, cases, case_col, filter_percentage):
 
 # Cell
 @delegates(PPModel)
-def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percentage,train_non_out,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
+def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percentage,train_nonOut,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
            **kwargs):
     store_path= _store_path(save_dir) if store else None
     '''
