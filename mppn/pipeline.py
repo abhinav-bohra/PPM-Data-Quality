@@ -369,10 +369,10 @@ class Performance_Statistic():
     def __init__(self):
         self.df = pd.DataFrame(
             columns=['Dataset', 'Model', 'Balancing Technique', 
-        'Train Next Step Acc','Train Next Step Pre','Train Next Step Rec','Train Next Step F1',\
-        'Train Next Resource Acc','Train Next Resource Pre','Train Next Resource Rec','Train Next Resource F1','Train Next relative Timestamp',\
         'Test Next Step Acc','Test Next Step Pre','Test Next Step Rec','Test Next Step F1', \
-        'Test Next Resource Acc','Test Next Resource Pre','Test Next Resource Rec','Test Next Resource F1','Test Next relative Timestamp'])
+        'Test Next Resource Acc','Test Next Resource Pre','Test Next Resource Rec','Test Next Resource F1','Test Next relative Timestamp',\
+        'Train Next Step Acc','Train Next Step Pre','Train Next Step Rec','Train Next Step F1',\
+        'Train Next Resource Acc','Train Next Resource Pre','Train Next Resource Rec','Train Next Resource F1','Train Next relative Timestamp'])
         #'Last Resource Acc','Last Resource Pre','Last Resource Rec','Last Resource F1', \
         #'Outcome Acc','Outcome Pre','Outcome Rec','Outcome F1', \
         #'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
