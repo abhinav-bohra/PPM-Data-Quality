@@ -389,7 +389,13 @@ class Tax_et_al_spezialized(torch.nn.Module) :
         self.linear_tim = nn.Linear(hidden_dim, 1)
 
     def forward(self, xcat,xcont):
-        x_act,x_tim = xcat.permute(0,2,1),xcont.squeeze().permute(0,2,1)
+        x_act = xcat.permute(0,2,1)
+        if (len(x.squeeze().size())==3):
+            x_tim = xcont.squeeze().permute(0,2,1)
+        else:
+            x_tim = xcont.permute(0,2,1)
+
+
         x_act, _ = self.lstm_act(x_act.float())
         x_act=self.linear_act(x_act[:,-1])
         x_act=F.softmax(x_act,dim=1)
@@ -408,8 +414,12 @@ class Tax_et_al_shared(torch.nn.Module) :
         self.linear_tim = nn.Linear(hidden_dim, 1)
 
 
-    def forward(self,xcat,xcont):
-        x_act,x_tim = xcat.permute(0,2,1),xcont.squeeze().permute(0,2,1)
+    def forward(self,xcat,xcont):        
+        x_act = xcat.permute(0,2,1)
+        if (len(x.squeeze().size())==3):
+            x_tim = xcont.squeeze().permute(0,2,1)
+        else:
+            x_tim = xcont.permute(0,2,1)
 
         x_concat=torch.cat((x_act.float(), x_tim), 2)
         x_concat, _ = self.lstm(x_concat)
@@ -436,7 +446,11 @@ class Tax_et_al_mixed(torch.nn.Module) :
 
 
     def forward(self,xcat,xcont):
-        x_act,x_tim = xcat.permute(0,2,1),xcont.squeeze().permute(0,2,1)
+        x_act = xcat.permute(0,2,1)
+        if (len(x.squeeze().size())==3):
+            x_tim = xcont.squeeze().permute(0,2,1)
+        else:
+            x_tim = xcont.permute(0,2,1)
 
         x_concat=torch.cat((x_act.float(), x_tim), 2)
         x_concat, _ = self.lstm(x_concat)
