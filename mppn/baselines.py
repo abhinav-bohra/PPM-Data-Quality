@@ -300,7 +300,10 @@ class PPM_Camargo_Spezialized(PPModel):
                [self.nsp_acc_train, self.nsp_pre_train, self.nsp_rec_train, self.nsp_f1_train],\
                [self.nsp_acc_train_nonOut, self.nsp_pre_train_nonOut, self.nsp_rec_train_nonOut, self.nsp_f1_train_nonOut]
 
-    def next_resource_prediction(self):return self.nrp_acc, self.nrp_pre, self.nrp_rec, self.nrp_f1
+    def next_resource_prediction(self):return [self.nrp_acc_test, self.nrp_pre_test, self.nrp_rec_test, self.nrp_f1_test],\
+                                              [self.nrp_acc_train, self.nrp_pre_train, self.nrp_rec_train, self.nrp_f1_train],\
+                                              [self.nrp_acc_train_nonOut, self.nrp_pre_train_nonOut, self.nrp_rec_train_nonOut, self.nrp_f1_train_nonOut]
+
     def last_resource_prediction(self): 
         print('Last event prediction training')
         loss=partial(multi_loss_sum,self.o)
@@ -477,8 +480,8 @@ class PPM_Tax_Spezialized(PPModel):
                [ self.nsp_acc_train, self.nsp_pre_train, self.nsp_rec_train, self.nsp_f1_train],\
                [ self.nsp_acc_train_nonOut, self.nsp_pre_train_nonOut, self.nsp_rec_train_nonOut, self.nsp_f1_train_nonOut]
         
-    def next_resource_prediction(self): return None,None,None,None
-    def last_resource_prediction(self): return None,None,None,None
+    def next_resource_prediction(self): return [None*4],[None*4],[None*4]
+    def last_resource_prediction(self): return [None*4],[None*4],[None*4]
     def outcome_prediction(self): 
         # Last event prediction training
         print('Last event prediction training')
@@ -488,16 +491,16 @@ class PPM_Tax_Spezialized(PPModel):
         self.res_test, self.res_train, self.res_train_nonOut =self._train_validate(self.o,dls,m,loss=loss,metrics=get_metrics(self.o),
                                                  output_index=[1,2,3,4,5])
 
-        self.op_acc_test, self.op_pre_test, self.op_rec_test, self.op_f1_test, self.dtlp_test = self.res_test[0], self.res_test[1], self.res_test[2], self.res_test[3], self.res_test[4]
-        self.op_acc_train, self.op_pre_train, self.op_rec_train, self.op_f1_train, self.dtlp_train = self.res_train[0], self.res_train[1], self.res_train[2], self.res_train[3], self.res_train[4]
-        self.op_acc_train_nonOut, self.op_pre_train_nonOut, self.op_rec_train_nonOut, self.op_f1_train_nonOut, self.dtlp_train_nonOut = self.res_train_nonOut[0], self.res_train_nonOut[1], self.res_train_nonOut[2], self.res_train_nonOut[3], self.res_train_nonOut[4]
+        self.op_acc_test, self.op_pre_test, self.op_rec_test, self.op_f1_test, self.dtlp_test = = self.res_test[0], self.res_test[1], self.res_test[2], self.res_test[3], self.res_test[4]
+        self.op_acc_train, self.op_pre_train, self.op_rec_train, self.op_f1_train, self.dtlp_train = = self.res_train[0], self.res_train[1], self.res_train[2], self.res_train[3], self.res_train[4]
+        self.op_acc_train_nonOut, self.op_pre_train_nonOut, self.op_rec_train_nonOut, self.op_f1_train_nonOut, self.dtlp_train_nonOut = = self.res_train_nonOut[0], self.res_train_nonOut[1], self.res_train_nonOut[2], self.res_train_nonOut[3], self.res_train_nonOut[4]
 
         return [self.op_acc_test, self.op_pre_test, self.op_rec_test, self.op_f1_test],\
                [self.op_acc_train, self.op_pre_train, self.op_rec_train, self.op_f1_train],\
                [self.op_acc_train_nonOut, self.op_pre_train_nonOut, self.op_rec_train_nonOut, self.op_f1_train_nonOut]
-               
+
     def duration_to_next_event_prediction(self): return self.dtnp_test,self.dtnp_train,self.dtnp_train_nonOut
-    def duration_to_end_prediction(self): return self.dtlp_test,self.dtlp_train,self.dtlp_train_nonOut
+    def duration_to_end_prediction(self): rreturn self.dtlp_test,self.dtlp_train,self.dtlp_train_nonOut
     def activity_suffix_prediction(self): pass
     def resource_suffix_prediction(self): pass
 
