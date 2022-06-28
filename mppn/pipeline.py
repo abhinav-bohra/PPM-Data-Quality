@@ -466,24 +466,24 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             splits=list(splits)
-                
+            logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
+
             if filter_percentage> 0:
                 case_col = "index" if ds_name == "BPIC20_RFP" else "trace_id"
-                logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
-
+                
                 train_non_outlier_split = filter_outliers(log, splits[0], case_col, filter_percentage)
                 val_non_outlier_split = filter_outliers(log, splits[1], case_col, filter_percentage)
 
-                if train_non_out:
+                if train_nonOut:
                     splits[0] = train_non_outlier_split
                     splits[1] = val_non_outlier_split
 
-                logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
                 splits.append(train_non_outlier_split)
 
             else:
                 splits.append(splits[0])
-
+            
+            logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}, train_non_outlier_split:{len(splits[3])}")    
             splits=tuple(splits)
             
             # if store:
