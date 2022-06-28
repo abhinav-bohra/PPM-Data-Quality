@@ -267,7 +267,8 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
         preds=tuple(learn.get_preds(dl=dls[2], with_input=True))
         save_features_targets(dls, store_path, o, task_name)
         save_preds(preds,model,store_path,task_name)
-        return learn.validate(dl=dls[2])[output_index], learn.validate(dl=dls[0])[output_index]
+        #Test, Train, Train Non Outliers
+        return learn.validate(dl=dls[2])[output_index], learn.validate(dl=dls[0])[output_index], learn.validate(dl=dls[3])[output_index]
 
     else:
         with HideOutput(),learn.no_bar():
@@ -275,7 +276,7 @@ def train_validate(o,dls,m,metrics=accuracy,loss=F.cross_entropy,epoch=20,print_
             preds=tuple(learn.get_preds(dl=dls[2], with_input=True))
             save_features_targets(dls, store_path, o, task_name)
             save_preds(preds,model,store_path,task_name)          
-            return learn.validate(dl=dls[2])[output_index], learn.validate(dl=dls[0])[output_index]
+            return learn.validate(dl=dls[2])[output_index], learn.validate(dl=dls[0])[output_index], learn.validate(dl=dls[3])[output_index]
 
 
 # Cell
@@ -303,14 +304,16 @@ class PPModel():
         self.setup()
 
         print('next_step_prediction')
-        nsp_test, nsp_train = self.next_step_prediction()
+        nsp_test, nsp_train, nsp_train_nonOut = self.next_step_prediction()
         nsp_acc_test,nsp_pre_test,nsp_rec_test,nsp_f1_test = nsp_test[0], nsp_test[1], nsp_test[2], nsp_test[3]
         nsp_acc_train,nsp_pre_train,nsp_rec_train,nsp_f1_train = nsp_train[0], nsp_train[1], nsp_train[2], nsp_train[3]
+        nsp_acc_train_nonOut,nsp_pre_train_nonOut,nsp_rec_train_nonOut,nsp_f1_train_nonOut = nsp_train_nonOut[0], nsp_train_nonOut[1], nsp_train_nonOut[2], nsp_train_nonOut[3]
 
         print('next_resource_prediction')
-        nrp_test, nrp_train =self.next_resource_prediction()
+        nrp_test, nrp_train, nrp_train_nonOut = self.next_resource_prediction()
         nrp_acc_test,nrp_pre_test,nrp_rec_test,nrp_f1_test = nrp_test[0], nrp_test[1], nrp_test[2], nrp_test[3]
         nrp_acc_train,nrp_pre_train,nrp_rec_train,nrp_f1_train = nrp_train[0], nrp_train[1], nrp_train[2], nrp_train[3]
+        nrp_acc_train_nonOut,nrp_pre_train_nonOut,nrp_rec_train_nonOut,nrp_f1_train_nonOut = nrp_train_nonOut[0], nrp_train_nonOut[1], nrp_train_nonOut[2], nrp_train_nonOut[3]
 
         #print('last_resource_prediction')
         #lrp_acc,lrp_pre,lrp_rec,lrp_f1=self.last_resource_prediction()
@@ -319,7 +322,7 @@ class PPModel():
         #op_acc,op_pre,op_rec,op_f1=self.outcome_prediction()
 
         print('duration_to_next_event_prediction')
-        dtnep_test,dtnep_train=self.duration_to_next_event_prediction()
+        dtnep_test,dtnep_train, dtnep_train_nonOut = self.duration_to_next_event_prediction()
 
         #print('duration_to_end_prediction')
         #dtep=self.duration_to_end_prediction()
@@ -372,7 +375,9 @@ class Performance_Statistic():
         'Test Next Step Acc','Test Next Step Pre','Test Next Step Rec','Test Next Step F1', \
         'Test Next Resource Acc','Test Next Resource Pre','Test Next Resource Rec','Test Next Resource F1','Test Next relative Timestamp',\
         'Train Next Step Acc','Train Next Step Pre','Train Next Step Rec','Train Next Step F1',\
-        'Train Next Resource Acc','Train Next Resource Pre','Train Next Resource Rec','Train Next Resource F1','Train Next relative Timestamp'])
+        'Train Next Resource Acc','Train Next Resource Pre','Train Next Resource Rec','Train Next Resource F1','Train Next relative Timestamp',\
+        'Train(NonOut) Next Step Acc','Train(NonOut) Next Step Pre','Train(NonOut) Next Step Rec','Train(NonOut) Next Step F1',\
+        'Train(NonOut) Next Resource Acc','Train(NonOut) Next Resource Pre','Train(NonOut) Next Resource Rec','Train(NonOut) Next Resource F1','Train(NonOut) Next relative Timestamp'])
         #'Last Resource Acc','Last Resource Pre','Last Resource Rec','Last Resource F1', \
         #'Outcome Acc','Outcome Pre','Outcome Rec','Outcome F1', \
         #'Duration to Outcome', 'Activity Suffix', 'Resource Suffix'])
@@ -416,19 +421,21 @@ def filter_outliers(log, cases, case_col, filter_percentage):
           break
 
     #df with whatever left after removing the outliers
-    filtered_df=variants_filter.apply(df,filter_variants,parameters={variants_filter.Parameters.POSITIVE: False, variants_filter.Parameters.CASE_ID_KEY: "case:concept:name",
+    non_outlier_df=variants_filter.apply(df,filter_variants,parameters={variants_filter.Parameters.POSITIVE: False, variants_filter.Parameters.CASE_ID_KEY: "case:concept:name",
                                                                  variants_filter.Parameters.ACTIVITY_KEY: "concept:name"})
 
-    logger.debug("\n-- OUTLIER FILTERING -- ")
-    logger.debug(f"Total Cases = {total_cases}, Filtered Cases = {filter_cases}")
-    logger.debug(f"Dataset size before: {len(df)}")
-    logger.debug(f"Dataset size after:  {len(filtered_df)}")
-    logger.debug(f"Dataset reduction: {round((100*(len(df) - len(filtered_df)))/len(df),2)}%")
-    logger.debug("-- ----------------- -- ")
+    print("\n-- OUTLIER FILTERING -- ")
+    print(f"Total Cases = {total_cases}, Filtered Cases = {filter_cases}")
+    print(f"Dataset size before: {len(df)}")
+    print(f"Dataset size after:  {len(non_outlier_df)}")
+    print(f"Dataset reduction: {round((100*(len(df) - len(non_outlier_df)))/len(df),2)}%")
+    print("-- ----------------- -- ")
 
-    filtered_cases = set(filtered_df[case_col])
-    filtered_split = [case for case in cases if case in filtered_cases]
-    return filtered_split
+    non_outlier_cases = set(non_outlier_df[case_col])
+    non_outlier_split = [case for case in cases if case in non_outlier_cases]
+    # outlier_split = [case for case in cases if case not in non_outlier_cases]
+
+    return non_outlier_split
 
 
 #----------------------------------------------------------------------------------------------------------------
@@ -437,7 +444,7 @@ def filter_outliers(log, cases, case_col, filter_percentage):
 
 # Cell
 @delegates(PPModel)
-def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percentage,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
+def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percentage,check_non-out,store=True,runs=1,sample=False,validation_seed=None,test_seed=42,tqdm=tqdm,
            **kwargs):
     store_path= _store_path(save_dir) if store else None
     '''
@@ -465,9 +472,15 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
                 else:
                     case_col = "trace_id"            
                 logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
-                splits[0] = filter_outliers(log, splits[0], case_col, filter_percentage)
-                splits[1] = filter_outliers(log, splits[1], case_col, filter_percentage)
+
+                train_non_outlier_split = filter_outliers(log, splits[0], case_col, filter_percentage)
+                val_non_outlier_split = filter_outliers(log, splits[1], case_col, filter_percentage)
+                if check_non-out:
+                    splits[0] = train_non_outlier_split
+                    splits[1] = val_non_outlier_split
+
                 logger.debug(f"train_cases:{len(splits[0])}, val_cases:{len(splits[1])}, test_cases:{len(splits[2])}")
+                splits.append(train_non_outlier_split)
                 splits = tuple(splits)
             
             # if store:
