@@ -462,7 +462,7 @@ def runner(dataset_urls,ppm_classes,save_dir,balancing_technique,filter_percenta
         for i in db:
             db.set_description(get_ds_name(dataset_urls[i]))
             ds= dataset_urls[i]
-            log=import_log(ds)[:2500]
+            log=import_log(ds)
             ds_name=get_ds_name(ds)
             splits=split_traces(log,ds_name,validation_seed=validation_seed,test_seed=test_seed)
             splits=list(splits)
