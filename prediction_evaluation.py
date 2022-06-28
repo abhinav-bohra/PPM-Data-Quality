@@ -13,6 +13,15 @@ from mppn.baselines import *
 from mppn.mppn import *
 import argparse
 
+def str_to_bool(value):
+    if isinstance(value, bool):
+        return value
+    if value.lower() in {'False','false', 'f', '0', 'no', 'n'}:
+        return False
+    elif value.lower() in {'True','true', 't', '1', 'yes', 'y'}:
+        return True
+    raise ValueError(f'{value} is not a valid boolean value')
+
 #------------------------------------------------------------------------------------------
 # Command Line Arguments
 #------------------------------------------------------------------------------------------
@@ -33,7 +42,8 @@ save_folder = args.save_folder
 gpu_id = args.gpu
 save_dir = f"{save_folder}"
 filter_percentage = args.filter_percentage
-train_nonOut = args.train_nonOut
+train_nonOut = str_to_bool(args.train_nonOut)
+
 if exp_mode == "CI" :
   balancing_technique = args.balancing_technique
 else:
@@ -64,7 +74,7 @@ elif exp_mode == "default":
 
 else:
   logs=[EventLogs.Helpdesk]
-  ppms=[PPM_MPPN]
+  ppms=[PPM_Camargo_concat]
 
 
 #------------------------------------------------------------------------------------------
