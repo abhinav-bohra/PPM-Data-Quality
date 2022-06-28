@@ -390,7 +390,7 @@ class Tax_et_al_spezialized(torch.nn.Module) :
 
     def forward(self, xcat,xcont):
         x_act = xcat.permute(0,2,1)
-        if (len(x.squeeze().size())==3):
+        if (len(xcont.squeeze().size())==3):
             x_tim = xcont.squeeze().permute(0,2,1)
         else:
             x_tim = xcont.permute(0,2,1)
@@ -416,7 +416,7 @@ class Tax_et_al_shared(torch.nn.Module) :
 
     def forward(self,xcat,xcont):        
         x_act = xcat.permute(0,2,1)
-        if (len(x.squeeze().size())==3):
+        if (len(xcont.squeeze().size())==3):
             x_tim = xcont.squeeze().permute(0,2,1)
         else:
             x_tim = xcont.permute(0,2,1)
@@ -447,7 +447,7 @@ class Tax_et_al_mixed(torch.nn.Module) :
 
     def forward(self,xcat,xcont):
         x_act = xcat.permute(0,2,1)
-        if (len(x.squeeze().size())==3):
+        if (len(xcont.squeeze().size())==3):
             x_tim = xcont.squeeze().permute(0,2,1)
         else:
             x_tim = xcont.permute(0,2,1)
